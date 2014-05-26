@@ -1,3 +1,5 @@
+#Hinweise#
+
 Die Datei "monsterPool_psp.mpp" stellt eine Projektstrukturplan
 fuer die weitere Spieleentwicklung dar und soll helfen 
 die Arbeitsschritte zu strukturieren und eine Uebersicht zu schaffen.

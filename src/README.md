@@ -25,3 +25,7 @@ wegen des funktionierenden Exporters fuer 2.66.
 Fuer die Erstellung rate ich dazu andere Software
 zu gebauchen. Für stark geometrische Objekte
 empfehle ich Punkt 1-3, fuer organische Punkt 4.
+
+Wer Mudbox2015 herunterlädt sollte für den Downloadwahl die Option des Browserdownloadswählen.
+Wenn es zu Fehlern bei der Installation kommt muss ggf. die setup.ini ausgetauscht werden.
+(siehe: http://forums.autodesk.com/t5/Installation-Licensing/Some-Products-Fail-to-Install-Result-1603/td-p/3382347)
