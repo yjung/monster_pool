@@ -1,9 +1,10 @@
 // once everything is loaded, we run our Three.js stuff.
 function initialisiere() {
 
-	Physijs.scripts.worker = '../lib/physijs_worker.js';    // Physi.js-Worker einbinden
-	Physijs.scripts.ammo = '../lib/ammo.js';                // Bibliotheksverweis zu Ammo
-	window.game = {};                                       // Globalen Namespace schaffen
+	Physijs.scripts.worker = '../lib/physijs_worker.js';        // Physi.js-Worker einbinden
+	Physijs.scripts.ammo = '../lib/ammo.js';                    // Bibliotheksverweis zu Ammo
+    window.game = {};                                           // Globalen Namespace schaffen
+    window.addEventListener('resize', onWindowResize, false);   // Eventlistener fuer Groessenaenderung
 
 	game.modus = {
 		statisch : 0,           // Position ist fixiert
@@ -27,77 +28,48 @@ function initialisiere() {
 	game.queue = new THREE.Object3D();          // Queue als GameObject initialisieren
 	game.whiteBall = new THREE.Object3D();      // Weisse Kugel als GameObject initialisieren
 
-	// Kamera (fov, aspect, near, far)
+	// Kamera mit (fov, aspect, near, far) Blickrichtung ist Sache des Mainloops
 	game.camera = new THREE.PerspectiveCamera(45, (window.innerWidth - 211) / (window.innerHeight - 230), 0.1, 1000);
-	game.clock = new THREE.Clock();
+    game.camera.position.x = 0;                 // x-Position
+    game.camera.position.y = 60;                // y-Position
+    game.camera.position.z = 10;                // z-Position
 
-	orbitControls = new THREE.OrbitControls(game.camera, $('#viewport')[0]);
-	orbitControls.autoRotate = false;
-	console.log(orbitControls);
-	richtung = 0;
 
-	// create a render and set the size
-	game.renderer = new THREE.WebGLRenderer();
+	game.clock = new THREE.Clock();             // Uhr-Objekt zur internen Zeitmessung im Spiel
 
-    game.renderer.setClearColorHex(0xEEEEEE);
-    game.renderer.setSize(window.innerWidth - 211, window.innerHeight - 230);
-    game.renderer.setClearColorHex(0x000, 1);
-    game.renderer.domElement.style.zIndex = -1;
+    // Initialisierung der Steurung
+	game.orbitControls = new OrbitControls(game.camera, $('#viewport')[0]);    // Kamera und Canvas an Steuerung
+    game.orbitControls.autoRotate = false;                                     // Auto-Rotate ausschalten
+    // Initialisierung des Renderers
+	game.renderer = new THREE.WebGLRenderer();                                  // Renderer erstellen
+    game.renderer.setSize(window.innerWidth - 211, window.innerHeight - 230);   // Groesse setzen
+    game.renderer.setClearColorHex(0x000, 1);                                   // ClearColor setzen
+    game.renderer.domElement.style.zIndex = -1;                                 // z-index kleiner fuer hoeheres HUD
+    $("#viewport").append(game.renderer.domElement);                            // Rendererrückgabe an viewport-DIV
 
-	var axes = new THREE.AxisHelper(20);
-	game.szene.add(axes);
+    // Initialisierung des Canvas
+    game.canvas = document.getElementsByTagName("canvas")[0];                   // Zeichenfläche der Anwendung sichern
+    game.canvas.addEventListener('mousemove', function(event) {                 // Eventlistener fuer mousemove
+        var rect = game.canvas.getBoundingClientRect();                         // Groesse der Zeichenflaeche auslesen
+        game.mausPosition.x = event.clientX - rect.left;                        // Maus-x berechnen
+        game.mausPosition.y = event.clientY - rect.top;                         // Maus-y berechnen
 
-	// position and point the camera to the center of the szene
-	game.camera.position.x = 0;
-	game.camera.position.y = 60;
-	game.camera.position.z = 10;
-	game.camera.lookAt(game.szene.position);
-
-	// var tisch = new tischLaden();
-	//tischLaden();
-	queueLaden();
-
-	createDummyTisch();         // Dummy-Tisch aus physikalischen Grundobjekten
-    createWhiteBall(0,20);      // Weisse Kugel aus physikalischem Grundobjekt an x,y
-
-    // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
-	setupLights();
-
-	// add the output of the renderer to the html element
-	$("#viewport").append(game.renderer.domElement);
-
-	// Zeichenfläche der Anwendung
-	game.canvas = document.getElementsByTagName("canvas")[0];
-
-	game.canvas.addEventListener('mousemove', function(event) {
-		var rect = game.canvas.getBoundingClientRect();
-		game.mausPosition.x = event.clientX - rect.left;
-		game.mausPosition.y = event.clientY - rect.top;
-		
-		game.mausPosition.x_n = rect.left / event.clientX;
-		game.mausPosition.y_n = rect.top / event.clientY;
-	}, false);
-
-	// Anzeige zur Kontrolle der Performance des Rendering erstellen, positionieren, anhaengen
-	statsX = new THREEx.RendererStats();
-	statsX.domElement.style.position = 'absolute';
-	statsX.domElement.style.right = "0px";
-	statsX.domElement.style.top = '40px';
-	statsX.domElement.style.zIndex = 2000;
-	$('#viewport').append(statsX.domElement);
-
-	// Anzeige zur Kontrolle der Performance des Rendering erstellen, positionieren, anhaengen
-	stats = new Stats();
-	stats.domElement.style.position = 'absolute';
-	stats.domElement.style.right = "0px";
-	stats.domElement.style.top = '0px';
-	stats.domElement.style.zIndex = 2000;
-	$('#viewport').append(stats.domElement);
-
-	window.addEventListener('resize', onWindowResize, false);
+        game.mausPosition.x_n = rect.left / event.clientX;                      // Maus-x normalisieren
+        game.mausPosition.y_n = rect.top / event.clientY;                       // Maus-y normalisieren
+    }, false);
 
 
 
-    // Ende der Initialisierung / Aufruf des Mainloops
+
+    /* Spielumgebung einladen */
+	queueLaden();                               // Queue laden
+    //tischLaden();                             // Nicht-Physisches, detailliertes Model des Tisches laden
+    createDummyTisch();                         // Dummy-Tisch aus physikalischen Grundobjekten erstellen
+    createWhiteBall(0,20);                      // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
+	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
+    erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
+    game.szene.add(new THREE.AxisHelper(50));   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
+
+    /* Ende der Initialisierung / Aufruf des Mainloops */
 	mainloop();
 };

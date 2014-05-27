@@ -12,7 +12,7 @@
  * @ aktiveFlaeche
  */
 
-THREE.OrbitControls = function(kameraObjekt, aktiveFlaeche) {
+OrbitControls=function(kameraObjekt, aktiveFlaeche) {
 
 	this.kameraObjekt = kameraObjekt;
 
@@ -312,4 +312,4 @@ THREE.OrbitControls = function(kameraObjekt, aktiveFlaeche) {
 
 };
 
-THREE.OrbitControls.prototype = Object.create(THREE.EventDispatcher.prototype);
+OrbitControls.prototype = Object.create(THREE.EventDispatcher.prototype);

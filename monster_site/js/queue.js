@@ -15,21 +15,28 @@ function queueLaden() {
     }, '../assets/tex');                            // Verweis auf Verzeichnis mit verwendeten Texturen
 };
 
+// Aktualisierung der Queue-Position (Mainloop) in Abhaengigkeit zum aktuellen Modus
 function queueAktualisieren() {
+    // Rotationsmodus
     if (game.state === game.modus.orbitrotation) {
-        // console.log("rotation");
+
+        // Lokale Variablen zur Positionsberechnung
         var radiusAbstand = new THREE.Vector3(1.5, 1, 1.5);
         var position = new THREE.Vector3();
         var positionCam = new THREE.Vector3();
         var positionBall = new THREE.Vector3();
+
+        // Positionsberechnung
         positionCam.copy(game.camera.position);
         positionBall.copy(game.whiteBall.position);
         position = positionCam.sub(positionBall).normalize().add(game.whiteBall.position);
 
-        game.queue.position.x = position.x;
-        game.queue.position.y = game.whiteBall.position.y;
-        game.queue.position.z = position.z;
+        // Positionszuweisung
+        game.queue.position.x = position.x;                         // x-Position
+        game.queue.position.y = game.whiteBall.position.y;          // Y-Position
+        game.queue.position.z = position.z;                         // Z-Position
 
+        //
         var qZiel = new THREE.Quaternion();
         var qAusgang = game.queue.rotation._quaternion;
         THREE.Quaternion.slerp(qAusgang, game.camera._quaternion, qZiel, 0.07);
@@ -40,12 +47,15 @@ function queueAktualisieren() {
         game.queue.__dirtyPosition = true;
         game.queue.__dirtyRotation = true;
 
-        orbitControls.Mittelpunkt.x = game.whiteBall.position.x;
-        orbitControls.Mittelpunkt.y = game.whiteBall.position.y;
-        orbitControls.Mittelpunkt.z = game.whiteBall.position.z;
+        game.orbitControls.Mittelpunkt.x = game.whiteBall.position.x;
+        game.orbitControls.Mittelpunkt.y = game.whiteBall.position.y;
+        game.orbitControls.Mittelpunkt.z = game.whiteBall.position.z;
     }
+
+    // Statischer Modus zum Stossen
     if(game.state === game.modus.statisch){
-        console.log(game.mausPosition.y_n);
+
+        //console.log(game.mausPosition.y_n);
 
         game.queue.__dirtyPosition = true;
         game.queue.__dirtyRotation = true;
