@@ -1,38 +1,35 @@
 // once everything is loaded, we run our Three.js stuff.
 function initialisiere() {
 
-	Physijs.scripts.worker = '../lib/physijs_worker.js';
-	Physijs.scripts.ammo = '../lib/ammo.js';
-
-	// Globalen Namespace schaffen
-	window.game = {};
+	Physijs.scripts.worker = '../lib/physijs_worker.js';    // Physi.js-Worker einbinden
+	Physijs.scripts.ammo = '../lib/ammo.js';                // Bibliotheksverweis zu Ammo
+	window.game = {};                                       // Globalen Namespace schaffen
 
 	game.modus = {
-		statisch : 0,
-		orbitrotation : 1,
-		zoom : 2,
-		// pan : 3
+		statisch : 0,           // Position ist fixiert
+		orbitrotation : 1,      // Position rotiert um weisse Kugel
+		zoom : 2,               // Zoom (optional)
+		// pan : 3              // Verschieben (optional, BRAUCHT BUGFIXING)
 	};
-	
-	game.state = game.modus.orbitrotation;
 
-	// Mausposition in der Anwendung
+	game.state = game.modus.orbitrotation; // Initial auf Rotationsmodus setzen
+
+	// Mausposition in der Anwendung tracken
 	game.mausPosition = {
-		x : 0,
-		y : 0,
-		//normaliesiert
-		x_n:0,
-		y_n:0
+		x : 0,                  // eingelesener X-Wert
+		y : 0,                  // eingelesener Y-Wert
+		x_n:0,                  // normalisierter X-Wert
+		y_n:0                   // normalisierter Y-Wert
 	};
 
-	game.szene = new Physijs.Scene;
-	game.tisch = new THREE.Object3D();
-	game.queue = new THREE.Object3D();
-	game.whiteBall = new THREE.Object3D();
+	game.szene = new Physijs.Scene;             // Erstellen einer Physi.js-Szene
+	game.tisch = new THREE.Object3D();          // Tisch als GameObject initialisieren
+	game.queue = new THREE.Object3D();          // Queue als GameObject initialisieren
+	game.whiteBall = new THREE.Object3D();      // Weisse Kugel als GameObject initialisieren
 
-	// create a camera, which defines where we're looking at.
+	// Kamera (fov, aspect, near, far)
 	game.camera = new THREE.PerspectiveCamera(45, (window.innerWidth - 211) / (window.innerHeight - 230), 0.1, 1000);
-	var clock = new THREE.Clock();
+	game.clock = new THREE.Clock();
 
 	orbitControls = new THREE.OrbitControls(game.camera, $('#viewport')[0]);
 	orbitControls.autoRotate = false;
@@ -40,12 +37,12 @@ function initialisiere() {
 	richtung = 0;
 
 	// create a render and set the size
-	var renderer = new THREE.WebGLRenderer();
+	game.renderer = new THREE.WebGLRenderer();
 
-	renderer.setClearColorHex(0xEEEEEE);
-	renderer.setSize(window.innerWidth - 211, window.innerHeight - 230);
-	renderer.setClearColorHex(0x000, 1);
-	renderer.domElement.style.zIndex = -1;
+    game.renderer.setClearColorHex(0xEEEEEE);
+    game.renderer.setSize(window.innerWidth - 211, window.innerHeight - 230);
+    game.renderer.setClearColorHex(0x000, 1);
+    game.renderer.domElement.style.zIndex = -1;
 
 	var axes = new THREE.AxisHelper(20);
 	game.szene.add(axes);
@@ -60,68 +57,14 @@ function initialisiere() {
 	//tischLaden();
 	queueLaden();
 
-	createDummyTisch();
-	createWhiteBall();
-	// Dummy-Tisch
-	function createDummyTisch() {
-		var dummy_rot = Physijs.createMaterial(new THREE.MeshPhongMaterial({
-			color : 0xFF0000
-		}), .9, .3);
-		var dummy_gruen = Physijs.createMaterial(new THREE.MeshPhongMaterial({
-			color : 0x00FF00
-		}), .9, .3);
-		var dummy_blau = Physijs.createMaterial(new THREE.MeshPhongMaterial({
-			color : 0x0000FF
-		}), .9, .3);
-		var dummy_gelb = Physijs.createMaterial(new THREE.MeshPhongMaterial({
-			color : 0xFFFF00
-		}), .9, .3);
-		var dummy_cyan = Physijs.createMaterial(new THREE.MeshPhongMaterial({
-			color : 0x00FFFF
-		}), .9, .3);
+	createDummyTisch();         // Dummy-Tisch aus physikalischen Grundobjekten
+    createWhiteBall(0,20);      // Weisse Kugel aus physikalischem Grundobjekt an x,y
 
-		var ground = new Physijs.BoxMesh(new THREE.CubeGeometry(75, 5, 38), dummy_rot, 0);
-		ground.position.y = 14;
-
-		var borderLeft = new Physijs.BoxMesh(new THREE.CubeGeometry(2, 3, 38), dummy_gruen, 0);
-		borderLeft.position.x = -36;
-		borderLeft.position.y = 2;
-		ground.add(borderLeft);
-
-		var borderRight = new Physijs.BoxMesh(new THREE.CubeGeometry(2, 3, 38), dummy_blau, 0);
-		borderRight.position.x = 38;
-		borderRight.position.y = 2;
-		ground.add(borderRight);
-
-		var borderBottom = new Physijs.BoxMesh(new THREE.CubeGeometry(75, 3, 2), dummy_gelb, 0);
-		borderBottom.position.z = 18;
-		borderBottom.position.y = 2;
-		ground.add(borderBottom);
-
-		var borderTop = new Physijs.BoxMesh(new THREE.CubeGeometry(75, 3, 2), dummy_cyan, 0);
-		borderTop.position.z = -18;
-		borderTop.position.y = 2;
-		ground.add(borderTop);
-
-		game.szene.add(ground);
-	}
-
-	function createWhiteBall() {
-		var dummy_white = Physijs.createMaterial(new THREE.MeshPhongMaterial({
-			color : 0xFFFFFF
-		}), .9, .3);
-
-		game.whiteBall = new Physijs.SphereMesh(new THREE.SphereGeometry(1, 16, 16), dummy_white, 1);
-		game.whiteBall.position.x = 0;
-		game.whiteBall.position.y = 20;
-
-		game.szene.add(game.whiteBall);
-	}
-
+    // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
 	setupLights();
 
 	// add the output of the renderer to the html element
-	$("#viewport").append(renderer.domElement);
+	$("#viewport").append(game.renderer.domElement);
 
 	// Zeichenfläche der Anwendung
 	game.canvas = document.getElementsByTagName("canvas")[0];
@@ -153,70 +96,8 @@ function initialisiere() {
 
 	window.addEventListener('resize', onWindowResize, false);
 
-	function queueAktualisieren() {
 
-		if (game.state === game.modus.orbitrotation) {
-			// console.log("rotation");
-			var radiusAbstand = new THREE.Vector3(1.5, 1, 1.5);
-			var position = new THREE.Vector3();
-			var positionCam = new THREE.Vector3();
-			var positionBall = new THREE.Vector3();
-			positionCam.copy(game.camera.position);
-			positionBall.copy(game.whiteBall.position);
-			position = positionCam.sub(positionBall).normalize().add(game.whiteBall.position);
 
-			game.queue.position.x = position.x;
-			game.queue.position.y = game.whiteBall.position.y;
-			game.queue.position.z = position.z;
-
-			var qZiel = new THREE.Quaternion();
-			var qAusgang = game.queue.rotation._quaternion;
-			THREE.Quaternion.slerp(qAusgang, game.camera._quaternion, qZiel, 0.07);
-
-			game.queue.__dirtyPosition = true;
-			game.queue.__dirtyRotation = true;
-			game.queue.rotation._quaternion.copy(qZiel);
-			game.queue.__dirtyPosition = true;
-			game.queue.__dirtyRotation = true;
-
-			orbitControls.Mittelpunkt.x = game.whiteBall.position.x;
-			orbitControls.Mittelpunkt.y = game.whiteBall.position.y;
-			orbitControls.Mittelpunkt.z = game.whiteBall.position.z;
-		}
-		if(game.state === game.modus.statisch){
-			 console.log(game.mausPosition.y_n);
-
-			game.queue.__dirtyPosition = true;
-			game.queue.__dirtyRotation = true;			
-			game.queue.position.lerp(game.whiteBall.position, (game.mausPosition.y_n*4));
-			game.queue.__dirtyPosition = true;
-			game.queue.__dirtyRotation = true;
-			
-		}
-	}
-
-	function onWindowResize() {
-		game.camera.aspect = (window.innerWidth - 211) / (window.innerHeight - 230);
-		game.camera.updateProjectionMatrix();
-
-		renderer.setSize(window.innerWidth - 211, window.innerHeight - 230);
-
-	};
-
-	function render() {
-
-		var delta = clock.getDelta();
-		orbitControls.rotateLeft(richtung);
-		orbitControls.update(delta);
-
-		queueAktualisieren();
-
-		requestAnimationFrame(render);
-		renderer.render(game.szene, game.camera);
-		stats.update(renderer);
-		statsX.update(renderer);
-		game.szene.simulate(undefined, 1);
-
-	};
-	render();
+    // Ende der Initialisierung / Aufruf des Mainloops
+	mainloop();
 };
