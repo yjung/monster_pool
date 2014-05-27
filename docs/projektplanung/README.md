@@ -1,3 +1,7 @@
+#Hinweise Game Design Doc#
+
+Erste Fassung des GDD zum "Monstard" mit Digitalisisertem Story Board
+
 #Hinweise#
 
 Die Datei "monsterPool_psp.mpp" stellt eine Projektstrukturplan
