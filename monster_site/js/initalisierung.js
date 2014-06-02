@@ -23,15 +23,16 @@ function initialisiere() {
 		y_n:0                   // normalisierter Y-Wert
 	};
 
-	game.szene = new Physijs.Scene;             // Erstellen einer Physi.js-Szene
-	game.tisch = new THREE.Object3D();          // Tisch als GameObject initialisieren
-	game.queue = new THREE.Object3D();          // Queue als GameObject initialisieren
-	game.whiteBall = new THREE.Object3D();      // Weisse Kugel als GameObject initialisieren
+	game.szene = new Physijs.Scene;             		// Erstellen einer Physi.js-Szene
+	game.szene.setGravity(new THREE.Vector3(0,-10,0));	// Schwerkraft
+	game.tisch = new THREE.Object3D();          		// Tisch als GameObject initialisieren
+	game.queue = new THREE.Object3D();          		// Queue als GameObject initialisieren
+	game.whiteBall = new THREE.Object3D();      		// Weisse Kugel als GameObject initialisieren
 
 	// Kamera mit (fov, aspect, near, far) Blickrichtung ist Sache des Mainloops
 	game.camera = new THREE.PerspectiveCamera(45, (window.innerWidth - 211) / (window.innerHeight - 230), 0.1, 1000);
     game.camera.position.x = 0;                 // x-Position
-    game.camera.position.y = 60;                // y-Position
+    game.camera.position.y = 20;                // y-Position
     game.camera.position.z = 10;                // z-Position
 
 
@@ -65,7 +66,7 @@ function initialisiere() {
 	queueLaden();                               // Queue laden
     //tischLaden();                             // Nicht-Physisches, detailliertes Model des Tisches laden
     createDummyTisch();                         // Dummy-Tisch aus physikalischen Grundobjekten erstellen
-    createWhiteBall(0,20);                      // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
+    createWhiteBall(0,18);                      // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
 	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
     game.szene.add(new THREE.AxisHelper(50));   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen

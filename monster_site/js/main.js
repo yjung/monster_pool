@@ -16,7 +16,7 @@ function mainloop() {
     benutzereingaben();                                 // Benutzereingaben abfangen
     var delta = game.clock.getDelta();                  // Verstrichene Zeit messen
     game.orbitControls.update(delta);                   // Steuerung in Zeitabhängigkeit aktualisieren
-    game.szene.simulate(undefined, 1);                  // Physiksimulation
+    game.szene.simulate(undefined, 1000);                  // Physiksimulation
     game.renderer.render(game.szene, game.camera);      // Rendering
     updateStatistik(true, true);                        // Statistiken aktualisieren
     requestAnimationFrame(mainloop);                    // Mainloop erneut durchlaufen

@@ -33,9 +33,9 @@ OrbitControls=function(kameraObjekt, aktiveFlaeche) {
 	this.autoRotateSpeed = 2.0;
 	// 30 seconds per round when fps is 60
 
-	this.minPolarAngle = 0;
+	this.minPolarAngle = 1.0;
 	// radians
-	this.maxPolarAngle = Math.PI;
+	this.maxPolarAngle = (Math.PI/2)-0.25;
 	// radians
 
 	this.minDistance = 0;
@@ -195,6 +195,7 @@ OrbitControls=function(kameraObjekt, aktiveFlaeche) {
 		}
 
 	};
+	
 	function getAutoRotationAngle() {
 
 		return 2 * Math.PI / 60 / 60 * scope.autoRotateSpeed;
@@ -213,7 +214,8 @@ OrbitControls=function(kameraObjekt, aktiveFlaeche) {
 			return;
 
 		event.preventDefault();
-
+		
+		// Standardmodus Orbitroatation
 		if (game.state === game.modus.orbitrotation) {
 
 			rotateEnd.set(event.clientX, event.clientY);
