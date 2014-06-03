@@ -25,7 +25,9 @@ function initialisiere() {
 
 	game.szene = new Physijs.Scene;             		// Erstellen einer Physi.js-Szene
 	game.szene.setGravity(new THREE.Vector3(0,-10,0));	// Schwerkraft
-	game.tisch = new THREE.Object3D();          		// Tisch als GameObject initialisieren
+//	game.tisch = new THREE.Object3D();          		// Tisch als GameObject initialisieren
+    game.ColadaTisch = new THREE.Object3D();          		// Tisch als GameObject initialisieren
+
 	game.queue = new THREE.Object3D();          		// Queue als GameObject initialisieren
 	game.whiteBall = new THREE.Object3D();      		// Weisse Kugel als GameObject initialisieren
 
@@ -66,6 +68,7 @@ function initialisiere() {
 	queueLaden();                               // Queue laden
     //tischLaden();                             // Nicht-Physisches, detailliertes Model des Tisches laden
     createDummyTisch();                         // Dummy-Tisch aus physikalischen Grundobjekten erstellen
+    // ColadaTischLaden();                               //Alpha Tisch aus Colada File Laden
     createWhiteBall(0,18);                      // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
 	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
