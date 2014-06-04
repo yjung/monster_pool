@@ -19,8 +19,15 @@ function initialisiere() {
 	game.mausPosition = {
 		x : 0,                  // eingelesener X-Wert
 		y : 0,                  // eingelesener Y-Wert
+
 		x_n:0,                  // normalisierter X-Wert
-		y_n:0                   // normalisierter Y-Wert
+		y_n:0,                  // normalisierter Y-Wert
+
+        x_last:0,               // letzter X-Wert
+        y_last:0,               // Letzter Y-Wert
+
+        x_d:0,
+        y_d:0
 	};
 
 	game.szene = new Physijs.Scene;             		// Erstellen einer Physi.js-Szene
@@ -59,6 +66,17 @@ function initialisiere() {
 
         game.mausPosition.x_n = rect.left / event.clientX;                      // Maus-x normalisieren
         game.mausPosition.y_n = rect.top / event.clientY;                       // Maus-y normalisieren
+
+        game.mausPosition.x_gemapped = rect.left / event.clientX - 0.5;                      // Maus-x normalisieren
+        game.mausPosition.y_gemapped = rect.top / event.clientY - 0.5;                       // Maus-y normalisieren
+
+        game.mausPosition.x_d = game.mausPosition.x_n - game.mausPosition.x_last;
+        game.mausPosition.y_d = game.mausPosition.y_n - game.mausPosition.y_last;
+
+        game.mausPosition.x_last = game.mausPosition.x_n;
+        game.mausPosition.y_last = game.mausPosition.y_n;
+
+
     }, false);
 
 

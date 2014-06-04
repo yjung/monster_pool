@@ -22,71 +22,77 @@ function queueLaden() {
 function queueAktualisieren() {
 
 	// Rotationsmodus
-	// if (game.state === game.modus.orbitrotation) {
+	if (game.state === game.modus.orbitrotation) {
 
-		// Lokale Variablen zur Positionsberechnung
-		var radiusAbstand = new THREE.Vector3(2, 2, 2);
-		var richtungCam = new THREE.Vector3();
-		var richtungCam = new THREE.Vector3();
-		var positionBall = new THREE.Vector3();
-		
-		var positionQueue = new THREE.Vector3();
+        // Lokale Variablen zur Positionsberechnung
+        var radiusAbstand = new THREE.Vector3(10, 0, 10);         // KEINE AHNUNG OB DAS IRGENDWIE GEHT
+        var abstand = 10;
+        var richtungCam = new THREE.Vector3();                  // Vektor fuer
 
-		// Positionsberechnung
-		positionBall.copy((game.whiteBall.position)).negate();
-		// positionBall.y -= 10;
-		richtungCam = positionBall.add(game.camera.position);
-		richtungCam.normalize();
+        var positionBall = new THREE.Vector3();
+        var positionCam = new THREE.Vector3();
 
-		richtungCam.multiply(radiusAbstand);
+        var positionQueue = new THREE.Vector3();
 
 
-		//Aktuelle Position addieren
-		richtungCam.add(game.whiteBall.position);
+        positionCam.copy(game.camera.position);                 // Position Kamera sichern
+        positionBall.copy(game.whiteBall.position);             // Position Kugel sichern
 
-		// richtungCam.y = game.whiteBall.position.y + 2;
+        richtungCam.subVectors(positionCam, positionBall);      // Richtung zur Kamera
+        richtungCam.normalize();                                // Richtung zur Kamera normalisiert
+
+        richtungCam.multiplyScalar(15);
+        console.log(richtungCam);
+
+        game.queue.__dirtyRotation = true;
+        game.queue.__dirtyPosition = true;
+        positionQueue.addVectors(positionBall, richtungCam);
+        game.queue.__dirtyRotation = true;
+        game.queue.__dirtyPosition = true;
 
 
+        game.queue.__dirtyRotation = true;
+        game.queue.__dirtyPosition = true;
+        game.queue.position.copy(positionQueue);
+        game.queue.__dirtyRotation = true;
+        game.queue.__dirtyPosition = true;
 
-		// game.queue.__dirtyPosition = true;
-		game.queue.position = richtungCam;
-		// game.queue.position.y += 2;
-		// game.queue.__dirtyPosition = true;
 
-		
-		var qZiel = new THREE.Quaternion();
-		var qAusgang = game.queue.rotation._quaternion;
-		
-		THREE.Quaternion.slerp(qAusgang, game.camera.rotation._quaternion, qZiel, 0.07);
+        var qZiel = new THREE.Quaternion();
+        game.queue.__dirtyRotation = true;
+        game.queue.__dirtyPosition = true;
+        var qAusgang = game.queue.rotation._quaternion;
+        game.queue.__dirtyRotation = true;
+        game.queue.__dirtyPosition = true;
 
-		game.queue.__dirtyRotation = true;
-		game.queue.rotation._quaternion.copy(qZiel);
-		game.queue.__dirtyRotation = true;
-		
-		game.queue.rotation._x *= 0.5;
-		game.queue.rotation._y *= 0.5;
-		
-		console.log(game.queue.rotation);
+        game.queue.__dirtyRotation = true;
+        game.queue.__dirtyPosition = true;
+        THREE.Quaternion.slerp(qAusgang, game.camera.rotation._quaternion, qZiel, 1 * game.clock.getDelta());
+        game.queue.__dirtyRotation = true;
+        game.queue.__dirtyPosition = true;
 
-		game.orbitControls.Mittelpunkt.x = game.whiteBall.position.x;
-		game.orbitControls.Mittelpunkt.y = game.whiteBall.position.y;
-		game.orbitControls.Mittelpunkt.z = game.whiteBall.position.z;
+        game.queue.__dirtyRotation = true;
+        game.queue.__dirtyPosition = true;
+        game.queue.rotation._quaternion.copy(qZiel);
+        game.queue.__dirtyRotation = true;
+        game.queue.__dirtyPosition = true;
+
+
+        game.orbitControls.Mittelpunkt.copy(game.whiteBall.position);
+    }
 		
 		// ------------------------------------------------------------
 	
 	if (game.state === game.modus.statisch) {
-		var richtungsvektor = new THREE.Vector3();
-		richtungsvektor.set(
-			game.whiteBall.position.x - game.queue.position.x, //
-			game.whiteBall.position.y - game.queue.position.y, 
-			game.whiteBall.position.y - game.queue.position.z
-		);
+          var richtungsvektor = new THREE.Vector3();
+          richtungsvektor.subVectors(game.whiteBall.position, game.queue.position);
 
+        game.queue.__dirtyRotation = true;
 		game.queue.__dirtyPosition = true;
-		game.queue.position.x = game.queue.position.x / richtungsvektor.x * game.mausPosition.y_n + game.queue.position.x;
-		// game.queue.position.y = game.queue.position.x / richtungsvektor.y * game.mausPosition.y_n + game.queue.position.y;
-		game.queue.position.z = game.queue.position.x / richtungsvektor.z * game.mausPosition.y_n + game.queue.position.z;
-		game.queue.__dirtyPosition = true;
+//      game.queue.translateOnAxis(game.queue.localToWorld(richtungsvektor), game.mausPosition.y_gemapped * game.clock.getDelta());
+		game.queue.translateOnAxis(richtungsvektor, game.mausPosition.y_gemapped * game.clock.getDelta());
+        game.queue.__dirtyRotation = true;
+        game.queue.__dirtyPosition = true;
 	}
 
 }

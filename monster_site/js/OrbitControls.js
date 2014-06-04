@@ -293,7 +293,6 @@ OrbitControls=function(kameraObjekt, aktiveFlaeche) {
 			case 0:
 				if (game.state === game.modus.orbitrotation) {
 					game.state = game.modus.statisch;
-		game.queue._physijs.collision_flags = 1;
 					break;
 				}
 				if (game.state === game.modus.statisch) {
