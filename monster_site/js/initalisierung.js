@@ -87,7 +87,7 @@ function initialisiere() {
     //tischLaden();                             // Nicht-Physisches, detailliertes Model des Tisches laden
     createDummyTisch();                         // Dummy-Tisch aus physikalischen Grundobjekten erstellen
     // ColadaTischLaden();                               //Alpha Tisch aus Colada File Laden
-    createWhiteBall(0,18);                      // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
+    createWhiteBall(0,18,0);                      // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
 	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
     game.szene.add(new THREE.AxisHelper(50));   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen

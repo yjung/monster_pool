@@ -69,12 +69,13 @@ lRedT = new THREE.MeshLambertMaterial({
 
 lGreenT = new THREE.MeshLambertMaterial({
 	color : 0x00ff00,
-	ambient : 0x00ff00
+	ambient : 0x00ff00,
+//    wireframe: true
 });
 
 lBlueT = new THREE.MeshLambertMaterial({
 	color : 0x0000ff,
-	ambient : 0xff0000,
+	ambient : 0xff0000
 });
 
 lGreyT = new THREE.MeshLambertMaterial({
