@@ -38,8 +38,8 @@ OrbitControls=function(kameraObjekt, aktiveFlaeche) {
 	this.maxPolarAngle = (Math.PI/2)-0.25;
 	// radians
 
-	this.minDistance = 0;
-	this.maxDistance = Infinity;
+	this.minDistance = 20;
+	this.maxDistance = 40;
 
 	// Intern verwendete Variablen
 	var scope = this;

@@ -1,17 +1,17 @@
 // Weisse Kugel aus physikalischem Grundobjekt
 function createWhiteBall(x,y,z) {
 
-    var friction = .2;      // low friction
-    var restitution = 0;   // low restitution
+    var friction = 0.25;      // low friction
+    var restitution = 0.87;   // low restitution
 
     var material = Physijs.createMaterial(
-        new THREE.MeshBasicMaterial({ color: 0xffffff }),
+        new THREE.MeshBasicMaterial({ color: 0xffffff, wireframe:true }),
         friction,
         restitution
     );
 
     // Grundobjekterzeugung mit Material aus angelegter Bibliothek
-    game.whiteBall = new Physijs.SphereMesh(new THREE.SphereGeometry(1, 16, 16), material, 1000);
+    game.whiteBall = new Physijs.SphereMesh(new THREE.SphereGeometry(1, 16, 16), material, 100000000);
     // Initiale Positionierung in der Welt
     game.whiteBall.position.x = x;
     game.whiteBall.position.y = y;

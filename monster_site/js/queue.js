@@ -15,8 +15,6 @@ function queueLaden() {
 
         game.queue.rotation.copy(game.camera.rotation);
 
-        console.log(game.queue);
-
         game.szene.add(game.queue);                                         // Queue zur Szene hinzufuegen
     });
 };
@@ -26,8 +24,6 @@ function queueAktualisieren() {
 
     // Rotationsmodus
     if (game.state === game.modus.orbitrotation) {
-
-        console.log(game.queue);
         game.queue.__dirtyRotation = true;
         game.queue.__dirtyPosition = true;
         game.orbitControls.Mittelpunkt.copy(game.whiteBall.position); // Mittelpunkt der Orbitrotation auf der Kugel
@@ -36,7 +32,9 @@ function queueAktualisieren() {
 
         game.queue.__dirtyRotation = true;
         game.queue.__dirtyPosition = true;
-        game.queue.rotation.copy(game.camera.rotation);
+        game.camera.position.y -= 1;
+        game.queue.lookAt(game.camera.position);
+        game.camera.position.y += 1;
         game.queue.__dirtyRotation = true;
         game.queue.__dirtyPosition = true;
 
@@ -48,7 +46,6 @@ function queueAktualisieren() {
 
         /* Positionen der Objekte in Vektorvariablen sichern.*/
         positionCam.copy(game.camera.position);                 // Position Kamera sichern
-        positionCam.y -= 1;
         positionBall.copy(game.whiteBall.position);             // Position Kugel sichern
 
         /* Richtungsvektor fuer Queuepositionierung bestimmen*/
@@ -64,6 +61,7 @@ function queueAktualisieren() {
         game.queue.__dirtyRotation = true;
         game.queue.__dirtyPosition = true;
 
+//        positionQueue.y -=0.5;
 
         game.queue.__dirtyRotation = true;
         game.queue.__dirtyPosition = true;
@@ -71,56 +69,17 @@ function queueAktualisieren() {
         game.queue.__dirtyRotation = true;
         game.queue.__dirtyPosition = true;
 
-
-//        game.queue.__dirtyRotation = true;
-//        game.queue.__dirtyPosition = true;
-//        richtungCam.normalize();
-//        game.queue.rotation.copy(game.camera.rotation);
-//        game.queue.__dirtyRotation = true;
-//        game.queue.__dirtyPosition = true;
-
-
-
-//        var qZiel = new THREE.Quaternion();
-//        game.queue.__dirtyRotation = true;
-//        game.queue.__dirtyPosition = true;
-//        var qAusgang = game.queue.quaternion;
-//        game.queue.__dirtyRotation = true;
-////
-//        game.queue.__dirtyRotation = true;
-//        game.queue.__dirtyPosition = true;
-//        game.queue.__dirtyPosition = true;
-//        THREE.Quaternion.slerp(qAusgang, game.camera.quaternion, qZiel, 10 * game.clock.getDelta());
-//        game.queue.__dirtyRotation = true;
-//        game.queue.__dirtyPosition = true;
-////
-//        game.queue.__dirtyRotation = true;
-//        game.queue.__dirtyPosition = true;
-//        game.queue.quaternion.copy(qZiel);
-//        game.queue.__dirtyRotation = true;
-//        game.queue.__dirtyPosition = true;
-
         // ------------------------------------------------------------
     }
 
     if (game.state === game.modus.statisch) {
-        console.log(game.queue._physijs.collision_flags);
-//        game.queue._physijs.collision_flags = 2;
         var richtungsvektor = new THREE.Vector3();
         richtungsvektor.subVectors(game.queue.position, game.whiteBall.position);
-
-//        var kamerablick = new THREE.Vector3( game.camera.matrix.elements[8], game.camera.matrix.elements[9], game.camera.matrix.elements[10]);
-//        kamerablick = game.queue.worldToLocal(kamerablick);
-//        richtungsvektor = game.queue.worldToLocal(richtungsvektor);
-//
-//        console.log(kamerablick);
 
         var zRichtung = new THREE.Vector3(0, 0, 1);
 
         game.queue.__dirtyRotation = true;
         game.queue.__dirtyPosition = true;
-//        game.queue.translateOnAxis(richtungsvektor, game.mausPosition.y_d * 20);
-//		game.queue.translateOnAxis(game.camera.rotation, game.mausPosition.y_d * 10);
         game.queue.translateOnAxis(zRichtung, (game.mausPosition.y_d + game.mausPosition.x_d) * -10);
         game.queue.__dirtyRotation = true;
         game.queue.__dirtyPosition = true;

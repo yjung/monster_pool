@@ -3,7 +3,7 @@ function createDummyTisch() {
     // Grundflaeche
     var dummy_rot = Physijs.createMaterial(new THREE.MeshPhongMaterial({
         color : 0xFF0000,
-        wireframe : true
+        wireframe : false
     }), .9, .3);
     // Kurze Bande 1
     var dummy_gruen = Physijs.createMaterial(new THREE.MeshPhongMaterial({
