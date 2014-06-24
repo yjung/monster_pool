@@ -1,0 +1,46 @@
+\documentclass[a4paper, 12pt, onecolumn]{scrartcl}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\sisetup{per-mode=symbol}
+
+\begin{document}
+
+  \begin{itemize}
+    \item Weg-Zeit-Gesetz \\
+  \begin{equation}
+    s (t) = s_0 + v_0 t + \frac{a}{2} t^2
+  \end{equation}
+  \item (Freier Fall) \\
+  \begin{align}
+    s (t) = \frac{g}{2} t^2 \\ g = \SI{9.81}{\meter\per\square\second}
+  \end{align}
+  \item Schräger Wurf \\
+  \begin{equation}
+    a = \text{ const } 
+  \end{equation}
+  \item Kleines Beispiel \\
+  \begin{align}
+    s (t) = \begin{matrix} \cos (t) \\ \sin (t) \end{matrix} \\
+    s' (t) = a t + v_0 = v (t)\\
+    v' (t) = a
+  \end{align}
+
+  \begin{align}
+    \vec{s} = \begin{pmatrix} s_x \\ s_y \\ s_z \end{pmatrix} + \begin{pmatrix} v_x \\ v_y \\ v_z \end{pmatrix} t + \frac{1}{2} \begin{pmatrix} a_x \\ a_y \\ a_z \end{pmatrix} t^2 \\
+    \vec{g} = \begin{pmatrix} 0 \\ 0 \\ \SI{-9.81}{\meter\per\square\second} \end{pmatrix}
+  \end{align}
+  \item Übungsaufgabe \\
+  \begin{equation}
+    \vec{s} (t) = \begin{pmatrix} x (t) \\ y (t) \\ z (t) \end{pmatrix} =  \begin{pmatrix} 0 \\ 0 \\ \SI{10}{\meter} \end{pmatrix} + \begin{pmatrix} 0 \\ \cos 40^\circ \\ \sin 40^\circ \end{pmatrix} t + \frac{1}{2} \begin{pmatrix} 0 \\ 0 \\ \SI{-9.81}{\meter\per\square\second} \end{pmatrix} t^2
+  \end{equation}
+  \begin{equation}
+    z (t) = \SI{10}{\meter} + \SI{50}{\meter\per\second} \sin 40^\circ t + \frac{1}{2} (\SI{-9.81}{\meter\per\square\second}) t^2
+  \end{equation}
+  \begin{equation}
+    z' (t) = \SI{50}{\meter\per\second} \sin 40^\circ - \SI{9.81}{\meter\per\square\second} t = 0
+  \end{equation}
+  \end{itemize}
+\end{document}
