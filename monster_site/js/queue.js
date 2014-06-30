@@ -13,7 +13,7 @@ function queueLaden() {
 
         game.queue.useQuaternion = true;
 
-        game.queue.rotation.copy(game.camera.rotation);
+        game.queue.rotation.copy(game.kamera.rotation);
 
 
 		game.queue.stosskraftX = 0;

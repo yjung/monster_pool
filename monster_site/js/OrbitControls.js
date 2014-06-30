@@ -154,9 +154,9 @@ OrbitControls = function(object, domElement) {
 
 		game.queue.__dirtyRotation = true;
 		game.queue.__dirtyPosition = true;
-		game.camera.position.y -= 1;
-		game.queue.lookAt(game.camera.position);
-		game.camera.position.y += 1;
+		game.kamera.position.y -= 1;
+		game.queue.lookAt(game.kamera.position);
+		game.kamera.position.y += 1;
 		game.queue.__dirtyRotation = true;
 		game.queue.__dirtyPosition = true;
 
@@ -171,7 +171,7 @@ OrbitControls = function(object, domElement) {
 		// Vektor Position Queue initialisieren
 
 		/* Positionen der Objekte in Vektorvariablen sichern.*/
-		positionCam.copy(game.camera.position);
+		positionCam.copy(game.kamera.position);
 		// Position Kamera sichern
 		positionBall.copy(game.whiteBall.position);
 		// Position Kugel sichern

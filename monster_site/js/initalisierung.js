@@ -8,6 +8,8 @@ function initialisiere() {
     
     game.breite = document.getElementById("viewport").clientWidth;
 	game.hoehe = document.getElementById("viewport").clientHeight;
+	
+	
 
 	game.modus = {
 		statisch : 0,           // Position ist fixiert
@@ -42,17 +44,17 @@ function initialisiere() {
 	game.whiteBall = new THREE.Object3D();      		// Weisse Kugel als GameObject initialisieren
 
 	// Kamera mit (fov, aspect, near, far) Blickrichtung ist Sache des Mainloops
-	game.camera = new THREE.PerspectiveCamera(45, (window.innerWidth - 211) / (window.innerHeight - 230), 0.1, 1000);
-    game.camera.position.x = 0;                 // x-Position
-    game.camera.position.y = 20;                // y-Position
-    game.camera.position.z = 10;                // z-Position
+	game.kamera = new THREE.PerspectiveCamera(45, (window.innerWidth - 211) / (window.innerHeight - 230), 0.1, 1000);
+    game.kamera.position.x = 0;                 // x-Position
+    game.kamera.position.y = 20;                // y-Position
+    game.kamera.position.z = 10;                // z-Position
 
 
 	game.clock = new THREE.Clock();             // Uhr-Objekt zur internen Zeitmessung im Spiel
 
     // Initialisierung der Steurung
     game.keyboard = erstelleTastaturSteuerung();
-	game.orbitControls = new OrbitControls(game.camera, $('#viewport')[0]);    // Kamera und Canvas an Steuerung
+	game.orbitControls = new OrbitControls(game.kamera, $('#viewport')[0]);    // Kamera und Canvas an Steuerung
     game.orbitControls.autoRotate = false;                                     // Auto-Rotate ausschalten
     // Initialisierung des Renderers
 	game.renderer = setupRenderer(game.breite, game.hoehe);                                  // Renderer erstellen
@@ -85,6 +87,10 @@ function initialisiere() {
 
     }, false);
 
+	/* Post-Processing */
+	game.postProcessing = false;
+	game.effect;
+	erstelleComposer();
 
 
 
