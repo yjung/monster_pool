@@ -5,6 +5,9 @@ function initialisiere() {
 	Physijs.scripts.ammo = '../lib/ammo.js';                    // Bibliotheksverweis zu Ammo
     window.game = {};                                           // Globalen Namespace schaffen
     window.addEventListener('resize', onWindowResize, false);   // Eventlistener fuer Groessenaenderung
+    
+    game.breite = document.getElementById("viewport").clientWidth;
+	game.hoehe = document.getElementById("viewport").clientHeight;
 
 	game.modus = {
 		statisch : 0,           // Position ist fixiert
@@ -52,9 +55,11 @@ function initialisiere() {
 	game.orbitControls = new OrbitControls(game.camera, $('#viewport')[0]);    // Kamera und Canvas an Steuerung
     game.orbitControls.autoRotate = false;                                     // Auto-Rotate ausschalten
     // Initialisierung des Renderers
-	game.renderer = new THREE.WebGLRenderer();                                  // Renderer erstellen
-    game.renderer.setSize(window.innerWidth - 211, window.innerHeight - 230);   // Groesse setzen
-    game.renderer.setClearColorHex(0x000, 1);                                   // ClearColor setzen
+	game.renderer = setupRenderer(game.breite, game.hoehe);                                  // Renderer erstellen
+	console.log(game.breite);                                 // Renderer erstellen
+	console.log(game.hoehe);                                 // Renderer erstellen
+    // game.renderer.setSize(window.innerWidth - 211, window.innerHeight - 230);   // Groesse setzen
+    // game.renderer.setClearColorHex(0x000, 1);                                   // ClearColor setzen
     game.renderer.domElement.style.zIndex = -1;                                 // z-index kleiner fuer hoeheres HUD
     $("#viewport").append(game.renderer.domElement);                            // Rendererrückgabe an viewport-DIV
 
