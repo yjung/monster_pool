@@ -1,9 +1,0 @@
-/* Library that covers all the physic aspects of the game.
- * Input: Vector of force and parameters of the enviroment
- * Output: Reaction of the elements
- * Datei: physics.js                   Autor: Juan Henao
- * Datum: 24.06.2014                   Version: 0.0
- * 
- */
- 
- 
