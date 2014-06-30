@@ -28,6 +28,7 @@ function createGUI() {
 	
 	paramPostprocessing = {
 		enable : false,
+		filmEffekt : false,
 	};
 
 	game.debugGUI.stosskraftX = controls.add(paramControls, 'stosskraftX').min(0).max(1000).step(1).listen().name("Stosskraft-X");
@@ -37,7 +38,8 @@ function createGUI() {
 	game.debugGUI.offsetY = controls.add(paramControls, 'offsetY').min(0).max(1).step(0.01).listen().name("Offset-Y");
 	game.debugGUI.offsetZ = controls.add(paramControls, 'offsetZ').min(0).max(1).step(0.01).listen().name("Offset-Z");
 	
-	game.debugGUI.postprocessing = postprocessing.add(paramPostprocessing, 'enable').listen();
+	game.debugGUI.enable = postprocessing.add(paramPostprocessing, 'enable').listen();
+	game.debugGUI.filmEffekt = postprocessing.add(paramPostprocessing, 'filmEffekt').listen();
 	
 
 	// Event on change in 'effectX'
@@ -80,14 +82,16 @@ function createGUI() {
 	// // refresh based on the new value of params.interation
 	// });
 
-	game.debugGUI.postprocessing.onChange(function(value){
+	game.debugGUI.enable.onChange(function(value){
 		game.postProcessing = value;
+	});
+
+	game.debugGUI.filmEffekt.onChange(function(value){
+		game.filmEffekt = value;
 	});
 
 	// GUI im Allgemeinen standardmaessig oeffnen
 	game.debugGUI.closed = false;
-	// Kontrollleiste anzeigen
-	// Ordner standardmaessig oeffnen
-	controls.close();
-	postprocessing.open();
+	controls.close();		// Kontrollleiste geschlossen
+	postprocessing.open();	// Ordner standardmaessig oeffnen
 };

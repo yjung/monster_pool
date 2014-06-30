@@ -1,17 +1,3 @@
-// Anpassung des Fensters (bzw. Canvas)
-function onWindowResize() {
-	
-	game.breite = document.getElementById("viewport").clientWidth;
-	game.hoehe = document.getElementById("viewport").clientHeight;
-	
-	
-    game.camera.aspect = game.breite / game.hoehe;    								// der Kamera auf Groessenaenderung
-    game.camera.updateProjectionMatrix();                                           // Projektionsmatrix der Kamera aktualisieren
-    game.renderer.setSize(game.breite, game.hoehe);       // Renderer aktualisieren
-    
-    game.effect.setSize(game.breite, game.hoehe);
-};
-
 // Abfangen von Benutzereingaben zum Anpassen der Szene
 function benutzereingaben(){
     // HIER ERGAENZEN
@@ -35,8 +21,6 @@ function mainloop() {
 		game.composer.render(delta);
 
 	}
-    
-    
     
     // game.renderer.render(game.szene, game.camera);      // Rendering
     updateStatistik(true, true);                        // Statistiken aktualisieren

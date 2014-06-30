@@ -4,23 +4,36 @@
  * 			aktualisieren.
  *//////////////////////////////////////////////////////////////////////////////////
 function setupRenderer(breite, hoehe) {
+
+
 	if (window.WebGLRenderingContext) {
-		renderer = new THREE.WebGLRenderer({
+		var renderer = new THREE.WebGLRenderer({
 			antialias : true
 		});
 	} else {
 		alert("NO WEBGL!");
-		renderer = new THREE.CanvasRenderer();
+		var renderer = new THREE.CanvasRenderer();
 	}
 
-	// Renderer auf die Groesse des Fensters maximieren
-	renderer.setSize(breite, hoehe);
-	// Hintergrundfarbe des Renderers festlegen
-	renderer.setClearColor(0x000000);
-	// shadowMaps aktivieren
-	renderer.shadowMapEnabled = true;
-	// To allow render overlay on top of sprited sphere
-	renderer.autoClear = false;
-	renderer.clear(false, true, false);
-	return (renderer);
+	renderer.setSize(game.breite, game.hoehe);	// Renderer auf die Groesse des Fensters maximieren
+	renderer.setClearColorHex(0x000, 1);  		// Hintergrundfarbe des Renderers festlegen
+	renderer.domElement.style.zIndex = -1; 		// To allow render overlay on top of sprited sphere
+	renderer.shadowMapEnabled = true;			// shadowMaps aktivieren
+	renderer.autoClear = false;					// Kein Auto-Clear um Postprocessing zu ermoeglichen
+	renderer.clear(false, true, false);			// clear(color, depth, stencil)
+	return (renderer);							// render wird in game.renderer gesichert
+};
+
+
+// Anpassung des Fensters (bzw. Canvas)
+function onWindowResize() {
+	
+	game.breite = document.getElementById("viewport").clientWidth;
+	game.hoehe = document.getElementById("viewport").clientHeight;
+	
+	
+    game.kamera.aspect = game.breite / game.hoehe;    								// der Kamera auf Groessenaenderung
+    game.kamera.updateProjectionMatrix();                                           // Projektionsmatrix der Kamera aktualisieren
+    game.renderer.setSize(game.breite, game.hoehe);       // Renderer aktualisieren
+    game.composer.setSize(game.breite, game.hoehe);
 };

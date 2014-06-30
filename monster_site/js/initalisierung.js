@@ -57,12 +57,10 @@ function initialisiere() {
 	game.orbitControls = new OrbitControls(game.kamera, $('#viewport')[0]);    // Kamera und Canvas an Steuerung
     game.orbitControls.autoRotate = false;                                     // Auto-Rotate ausschalten
     // Initialisierung des Renderers
+	// console.log(game.breite);                                 // Renderer erstellen
+	// console.log(game.hoehe);                                 // Renderer erstellen
 	game.renderer = setupRenderer(game.breite, game.hoehe);                                  // Renderer erstellen
-	console.log(game.breite);                                 // Renderer erstellen
-	console.log(game.hoehe);                                 // Renderer erstellen
-    // game.renderer.setSize(window.innerWidth - 211, window.innerHeight - 230);   // Groesse setzen
-    // game.renderer.setClearColorHex(0x000, 1);                                   // ClearColor setzen
-    game.renderer.domElement.style.zIndex = -1;                                 // z-index kleiner fuer hoeheres HUD
+
     $("#viewport").append(game.renderer.domElement);                            // Rendererrückgabe an viewport-DIV
 
     // Initialisierung des Canvas
