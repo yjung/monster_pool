@@ -13,7 +13,8 @@ function erstelleComposer() {
 
 	var renderPass = new THREE.RenderPass(game.szene, game.kamera);	// Renderpass fuer Szene aus Kamera
 	
-	effectFilm = new THREE.FilmPass(0.8, 0.325, 256, false);	// Film-Effekt-Pass
+	var effektFilm = new THREE.FilmPass(0.8, 0.325, 256, false);	// Film-Effekt-Pass
+	var effektBloomPass = new THREE.BloomPass(3, 25, 5, 256);
 	
 	var effectcopy = new THREE.ShaderPass(THREE.CopyShader);		// Kopier-Shader fuer Effekte, die nicht selbst/direkt gerendert werden koennen
 	effectcopy.renderToScreen = true;								// Als Letzten markieren bzw. final auf das Canvas rendern
@@ -28,11 +29,19 @@ function erstelleComposer() {
 	};
 	
 	var renderTarget = new THREE.WebGLRenderTarget(game.breite, game.hoehe, parameters);	// Rendertarget-Objekt fuer Renderer-Initialisierung
-	game.composer = new THREE.EffectComposer(game.renderer, renderTarget);	// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren
-	game.composer.setSize(game.breite, game.hoehe);							// Groesse setzen
+	game.composerFilm = new THREE.EffectComposer(game.renderer, renderTarget);	// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren
+	game.composerFilm.setSize(game.breite, game.hoehe);							// Groesse setzen
 	
-	game.composer.addPass(renderPass);		// Normales Bild rendern
-	game.composer.addPass(effectFilm);		// Film-Effekt
-	game.composer.addPass(effectcopy);		// Standard-Copy-Shader zum finalen rendern
+	game.composerFilm.addPass(renderPass);		// Normales Bild rendern
+	game.composerFilm.addPass(effektFilm);	// Film-Effekt
+	game.composerFilm.addPass(effectcopy);		// Standard-Copy-Shader zum finalen rendern
+	
+	var renderTarget = new THREE.WebGLRenderTarget(game.breite, game.hoehe, parameters);	// Rendertarget-Objekt fuer Renderer-Initialisierung
+	game.composerBloomPass = new THREE.EffectComposer(game.renderer, renderTarget);	// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren
+	game.composerBloomPass.setSize(game.breite, game.hoehe);							// Groesse setzen
+	
+	game.composerBloomPass.addPass(renderPass);		// Normales Bild rendern
+	game.composerBloomPass.addPass(effektBloomPass);// Film-Effekt
+	game.composerBloomPass.addPass(effectcopy);		// Standard-Copy-Shader zum finalen rendern
 
 }

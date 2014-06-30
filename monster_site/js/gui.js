@@ -25,10 +25,11 @@ function createGUI() {
 		offsetY : 0,
 		offsetZ : 0
 	};
-	
+
 	paramPostprocessing = {
 		enable : false,
 		filmEffekt : false,
+		bloomPass : false,
 	};
 
 	game.debugGUI.stosskraftX = controls.add(paramControls, 'stosskraftX').min(0).max(1000).step(1).listen().name("Stosskraft-X");
@@ -37,10 +38,10 @@ function createGUI() {
 	game.debugGUI.offsetX = controls.add(paramControls, 'offsetX').min(0).max(1).step(0.01).listen().name("Offset-X");
 	game.debugGUI.offsetY = controls.add(paramControls, 'offsetY').min(0).max(1).step(0.01).listen().name("Offset-Y");
 	game.debugGUI.offsetZ = controls.add(paramControls, 'offsetZ').min(0).max(1).step(0.01).listen().name("Offset-Z");
-	
+
 	game.debugGUI.enable = postprocessing.add(paramPostprocessing, 'enable').listen();
-	game.debugGUI.filmEffekt = postprocessing.add(paramPostprocessing, 'filmEffekt').listen();
-	
+	game.debugGUI.filmEffekt = postprocessing.add(paramPostprocessing, 'filmEffekt').listen().name("Film-Effekt");
+	game.debugGUI.bloomPass = postprocessing.add(paramPostprocessing, 'bloomPass').listen().name("Leucht-Effekt");
 
 	// Event on change in 'effectX'
 	game.debugGUI.stosskraftX.onFinishChange(function(value) {
@@ -57,13 +58,13 @@ function createGUI() {
 	// Event on change in 'effectZ'
 	game.debugGUI.stosskraftZ.onFinishChange(function(value) {
 		stosskraftZ = value;
-				game.queue.stosskraftZ = value;
+		game.queue.stosskraftZ = value;
 	});
 
 	// Event on change in 'offsetX'
 	game.debugGUI.offsetX.onFinishChange(function(value) {
 		offsetX = value;
-				game.queue.offsetX = value;
+		game.queue.offsetX = value;
 	});
 
 	// Event on change in 'offsetY'
@@ -82,16 +83,24 @@ function createGUI() {
 	// // refresh based on the new value of params.interation
 	// });
 
-	game.debugGUI.enable.onChange(function(value){
+	game.debugGUI.enable.onChange(function(value) {
 		game.postProcessing = value;
 	});
 
-	game.debugGUI.filmEffekt.onChange(function(value){
+	game.debugGUI.filmEffekt.onChange(function(value) {
 		game.filmEffekt = value;
+		game.renderer.filmEffect = value;
+	});
+
+	game.debugGUI.bloomPass.onChange(function(value) {
+		game.bloomPass = value;
+		game.renderer.bloomPass = value;
 	});
 
 	// GUI im Allgemeinen standardmaessig oeffnen
 	game.debugGUI.closed = false;
-	controls.close();		// Kontrollleiste geschlossen
-	postprocessing.open();	// Ordner standardmaessig oeffnen
+	controls.close();
+	// Kontrollleiste geschlossen
+	postprocessing.open();
+	// Ordner standardmaessig oeffnen
 };

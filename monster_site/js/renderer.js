@@ -21,6 +21,10 @@ function setupRenderer(breite, hoehe) {
 	renderer.shadowMapEnabled = true;			// shadowMaps aktivieren
 	renderer.autoClear = false;					// Kein Auto-Clear um Postprocessing zu ermoeglichen
 	renderer.clear(false, true, false);			// clear(color, depth, stencil)
+	
+	renderer.filmEffect = false;
+	renderer.bloomPass = false;
+	
 	return (renderer);							// render wird in game.renderer gesichert
 };
 
