@@ -9,6 +9,7 @@ function onWindowResize() {
 function benutzereingaben(){
     // HIER ERGAENZEN
     queueAktualisieren();       // Aktualisierung der Queue-Position
+    checkKeyboard();
 }
 
 // Mainloop des Spiels von dem aus aktualisiert und gerendert wird

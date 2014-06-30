@@ -48,6 +48,7 @@ function initialisiere() {
 	game.clock = new THREE.Clock();             // Uhr-Objekt zur internen Zeitmessung im Spiel
 
     // Initialisierung der Steurung
+    game.keyboard = erstelleTastaturSteuerung();
 	game.orbitControls = new OrbitControls(game.camera, $('#viewport')[0]);    // Kamera und Canvas an Steuerung
     game.orbitControls.autoRotate = false;                                     // Auto-Rotate ausschalten
     // Initialisierung des Renderers
@@ -90,6 +91,9 @@ function initialisiere() {
     createWhiteBall(0,18,0);                      // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
 	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
+
+	createGUI();
+
     game.szene.add(new THREE.AxisHelper(50));   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
 
     /* Ende der Initialisierung / Aufruf des Mainloops */

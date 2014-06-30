@@ -15,6 +15,13 @@ function queueLaden() {
 
         game.queue.rotation.copy(game.camera.rotation);
 
+
+		game.queue.stosskraftX = 0;
+		game.queue.stosskraftY = 0;
+		game.queue.stosskraftZ = 0;
+		game.queue.offsetX = 0;
+		game.queue.offsetY = 0;
+		game.queue.offsetZ = 0;
         game.szene.add(game.queue);                                         // Queue zur Szene hinzufuegen
     });
 };
