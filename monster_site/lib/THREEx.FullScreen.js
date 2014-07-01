@@ -23,7 +23,7 @@ THREEx.FullScreen	= THREEx.FullScreen	|| {};
 THREEx.FullScreen.available	= function()
 {
 	return this._hasWebkitFullScreen || this._hasMozFullScreen;
-}
+};
 
 /**
  * test if fullscreen is currently activated
@@ -39,7 +39,7 @@ THREEx.FullScreen.activated	= function()
 	}else{
 		console.assert(false);
 	}
-}
+};
 
 /**
  * Request fullscreen on a given element
@@ -55,7 +55,7 @@ THREEx.FullScreen.request	= function(element)
 	}else{
 		console.assert(false);
 	}
-}
+};
 
 /**
  * Cancel fullscreen
@@ -69,7 +69,7 @@ THREEx.FullScreen.cancel	= function()
 	}else{
 		console.assert(false);
 	}
-}
+};
 
 // internal functions to know which fullscreen API implementation is available
 THREEx.FullScreen._hasWebkitFullScreen	= 'webkitCancelFullScreen' in document	? true : false;	
