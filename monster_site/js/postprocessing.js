@@ -45,3 +45,8 @@ function erstelleComposer() {
 	game.composerBloomPass.addPass(effectcopy);		// Standard-Copy-Shader zum finalen rendern
 
 }
+
+function resizeComposer(){
+	game.composerFilm.setSize(game.breite, game.hoehe);
+	game.composerBloomPass.setSize(game.breite, game.hoehe);
+}

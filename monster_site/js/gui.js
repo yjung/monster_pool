@@ -16,6 +16,7 @@ function createGUI() {
 	// Ordner fuer die Kategorien erstellen
 	var controls = game.debugGUI.addFolder('Controls');
 	var postprocessing = game.debugGUI.addFolder('Postprocessing');
+	var options = game.debugGUI.addFolder('Options');
 
 	paramControls = {
 		stosskraftX : 0,
@@ -31,7 +32,12 @@ function createGUI() {
 		filmEffekt : false,
 		bloomPass : false,
 	};
+	
+	paramOptions = {
+		vollbild : false,
+	};
 
+	// Steuerungseintraege hinzufuegen
 	game.debugGUI.stosskraftX = controls.add(paramControls, 'stosskraftX').min(0).max(1000).step(1).listen().name("Stosskraft-X");
 	game.debugGUI.stosskraftY = controls.add(paramControls, 'stosskraftY').min(0).max(1000).step(1).listen().name("Stosskraft-Y");
 	game.debugGUI.stosskraftZ = controls.add(paramControls, 'stosskraftZ').min(0).max(1000).step(1).listen().name("Stosskraft-Z");
@@ -39,9 +45,14 @@ function createGUI() {
 	game.debugGUI.offsetY = controls.add(paramControls, 'offsetY').min(0).max(1).step(0.01).listen().name("Offset-Y");
 	game.debugGUI.offsetZ = controls.add(paramControls, 'offsetZ').min(0).max(1).step(0.01).listen().name("Offset-Z");
 
+	// Post-Processingeintraege hinzufuegen
 	game.debugGUI.enable = postprocessing.add(paramPostprocessing, 'enable').listen();
 	game.debugGUI.filmEffekt = postprocessing.add(paramPostprocessing, 'filmEffekt').listen().name("Film-Effekt");
 	game.debugGUI.bloomPass = postprocessing.add(paramPostprocessing, 'bloomPass').listen().name("Leucht-Effekt");
+
+	// Post-Processingeintraege hinzufuegen
+	game.debugGUI.vollbild = options.add(paramOptions,'vollbild').listen().name("Vollbildmodus");
+	
 
 	// Event on change in 'effectX'
 	game.debugGUI.stosskraftX.onFinishChange(function(value) {
@@ -96,6 +107,20 @@ function createGUI() {
 		game.bloomPass = value;
 		game.renderer.bloomPass = value;
 	});
+	
+	
+	
+	game.debugGUI.vollbild.onChange(function(value) {
+		game.vollbild = value;
+		if(value && THREEx.FullScreen.available() && !THREEx.FullScreen.activated()){
+			THREEx.FullScreen.request(document.getElementById("viewport"));
+			onWindowResize();
+		} else{
+			THREEx.FullScreen.cancel();
+			onWindowResize();
+		}
+	});
+
 
 	// GUI im Allgemeinen standardmaessig oeffnen
 	game.debugGUI.closed = false;

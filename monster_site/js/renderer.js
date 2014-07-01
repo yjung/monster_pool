@@ -32,12 +32,16 @@ function setupRenderer(breite, hoehe) {
 // Anpassung des Fensters (bzw. Canvas)
 function onWindowResize() {
 	
-	game.breite = document.getElementById("viewport").clientWidth;
-	game.hoehe = document.getElementById("viewport").clientHeight;
+	// game.breite = document.getElementById("viewport").clientWidth;
+	// game.hoehe = document.getElementById("viewport").clientHeight;
 	
+	game.breite = Math.round($("#viewport").width());
+	game.hoehe = ($(window).height() - $("#header").height()- $("#footer").height());
 	
     game.kamera.aspect = game.breite / game.hoehe;    								// der Kamera auf Groessenaenderung
     game.kamera.updateProjectionMatrix();                                           // Projektionsmatrix der Kamera aktualisieren
     game.renderer.setSize(game.breite, game.hoehe);       // Renderer aktualisieren
-    game.composer.setSize(game.breite, game.hoehe);
+
+	// Effekt-Composer in Groesse anpassen
+	resizeComposer();
 };
