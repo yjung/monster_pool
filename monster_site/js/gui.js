@@ -31,6 +31,7 @@ function createGUI() {
 		enable : false,
 		filmEffekt : false,
 		bloomPass : false,
+		custom: false,
 	};
 	
 	paramOptions = {
@@ -49,8 +50,9 @@ function createGUI() {
 	game.debugGUI.enable = postprocessing.add(paramPostprocessing, 'enable').listen();
 	game.debugGUI.filmEffekt = postprocessing.add(paramPostprocessing, 'filmEffekt').listen().name("Film-Effekt");
 	game.debugGUI.bloomPass = postprocessing.add(paramPostprocessing, 'bloomPass').listen().name("Leucht-Effekt");
+	game.debugGUI.custom = postprocessing.add(paramPostprocessing, 'custom').listen().name("Custom-Effekt");
 
-	// Post-Processingeintraege hinzufuegen
+	// Optionen-Eintraege hinzufuegen
 	game.debugGUI.vollbild = options.add(paramOptions,'vollbild').listen().name("Vollbildmodus");
 	
 
@@ -106,6 +108,11 @@ function createGUI() {
 	game.debugGUI.bloomPass.onChange(function(value) {
 		game.bloomPass = value;
 		game.renderer.bloomPass = value;
+	});
+
+	game.debugGUI.custom.onChange(function(value) {
+		game.custom = value;
+		game.renderer.custom = value;
 	});
 	
 	
