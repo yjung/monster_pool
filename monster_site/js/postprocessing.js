@@ -32,17 +32,17 @@ function erstelleComposer() {
 	
 	// Composer Film-Effekt
 	var renderTarget = new THREE.WebGLRenderTarget(game.breite, game.hoehe, parameters);	// Rendertarget-Objekt fuer Renderer-Initialisierung
-	game.composerFilm = new THREE.EffectComposer(game.renderer, renderTarget);	// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren
-	game.composerFilm.setSize(game.breite, game.hoehe);							// Groesse setzen
+	game.composerFilm = new THREE.EffectComposer(game.renderer, renderTarget);				// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren
+	game.composerFilm.setSize(game.breite, game.hoehe);										// Groesse setzen
 	
 	game.composerFilm.addPass(renderPass);		// Normales Bild rendern
-	game.composerFilm.addPass(effektFilm);	// Film-Effekt
+	game.composerFilm.addPass(effektFilm);		// Film-Effekt
 	game.composerFilm.addPass(effectcopy);		// Standard-Copy-Shader zum finalen rendern
 	
 	// Composer Bloom-Effekt
 	var renderTarget = new THREE.WebGLRenderTarget(game.breite, game.hoehe, parameters);	// Rendertarget-Objekt fuer Renderer-Initialisierung
-	game.composerBloomPass = new THREE.EffectComposer(game.renderer, renderTarget);	// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren
-	game.composerBloomPass.setSize(game.breite, game.hoehe);							// Groesse setzen
+	game.composerBloomPass = new THREE.EffectComposer(game.renderer, renderTarget);			// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren
+	game.composerBloomPass.setSize(game.breite, game.hoehe);								// Groesse setzen
 	
 	game.composerBloomPass.addPass(renderPass);		// Normales Bild rendern
 	game.composerBloomPass.addPass(effektBloomPass);// Film-Effekt
@@ -51,11 +51,11 @@ function erstelleComposer() {
 	
 	// Composer CustomShader
 	var renderTarget = new THREE.WebGLRenderTarget(game.breite, game.hoehe, parameters);	// Rendertarget-Objekt fuer Renderer-Initialisierung
-	game.composerCustom = new THREE.EffectComposer(game.renderer, renderTarget);	// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren
-	game.composerCustom.setSize(game.breite, game.hoehe);							// Groesse setzen
+	game.composerCustom = new THREE.EffectComposer(game.renderer, renderTarget);			// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren
+	game.composerCustom.setSize(game.breite, game.hoehe);									// Groesse setzen
 	
 	game.composerCustom.addPass(renderPass);		// Normales Bild rendern
-	game.composerCustom.addPass(customShader);	// Custom-Effekt
+	game.composerCustom.addPass(customShader);		// Custom-Effekt
 	game.composerCustom.addPass(effectcopy);		// Standard-Copy-Shader zum finalen rendern
 
 }

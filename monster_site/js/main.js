@@ -23,6 +23,9 @@ function mainloop() {
 		if(game.renderer.bloomPass){
 			game.composerBloomPass.render(delta);	
 		}
+		if(game.renderer.custom){
+			game.composerCustom.render(delta);
+		}
 		else{
 			game.renderer.render(game.szene, game.kamera);	// Falls Postprocessing aktiv, aber kein Effekt gesetzt normal rendern
 		}
