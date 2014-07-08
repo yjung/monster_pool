@@ -3,23 +3,27 @@ function createDummyTisch() {
     // Grundflaeche
     var dummy_rot = Physijs.createMaterial(new THREE.MeshPhongMaterial({
         color : 0xFF0000,
-        wireframe : false
+        wireframe : true
     }), .9, .3);
     // Kurze Bande 1
     var dummy_gruen = Physijs.createMaterial(new THREE.MeshPhongMaterial({
-        color : 0x00FF00
+        color : 0x00FF00,
+        wireframe : true
     }), .9, .3);
     // Kurze Bande 2
     var dummy_blau = Physijs.createMaterial(new THREE.MeshPhongMaterial({
-        color : 0x0000FF
+        color : 0x0000FF,
+        wireframe : true
     }), .9, .3);
     // Lange Bande 1
     var dummy_gelb = Physijs.createMaterial(new THREE.MeshPhongMaterial({
-        color : 0xFFFF00
+        color : 0xFFFF00,
+        wireframe : true
     }), .9, .3);
     // Lange Bande 2
     var dummy_cyan = Physijs.createMaterial(new THREE.MeshPhongMaterial({
-        color : 0x00FFFF
+        color : 0x00FFFF,
+        wireframe : true
     }), .9, .3);
 
     var ground = new Physijs.BoxMesh(new THREE.CubeGeometry(75, 5, 38), dummy_rot, 0);
