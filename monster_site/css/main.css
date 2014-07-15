@@ -149,7 +149,7 @@ td {
 	background-image: url(../img/trenner.jpg);	
 }
 
-#navigation {
+/*#navigation {
 	position: absolute;
 	text-align:center;
 	width: 211px;
@@ -163,7 +163,7 @@ td {
 	background-image: url(../img/naviButton_bg.png);
 	background-repeat:repeat-y;
 	overflow: none;
-}
+}*/
 
 #navigationButtons {
 
@@ -171,17 +171,18 @@ td {
 
 #contentwrapper {
 	position: absolute;
-	margin-left: 211px;
+	/*margin-left: 211px;*/
 
 	height: calc(100% - 230px);
 	height: -o-calc(100% - 230px); /* opera */
 	height: -webkit-calc(100% - 230px); /* google, safari */
 	height: -moz-calc(100% - 230px); /* firefox */
 
-	width: calc(100% - 211px);
-	width: -o-calc(100% - 211px); /* opera */
-	width: -webkit-calc(100% - 211px); /* google, safari */
-	width: -moz-calc(100% - 211px); /* firefox */
+	width: 100%;
+	/*width: calc(100% - 211px); */
+	/* width: -o-calc(100% - 211px); /* opera */
+	/* width: -webkit-calc(100% - 211px); /* google, safari */
+	/* width: -moz-calc(100% - 211px); /* firefox */
 	background-image: url(../img/header_bg.jpg);
 	background-repeat:repeat;
 

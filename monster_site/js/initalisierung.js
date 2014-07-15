@@ -6,8 +6,8 @@ function initialisiere() {
     window.game = {};                                           // Globalen Namespace schaffen
     window.addEventListener('resize', onWindowResize, false);   // Eventlistener fuer Groessenaenderung
     
-    game.breite = document.getElementById("viewport").clientWidth;
-	game.hoehe = document.getElementById("viewport").clientHeight;
+	game.breite = Math.round($("#viewport").width());
+	game.hoehe = ($(window).height() - $("#header").height()- $("#footer").height());
 	
 	
 
@@ -56,12 +56,11 @@ function initialisiere() {
     game.keyboard = erstelleTastaturSteuerung();
 	game.orbitControls = new OrbitControls(game.kamera, $('#viewport')[0]);    // Kamera und Canvas an Steuerung
     game.orbitControls.autoRotate = false;                                     // Auto-Rotate ausschalten
+    
     // Initialisierung des Renderers
-	// console.log(game.breite);                                 // Renderer erstellen
-	// console.log(game.hoehe);                                 // Renderer erstellen
-	game.renderer = setupRenderer(game.breite, game.hoehe);                                  // Renderer erstellen
-
+	game.renderer = setupRenderer(game.breite, game.hoehe);                    // Renderer erstellen
     $("#viewport").append(game.renderer.domElement);                            // Rendererrückgabe an viewport-DIV
+    onWindowResize();
 
     // Initialisierung des Canvas
     game.canvas = document.getElementsByTagName("canvas")[0];                   // Zeichenfläche der Anwendung sichern

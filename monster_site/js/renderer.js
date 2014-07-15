@@ -39,6 +39,8 @@ function onWindowResize() {
     game.kamera.updateProjectionMatrix();               // Projektionsmatrix der Kamera aktualisieren
     game.renderer.setSize(game.breite, game.hoehe);     // Renderer aktualisieren
 
-	// Effekt-Composer in Groesse anpassen
+	// Effekt-Composer in Groesse anpassen, falls diese schon vorhanden
+	if(game.composerCustom){
 	resizeComposer();
+	}
 };
