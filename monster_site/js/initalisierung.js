@@ -1,7 +1,7 @@
 // once everything is loaded, we run our Three.js stuff.
 function initialisiere() {
 
-	Physijs.scripts.worker = '../lib/physijs_worker.js';        // Physi.js-Worker einbinden
+	Physijs.scripts.worker = 'lib/physijs_worker.js';        // Physi.js-Worker einbinden
 	Physijs.scripts.ammo = '../lib/ammo.js';                    // Bibliotheksverweis zu Ammo
     window.game = {};                                           // Globalen Namespace schaffen
     window.addEventListener('resize', onWindowResize, false);   // Eventlistener fuer Groessenaenderung

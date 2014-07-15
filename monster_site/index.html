@@ -8,14 +8,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
-
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
+    <script src="js/vendor/jquery-1.11.0.min.js"></script>
     <script src="js/vendor/modernizr-2.7.1.min.js"></script>
     <script src="js/plugins.js"></script>
 
+
+    <!-- Einbinden von WebGL-Bibliotheken / - Frameworks -->
+    <script type="text/javascript" src="lib/three.js"></script>                  <!-- Three.js -->
+    <script type="text/javascript" src="lib/physi.js"></script>                  <!-- Physi.js -->
+    <script type="text/javascript" src="lib/ColladaLoader.js"></script>          <!-- ColladaLoader.js -->
+
+	<!-- Helper-Frameworks -->
+    <script type="text/javascript" src="lib/dat.gui.js"></script>                <!-- dat.GUI -->
+    <script type="text/javascript" src="lib/stats.js"></script>                  <!-- Stats.js -->
+    <script type="text/javascript" src="lib/threex.rendererstats.js"></script>   <!-- Renderstats.js -->
+    <script type="text/javascript" src="lib/THREEx.KeyboardState.js"></script>   <!-- KeyboardState.js -->
+    <script type="text/javascript" src="lib/THREEx.FullScreen.js"></script>   	<!-- FullScreen.js -->
+
+	<!-- Post-Processing -->
+    <script type="text/javascript" src="lib/EffectComposer.js"></script>         <!-- Effect Composer-->
+    <script type="text/javascript" src="lib/RenderPass.js"></script>             <!-- Render-Pass -->
+    <script type="text/javascript" src="lib/ShaderPass.js"></script>             <!-- Shader-Pass.js -->    
+    <script type="text/javascript" src="lib/MaskPass.js"></script>               <!-- Mask-Pass -->    
+    <script type="text/javascript" src="lib/BloomPass.js"></script>              <!-- Bloom-Pass -->    
+    <script type="text/javascript" src="lib/FilmPass.js"></script>               <!-- Film-Pass -->    
+    <script type="text/javascript" src="lib/CopyShader.js"></script>             <!-- Copy-Shader.js -->    
+    <script type="text/javascript" src="lib/ConvolutionShader.js"></script>      <!-- Convolution-Shader -->    
+    <script type="text/javascript" src="lib/FilmShader.js"></script>             <!-- Film-Shader -->    
+	<script type="text/javascript" src="shaders/CustomShader.js"></script>
+
+
+    <!-- Programmlogik-->
+    <script type="text/javascript" src="js/initalisierung.js"></script>			<!-- Initialisierung -->
+    <script type="text/javascript" src="js/statistik.js"></script>				<!-- Statistik -->
+    <script type="text/javascript" src="js/postprocessing.js"></script>			<!-- Post-Processing -->
+    <script type="text/javascript" src="js/renderer.js"></script>				<!-- Renderer -->
+    <script type="text/javascript" src="js/tastatur.js"></script>				<!-- Tastatur -->
+    <script type="text/javascript" src="js/gui.js"></script>    					<!-- GUI -->
+    <script type="text/javascript" src="js/OrbitControls.js"></script>			<!-- OrbitControls -->
+    <script type="text/javascript" src="js/whiteball.js"></script>				<!-- Whiteball -->
+    <script type="text/javascript" src="js/queue.js"></script>					<!-- Queue -->
+
+	<!-- Leveldesign -->
+    <script type="text/javascript" src="js/dummyTisch.js"></script>				<!-- dummyTisch -->
+    <script type="text/javascript" src="js/tisch.js"></script>					<!-- Tisch -->
+    <script type="text/javascript" src="js/lightSetup.js"></script>				<!-- Licht -->
+    <script type="text/javascript" src="js/raumErstellen.js"></script>			<!-- Raum -->
+    <script type="text/javascript" src="js/MatLibThree.js"></script>				<!-- Materialbibliothek fuer Three.js -->
+    <script type="text/javascript" src="js/MatLibPhysi.js"></script>				<!-- Materialbibliothek fuer Physi.js -->
+	
+
+    <script type="text/javascript" src="js/main.js"></script>
+
 </head>
-<body>
+<body onload="initialisiere()">
 <!--[if lt IE 8]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
@@ -28,44 +76,26 @@
 <!-- /////////////////		MENUE		/////////////////-->
 <div id=navigation>
     <div id=navigationButtons>
-        <input class="navigationButton" type="button" name="Startseite" value="Startseite"/>
-        <input class="navigationButton" type="button" name="Skripte" value="Skripte"onclick="window.location.replace('html/skripte.html')"//>
-        <input class="navigationButton" type="button" name="Uebung1" value="&Uuml;bung 01" onclick="window.location.replace('html/uebung1.html')"//>
-        <input class="navigationButton" type="button" name="ComputerGames" value="Computer Games" onclick="window.location.replace('html/computerGames.html')"//>
-        <input class="navigationButton" type="button" name="Impressum" value="Impressum" onclick="window.location.replace('html/impressum.html')"/>
+        <input class="navigationButton" type="button" name="Startseite" value="Startseite" onclick="window.location.replace('../index.html')"/>
+        <input class="navigationButton" type="button" name="Skripte" value="Skripte" onclick="window.location.replace('skripte.html')"/>
+        <input class="navigationButton" type="button" name="Uebung1" value="&Uuml;bung 01"/>
+        <input class="navigationButton" type="button" name="ComputerGames" value="Computer Games" onclick="window.location.replace('computerGames.html')"//>
+        <input class="navigationButton" type="button" name="Impressum" value="Impressum" onclick="window.location.replace('impressum.html')"/>
     </div>
 </div>
 <!-- /////////////////		CONTENT		/////////////////-->
 <div id=contentwrapper>
-    <div id=blattLogo>
-        <div id=contentgradient>
-            <div id=content>
-                <h1>Startseite</h1>
-                <p>
-                    Diese Website soll dazu dienen die im Modul "Visuelle Effekte"
-                    bearbeiteten &Uuml;bungen auf einer Plattfrom &uuml;bersichtlich
-                    zu b&uuml;ndeln. Sowohl die Website selbst, als auch die darauf
-                    präsentierten Inhalte wurden eigens für den Kurs erstellt.
-                    Das Modul selbst ist Bestandteil des Masterstudiengangs
-                    "Angewandte Informatik" an der Hochschule Fulda und stellt ein Angebot
-                    der Vertiefungsrichtung "MHCI" dar.
-                </p>
-                <p>
-                    Geleitet wird der Kurs von Prof. Dr. Yvonne Jung. Die Bearbeitung
-                    erstreckt sich über den Zeitraum des Sommersemesters 2014.
-                </p>
-            </div>
-        </div>
+
+    <div id="viewport">
     </div>
+
 </div>
 
 <!-- /////////////////		FOOTER		/////////////////-->
 <div id=footer></div>
 
-<script src="lib/jquery-1.11.0.min.js"></script>
-<script>
-    window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>')
-</script>
+
+
 
 </body>
 </html>

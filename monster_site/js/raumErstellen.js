@@ -3,7 +3,7 @@ function raumLaden()/* Tisch falsch rotiert (steht hochkant): Gedreht beine fehl
 {
     var ColladaLoader = new THREE.ColladaLoader();
     // JSON-Loader erstellen
-    ColladaLoader.load('../assets/dae/raum_a01.dae', function (collada)
+    ColladaLoader.load('assets/dae/raum_a01.dae', function (collada)
     {
 
 	var modelScene = collada.scene;
