@@ -25,7 +25,7 @@
     <script type="text/javascript" src="lib/stats.js"></script>                  <!-- Stats.js -->
     <script type="text/javascript" src="lib/threex.rendererstats.js"></script>   <!-- Renderstats.js -->
     <script type="text/javascript" src="lib/THREEx.KeyboardState.js"></script>   <!-- KeyboardState.js -->
-    <script type="text/javascript" src="lib/THREEx.FullScreen.js"></script>   	<!-- FullScreen.js -->
+    <script type="text/javascript" src="lib/THREEx.FullScreen.js"></script>   	 <!-- FullScreen.js -->
 
 	<!-- Post-Processing -->
     <script type="text/javascript" src="lib/EffectComposer.js"></script>         <!-- Effect Composer-->
@@ -46,56 +46,35 @@
     <script type="text/javascript" src="js/postprocessing.js"></script>			<!-- Post-Processing -->
     <script type="text/javascript" src="js/renderer.js"></script>				<!-- Renderer -->
     <script type="text/javascript" src="js/tastatur.js"></script>				<!-- Tastatur -->
-    <script type="text/javascript" src="js/gui.js"></script>    					<!-- GUI -->
+    <script type="text/javascript" src="js/gui.js"></script>    				<!-- GUI -->
     <script type="text/javascript" src="js/OrbitControls.js"></script>			<!-- OrbitControls -->
     <script type="text/javascript" src="js/whiteball.js"></script>				<!-- Whiteball -->
     <script type="text/javascript" src="js/queue.js"></script>					<!-- Queue -->
+    <script type="text/javascript" src="js/main.js"></script>					<!-- Mainloop -->
 
 	<!-- Leveldesign -->
     <script type="text/javascript" src="js/dummyTisch.js"></script>				<!-- dummyTisch -->
     <script type="text/javascript" src="js/tisch.js"></script>					<!-- Tisch -->
     <script type="text/javascript" src="js/lightSetup.js"></script>				<!-- Licht -->
     <script type="text/javascript" src="js/raumErstellen.js"></script>			<!-- Raum -->
-    <script type="text/javascript" src="js/MatLibThree.js"></script>				<!-- Materialbibliothek fuer Three.js -->
-    <script type="text/javascript" src="js/MatLibPhysi.js"></script>				<!-- Materialbibliothek fuer Physi.js -->
+    <script type="text/javascript" src="js/MatLibThree.js"></script>			<!-- Materialbibliothek fuer Three.js -->
+    <script type="text/javascript" src="js/MatLibPhysi.js"></script>			<!-- Materialbibliothek fuer Physi.js -->
 	
 
-    <script type="text/javascript" src="js/main.js"></script>
 
 </head>
-<body onload="initialisiere()">
-<!--[if lt IE 8]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-<![endif]-->
-
-<!-- /////////////////		HEADER		/////////////////-->
-<div id=header>
-    <img src="img/hochschul_logo.png" />
-    <div id=headertrenner></div>
-</div>
-<!-- /////////////////		MENUE		/////////////////-->
-<!-- <div id=navigation>
-    <div id=navigationButtons>
-        <input class="navigationButton" type="button" name="Startseite" value="Startseite" onclick="window.location.replace('../index.html')"/>
-        <input class="navigationButton" type="button" name="Skripte" value="Skripte" onclick="window.location.replace('skripte.html')"/>
-        <input class="navigationButton" type="button" name="Uebung1" value="&Uuml;bung 01"/>
-        <input class="navigationButton" type="button" name="ComputerGames" value="Computer Games" onclick="window.location.replace('computerGames.html')"//>
-        <input class="navigationButton" type="button" name="Impressum" value="Impressum" onclick="window.location.replace('impressum.html')"/>
-    </div>
-</div> -->
-<!-- /////////////////		CONTENT		/////////////////-->
-<div id=contentwrapper>
-
-    <div id="viewport">
-    </div>
-
-</div>
-
-<!-- /////////////////		FOOTER		/////////////////-->
-<div id=footer></div>
-
-
-
-
-</body>
+	<body onload="initialisiere()">
+		<!-- /////////////////		HEADER		/////////////////-->
+		<div id=header>
+    		<img src="img/hochschul_logo.png" />
+    		<!-- /////////////////		MENUE		/////////////////-->
+    		<div id=headertrenner></div>
+		</div>
+		<!-- /////////////////		CONTENT		/////////////////-->
+		<div id=contentwrapper>
+    		<div id="viewport"></div>
+		</div>
+		<!-- /////////////////		FOOTER		/////////////////-->
+		<div id=footer></div>
+	</body>
 </html>

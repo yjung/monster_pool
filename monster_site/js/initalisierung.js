@@ -6,8 +6,7 @@ function initialisiere() {
     window.game = {};                                           // Globalen Namespace schaffen
     window.addEventListener('resize', onWindowResize, false);   // Eventlistener fuer Groessenaenderung
     
-	game.breite = Math.round($("#viewport").width());
-	game.hoehe = ($(window).height() - $("#header").height()- $("#footer").height());
+
 	
 	
 
@@ -31,8 +30,8 @@ function initialisiere() {
         x_last:0,               // letzter X-Wert
         y_last:0,               // Letzter Y-Wert
 
-        x_d:0,
-        y_d:0
+        x_d:0,					// Delta-X
+        y_d:0					// Delta-Y
 	};
 
 	game.szene = new Physijs.Scene;             		// Erstellen einer Physi.js-Szene
@@ -57,10 +56,14 @@ function initialisiere() {
 	game.orbitControls = new OrbitControls(game.kamera, $('#viewport')[0]);    // Kamera und Canvas an Steuerung
     game.orbitControls.autoRotate = false;                                     // Auto-Rotate ausschalten
     
+    
+    // Canvas-Abmessungen zur Initialisierung des Renderes festhalten
+	game.breite = Math.round($("#viewport").width());									// Volle Bildschirmbreite
+	game.hoehe = ($(window).height() - $("#header").height()- $("#footer").height());	// Volle Bildschirmhoehe ohne Header und Footer
     // Initialisierung des Renderers
-	game.renderer = setupRenderer(game.breite, game.hoehe);                    // Renderer erstellen
+	game.renderer = setupRenderer(game.breite, game.hoehe);                    	// Renderer erstellen
     $("#viewport").append(game.renderer.domElement);                            // Rendererrückgabe an viewport-DIV
-    onWindowResize();
+    onWindowResize();															// Einmaliger Aufruf zum Aktualisieren
 
     // Initialisierung des Canvas
     game.canvas = document.getElementsByTagName("canvas")[0];                   // Zeichenfläche der Anwendung sichern
@@ -72,22 +75,21 @@ function initialisiere() {
         game.mausPosition.x_n = rect.left / event.clientX;                      // Maus-x normalisieren
         game.mausPosition.y_n = rect.top / event.clientY;                       // Maus-y normalisieren
 
-        game.mausPosition.x_gemapped = rect.left / event.clientX - 0.5;                      // Maus-x normalisieren
-        game.mausPosition.y_gemapped = rect.top / event.clientY - 0.5;                       // Maus-y normalisieren
+        game.mausPosition.x_gemapped = rect.left / event.clientX - 0.5;             // Maus-x normalisieren
+        game.mausPosition.y_gemapped = rect.top / event.clientY - 0.5;              // Maus-y normalisieren
 
-        game.mausPosition.x_d = game.mausPosition.x_n - game.mausPosition.x_last;
-        game.mausPosition.y_d = game.mausPosition.y_n - game.mausPosition.y_last;
+        game.mausPosition.x_d = game.mausPosition.x_n - game.mausPosition.x_last;	//  Delta-X
+        game.mausPosition.y_d = game.mausPosition.y_n - game.mausPosition.y_last;	//  Delta-Y
 
-        game.mausPosition.x_last = game.mausPosition.x_n;
-        game.mausPosition.y_last = game.mausPosition.y_n;
+        game.mausPosition.x_last = game.mausPosition.x_n;							// Letzte Position X
+        game.mausPosition.y_last = game.mausPosition.y_n;							// Letzte Position Y
 
 
     }, false);
 
 	/* Post-Processing */
-	game.postProcessing = false;
-	game.effect;
-	erstelleComposer();
+	erstelleComposer();				// Effekt-Composer erstellen
+	game.postProcessing = false;	// Postprocessing standardmaessig deaktiviert
 
 
 
@@ -100,7 +102,7 @@ function initialisiere() {
 	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
 
-	createGUI();
+	createGUI();								// Debugging-GUI erstellen
 
     game.szene.add(new THREE.AxisHelper(50));   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
 

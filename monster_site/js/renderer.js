@@ -4,15 +4,13 @@
  * 			aktualisieren.
  *//////////////////////////////////////////////////////////////////////////////////
 function setupRenderer(breite, hoehe) {
-
-
-	if (window.WebGLRenderingContext) {
-		var renderer = new THREE.WebGLRenderer({
-			antialias : true
+	if (window.WebGLRenderingContext) {				// Falls WebGL verfuegbar
+		var renderer = new THREE.WebGLRenderer({	// Renderer intialisieren
+			antialias : true						// antialias standardmaessig an
 		});
-	} else {
-		alert("NO WEBGL!");
-		var renderer = new THREE.CanvasRenderer();
+	} else {												// ohne WebGL
+		alert("Browser nicht kompatibel! Bitte updaten!");	// Warnung ausgeben
+		var renderer = new THREE.CanvasRenderer();			// und Fallback auf Software-Rendering 
 	}
 
 	renderer.setSize(game.breite, game.hoehe);	// Renderer auf die Groesse des Fensters maximieren
@@ -22,7 +20,7 @@ function setupRenderer(breite, hoehe) {
 	renderer.autoClear = false;					// Kein Auto-Clear um Postprocessing zu ermoeglichen
 	renderer.clear(false, true, false);			// clear(color, depth, stencil)
 	
-	renderer.filmEffect = false;
+	renderer.filmEffect = false;				
 	renderer.bloomPass = false;
 	
 	return (renderer);							// render wird in game.renderer gesichert
@@ -32,8 +30,8 @@ function setupRenderer(breite, hoehe) {
 // Anpassung des Fensters (bzw. Canvas)
 function onWindowResize() {
 
-	game.breite = Math.round($("#viewport").width());
-	game.hoehe = ($(window).height() - $("#header").height()- $("#footer").height());
+	game.breite = Math.round($("#viewport").width());									// Volle Bildschirmbreite
+	game.hoehe = ($(window).height() - $("#header").height()- $("#footer").height());	// Volle Bildschirmhoehe ohne Header und Footer
 	
     game.kamera.aspect = game.breite / game.hoehe;    	// der Kamera auf Groessenaenderung
     game.kamera.updateProjectionMatrix();               // Projektionsmatrix der Kamera aktualisieren
@@ -41,6 +39,6 @@ function onWindowResize() {
 
 	// Effekt-Composer in Groesse anpassen, falls diese schon vorhanden
 	if(game.composerCustom){
-	resizeComposer();
+	resizeComposer();			// Composer in Groesse aktualisieren
 	}
 };

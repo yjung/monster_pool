@@ -61,7 +61,7 @@ function erstelleComposer() {
 }
 
 function resizeComposer(){
-	game.composerFilm.setSize(game.breite, game.hoehe);
-	game.composerBloomPass.setSize(game.breite, game.hoehe);
-	game.composerCustom.setSize(game.breite, game.hoehe);
+	game.composerFilm.setSize(game.breite, game.hoehe);			// Composer fuer Film-Effekt in Groesse aktualisieren
+	game.composerBloomPass.setSize(game.breite, game.hoehe);	// Composer fuer Bloom-Effekt in Groesse aktualisieren
+	game.composerCustom.setSize(game.breite, game.hoehe);		// Composer fuer Custom-Effekt in Groesse aktualisieren
 }
