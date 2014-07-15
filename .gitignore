@@ -12,4 +12,4 @@ wp-content/backups/
 sitemap.xml.gz
 wp-config.php
 .DS_Store
-
+*.sublime-project
