@@ -20,9 +20,9 @@ function createGUI() {
 
 	
 	paramControls = {
-		stosskraftX : 0.01, 	// Muss initial 0.01 sein um float zu bekommen
-		stosskraftY : 0.01,		// Muss initial 0.01 sein um float zu bekommen
-		stosskraftZ : 0.01,		// Muss initial 0.01 sein um float zu bekommen
+		stosskraftX : 0, 	// Muss initial 0.01 sein um float zu bekommen
+		stosskraftY : 0,		// Muss initial 0.01 sein um float zu bekommen
+		stosskraftZ : 0,		// Muss initial 0.01 sein um float zu bekommen
 		offsetX : 0.01,			// Muss initial 0.01 sein um float zu bekommen
 		offsetY : 0.01,			// Muss initial 0.01 sein um float zu bekommen
 		offsetZ : 0.01			// Muss initial 0.01 sein um float zu bekommen
@@ -40,9 +40,9 @@ function createGUI() {
 	};
 
 	// Steuerungseintraege hinzufuegen
-	game.debugGUI.stosskraftX = controls.add(paramControls, 'stosskraftX').min(0).max(1000).step(0.1).listen().name("Stosskraft-X");
-	game.debugGUI.stosskraftY = controls.add(paramControls, 'stosskraftY').min(0).max(1000).step(0.1).listen().name("Stosskraft-Y");
-	game.debugGUI.stosskraftZ = controls.add(paramControls, 'stosskraftZ').min(0).max(1000).step(0.1).listen().name("Stosskraft-Z");
+	game.debugGUI.stosskraftX = controls.add(paramControls, 'stosskraftX').min(0).max(1000).step(1).listen().name("Stosskraft-X");
+	game.debugGUI.stosskraftY = controls.add(paramControls, 'stosskraftY').min(0).max(1000).step(1).listen().name("Stosskraft-Y");
+	game.debugGUI.stosskraftZ = controls.add(paramControls, 'stosskraftZ').min(0).max(1000).step(1).listen().name("Stosskraft-Z");
 	game.debugGUI.offsetX = controls.add(paramControls, 'offsetX').min(-1.0).max(1.0).step(0.01).listen().name("Offset-X");
 	game.debugGUI.offsetY = controls.add(paramControls, 'offsetY').min(-1.0).max(1.0).step(0.01).listen().name("Offset-Y");
 	game.debugGUI.offsetZ = controls.add(paramControls, 'offsetZ').min(-1.0).max(1.0).step(0.01).listen().name("Offset-Z");

@@ -182,6 +182,10 @@ OrbitControls = function(object, domElement) {
 		richtungCam.normalize();
 		// Richtung zur Kamera normalisiert
 
+		/* Einschub: Stosskraft in Debug-GUI ueberfuehren */
+			// paramControls.stosskraftX += richtungCam.x;
+		// In Debug-GUI uebertragen
+
 		/* Sicherheitsabstand zur Kugel*/
 		richtungCam.multiplyScalar(10);
 		// Verlaengerung des Normalisierten Richtungsvektors
@@ -200,30 +204,47 @@ OrbitControls = function(object, domElement) {
 		// Zuweisung der berrechneten Position an den Queue
 		game.queue.__dirtyRotation = true;
 		game.queue.__dirtyPosition = true;
+
 	};
 
 	this.rotateLeft = function(angle) {
-
 		if (angle === undefined) {
-
 			angle = getAutoRotationAngle();
-
 		}
+		thetaDelta -= angle;		
+		
+		/* Lokale Variablen zur Positionsberechnung initialisieren*/
+		var richtungCam = new THREE.Vector3();
+		// Vektor fuer Richtung initialisieren
+		var positionBall = new THREE.Vector3();
+		var positionCam = new THREE.Vector3();
+		// Vektor Position Kamera initialisieren
+		
+		/* Positionen der Objekte in Vektorvariablen sichern.*/
+		positionCam.copy(game.kamera.position);
+		// Position Kamera sichern
+		positionBall.copy(game.whiteBall.position);
+		// Position Kugel sichern
 
-		thetaDelta -= angle;
+		/* Richtungsvektor fuer Queuepositionierung bestimmen*/
+		richtungCam.subVectors(positionBall, positionCam);
+		// Richtung zur Kamera berrechnen
+		richtungCam.normalize();
+		// Richtung zur Kamera normalisiert
 
+		paramControls.stosskraftX = richtungCam.x * 1000;
+		paramControls.stosskraftY = richtungCam.Y * 1000;
+		paramControls.stosskraftZ = richtungCam.z * 1000;
+		/* Einschub: Stosskraft in Debug-GUI ueberfuehren */
+			// paramControls.stosskraftX += richtungCam.x;
+		// In Debug-GUI uebertragen
 	};
 
 	this.rotateUp = function(angle) {
-
 		if (angle === undefined) {
-
 			angle = getAutoRotationAngle();
-
 		}
-
 		phiDelta -= angle;
-
 	};
 
 	// pass in distance in world space to move left
@@ -237,7 +258,12 @@ OrbitControls = function(object, domElement) {
 
 		pan.add(panOffset);
 
-		paramControls.offsetX += panOffset.x;		// In Debug-GUI uebertragen
+		paramControls.offsetX += panOffset.x;
+		// In Debug-GUI uebertragen
+		if (paramControls.offsetX < -1)
+			paramControls.offsetX = -1;
+		if (paramControls.offsetX > 1)
+			paramControls.offsetX = 1;
 	};
 
 	// pass in distance in world space to move up
@@ -251,7 +277,12 @@ OrbitControls = function(object, domElement) {
 
 		pan.add(panOffset);
 
-		paramControls.offsetY += panOffset.y;		// In Debug-GUI uebertragen
+		paramControls.offsetY += panOffset.y;
+		// In Debug-GUI uebertragen
+		if (paramControls.offsetY < -1)
+			paramControls.offsetY = -1;
+		if (paramControls.offsetY > 1)
+			paramControls.offsetY = 1;
 
 	};
 
@@ -386,7 +417,6 @@ OrbitControls = function(object, domElement) {
 			lastPosition.copy(this.object.position);
 
 		}
-
 	};
 
 	this.reset = function() {

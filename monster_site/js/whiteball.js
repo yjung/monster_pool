@@ -21,7 +21,7 @@ function createWhiteBall(x,y,z) {
 }
 
 function applyForce(){
-  	effect = new THREE.Vector3( game.queue.stosskraftX, game.queue.stosskraftY, game.queue.stosskraftZ);
-  	offset = new THREE.Vector3( game.queue.offsetX, game.queue.offsetY, game.queue.offsetZ );
+  	effect = new THREE.Vector3( paramControls.stosskraftX, paramControls.stosskraftY, paramControls.stosskraftZ);
+  	offset = new THREE.Vector3( paramControls.offsetX, paramControls.offsetY, paramControls.offsetZ );
   	game.whiteBall.applyImpulse( effect, offset );
 };
