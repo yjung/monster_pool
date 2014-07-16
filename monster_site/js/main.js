@@ -34,5 +34,12 @@ function mainloop() {
     
     // game.renderer.render(game.szene, game.camera);      // Rendering
     updateStatistik(true, true);                        // Statistiken aktualisieren
+    
+    // Iteriere über alle Controller der DebugGUI
+  	if (game.debugGUI)
+  	for (var i in game.debugGUI.__controllers) {
+    	game.debugGUI.__controllers[i].updateDisplay();
+  	}
+    
     requestAnimationFrame(mainloop);                    // Mainloop erneut durchlaufen
 };

@@ -18,13 +18,14 @@ function createGUI() {
 	var postprocessing = game.debugGUI.addFolder('Postprocessing');
 	var options = game.debugGUI.addFolder('Options');
 
+	
 	paramControls = {
-		stosskraftX : 0,
-		stosskraftY : 0,
-		stosskraftZ : 0,
-		offsetX : 0,
-		offsetY : 0,
-		offsetZ : 0
+		stosskraftX : 0.01, 	// Muss initial 0.01 sein um float zu bekommen
+		stosskraftY : 0.01,		// Muss initial 0.01 sein um float zu bekommen
+		stosskraftZ : 0.01,		// Muss initial 0.01 sein um float zu bekommen
+		offsetX : 0.01,			// Muss initial 0.01 sein um float zu bekommen
+		offsetY : 0.01,			// Muss initial 0.01 sein um float zu bekommen
+		offsetZ : 0.01			// Muss initial 0.01 sein um float zu bekommen
 	};
 
 	paramPostprocessing = {
@@ -39,12 +40,12 @@ function createGUI() {
 	};
 
 	// Steuerungseintraege hinzufuegen
-	game.debugGUI.stosskraftX = controls.add(paramControls, 'stosskraftX').min(0).max(1000).step(1).listen().name("Stosskraft-X");
-	game.debugGUI.stosskraftY = controls.add(paramControls, 'stosskraftY').min(0).max(1000).step(1).listen().name("Stosskraft-Y");
-	game.debugGUI.stosskraftZ = controls.add(paramControls, 'stosskraftZ').min(0).max(1000).step(1).listen().name("Stosskraft-Z");
-	game.debugGUI.offsetX = controls.add(paramControls, 'offsetX').min(0).max(1).step(0.01).listen().name("Offset-X");
-	game.debugGUI.offsetY = controls.add(paramControls, 'offsetY').min(0).max(1).step(0.01).listen().name("Offset-Y");
-	game.debugGUI.offsetZ = controls.add(paramControls, 'offsetZ').min(0).max(1).step(0.01).listen().name("Offset-Z");
+	game.debugGUI.stosskraftX = controls.add(paramControls, 'stosskraftX').min(0).max(1000).step(0.1).listen().name("Stosskraft-X");
+	game.debugGUI.stosskraftY = controls.add(paramControls, 'stosskraftY').min(0).max(1000).step(0.1).listen().name("Stosskraft-Y");
+	game.debugGUI.stosskraftZ = controls.add(paramControls, 'stosskraftZ').min(0).max(1000).step(0.1).listen().name("Stosskraft-Z");
+	game.debugGUI.offsetX = controls.add(paramControls, 'offsetX').min(-1.0).max(1.0).step(0.01).listen().name("Offset-X");
+	game.debugGUI.offsetY = controls.add(paramControls, 'offsetY').min(-1.0).max(1.0).step(0.01).listen().name("Offset-Y");
+	game.debugGUI.offsetZ = controls.add(paramControls, 'offsetZ').min(-1.0).max(1.0).step(0.01).listen().name("Offset-Z");
 
 	// Post-Processingeintraege hinzufuegen
 	game.debugGUI.enable = postprocessing.add(paramPostprocessing, 'enable').listen();
@@ -55,6 +56,7 @@ function createGUI() {
 	// Optionen-Eintraege hinzufuegen
 	game.debugGUI.vollbild = options.add(paramOptions,'vollbild').listen().name("Vollbildmodus");
 	
+	game.debugGUI.autoListen = true;
 
 	// Event on change in 'effectX'
 	game.debugGUI.stosskraftX.onFinishChange(function(value) {

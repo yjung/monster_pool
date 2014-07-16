@@ -148,7 +148,7 @@ OrbitControls = function(object, domElement) {
 		game.queue.__dirtyRotation = true;
 		game.queue.__dirtyPosition = true;
 		this.target.copy(game.whiteBall.position);
-		// // Mittelpunkt der Orbitrotation auf der Kugel
+		// Mittelpunkt der Orbitrotation auf der Kugel
 		game.queue.__dirtyPosition = true;
 		game.queue.__dirtyRotation = true;
 
@@ -183,7 +183,7 @@ OrbitControls = function(object, domElement) {
 		// Richtung zur Kamera normalisiert
 
 		/* Sicherheitsabstand zur Kugel*/
-		richtungCam.multiplyScalar(5);
+		richtungCam.multiplyScalar(10);
 		// Verlaengerung des Normalisierten Richtungsvektors
 
 		game.queue.__dirtyRotation = true;
@@ -237,6 +237,7 @@ OrbitControls = function(object, domElement) {
 
 		pan.add(panOffset);
 
+		paramControls.offsetX += panOffset.x;		// In Debug-GUI uebertragen
 	};
 
 	// pass in distance in world space to move up
@@ -249,6 +250,8 @@ OrbitControls = function(object, domElement) {
 		panOffset.multiplyScalar(distance);
 
 		pan.add(panOffset);
+
+		paramControls.offsetY += panOffset.y;		// In Debug-GUI uebertragen
 
 	};
 
@@ -314,8 +317,6 @@ OrbitControls = function(object, domElement) {
 	this.update = function() {
 
 		this.updateQueueRotation();
-
-
 
 		var position = this.object.position;
 
@@ -442,8 +443,6 @@ OrbitControls = function(object, domElement) {
 			panStart.set(event.clientX, event.clientY);
 
 		}
-		
-		
 
 		scope.domElement.addEventListener('mousemove', onMouseMove, false);
 		scope.domElement.addEventListener('mouseup', onMouseUp, false);
