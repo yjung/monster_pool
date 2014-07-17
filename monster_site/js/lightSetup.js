@@ -5,6 +5,6 @@ function setupLights() {
     spotLight.castShadow = true;                        // Schattenwurf aktivieren
     game.szene.add(spotLight);                          // Lichtquelle zur Szene hinzufuegen
 
-    var ambientLight = new THREE.AmbientLight(0x111111);// Ambiente Lichtquelle zum Aufhellen
+    var ambientLight = new THREE.AmbientLight(0x444444);// Ambiente Lichtquelle zum Aufhellen
     game.szene.add(ambientLight);                       // Lichtquelle zur Szene hinzufuegen
 };
