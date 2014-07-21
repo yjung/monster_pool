@@ -19,7 +19,7 @@ function tischLaden()/* Tisch falsch rotiert (steht hochkant): Gedreht beine feh
 {
 	var ColladaLoader = new THREE.ColladaLoader();
 	// JSON-Loader erstellen
-	ColladaLoader.load('assets/dae/pooltable_a02.dae', function(collada) {
+	ColladaLoader.load('assets/dae/pooltable_a03.dae', function(collada) {
 
 		var modelScene = collada.scene;
 		var einzelteile = modelScene.children.length;
