@@ -1,3 +1,5 @@
+var requestID;
+var animate = true;
 // Abfangen von Benutzereingaben zum Anpassen der Szene
 function benutzereingaben(){
     // HIER ERGAENZEN
@@ -40,6 +42,29 @@ function mainloop() {
   	for (var i in game.debugGUI.__controllers) {
     	game.debugGUI.__controllers[i].updateDisplay();
   	}
-    
-    requestAnimationFrame(mainloop);                    // Mainloop erneut durchlaufen
+
+    if (animate) {
+        requestID = window.requestAnimationFrame(mainloop);     
+    }
+                       // Mainloop erneut durchlaufen
 };
+
+function start() {
+    console.log("hello start");
+    if (!requestID) {
+        animate = true;
+        requestID = window.requestAnimationFrame(mainloop); 
+
+        console.log("Hello Loop");
+    }
+}
+
+function stop() {
+    console.log("hello stop" + requestID);
+    if (requestID) {
+        window.cancelAnimationFrame(requestID);
+        requestID = undefined;
+        animate = false;
+        console.log("hello loop stop " + requestID);
+    }
+}
