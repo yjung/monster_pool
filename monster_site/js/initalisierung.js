@@ -96,15 +96,17 @@ function initialisiere() {
     /* Spielumgebung einladen */
 	queueLaden();                               // Queue laden
     tischLaden();                             // Nicht-Physisches, detailliertes Model des Tisches laden
-    createDummyTisch();                         // Dummy-Tisch aus physikalischen Grundobjekten erstellen
-    // raumLaden();                        //Alpha Tisch aus Colada File Laden
-    createWhiteBall(0,18,0);                    // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
+    // createDummyTisch();                         // Dummy-Tisch aus physikalischen Grundobjekten erstellen
+    raumLaden();                        //Alpha Tisch aus Colada File Laden
+    createWhiteBall(0,22,0);                    // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
 	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
 
 	createGUI();								// Debugging-GUI erstellen
 
-    game.szene.add(new THREE.AxisHelper(50));   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
+	achsendreibein = new THREE.AxisHelper(50);
+	achsendreibein.position.y = 20;
+    game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
 
     /* Ende der Initialisierung / Aufruf des Mainloops */
 	mainloop();

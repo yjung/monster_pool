@@ -22,10 +22,11 @@ function tischLaden()/* Tisch falsch rotiert (steht hochkant): Gedreht beine feh
 	ColladaLoader.load('assets/dae/pooltable_a03.dae', function(collada) {
 
 		var modelScene = collada.scene;
-		var einzelteile = modelScene.children.length;
+		var tischbestandteile = 5; 						// Aktuell besteht das Tischmodell aus 7 Einzelteilen 
+		var szenenbestandteile = modelScene.children.length;
 		console.log(modelScene);
 
-		for ( i = 0; i < einzelteile; i++) {
+		for ( i = 0; i < tischbestandteile; i++) {
 		console.log(i);
 		var modelGeometry = modelScene.children[i].children[0].geometry;
 		var modelMaterial = modelScene.children[i].children[0].material;
@@ -36,9 +37,25 @@ function tischLaden()/* Tisch falsch rotiert (steht hochkant): Gedreht beine feh
 			color : 0xFFFFFF,
 			wireframe : false
 		});
+		
 
 		game.tisch.i = new THREE.Mesh(modelGeometry, modelMaterial);
+		game.tisch.i.scale.set(0.25,0.25,0.25);
 
+		game.szene.add(game.tisch.i);
+		// Collada Table Alpha zur Szene hinzufuegen
+		}
+		
+		// Collider importieren
+		for ( i = tischbestandteile; i < szenenbestandteile; i++) {
+		console.log(i);
+		var modelGeometry = modelScene.children[i].children[0].geometry;
+		var modelMaterial = modelScene.children[i].children[0].material;
+		/* Geometrie aus der .dae-Szene extrahieren*/
+		// Referenz auf Geometrie von Objekt 1 der eingeladenen .dae-Szene
+		
+
+		game.tisch.i = new Physijs.BoxMesh(modelGeometry, modelMaterial,0);
 		game.tisch.i.scale.set(0.25,0.25,0.25);
 
 		game.szene.add(game.tisch.i);
