@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <!--  <link rel="stylesheet" href="/css/main.css" /> //-->
+</head>
+<body>
+  
+  <div class="viewport"></div>
+
+  <script src="libs/jquery-1.9.0.js"></script>
+  <script type="text/javascript" src="libs/three.js"></script>
+  <script>
+    var container, scene, renderer, camera, light;
+    var WIDTH, HEIGHT, VIEW_ANGLE, ASPECT, NEAR, FAR;
+
+    container = document.querySelector('.viewport');
+
+    WIDTH = window.innerWidth,
+    HEIGHT = window.innerHeight;
+
+    VIEW_ANGLE = 45,
+    ASPECT = WIDTH / HEIGHT,
+    NEAR = 1,
+    FAR = 10000;
+
+    scene = new THREE.Scene();
+
+    renderer = new THREE.WebGLRenderer({antialias: true});
+
+    renderer.setSize(WIDTH, HEIGHT);
+    renderer.shadowMapEnabled = true;
+    renderer.shadowMapSoft = true;
+    renderer.shadowMapType = THREE.PCFShadowMap;
+    renderer.shadowMapAutoUpdate = true;
+
+    container.appendChild(renderer.domElement);
+
+    camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
+
+    camera.position.set(0, 20, 20);
+    camera.lookAt(scene.position);
+
+    scene.add(camera);
+
+    light = new THREE.DirectionalLight(0xffffff);
+
+    light.position.set(0, 100, 50);
+    light.castShadow = true;
+    light.shadowCameraLeft = -60;
+    light.shadowCameraTop = -60;
+    light.shadowCameraRight = 60;
+    light.shadowCameraBottom = 60;
+    light.shadowCameraNear = 1;
+    light.shadowCameraFar = 1000;
+    light.shadowBias = -.0001
+    light.shadowMapWidth = light.shadowMapHeight = 1024;
+    light.shadowDarkness = .7;
+
+    scene.add(light);
+
+    var loader = new THREE.JSONLoader();
+    var animation;
+
+    loader.load('xs2.js', function (geometry, materials) {
+      var mesh, naterial;
+
+      mesh = new THREE.SkinnedMesh(
+        geometry,
+        new THREE.MeshFaceMaterial(materials)
+      );
+
+      mesh.rotation.y = -Math.PI / 2;
+
+      material = mesh.material.materials;
+
+      for (var i = 0; i < materials.length; i++) {
+        var mat = materials[i];
+
+        mat.skinning = true;
+      }
+
+      scene.add(mesh);
+
+      THREE.AnimationHandler.add(mesh.geometry.animation);
+
+      animation = new THREE.Animation(
+        mesh,
+        'ArmatureAction',
+        THREE.AnimationHandler.CATMULLROM
+      );
+
+      animation.play();
+      render();
+    });
+
+    function render() {
+      animation.update(.01);
+      renderer.render(scene, camera);
+      requestAnimationFrame(render);
+    }
+  </script>
+</body>
+</html>
