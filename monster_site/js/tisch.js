@@ -41,7 +41,6 @@ function tischLaden()/* Tisch falsch rotiert (steht hochkant): Gedreht beine feh
 		
 		// Collider importieren
 		for ( i = tischbestandteile; i < szenenbestandteile; i++) {
-		console.log(i);
 		var modelGeometry = modelScene.children[i].children[0].geometry;
 		var modelMaterial = modelScene.children[i].children[0].material;
 		/* Geometrie aus der .dae-Szene extrahieren*/
