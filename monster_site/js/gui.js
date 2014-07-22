@@ -32,6 +32,7 @@ function createGUI() {
 		enable : false,
 		filmEffekt : false,
 		bloomPass : false,
+		celShading: false,
 		custom: false,
 	};
 	
@@ -51,6 +52,7 @@ function createGUI() {
 	game.debugGUI.enable = postprocessing.add(paramPostprocessing, 'enable').listen();
 	game.debugGUI.filmEffekt = postprocessing.add(paramPostprocessing, 'filmEffekt').listen().name("Film-Effekt");
 	game.debugGUI.bloomPass = postprocessing.add(paramPostprocessing, 'bloomPass').listen().name("Leucht-Effekt");
+	game.debugGUI.celShading = postprocessing.add(paramPostprocessing, 'celShading').listen().name("Cel-Shading");
 	game.debugGUI.custom = postprocessing.add(paramPostprocessing, 'custom').listen().name("Custom-Effekt");
 
 	// Optionen-Eintraege hinzufuegen
@@ -110,6 +112,11 @@ function createGUI() {
 	game.debugGUI.bloomPass.onChange(function(value) {
 		game.bloomPass = value;
 		game.renderer.bloomPass = value;
+	});
+
+	game.debugGUI.celShading.onChange(function(value) {
+		game.celShading = value;
+		game.renderer.cel = value;
 	});
 
 	game.debugGUI.custom.onChange(function(value) {

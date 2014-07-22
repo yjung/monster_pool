@@ -32,7 +32,6 @@ function raumLaden()/* Tisch falsch rotiert (steht hochkant): Gedreht beine fehl
 		var modelScene = collada.scene;
 		var szenenbestandteile = modelScene.children.length;
 		for ( i = 0; i < szenenbestandteile; i++) {
-		console.log(modelScene);
 			var modelGeometry = modelScene.children[i].children[0].geometry;
 			// Geometrie aus der .dae-Szene extrahieren
 			var modelMaterial = modelScene.children[i].children[0].material;

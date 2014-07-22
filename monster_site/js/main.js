@@ -25,6 +25,9 @@ function mainloop() {
 		if(game.renderer.bloomPass){
 			game.composerBloomPass.render(delta);	
 		}
+		if(game.renderer.cel){
+			game.composerCel.render(delta);
+		}
 		if(game.renderer.custom){
 			game.composerCustom.render(delta);
 		}

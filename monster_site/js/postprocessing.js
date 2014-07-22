@@ -15,6 +15,7 @@ function erstelleComposer() {
 
 	var effektFilm = new THREE.FilmPass(0.8, 0.325, 256, false);	// Film-Effekt-Pass
 	var effektBloomPass = new THREE.BloomPass(3, 25, 5, 256);		// Bloom-Effekt
+	var celShader = new THREE.ShaderPass(CelShader);
 	var customShader = new THREE.ShaderPass(CustomShader);
 	
 	
@@ -57,6 +58,15 @@ function erstelleComposer() {
 	game.composerCustom.addPass(renderPass);		// Normales Bild rendern
 	game.composerCustom.addPass(customShader);		// Custom-Effekt
 	game.composerCustom.addPass(effectcopy);		// Standard-Copy-Shader zum finalen rendern
+	
+	// Composer celShader
+	var renderTarget = new THREE.WebGLRenderTarget(game.breite, game.hoehe, parameters);	// Rendertarget-Objekt fuer Renderer-Initialisierung
+	game.composerCel = new THREE.EffectComposer(game.renderer, renderTarget);			// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren
+	game.composerCel.setSize(game.breite, game.hoehe);									// Groesse setzen
+	
+	game.composerCel.addPass(renderPass);		// Normales Bild rendern
+	game.composerCel.addPass(celShader);		// Custom-Effekt
+	game.composerCel.addPass(effectcopy);		// Standard-Copy-Shader zum finalen rendern
 
 }
 
@@ -64,4 +74,5 @@ function resizeComposer(){
 	game.composerFilm.setSize(game.breite, game.hoehe);			// Composer fuer Film-Effekt in Groesse aktualisieren
 	game.composerBloomPass.setSize(game.breite, game.hoehe);	// Composer fuer Bloom-Effekt in Groesse aktualisieren
 	game.composerCustom.setSize(game.breite, game.hoehe);		// Composer fuer Custom-Effekt in Groesse aktualisieren
+	game.composerCel.setSize(game.breite, game.hoehe);		// Composer fuer Custom-Effekt in Groesse aktualisieren
 }
