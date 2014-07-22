@@ -6,7 +6,7 @@ function raumLaden()/* Tisch falsch rotiert (steht hochkant): Gedreht beine fehl
 	
 	material = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("assets/dae/tex/dielen.png") });
 	
-	ColladaLoader.load('assets/dae/raum_a03.dae', function(collada) {
+	ColladaLoader.load('assets/dae/raum_a05.dae', function(collada) {
 
 		var modelScene = collada.scene;
 		var szenenbestandteile = modelScene.children.length;
@@ -15,7 +15,7 @@ function raumLaden()/* Tisch falsch rotiert (steht hochkant): Gedreht beine fehl
 			// Geometrie aus der .dae-Szene extrahieren
 			var modelMaterial = modelScene.children[i].children[0].material;
 
-			game.raum.i = new THREE.Mesh(modelGeometry, material);
+			game.raum.i = new THREE.Mesh(modelGeometry, modelMaterial);
 			game.raum.i.scale.set(0.25, 0.25, 0.25);
 
 			// Collada Table Alpha zur Szene hinzufuegen
