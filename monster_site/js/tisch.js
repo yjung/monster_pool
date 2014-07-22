@@ -24,19 +24,12 @@ function tischLaden()/* Tisch falsch rotiert (steht hochkant): Gedreht beine feh
 		var modelScene = collada.scene;
 		var tischbestandteile = 5; 						// Aktuell besteht das Tischmodell aus 7 Einzelteilen 
 		var szenenbestandteile = modelScene.children.length;
-		console.log(modelScene);
 
 		for ( i = 0; i < tischbestandteile; i++) {
-		console.log(i);
 		var modelGeometry = modelScene.children[i].children[0].geometry;
 		var modelMaterial = modelScene.children[i].children[0].material;
 		/* Geometrie aus der .dae-Szene extrahieren*/
 		// Referenz auf Geometrie von Objekt 1 der eingeladenen .dae-Szene
-
-		var tempWhite = new THREE.MeshPhongMaterial({
-			color : 0xFFFFFF,
-			wireframe : false
-		});
 		
 
 		game.tisch.i = new THREE.Mesh(modelGeometry, modelMaterial);

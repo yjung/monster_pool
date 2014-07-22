@@ -1,36 +1,25 @@
 // Tisch einladen und initialisieren
 function raumLaden()/* Tisch falsch rotiert (steht hochkant): Gedreht beine fehlen (Export error oder altes File¿)*/
 {
-	// var ColladaLoader = new THREE.ColladaLoader();
-	// // JSON-Loader erstellen
-	// ColladaLoader.load('assets/dae/raum_a01.dae', function (collada)
-	// {
-	//
-	// var modelScene = collada.scene;
-	// var modelGeometry = modelScene.children[0].children[0].geometry;
-	// var modelMaterial = modelScene.children[0].children[0].material;
-	// /* Geometrie aus der .dae-Szene extrahieren*/
-	// var daeGeometrie = collada.scene.children[0].children[0].geometry;  // Referenz auf Geometrie von Objekt 1 der eingeladenen .dae-Szene
-	//
-	//
-	// var tempWhite = new THREE.MeshPhongMaterial({
-	// color : 0xFFFFFF,
-	// wireframe : false
-	// });
-	//
-	// game.raum = new THREE.Mesh(modelGeometry, modelMaterial);
-	//
-	// game.raum.scale.set(0.5,0.5,0.5);
-	//
-	// game.szene.add(game.raum);         // Collada Table Alpha zur Szene hinzufuegen
-	// console.log("Raum geladen");
-	// });
-	plane = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), new THREE.MeshBasicMaterial({
-		color : 0xe0e0e0
-	}));
+	var ColladaLoader = new THREE.ColladaLoader();
+	// JSON-Loader erstellen
+	
+	material = new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture("assets/dae/tex/dielen.png") });
+	
+	ColladaLoader.load('assets/dae/raum_a03.dae', function(collada) {
 
-	plane.rotation.x = -90 * (Math.PI / 180);
+		var modelScene = collada.scene;
+		var szenenbestandteile = modelScene.children.length;
+		for ( i = 0; i < szenenbestandteile; i++) {
+			var modelGeometry = modelScene.children[i].children[0].geometry;
+			// Geometrie aus der .dae-Szene extrahieren
+			var modelMaterial = modelScene.children[i].children[0].material;
 
-	game.szene.add(plane);
+			game.raum.i = new THREE.Mesh(modelGeometry, material);
+			game.raum.i.scale.set(0.25, 0.25, 0.25);
+
+			// Collada Table Alpha zur Szene hinzufuegen
+			game.szene.add(game.raum.i);
+		}
+	});
 };
-
