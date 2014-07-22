@@ -10,8 +10,10 @@
     <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="lib/bootstrap-3.2.0-dist/css/bootstrap.min.css">
     <script src="lib/jquery-1.11.0.min.js"></script>
-    <script src="js/vendor/modernizr-2.7.1.min.js"></script>
+    <script src="lib/modernizr-2.7.1.min.js"></script>
+    <script src="lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
      <!--<script src="js/vendor/jquery-1.11.0.min.js"></script>
     <script src="js/vendor/modernizr-2.7.1.min.js"></script>-->
     <script src="js/plugins.js"></script>
@@ -77,6 +79,40 @@
     		<div id="viewport"></div>
 		</div>
 		<!-- /////////////////		FOOTER		/////////////////-->
-		<div id=footer><a onclick="jsfunction()" href="#">Impressum</a></div>
+		<div id=footer><a href="#"  data-toggle="modal" data-target="#impressumModal">Impressum</a></div>
+		<!-- Modal -->
+		<div class="modal fade" id="impressumModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Impressum</h4>
+		      </div>
+		      <div class="modal-body">
+		        Angaben nach § 5 Telemediengesetz<br><br>
+
+				<p>Name und Anschrift: Hochschule Fulda<br>
+				 Marquardstr. 35<br>
+				 36039 Fulda<br></p>
+				
+				<p>Internet: http://www.hs-fulda.de</p>
+				
+				<p>Gesetzlicher Vertreter: Prof. Dr. Yvonne Jung</p>
+				
+				<p>Webmaster: Yvonne Jung<br>
+				 Telefon: (+49) 0661 - 96 40 - 3349<br>
+				 Telefax: (+49) 0661 - 96 40 - 349<br>
+				 eMail: yvonne.jung@informatik.hs-fulda.de</p>
+				 
+				 <p>Haftungsausschluss<br><br>
+
+					Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Sie stellen kein Angebot der Hochschule Fulda dar. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 	</body>
 </html>
