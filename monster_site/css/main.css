@@ -296,6 +296,10 @@ td {
 	margin-right:auto;
 }
 
+/* navbar */
+.navbar-nav > li > a {padding-top:8px !important; padding-bottom:5px !important;}
+.navbar {min-height:38px !important}
+
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
    These examples override the primary ('mobile first') styles.
