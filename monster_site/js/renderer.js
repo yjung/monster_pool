@@ -14,7 +14,8 @@ function setupRenderer(breite, hoehe) {
 	}
 
 	renderer.setSize(game.breite, game.hoehe);	// Renderer auf die Groesse des Fensters maximieren
-	renderer.setClearColorHex(0x000, 1);  		// Hintergrundfarbe des Renderers festlegen
+	renderer.setClearColor(0x000, 1);  			// Hintergrundfarbe des Renderers festlegen
+												// Auf setClearColor() geändert, weil setClearColorHex() veraltet ist
 	renderer.domElement.style.zIndex = -1; 		// To allow render overlay on top of sprited sphere
 	renderer.shadowMapEnabled = true;			// shadowMaps aktivieren
 	renderer.autoClear = false;					// Kein Auto-Clear um Postprocessing zu ermoeglichen

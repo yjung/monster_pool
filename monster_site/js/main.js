@@ -17,7 +17,7 @@ function mainloop() {
     
     // game.renderer.clear(true, false, false);				// (color, depth, stencil)
     if (!game.postProcessing) {								// Falls Post-Processing deaktiviert
-			game.renderer.render(game.szene, game.kamera);	// Szene normal rendern
+            game.renderer.render(game.szene, game.kamera);   // Szene normal rendern			
 	} else {												// Postprocessing ist aktiviert
 		if(game.renderer.filmEffect){			
 			game.composerFilm.render(delta);
@@ -30,6 +30,11 @@ function mainloop() {
 		}
 		else{
 			game.renderer.render(game.szene, game.kamera);	// Falls Postprocessing aktiv, aber kein Effekt gesetzt normal rendern
+            game.renderer.clear( false, true, false );       // Depth-Cache muss noch entleert werden
+            game.renderer.setViewport( 10, 0, window.innerWidth, window.innerHeight ); // soll eigentlich die Viewport-Einstellung für mapCamera sein;
+                                                                                       // es ändert aber auch den Viewport der Hauptkamera
+                                                                                       // weiß nicht wie man es direkt auf die mapCamera assigned 
+            game.renderer.render(game.szene, game.mapCamera);   // Szene normal rendern
 		}
 
 	}
@@ -43,12 +48,13 @@ function mainloop() {
     	game.debugGUI.__controllers[i].updateDisplay();
   	}
 
-    if (animate) {
+    if (animate) { 
         requestID = window.requestAnimationFrame(mainloop);     
     }
                        // Mainloop erneut durchlaufen
 };
 
+// Start, um das Spiel nach Pausierung wieder anzufangen
 function start() {
     console.log("hello start");
     if (!requestID) {
@@ -59,10 +65,11 @@ function start() {
     }
 }
 
+// Ermöglicht die Pausierung des Spiels
 function stop() {
     console.log("hello stop" + requestID);
     if (requestID) {
-        window.cancelAnimationFrame(requestID);
+        window.cancelAnimationFrame(requestID);                 
         requestID = undefined;
         animate = false;
         console.log("hello loop stop " + requestID);
