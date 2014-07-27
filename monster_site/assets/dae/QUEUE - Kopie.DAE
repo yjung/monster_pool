@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
 	<asset>
-		<contributor>
-			<author></author><authoring_tool>FBX COLLADA exporter</authoring_tool>
-		</contributor>
-	<created>2014-07-23T11:20:19Z</created>
+		<contributor><author></author><authoring_tool>FBX COLLADA exporter</authoring_tool>
+	<comments></comments>
+	</contributor><created>2014-07-23T11:20:19Z</created>
+	<keywords></keywords>
 	<modified>2014-07-23T11:20:19Z</modified>
+	<revision></revision>
+	<subject></subject>
+	<title></title>
 	<unit meter="0.025400" name="centimeter"></unit>
 	<up_axis>Z_UP</up_axis>
   </asset>
   <library_images>
     <image id="Map_12-image" name="Map #12">
-		<init_from>tex/QUEUE_Tex.png</init_from>
+		<init_from>tex/TestTexture.png</init_from>
 	</image>
   </library_images>
   <library_materials>
@@ -28,10 +31,18 @@
               <color sid="emission">0.000000  0.000000 0.000000 1.000000</color>
             </emission>
             <ambient>
-              <color sid="ambient">0.139000  0.069000 0.019000 1.000000</color>
+              <color sid="ambient">0.588000  0.588000 0.588000 1.000000</color>
             </ambient>
             <diffuse>
-              <texture texture="Map_12-image" texcoord="CHANNEL0"/>
+              <texture texture="Map_12-image" texcoord="CHANNEL0">
+                <extra>
+                  <technique profile="MAYA">
+                    <wrapU sid="wrapU0">TRUE</wrapU>
+                    <wrapV sid="wrapV0">TRUE</wrapV>
+                    <blend_mode>ADD</blend_mode>
+                  </technique>
+                </extra>
+              </texture>
             </diffuse>
             <specular>
               <color sid="specular">0.000000  0.000000 0.000000 1.000000</color>

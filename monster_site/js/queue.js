@@ -5,7 +5,7 @@ function queueLaden() {
     ColladaLoader.load('assets/dae/QUEUE.DAE', function (collada) {  // Einladen der Datei mit Referenz "collada"
         /* Geometrie aus der .dae-Szene extrahieren*/
         var daeGeometrie = collada.scene.children[0].children[0].geometry;  // Referenz auf Geometrie von Objekt 1 der eingeladenen .dae-Szene
-		var daeMaterial = collada.scene.children[0].children[0].Material;
+		var daeMaterial = collada.scene.children[0].children[0].material;
         /*Physikalischer Queue mit Physi.js*/
         var queueMaterial = daeMaterial;         // Physi.js-Material initialisieren
         game.queue = new Physijs.CylinderMesh(daeGeometrie, queueMaterial, 0);   // Objekterzeugung
