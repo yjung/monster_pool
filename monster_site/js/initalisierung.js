@@ -1,6 +1,16 @@
 // once everything is loaded, we run our Three.js stuff.
 function initialisiere() {
 
+	$("#info").hide();	
+	$("#imgBanner").width(151);										//Hide information to show the game
+	$("#imgBanner").height(41);		
+	var name = $("#inputName").val();
+	$( "#header" ).removeClass( "header-big" );
+	$( "#header" ).addClass( "header-small" );
+	
+	
+	
+	console.log(name);
 	Physijs.scripts.worker = 'lib/physijs_worker.js';        // Physi.js-Worker einbinden
 	Physijs.scripts.ammo = '../lib/ammo.js';                    // Bibliotheksverweis zu Ammo
     window.game = {};                                           // Globalen Namespace schaffen
