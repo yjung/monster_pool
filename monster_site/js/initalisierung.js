@@ -8,7 +8,7 @@ function initialisiere() {
 	$( "#header" ).removeClass( "header-big" );
 	$( "#header" ).addClass( "header-small" );
 	
-	
+			
 	
 	console.log(name);
 	Physijs.scripts.worker = 'lib/physijs_worker.js';        // Physi.js-Worker einbinden
@@ -16,9 +16,7 @@ function initialisiere() {
     window.game = {};                                           // Globalen Namespace schaffen
     window.addEventListener('resize', onWindowResize, false);   // Eventlistener fuer Groessenaenderung
     
-
-	
-	
+    window.game.monster = {};								// Sammlung fuer alle Monster im Spiel	
 
 	game.modus = {
 		statisch : 0,           // Position ist fixiert
@@ -110,6 +108,7 @@ function initialisiere() {
     // createDummyTisch();                         // Dummy-Tisch aus physikalischen Grundobjekten erstellen
     raumLaden();                        //Alpha Tisch aus Colada File Laden
     createWhiteBall(0,22,0);                    // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
+    ladeMonster();								// Lade ein Monster (Bernd)
 	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
 
