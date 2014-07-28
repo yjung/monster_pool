@@ -11,7 +11,7 @@ function createWhiteBall(x,y,z) {
     );
 
     // Grundobjekterzeugung mit Material aus angelegter Bibliothek
-    game.whiteBall = new Physijs.SphereMesh(new THREE.SphereGeometry(1, 16, 16), material, 100);
+    game.whiteBall = new Physijs.SphereMesh(new THREE.SphereGeometry(0.75, 16, 16), material, 100);
     // Initiale Positionierung in der Welt
     game.whiteBall.position.x = x;
     game.whiteBall.position.y = y;

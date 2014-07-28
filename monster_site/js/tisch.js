@@ -58,23 +58,17 @@ function tischLaden()/* Tisch falsch rotiert (steht hochkant): Gedreht beine feh
 };
 
 function erstelleHindernisse(ColladaLoader){
-	var colladaLoader = ColladaLoader;
 	
-	ColladaLoader.load('assets/dae/slider.dae', function(collada) {
+	erstelleSlider(ColladaLoader, 0, 19, 0);
+	erstelleBumper(ColladaLoader, 2, 18, 0);
 
-		var modelScene = collada.scene;
-		
-		console.log(modelScene);
-		
-		var modelGeometry = modelScene.children[0].children[0].geometry; 		/* Geometrie aus der .dae-Szene extrahieren*/
-		var modelMaterial = modelScene.children[0].children[0].material;		// Referenz auf Geometrie von Objekt 1 der eingeladenen .dae-Szene
-
-		var slider = new THREE.Mesh(modelGeometry, modelMaterial);
-
-		slider.position.y = 20;
-		
-		game.szene.add(slider); // Collada Table Alpha zur Szene hinzufuegen
-	});
-	
+	// // Bumper einladen
+	// ColladaLoader.load('assets/dae/bumper.dae', function(collada) {
+		// var bumper = new THREE.Mesh(collada.scene.children[0].children[0].geometry, collada.scene.children[0].children[0].material);
+// 
+		// bumper.position.y = 20;
+// 		
+		// game.szene.add(bumper); // Collada Table Alpha zur Szene hinzufuegen	
+// });	
 };
 
