@@ -2,7 +2,7 @@
 function queueLaden() {
     var ColladaLoader = new THREE.ColladaLoader();                          // Collada-Loader erstellen
     // ColladaLoader.load('assets/dae/queue_a02.dae', function (collada) {  // Einladen der Datei mit Referenz "collada"
-    ColladaLoader.load('assets/dae/QUEUE.DAE', function (collada) {  // Einladen der Datei mit Referenz "collada"
+    ColladaLoader.load('assets/dae/queue.dae', function (collada) {  // Einladen der Datei mit Referenz "collada"
         /* Geometrie aus der .dae-Szene extrahieren*/
         var daeGeometrie = collada.scene.children[0].children[0].geometry;  // Referenz auf Geometrie von Objekt 1 der eingeladenen .dae-Szene
 		var daeMaterial = collada.scene.children[0].children[0].material;
