@@ -11,49 +11,49 @@
     </asset>
     <library_images>
         <image id="ID5">
-            <init_from>kugel_1.jpg</init_from>
+            <init_from>tex/kugel_01.jpg</init_from>
         </image>
         <image id="ID10">
-            <init_from>kugel_2.jpg</init_from>
+            <init_from>tex/kugel_02.jpg</init_from>
         </image>
         <image id="ID15">
-            <init_from>kugel_3.jpg</init_from>
+            <init_from>tex/kugel_03.jpg</init_from>
         </image>
         <image id="ID20">
-            <init_from>kugel_4.jpg</init_from>
+            <init_from>tex/kugel_04.jpg</init_from>
         </image>
         <image id="ID25">
-            <init_from>kugel_5.jpg</init_from>
+            <init_from>tex/kugel_05.jpg</init_from>
         </image>
         <image id="ID30">
-            <init_from>kugel_6.jpg</init_from>
+            <init_from>tex/kugel_06.jpg</init_from>
         </image>
         <image id="ID35">
-            <init_from>kugel_7.jpg</init_from>
+            <init_from>tex/kugel_07.jpg</init_from>
         </image>
         <image id="ID40">
-            <init_from>kugel_8.jpg</init_from>
+            <init_from>tex/kugel_08.jpg</init_from>
         </image>
         <image id="ID45">
-            <init_from>kugel_9.jpg</init_from>
+            <init_from>tex/kugel_09.jpg</init_from>
         </image>
         <image id="ID50">
-            <init_from>kugel_10.jpg</init_from>
+            <init_from>tex/kugel_10.jpg</init_from>
         </image>
         <image id="ID55">
-            <init_from>kugel_11.jpg</init_from>
+            <init_from>tex/kugel_11.jpg</init_from>
         </image>
         <image id="ID60">
-            <init_from>kugel_12.jpg</init_from>
+            <init_from>tex/kugel_12.jpg</init_from>
         </image>
         <image id="ID65">
-            <init_from>kugel_13.jpg</init_from>
+            <init_from>tex/kugel_13.jpg</init_from>
         </image>
         <image id="ID70">
-            <init_from>kugel_14.jpg</init_from>
+            <init_from>tex/kugel_14.jpg</init_from>
         </image>
         <image id="ID75">
-            <init_from>kugel_15.jpg</init_from>
+            <init_from>tex/kugel_15.jpg</init_from>
         </image>
     </library_images>
     <library_effects>
