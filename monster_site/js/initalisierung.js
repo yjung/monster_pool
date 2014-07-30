@@ -105,6 +105,7 @@ function initialisiere() {
     /* Spielumgebung einladen */
 	queueLaden();                               // Queue laden
     tischLaden();                             // Nicht-Physisches, detailliertes Model des Tisches laden
+    ladeKugeln();                             // Nicht-Physisches, detailliertes Model des Tisches laden
     // createDummyTisch();                         // Dummy-Tisch aus physikalischen Grundobjekten erstellen
     raumLaden();                        //Alpha Tisch aus Colada File Laden
     createWhiteBall(0,22,15);                    // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen

@@ -46,7 +46,6 @@ function tischLaden()/* Tisch falsch rotiert (steht hochkant): Gedreht beine feh
 		var colliderPosition = colliderObjekt.position;
 		var colliderGeometrie = colliderObjekt.children[0].geometry;
 		var colliderMaterial = colliderObjekt.children[0].material;
-		console.log(colliderObjekt);
 
 		var collider = new Physijs.BoxMesh(colliderGeometrie, colliderMaterial,0);
 		collider.scale.set(0.25,0.25,0.25);
@@ -63,8 +62,8 @@ function tischLaden()/* Tisch falsch rotiert (steht hochkant): Gedreht beine feh
 
 function erstelleHindernisse(ColladaLoader){
 	
-	erstelleSlider(ColladaLoader, 0, 19, 0);
-	erstelleBumper(ColladaLoader, 2, 18, 0);
+	// erstelleSlider(ColladaLoader, 0, 19, 0);
+	// erstelleBumper(ColladaLoader, 2, 18, 0);
 
 	// // Bumper einladen
 	// ColladaLoader.load('assets/dae/bumper.dae', function(collada) {
