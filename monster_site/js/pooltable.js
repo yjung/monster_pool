@@ -9,7 +9,7 @@ function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine 
 		var tischbestandteile = 6; 												// Aktuell besteht das Tischmodell aus 7 Einzelteilen 
 		var szenenbestandteile = modelScene.children.length;					// Abfragen wieiviel Objekte noch folgen (Das sind Collider)
 
-		for ( i = 0; i < tischbestandteile; i++) {								// Fuer alle Tischteile
+		for (var i = 0; i < tischbestandteile; i++) {								// Fuer alle Tischteile
 		var modelGeometry = modelScene.children[i].children[0].geometry; 		// Geometrie aus der .dae-Szene extrahieren
 		var modelMaterial = modelScene.children[i].children[0].material;		// Material aus der .dae-Szene extrahieren
 		
@@ -20,7 +20,7 @@ function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine 
 		}
 		
 		// Collider importieren
-		for ( j = tischbestandteile; j < szenenbestandteile; j++) {
+		for (var j = tischbestandteile; j < szenenbestandteile; j++) {
 		var colliderObjekt = modelScene.children[j].children[0].parent.children[0].parent;
 		var colliderName = colliderObjekt.name;
 		var colliderPosition = colliderObjekt.position;
@@ -38,7 +38,7 @@ function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine 
 		}
 	});
 	erstelleHindernisse(ColladaLoader);
-};
+}
 
 function erstelleHindernisse(ColladaLoader){
 	
@@ -50,5 +50,5 @@ function erstelleHindernisse(ColladaLoader){
 	erstelleSlider(posStart, posZiel, rotStart, rotZiel);
 	// erstelleBumper(ColladaLoader, 2, 18, 0);
 
-};
+}
 
