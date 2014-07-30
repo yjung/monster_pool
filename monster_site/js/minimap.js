@@ -8,12 +8,12 @@ function erstelleMinimap(){
     var far = 1000;
     
     // Konsolenausgabe zum Testen der oberen Werte
-    console.log("left: "+left);
-    console.log("right: "+right);
-    console.log("top: "+top);
-    console.log("bottom: "+bottom);
-    console.log("near: "+near);
-    console.log("far: "+far);
+    // console.log("left: "+left);
+    // console.log("right: "+right);
+    // console.log("top: "+top);
+    // console.log("bottom: "+bottom);
+    // console.log("near: "+near);
+    // console.log("far: "+far);
     
     
 

@@ -107,7 +107,7 @@ function initialisiere() {
     tischLaden();                             // Nicht-Physisches, detailliertes Model des Tisches laden
     // createDummyTisch();                         // Dummy-Tisch aus physikalischen Grundobjekten erstellen
     raumLaden();                        //Alpha Tisch aus Colada File Laden
-    createWhiteBall(0,22,0);                    // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
+    createWhiteBall(0,22,15);                    // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
     ladeMonster();								// Lade ein Monster (Bernd)
 	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
