@@ -9,9 +9,9 @@ function createGUI() {
 	var vaterContainer = document.getElementById('viewport');
 	vaterContainer.appendChild(game.debugGUI.domElement);
 
-	game.debugGUI.domElement.style.position = "absolute";
+	game.debugGUI.domElement.style.position = "fixed";
 	// Eigene Positionierung
-	game.debugGUI.domElement.style.bottom = "0";
+	game.debugGUI.domElement.style.bottom = "40px";
 
 	// Ordner fuer die Kategorien erstellen
 	var controls = game.debugGUI.addFolder('Controls');
