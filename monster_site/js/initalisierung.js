@@ -17,7 +17,8 @@ function initialisiere() {
     window.addEventListener('resize', onWindowResize, false);   // Eventlistener fuer Groessenaenderung
     
     window.game.monster = {};								// Sammlung fuer alle Monster im Spiel	
-
+    monsterCounter=15; //Counter fuer Kugeln (Monster) im Spiel (wird in loecherTrigger.js aktualisiert)
+    
 	game.modus = {
 		statisch : 0,           // Position ist fixiert
 		orbitrotation : 1,      // Position rotiert um weisse Kugel
@@ -104,10 +105,11 @@ function initialisiere() {
 
     /* Spielumgebung einladen */
 	queueLaden();                               // Queue laden
-    tischLaden();                             // Nicht-Physisches, detailliertes Model des Tisches laden
+    tischLaden();                             // Nicht-Physisches, detailliertes Model des Tisches laden    
     ladeKugeln();                             // Nicht-Physisches, detailliertes Model des Tisches laden
     // createDummyTisch();                         // Dummy-Tisch aus physikalischen Grundobjekten erstellen
     raumLaden();                        //Alpha Tisch aus Colada File Laden
+    loecherTrigger();							//Lade die Triggers von den Loechern
     createWhiteBall(0,22,15);                    // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
     ladeMonster();								// Lade ein Monster (Bernd)
 	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
