@@ -11,6 +11,7 @@ function benutzereingaben(){
 function mainloop() {
     benutzereingaben();                                 // Benutzereingaben abfangen
     var delta = game.clock.getDelta();                  // Verstrichene Zeit messen
+    TWEEN.update();										// Interpolationsschritt von Animationstweens 
     game.orbitControls.update(delta);                   // Steuerung in Zeitabhängigkeit aktualisieren
     game.szene.simulate(undefined, 1);                  // Physiksimulation
     
