@@ -36,7 +36,7 @@ function createGUI() {
 
 	paramOptions = {
 		vollbild : false,
-		sound : true,
+		sound : false,
 	};
 
 	// Steuerungseintraege hinzufuegen
@@ -130,12 +130,12 @@ function createGUI() {
 	});
 
 	game.debugGUI.sound.onChange(function(value) {
-		game.sound = value;
-
+		game.soundAn = value;
 		if (!value) {
 			game.ambientSound.volume = 0;
 		}
 		if (value) {
+			soundAmbience('ambience');
 			game.ambientSound.volume = 0.5;
 		}
 	});

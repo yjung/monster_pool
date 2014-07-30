@@ -103,7 +103,7 @@ function initialisiere() {
 
 	/* Sound */
 	game.ambientSound = document.createElement("audio");
-	game.soundAn = true;
+	game.soundAn = false;
 	soundAmbience('ambience');
 
     /* Spielumgebung einladen */

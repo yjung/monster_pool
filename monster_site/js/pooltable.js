@@ -6,21 +6,17 @@ function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine 
 	ColladaLoader.load('assets/dae/pooltable.dae', function(collada) {
 
 		var modelScene = collada.scene;
-		var tischbestandteile = 6; 						// Aktuell besteht das Tischmodell aus 7 Einzelteilen 
-		var szenenbestandteile = modelScene.children.length;
+		var tischbestandteile = 6; 												// Aktuell besteht das Tischmodell aus 7 Einzelteilen 
+		var szenenbestandteile = modelScene.children.length;					// Abfragen wieiviel Objekte noch folgen (Das sind Collider)
 
-		for ( i = 0; i < tischbestandteile; i++) {
-		var modelGeometry = modelScene.children[i].children[0].geometry;
-		var modelMaterial = modelScene.children[i].children[0].material;
-		/* Geometrie aus der .dae-Szene extrahieren*/
-		// Referenz auf Geometrie von Objekt 1 der eingeladenen .dae-Szene
+		for ( i = 0; i < tischbestandteile; i++) {								// Fuer alle Tischteile
+		var modelGeometry = modelScene.children[i].children[0].geometry; 		// Geometrie aus der .dae-Szene extrahieren
+		var modelMaterial = modelScene.children[i].children[0].material;		// Material aus der .dae-Szene extrahieren
 		
+		game.tisch.i = new THREE.Mesh(modelGeometry, modelMaterial);			// Einzelteile zusammenfuegen
+		game.tisch.i.scale.set(0.25,0.25,0.25);									// FIX: Sollte im dae-File behoben werden!
 
-		game.tisch.i = new THREE.Mesh(modelGeometry, modelMaterial);
-		game.tisch.i.scale.set(0.25,0.25,0.25);
-
-		game.szene.add(game.tisch.i);
-		// Collada Table Alpha zur Szene hinzufuegen
+		game.szene.add(game.tisch.i); 											// Collada-Table zur Szene hinzufuegen
 		}
 		
 		// Collider importieren
@@ -54,13 +50,5 @@ function erstelleHindernisse(ColladaLoader){
 	erstelleSlider(posStart, posZiel, rotStart, rotZiel);
 	// erstelleBumper(ColladaLoader, 2, 18, 0);
 
-	// // Bumper einladen
-	// ColladaLoader.load('assets/dae/bumper.dae', function(collada) {
-		// var bumper = new THREE.Mesh(collada.scene.children[0].children[0].geometry, collada.scene.children[0].children[0].material);
-// 
-		// bumper.position.y = 20;
-// 		
-		// game.szene.add(bumper); // Collada Table Alpha zur Szene hinzufuegen	
-// });	
 };
 
