@@ -18,25 +18,25 @@ function createGUI() {
 	var postprocessing = game.debugGUI.addFolder('Postprocessing');
 	var options = game.debugGUI.addFolder('Options');
 
-	
 	paramControls = {
-		stosskraftX : 0, 	// Muss initial 0.01 sein um float zu bekommen
-		stosskraftY : 0,		// Muss initial 0.01 sein um float zu bekommen
-		stosskraftZ : 0,		// Muss initial 0.01 sein um float zu bekommen
-		offsetX : 0.01,			// Muss initial 0.01 sein um float zu bekommen
-		offsetY : 0.01,			// Muss initial 0.01 sein um float zu bekommen
-		offsetZ : 0.01			// Muss initial 0.01 sein um float zu bekommen
+		stosskraftX : 0, // Muss initial 0.01 sein um float zu bekommen
+		stosskraftY : 0, // Muss initial 0.01 sein um float zu bekommen
+		stosskraftZ : 0, // Muss initial 0.01 sein um float zu bekommen
+		offsetX : 0.01, // Muss initial 0.01 sein um float zu bekommen
+		offsetY : 0.01, // Muss initial 0.01 sein um float zu bekommen
+		offsetZ : 0.01	// Muss initial 0.01 sein um float zu bekommen
 	};
 
 	paramPostprocessing = {
 		enable : false,
 		filmEffekt : false,
 		bloomPass : false,
-		custom: false,
+		custom : false,
 	};
-	
+
 	paramOptions = {
 		vollbild : false,
+		sound : true,
 	};
 
 	// Steuerungseintraege hinzufuegen
@@ -54,8 +54,9 @@ function createGUI() {
 	game.debugGUI.custom = postprocessing.add(paramPostprocessing, 'custom').listen().name("Custom-Effekt");
 
 	// Optionen-Eintraege hinzufuegen
-	game.debugGUI.vollbild = options.add(paramOptions,'vollbild').listen().name("Vollbildmodus");
-	
+	game.debugGUI.vollbild = options.add(paramOptions, 'vollbild').listen().name("Vollbildmodus");
+	game.debugGUI.sound = options.add(paramOptions, 'sound').listen().name("Sound");
+
 	game.debugGUI.autoListen = true;
 
 	// Event on change in 'effectX'
@@ -116,20 +117,28 @@ function createGUI() {
 		game.custom = value;
 		game.renderer.custom = value;
 	});
-	
-	
-	
+
 	game.debugGUI.vollbild.onChange(function(value) {
 		game.vollbild = value;
-		if(value && THREEx.FullScreen.available() && !THREEx.FullScreen.activated()){
+		if (value && THREEx.FullScreen.available() && !THREEx.FullScreen.activated()) {
 			THREEx.FullScreen.request(document.getElementById("viewport"));
 			onWindowResize();
-		} else{
+		} else {
 			THREEx.FullScreen.cancel();
 			onWindowResize();
 		}
 	});
 
+	game.debugGUI.sound.onChange(function(value) {
+		game.sound = value;
+
+		if (!value) {
+			game.ambientSound.volume = 0;
+		}
+		if (value) {
+			game.ambientSound.volume = 0.5;
+		}
+	});
 
 	// GUI im Allgemeinen standardmaessig oeffnen
 	game.debugGUI.closed = false;

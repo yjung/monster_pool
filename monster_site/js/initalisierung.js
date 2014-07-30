@@ -100,7 +100,10 @@ function initialisiere() {
 	erstelleComposer();				// Effekt-Composer erstellen
 	game.postProcessing = false;	// Postprocessing standardmaessig deaktiviert
 
-
+	/* Sound */
+	game.ambientSound = document.createElement("audio");
+	game.soundAn = true;
+	soundAmbience('ambience');
 
     /* Spielumgebung einladen */
 	queueLaden();                               // Queue laden
