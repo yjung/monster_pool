@@ -104,7 +104,6 @@ function initialisiere() {
 	/* Sound */
 	game.ambientSound = document.createElement("audio");
 	game.soundAn = false;
-	soundAmbience('ambience');
 
     /* Spielumgebung einladen */
 	queueLaden();                               // Queue laden
