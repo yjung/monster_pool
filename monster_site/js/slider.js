@@ -25,6 +25,11 @@ function erstelleSlider(posStart, posZiel, rotStart, rotZiel) {
 		startRot.x *= (Math.PI / 180);
 		startRot.y *= (Math.PI / 180);
 		startRot.z *= (Math.PI / 180);
+		
+		zielRot.x *= (Math.PI / 180);
+		zielRot.y *= (Math.PI / 180);
+		zielRot.z *= (Math.PI / 180);
+		
 		slider.rotation.x = startRot.x;
 		slider.rotation.y = startRot.y;
 		slider.rotation.z = startRot.z;
@@ -41,32 +46,63 @@ function animiereSlider(sliderObjekt, startPos, zielPos, startRot, zielRot) {
 
 	var slider = sliderObjekt;
 
-	var xStart = startPos.x;
-	var yStart = startPos.y;
-	var zStart = startPos.z;
-	var xZiel = zielPos.x;
-	var yZiel = zielPos.y;
-	var zZiel = zielPos.z;
+	var xStartPos = startPos.x;
+	var yStartPos = startPos.y;
+	var zStartPos = startPos.z;
+	var xZielPos = zielPos.x;
+	var yZielPos = zielPos.y;
+	var zZielPos = zielPos.z;
+	
+	var xStartRot = startRot.x;
+	var yStartRot = startRot.y;
+	var zStartRot = startRot.z;
+	var xZielRot = zielRot.x;
+	var yZielRot = zielRot.y;
+	var zZielRot = zielRot.z;
 
 	var aktuellerWert = {
-		positionX : slider.position.x
+		positionX : slider.position.x,
+		positionY : slider.position.y,
+		positionZ : slider.position.z,
+
+		rotationX : slider.rotation.x,
+		rotationY : slider.rotation.y,
+		rotationZ : slider.rotation.z
 	};
 
 	var richtungZiel = {
-		positionX : xZiel
+		positionX : xZielPos,
+		positionY : yZielPos,
+		positionZ : zZielPos,
+		
+		rotationX : xZielRot,
+		rotationY : yZielRot,
+		rotationZ : zZielRot,
 	};
 
 	var richtungStart = {
-		positionX : xStart
+		positionX : xStartPos,
+		positionY : yStartPos,
+		positionZ : zStartPos,
+		
+		rotationX : xStartRot,
+		rotationY : yStartRot,
+		rotationZ : zStartRot,
 	};
 
-	tweenZuZiel = new TWEEN.Tween(aktuellerWert).to(richtungZiel, 1000);
-	tweenZuStart = new TWEEN.Tween(aktuellerWert).to(richtungStart, 1000);
+	tweenZuZiel = new TWEEN.Tween(aktuellerWert).to(richtungZiel, 1000).easing(TWEEN.Easing.Elastic.InOut);
+	tweenZuStart = new TWEEN.Tween(aktuellerWert).to(richtungStart, 1000).easing(TWEEN.Easing.Elastic.InOut);
 
 	tweenZuZiel.onUpdate(function() {
 		slider.__dirtyPosition = true;
 		slider.__dirtyRotation = true;
 		slider.position.x = aktuellerWert.positionX;
+		slider.position.y = aktuellerWert.positionY;
+		slider.position.z = aktuellerWert.positionZ;
+		
+		slider.rotation.x = aktuellerWert.rotationX;
+		slider.rotation.y = aktuellerWert.rotationY;
+		slider.rotation.z = aktuellerWert.rotationZ;
 
 	});
 
@@ -74,6 +110,12 @@ function animiereSlider(sliderObjekt, startPos, zielPos, startRot, zielRot) {
 		slider.__dirtyPosition = true;
 		slider.__dirtyRotation = true;
 		slider.position.x = aktuellerWert.positionX;
+		slider.position.y = aktuellerWert.positionY;
+		slider.position.z = aktuellerWert.positionZ;
+		
+		slider.rotation.x = aktuellerWert.rotationX;
+		slider.rotation.y = aktuellerWert.rotationY;
+		slider.rotation.z = aktuellerWert.rotationZ;
 	});
 
 	tweenZuZiel.chain(tweenZuStart);
