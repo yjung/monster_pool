@@ -62,7 +62,12 @@ function tischLaden()/* Tisch falsch rotiert (steht hochkant): Gedreht beine feh
 
 function erstelleHindernisse(ColladaLoader){
 	
-	// erstelleSlider(ColladaLoader, 0, 19, 0);
+	var posStart = new THREE.Vector3(8,17,22);	// Startpunkt Slider-Animation
+	var posZiel = new THREE.Vector3(-8,17,20);	// Endpunkt Slider-Animation
+	var rotStart = new THREE.Vector3(0,90,0);	// Startrotation Slider-Animation
+	var rotZiel = new THREE.Vector3(0,90,0);	// Endrotation Slider-Animation
+	
+	erstelleSlider(posStart, posZiel, rotStart, rotZiel);
 	// erstelleBumper(ColladaLoader, 2, 18, 0);
 
 	// // Bumper einladen
