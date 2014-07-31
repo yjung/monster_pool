@@ -13,29 +13,15 @@ function loecherTrigger()
 	lochColliderErstellen(13, 16, 1);
 	lochColliderErstellen(-13, 16, 26);
 	lochColliderErstellen(13, 16, 26);
-	
-	
-	//Zum Testen
-	lochColliderErstellen(0, 20, -20);
-	lochColliderErstellen(0, 21, -20);
-	lochColliderErstellen(0, 22, -20);
-	lochColliderErstellen(0, 23, -20);
-	
 }
 
 function lochColliderErstellen(x, y, z)
 {
-	//Create material with low restitution and friction
-	var material = Physijs.createMaterial(new THREE.MeshPhongMaterial({
-        color : 0x00FF00,
-        wireframe : false
-    }), 1, 0);  
-    
 	//Create geometry - Define Size (radiusTop, radiusBottom, height)
 	var cyl = new THREE.CylinderGeometry(1.7,1.7,1);
 	
 	//Create Box
-	var colliderBox = new Physijs.BoxMesh(cyl, material, 0);
+	var colliderBox = new Physijs.BoxMesh(cyl, lTransparentT, 0);
 	
 	//Position Box
 	colliderBox.position.x=x;
