@@ -17,6 +17,7 @@ function initialisiere() {
     
     window.game.monster = {};								// Sammlung fuer alle Monster im Spiel	
     monsterCounter=15; //Counter fuer Kugeln (Monster) im Spiel (wird in loecherTrigger.js aktualisiert)
+    scoreCounter=0; //Counter fuer Score vom Spiel (wird in loecherTrigger.js aktualisiert)
     
 	game.modus = {
 		statisch : 0,           // Position ist fixiert
