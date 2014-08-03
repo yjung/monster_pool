@@ -1,6 +1,5 @@
 // once everything is loaded, we run our Three.js stuff.
 function initialisiere() {
-    "use strict";
 
 	$("#info").hide();	
 	$("#imgBanner").width(151);										//Hide information to show the game
@@ -11,14 +10,13 @@ function initialisiere() {
 	
 			
 	
-	console.log(name);
 	Physijs.scripts.worker = 'lib/physijs_worker.js';        // Physi.js-Worker einbinden
 	Physijs.scripts.ammo = '../lib/ammo.js';                    // Bibliotheksverweis zu Ammo
     window.game = {};                                           // Globalen Namespace schaffen
     window.addEventListener('resize', onWindowResize, false);   // Eventlistener fuer Groessenaenderung
     
     window.game.monster = {};								// Sammlung fuer alle Monster im Spiel	
-    window.monsterCounter=15; //Counter fuer Kugeln (Monster) im Spiel (wird in loecherTrigger.js aktualisiert)
+    monsterCounter=15; //Counter fuer Kugeln (Monster) im Spiel (wird in loecherTrigger.js aktualisiert)
     
 	game.modus = {
 		statisch : 0,           // Position ist fixiert
@@ -45,6 +43,7 @@ function initialisiere() {
 	};
 
 	game.szene = new Physijs.Scene;             		// Erstellen einer Physi.js-Szene
+	game.szene.fog = new THREE.Fog(0x000000, 1, 200);;             		// Erstellen einer Physi.js-Szene
 	game.szene.setGravity(new THREE.Vector3(0,-10,0));	// Schwerkraft
 	
 	game.raum = new THREE.Object3D();          		// Tisch als GameObject initialisieren
@@ -120,12 +119,11 @@ function initialisiere() {
 
 	createGUI();								// Debugging-GUI erstellen
 
-	var achsendreibein = new THREE.AxisHelper(50);
+	achsendreibein = new THREE.AxisHelper(50);
 	achsendreibein.position.y = 20;
     game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
 
 	erstelleMinimap();
-
 
     /* Ende der Initialisierung / Aufruf des Mainloops */
 	mainloop();

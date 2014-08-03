@@ -1,5 +1,6 @@
 // Initialisierung der Lichtquellen fuer die gesamte Szene
 function setupLights() {
+	console.log("--Erstelle Lichtquellen.--");
     var spotLight = new THREE.SpotLight(0xffffff);      // Spotlichtquelle in weisser Lichtfarbe
     spotLight.position.set(0, 100, 0);                  // Positionierung in der Szene
     spotLight.castShadow = true;                        // Schattenwurf aktivieren
@@ -19,8 +20,13 @@ function setupLights() {
         // aufheller.target.position = new THREE.Object3D( 0, 0, -200);
         aufheller.intensity = 1;
         game.szene.add(aufheller);
+        
+		var barlicht = new THREE.PointLight( 0xffffff, 1, 500 );
+		barlicht.position.set( 50, 40, 25 );
+		game.szene.add( barlicht );
 
 
     var ambientLight = new THREE.AmbientLight(0x444444);// Ambiente Lichtquelle zum Aufhellen
-    game.szene.add(ambientLight);                       // Lichtquelle zur Szene hinzufuegen
+    ambientLight.intensity = 0;
+    // game.szene.add(ambientLight);                       // Lichtquelle zur Szene hinzufuegen
 };
