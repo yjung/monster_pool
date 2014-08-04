@@ -1,9 +1,9 @@
 function erstelleMinimap(){
     // Minimap-Kamera
-    var left = window.innerWidth / -36;
-    var right = window.innerWidth / 36;
-    var top = window.innerHeight / 36;
-    var bottom = window.innerHeight / -36;
+    var left = window.innerWidth / -60;
+    var right = window.innerWidth / 60;
+    var top = window.innerHeight / 60;
+    var bottom = window.innerHeight / -60;
     var near = -500;
     var far = 1000;
     
