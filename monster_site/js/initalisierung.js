@@ -55,7 +55,7 @@ function initialisiere() {
 	game.whiteBall = new THREE.Object3D();      		// Weisse Kugel als GameObject initialisieren
 
 	// Kamera mit (fov, aspect, near, far) Blickrichtung ist Sache des Mainloops
-	game.kamera = new THREE.PerspectiveCamera(45, (window.innerWidth - 211) / (window.innerHeight - 230), 0.1, 1000);
+	game.kamera = new THREE.PerspectiveCamera(45, (window.innerWidth) / (window.innerHeight - 160), 0.1, 1000);
     game.kamera.position.x = 0;                 // x-Position
     game.kamera.position.y = 20;                // y-Position
     game.kamera.position.z = 10;                // z-Position
