@@ -100,4 +100,29 @@ function erstelleUmgebungsCollider() {
 	umgebungsCollider.add(ecke);
 
 	game.szene.add(umgebungsCollider);
+	
+	umgebungsCollider.addEventListener('collision', roomCollideEvent);
+}
+
+function roomCollideEvent(object) {
+	if(object === game.whiteBall){
+	  	window.setTimeout(whiteCollideRoom, 3000);
+	 }
+	 else
+	 {
+	 	monsterCollideRoom();
+	 }
+}
+    
+ function whiteCollideRoom() {
+ 	
+  		  positionBall(0,22,15);
+	  
+    }
+
+function monsterCollideRoom(){
+	  	
+		  monsterCounter -= 1; //Counter von 15 bis 0 aktualisieren
+	      console.log(monsterCounter);
+	
 }

@@ -32,19 +32,32 @@ function lochColliderErstellen(x, y, z, points)
 	
 	
 	colliderBox.addEventListener('collision', function(object) {
-	  if(object !== game.whiteBall)
-	  {	  	  
-	      game.szene.remove( object); //3. Remove Kugel (game-szene remove)	  	
+		if(object === game.whiteBall){
+		  	window.setTimeout(whiteCollideHole, 2000);
+		 }
+		 else
+		 {
+		 	
+		 	monsterCollideHole(object);
+		 }
+	  
+    });
+    
+     function whiteCollideHole() {
+ 	
+  		  console.log('BOLA BLANCA!!');
+  		  positionBall(0,22,15);
+	  
+    }
+
+	function monsterCollideHole(object){
+	
+		  game.szene.remove( object); //3. Remove Kugel (game-szene remove)	  	
 		  monsterCounter -= 1; //4. Counter von 15 bis 0 aktualisieren
 		  scoreCounter += points;
 	      console.log(monsterCounter);
 	      console.log("scoreCounter:");
 	      console.log(scoreCounter);
-	  }
-	  else
-	  {
-  		  console.log('BOLA BLANCA!!');
-	  }
-	  
-    });
+	
+	}
 }
