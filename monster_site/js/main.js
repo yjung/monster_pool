@@ -18,6 +18,9 @@ function mainloop() {
     
     // game.renderer.clear(true, false, false);				// (color, depth, stencil)
     if (!game.postProcessing) {								// Falls Post-Processing deaktiviert
+            if (game.monster.animation) {
+                game.monster.animation.update(0.01);
+            }
             game.renderer.render(game.szene, game.kamera);   // Szene normal rendern			
 	} else {												// Postprocessing ist aktiviert
 		if(game.renderer.filmEffect){			
