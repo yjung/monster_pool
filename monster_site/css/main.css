@@ -224,6 +224,14 @@ td {
 	width: 100%;
 }
 
+#minimapViewport {
+	position: absolute;
+	width: 240px;
+	height: 140px;
+	margin: 20px;
+	background: black;
+}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */

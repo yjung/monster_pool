@@ -16,12 +16,21 @@ function mainloop() {
     game.szene.simulate(undefined, 1);                  // Physiksimulation
     
     
+    var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
+
     // game.renderer.clear(true, false, false);				// (color, depth, stencil)
     if (!game.postProcessing) {								// Falls Post-Processing deaktiviert
             if (game.monster.animation) {
                 game.monster.animation.update(0.01);
             }
-            game.renderer.render(game.szene, game.kamera);   // Szene normal rendern			
+            game.renderer.setViewport( 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT );
+            game.renderer.clear();
+            game.renderer.render(game.szene, game.kamera);  // Falls Postprocessing aktiv, aber kein Effekt gesetzt normal rendern
+            game.renderer.clear( false, true, false );       // Depth-Cache muss noch entleert werden
+            game.renderer.setViewport( 10, SCREEN_HEIGHT - 160 - 120, 240, 140 ); // soll eigentlich die Viewport-Einstellung für mapCamera sein;
+                                                                                       // es ändert aber auch den Viewport der Hauptkamera
+                                                                                       // weiß nicht wie man es direkt auf die mapCamera assigned 
+            game.renderer.render(game.szene, game.mapCamera);   // Szene normal rendern
 	} else {												// Postprocessing ist aktiviert
 		if(game.renderer.filmEffect){			
 			game.composerFilm.render(delta);
@@ -33,9 +42,11 @@ function mainloop() {
 			game.composerCustom.render(delta);
 		}
 		else{
-			game.renderer.render(game.szene, game.kamera);	// Falls Postprocessing aktiv, aber kein Effekt gesetzt normal rendern
+			game.renderer.setViewport( 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT );
+            game.renderer.clear();
+            game.renderer.render(game.szene, game.kamera);	// Falls Postprocessing aktiv, aber kein Effekt gesetzt normal rendern
             game.renderer.clear( false, true, false );       // Depth-Cache muss noch entleert werden
-            game.renderer.setViewport( 10, 0, window.innerWidth, window.innerHeight ); // soll eigentlich die Viewport-Einstellung für mapCamera sein;
+            game.renderer.setViewport( 10, SCREEN_HEIGHT - 160 - 120, 240, 140 ); // soll eigentlich die Viewport-Einstellung für mapCamera sein;
                                                                                        // es ändert aber auch den Viewport der Hauptkamera
                                                                                        // weiß nicht wie man es direkt auf die mapCamera assigned 
             game.renderer.render(game.szene, game.mapCamera);   // Szene normal rendern
