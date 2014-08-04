@@ -64,7 +64,7 @@ function raumLaden()/* Tisch falsch rotiert (steht hochkant): Gedreht beine fehl
 	});
 
 
-	// Lampe laden
+	// Lampe fuer Spotlichter laden
 	ColladaLoader.load('assets/dae/lampeSpot.dae', function(collada) {
 
 		var modelScene = collada.scene;
@@ -82,6 +82,24 @@ function raumLaden()/* Tisch falsch rotiert (steht hochkant): Gedreht beine fehl
 			game.szene.add(element);
 		}
 	});
+	
+	// Lampe fuer Flaechenlichter laden
+	// ColladaLoader.load('assets/dae/lampeArea.dae', function(collada) {
+// 
+		// var modelScene = collada.scene;
+		// console.log(modelScene);
+		// var szenenbestandteile = modelScene.children.length;
+		// for (var i = 0; i < szenenbestandteile; i++) {
+			// var modelGeometry = modelScene.children[i].children[0].geometry;
+			// // Geometrie aus der .dae-Szene extrahieren
+			// var modelMaterial = modelScene.children[i].children[0].material;
+// 
+			// var element = new THREE.Mesh(modelGeometry, modelMaterial);
+			// // element.scale.set(0.25, 0.25, 0.25);
+			// // Collada Table Alpha zur Szene hinzufuegen
+			// game.szene.add(element);
+		// }
+	// });
 	
 	
 	
