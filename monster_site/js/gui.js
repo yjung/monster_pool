@@ -15,7 +15,8 @@ function createGUI() {
 
 	// Ordner fuer die Kategorien erstellen
 	var controls = game.debugGUI.addFolder('Controls');
-	var postprocessing = game.debugGUI.addFolder('Postprocessing');
+	var postprocessing = game.debugGUI.addFolder('Postprocessing - Allgmein');
+	var celShading = game.debugGUI.addFolder('Cel-Shading - Mathias');
 	var options = game.debugGUI.addFolder('Options');
 
 	paramControls = {
@@ -32,6 +33,10 @@ function createGUI() {
 		filmEffekt : false,
 		bloomPass : false,
 		custom : false,
+	};
+
+	paramCelShading = {
+		enable : false,
 	};
 
 	paramOptions = {
@@ -52,6 +57,9 @@ function createGUI() {
 	game.debugGUI.filmEffekt = postprocessing.add(paramPostprocessing, 'filmEffekt').listen().name("Film-Effekt");
 	game.debugGUI.bloomPass = postprocessing.add(paramPostprocessing, 'bloomPass').listen().name("Leucht-Effekt");
 	game.debugGUI.custom = postprocessing.add(paramPostprocessing, 'custom').listen().name("Custom-Effekt");
+
+	// Post-Processingeintraege hinzufuegen
+	game.debugGUI.enableCelShading = celShading.add(paramCelShading, 'enable').listen();
 
 	// Optionen-Eintraege hinzufuegen
 	game.debugGUI.vollbild = options.add(paramOptions, 'vollbild').listen().name("Vollbildmodus");
@@ -118,6 +126,13 @@ function createGUI() {
 		game.renderer.custom = value;
 	});
 
+	game.debugGUI.enableCelShading.onChange(function(value) {
+		game.postProcessing = value;
+		game.celShading = value;
+		game.renderer.celShading = value;
+	});
+
+
 	game.debugGUI.vollbild.onChange(function(value) {
 		game.vollbild = value;
 		if (value && THREEx.FullScreen.available() && !THREEx.FullScreen.activated()) {
@@ -144,6 +159,6 @@ function createGUI() {
 	game.debugGUI.closed = false;
 	controls.close();
 	// Kontrollleiste geschlossen
-	postprocessing.open();
+	celShading.open();
 	// Ordner standardmaessig oeffnen
 };

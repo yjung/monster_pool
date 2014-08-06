@@ -1,4 +1,4 @@
-CustomShader = {
+CelShader = {
 
 	uniforms: {
 

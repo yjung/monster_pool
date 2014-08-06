@@ -15,7 +15,8 @@ function erstelleComposer() {
 
 	var effektFilm = new THREE.FilmPass(0.8, 0.325, 256, false);	// Film-Effekt-Pass
 	var effektBloomPass = new THREE.BloomPass(3, 25, 5, 256);		// Bloom-Effekt
-	var customShader = new THREE.ShaderPass(CustomShader);
+	var celShader = new THREE.ShaderPass(CelShader);			// Custom-Shader
+	var customShader = new THREE.ShaderPass(CustomShader);			// Custom-Shader
 	
 	
 	var effectcopy = new THREE.ShaderPass(THREE.CopyShader);		// Kopier-Shader fuer Effekte, die nicht selbst/direkt gerendert werden koennen
@@ -49,6 +50,15 @@ function erstelleComposer() {
 	game.composerBloomPass.addPass(effectcopy);		// Standard-Copy-Shader zum finalen rendern
 	
 	
+	// Composer CelShader
+	var renderTarget = new THREE.WebGLRenderTarget(game.breite, game.hoehe, parameters);	// Rendertarget-Objekt fuer Renderer-Initialisierung
+	game.composerCelShading = new THREE.EffectComposer(game.renderer, renderTarget);			// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren
+	game.composerCelShading.setSize(game.breite, game.hoehe);									// Groesse setzen
+	
+	game.composerCelShading.addPass(renderPass);		// Normales Bild rendern
+	game.composerCelShading.addPass(celShader);		// Custom-Effekt
+	game.composerCelShading.addPass(effectcopy);		// Standard-Copy-Shader zum finalen rendern
+
 	// Composer CustomShader
 	var renderTarget = new THREE.WebGLRenderTarget(game.breite, game.hoehe, parameters);	// Rendertarget-Objekt fuer Renderer-Initialisierung
 	game.composerCustom = new THREE.EffectComposer(game.renderer, renderTarget);			// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren
@@ -63,5 +73,6 @@ function erstelleComposer() {
 function resizeComposer(){
 	game.composerFilm.setSize(game.breite, game.hoehe);			// Composer fuer Film-Effekt in Groesse aktualisieren
 	game.composerBloomPass.setSize(game.breite, game.hoehe);	// Composer fuer Bloom-Effekt in Groesse aktualisieren
+	game.composerCelShading.setSize(game.breite, game.hoehe);		// Composer fuer Custom-Effekt in Groesse aktualisieren
 	game.composerCustom.setSize(game.breite, game.hoehe);		// Composer fuer Custom-Effekt in Groesse aktualisieren
 }
