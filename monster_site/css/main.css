@@ -311,6 +311,15 @@ td {
 	margin-right:auto;
 }
 
+.navbar_navbar-default
+{
+	background: rgba(220,160,140,0.0);
+}
+.nav_navbar-nav
+{
+	background: rgba(220,160,140,0.0);
+}
+
 /* CHANGES BOOTSTRAP navbar */
 .navbar-nav > li > a {padding-top:8px !important; padding-bottom:5px !important;}
 .navbar {min-height:38px !important}
