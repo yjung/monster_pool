@@ -1,5 +1,6 @@
 // once everything is loaded, we run our Three.js stuff.
 function initialisiere() {
+    "use strict";                                                   // Strict-Mode 
 
 	$("#info").hide();	
 	$("#imgBanner").width(151);										//Hide information to show the game
@@ -16,8 +17,8 @@ function initialisiere() {
     window.addEventListener('resize', onWindowResize, false);   // Eventlistener fuer Groessenaenderung
     
     window.game.monster = {};								// Sammlung fuer alle Monster im Spiel	
-    monsterCounter=15; //Counter fuer Kugeln (Monster) im Spiel (wird in loecherTrigger.js aktualisiert)
-    scoreCounter=0; //Counter fuer Score vom Spiel (wird in loecherTrigger.js aktualisiert)
+    var monsterCounter=15; //Counter fuer Kugeln (Monster) im Spiel (wird in loecherTrigger.js aktualisiert)
+    var scoreCounter=0; //Counter fuer Score vom Spiel (wird in loecherTrigger.js aktualisiert)
     
 	game.modus = {
 		statisch : 0,           // Position ist fixiert
@@ -121,7 +122,7 @@ function initialisiere() {
 
 	createGUI();								// Debugging-GUI erstellen
 
-	achsendreibein = new THREE.AxisHelper(50);
+	var achsendreibein = new THREE.AxisHelper(50);
 	achsendreibein.position.y = 20;
     game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
 
