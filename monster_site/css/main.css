@@ -36,7 +36,7 @@ p {
 }
 
 ::selection {
-    background: #b3d4fc;
+    /*background: #b3fffc;*/
     text-shadow: none;
 }
 
@@ -118,7 +118,7 @@ body {
 
 a:link {color:#e2c165;}      /* unvisited link */
 a:visited {color:#c8141d;}  /* visited link */
-a:hover {color:#FFF;}  /* mouse over link */
+a:hover {color:#FFF;}   /*mouse over link */
 a:active {color:#c8141d;}  /* selected link */
 
 table {
@@ -317,7 +317,7 @@ td {
 }
 .nav_navbar-nav
 {
-	background: rgba(220,160,140,0.0);
+	background: rgba(0,0,140,0.0);
 }
 
 /* CHANGES BOOTSTRAP navbar */
@@ -330,7 +330,7 @@ td {
 }
 
 
- ==========================================================================
+   ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
    These examples override the primary ('mobile first') styles.
    Modify as content requires.
