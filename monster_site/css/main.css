@@ -135,7 +135,7 @@ td {
 }
 
 .header-big {
-	text-align:right;
+	text-align: center;
 	min-width:100%;
 	height:190px;
 	background:#000000;
@@ -148,6 +148,12 @@ td {
 	height:80px;
 	background:#000000;
 	background-image: url(../img/header_bg.png);	
+}
+
+#imgBanner
+{
+	width:151px;
+	height:41px;
 }
 
 #headertrenner {

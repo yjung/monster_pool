@@ -3,8 +3,7 @@ function initialisiere() {
     "use strict";                                                   // Strict-Mode 
 
 	$("#info").hide();	
-	$("#imgBanner").width(151);										//Hide information to show the game
-	$("#imgBanner").height(41);		
+	
 	var name = $("#inputName").val();
 	$( "#header" ).removeClass( "header-big" );
 	$( "#header" ).addClass( "header-small" );

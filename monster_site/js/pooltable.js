@@ -15,7 +15,7 @@ function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine 
 		
 		game.tisch.i = new THREE.Mesh(modelGeometry, modelMaterial);			// Einzelteile zusammenfuegen
 		game.tisch.i.scale.set(0.25,0.25,0.25);									// FIX: Sollte im dae-File behoben werden!
-		game.tisch.reciveShadow = true;										//Not shure ob das da hin soll ;D
+		game.tisch.i.castShadow = true;										//Not shure ob das da hin soll ;D
 		
 		game.szene.add(game.tisch.i); 											// Collada-Table zur Szene hinzufuegen
 		
