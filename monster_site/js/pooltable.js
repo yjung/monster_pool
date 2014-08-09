@@ -29,7 +29,7 @@ function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine 
 		var colliderGeometrie = colliderObjekt.children[0].geometry;
 		// var colliderMaterial = colliderObjekt.children[0].material;
 
-		var collider = new Physijs.BoxMesh(colliderGeometrie, lTransparentT,0);
+		var collider = new Physijs.BoxMesh(colliderGeometrie, pTransparentT,0);
 		collider.scale.set(0.25,0.25,0.25);
 		collider.position.x = colliderPosition.x * 0.25;
 		collider.position.y = colliderPosition.y * 0.25;
