@@ -16,7 +16,7 @@ function raumLaden()
 		map : THREE.ImageUtils.loadTexture("assets/dae/tex/dielen.png")
 	});
 
-	ColladaLoader.load('assets/dae/raum_a05.dae', function(collada)
+	ColladaLoader.load('assets/dae/raum.dae', function(collada)
 	{
 
 		var modelScene = collada.scene;
@@ -59,7 +59,7 @@ function raumLaden()
 	});
 
 	// Moebel laden
-	ColladaLoader.load('assets/dae/tischeStuehle_a01.dae', function(collada)
+	ColladaLoader.load('assets/dae/tischeStuehle.dae', function(collada)
 	{
 
 		var modelScene = collada.scene;

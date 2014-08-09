@@ -60,7 +60,7 @@
         <effect id="ID2">
             <profile_COMMON>
                 <technique sid="COMMON">
-                    <blinn>
+                    <lambert>
                         <diffuse>
                             <color>0.8 0.8 0.8 1</color>
                         </diffuse>
@@ -70,7 +70,7 @@
                         <shininess>
                             <float>0.5</float>
                         </shininess>
-                    </blinn>
+                    </lambert>
                 </technique>
             </profile_COMMON>
         </effect>
@@ -87,7 +87,7 @@
                     </sampler2D>
                 </newparam>
                 <technique sid="COMMON">
-                    <blinn>
+                    <lambert>
                         <diffuse>
                             <texture texture="ID7" texcoord="UVSET0"/>
                         </diffuse>
@@ -97,7 +97,7 @@
                         <shininess>
                             <float>0.5</float>
                         </shininess>
-                    </blinn>
+                    </lambert>
                 </technique>
             </profile_COMMON>
         </effect>
@@ -114,7 +114,7 @@
                     </sampler2D>
                 </newparam>
                 <technique sid="COMMON">
-                    <blinn>
+                    <lambert>
                         <diffuse>
                             <texture texture="ID12" texcoord="UVSET0"/>
                         </diffuse>
@@ -124,7 +124,7 @@
                         <shininess>
                             <float>0.5</float>
                         </shininess>
-                    </blinn>
+                    </lambert>
                 </technique>
             </profile_COMMON>
         </effect>
@@ -141,7 +141,7 @@
                     </sampler2D>
                 </newparam>
                 <technique sid="COMMON">
-                    <blinn>
+                    <lambert>
                         <diffuse>
                             <texture texture="ID17" texcoord="UVSET0"/>
                         </diffuse>
@@ -151,7 +151,7 @@
                         <shininess>
                             <float>0.5</float>
                         </shininess>
-                    </blinn>
+                    </lambert>
                 </technique>
             </profile_COMMON>
         </effect>
@@ -168,7 +168,7 @@
                     </sampler2D>
                 </newparam>
                 <technique sid="COMMON">
-                    <blinn>
+                    <lambert>
                         <diffuse>
                             <texture texture="ID22" texcoord="UVSET0"/>
                         </diffuse>
@@ -178,7 +178,7 @@
                         <shininess>
                             <float>0.5</float>
                         </shininess>
-                    </blinn>
+                    </lambert>
                 </technique>
             </profile_COMMON>
         </effect>
@@ -195,7 +195,7 @@
                     </sampler2D>
                 </newparam>
                 <technique sid="COMMON">
-                    <blinn>
+                    <lambert>
                         <diffuse>
                             <texture texture="ID27" texcoord="UVSET0"/>
                         </diffuse>
@@ -205,7 +205,7 @@
                         <shininess>
                             <float>0.5</float>
                         </shininess>
-                    </blinn>
+                    </lambert>
                 </technique>
             </profile_COMMON>
         </effect>
@@ -222,7 +222,7 @@
                     </sampler2D>
                 </newparam>
                 <technique sid="COMMON">
-                    <blinn>
+                    <lambert>
                         <diffuse>
                             <texture texture="ID32" texcoord="UVSET0"/>
                         </diffuse>
@@ -232,7 +232,7 @@
                         <shininess>
                             <float>0.5</float>
                         </shininess>
-                    </blinn>
+                    </lambert>
                 </technique>
             </profile_COMMON>
         </effect>
@@ -249,7 +249,7 @@
                     </sampler2D>
                 </newparam>
                 <technique sid="COMMON">
-                    <blinn>
+                    <lambert>
                         <diffuse>
                             <texture texture="ID37" texcoord="UVSET0"/>
                         </diffuse>
@@ -259,7 +259,7 @@
                         <shininess>
                             <float>0.5</float>
                         </shininess>
-                    </blinn>
+                    </lambert>
                 </technique>
             </profile_COMMON>
         </effect>
@@ -276,7 +276,7 @@
                     </sampler2D>
                 </newparam>
                 <technique sid="COMMON">
-                    <blinn>
+                    <lambert>
                         <diffuse>
                             <texture texture="ID42" texcoord="UVSET0"/>
                         </diffuse>
@@ -286,7 +286,7 @@
                         <shininess>
                             <float>0.5</float>
                         </shininess>
-                    </blinn>
+                    </lambert>
                 </technique>
             </profile_COMMON>
         </effect>
@@ -303,7 +303,7 @@
                     </sampler2D>
                 </newparam>
                 <technique sid="COMMON">
-                    <blinn>
+                    <lambert>
                         <diffuse>
                             <texture texture="ID47" texcoord="UVSET0"/>
                         </diffuse>
@@ -313,7 +313,7 @@
                         <shininess>
                             <float>0.5</float>
                         </shininess>
-                    </blinn>
+                    </lambert>
                 </technique>
             </profile_COMMON>
         </effect>
@@ -330,7 +330,7 @@
                     </sampler2D>
                 </newparam>
                 <technique sid="COMMON">
-                    <blinn>
+                    <lambert>
                         <diffuse>
                             <texture texture="ID52" texcoord="UVSET0"/>
                         </diffuse>
@@ -340,7 +340,7 @@
                         <shininess>
                             <float>0.5</float>
                         </shininess>
-                    </blinn>
+                    </lambert>
                 </technique>
             </profile_COMMON>
         </effect>
@@ -357,7 +357,7 @@
                     </sampler2D>
                 </newparam>
                 <technique sid="COMMON">
-                    <blinn>
+                    <lambert>
                         <diffuse>
                             <texture texture="ID57" texcoord="UVSET0"/>
                         </diffuse>
@@ -367,7 +367,7 @@
                         <shininess>
                             <float>0.5</float>
                         </shininess>
-                    </blinn>
+                    </lambert>
                 </technique>
             </profile_COMMON>
         </effect>
@@ -384,7 +384,7 @@
                     </sampler2D>
                 </newparam>
                 <technique sid="COMMON">
-                    <blinn>
+                    <lambert>
                         <diffuse>
                             <texture texture="ID62" texcoord="UVSET0"/>
                         </diffuse>
@@ -394,7 +394,7 @@
                         <shininess>
                             <float>0.5</float>
                         </shininess>
-                    </blinn>
+                    </lambert>
                 </technique>
             </profile_COMMON>
         </effect>
@@ -411,7 +411,7 @@
                     </sampler2D>
                 </newparam>
                 <technique sid="COMMON">
-                    <blinn>
+                    <lambert>
                         <diffuse>
                             <texture texture="ID67" texcoord="UVSET0"/>
                         </diffuse>
@@ -421,7 +421,7 @@
                         <shininess>
                             <float>0.5</float>
                         </shininess>
-                    </blinn>
+                    </lambert>
                 </technique>
             </profile_COMMON>
         </effect>
@@ -438,7 +438,7 @@
                     </sampler2D>
                 </newparam>
                 <technique sid="COMMON">
-                    <blinn>
+                    <lambert>
                         <diffuse>
                             <texture texture="ID72" texcoord="UVSET0"/>
                         </diffuse>
@@ -448,7 +448,7 @@
                         <shininess>
                             <float>0.5</float>
                         </shininess>
-                    </blinn>
+                    </lambert>
                 </technique>
             </profile_COMMON>
         </effect>
@@ -465,7 +465,7 @@
                     </sampler2D>
                 </newparam>
                 <technique sid="COMMON">
-                    <blinn>
+                    <lambert>
                         <diffuse>
                             <texture texture="ID77" texcoord="UVSET0"/>
                         </diffuse>
@@ -475,7 +475,7 @@
                         <shininess>
                             <float>0.5</float>
                         </shininess>
-                    </blinn>
+                    </lambert>
                 </technique>
             </profile_COMMON>
         </effect>
