@@ -13,7 +13,7 @@
         <effect id="ID2">
             <profile_COMMON>
                 <technique sid="COMMON">
-                    <blinn>
+                    <lambert>
                         <diffuse>
                             <color>0.8 0.8 0.8 1</color>
                         </diffuse>
@@ -23,18 +23,18 @@
                         <shininess>
                             <float>0.5</float>
                         </shininess>
-                    </blinn>
+                    </lambert>
                 </technique>
             </profile_COMMON>
         </effect>
         <effect id="ID4">
             <profile_COMMON>
                 <technique sid="COMMON">
-                    <blinn>
+                    <lambert>
                         <diffuse>
                             <color>0.407843 0.219608 0 1</color>
                         </diffuse>
-                    </blinn>
+                    </lambert>
                 </technique>
             </profile_COMMON>
         </effect>
