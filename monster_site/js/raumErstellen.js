@@ -180,5 +180,6 @@ function monsterCollideRoom()
 {
 	monsterCounter -= 1;
 	//Counter von 15 bis 0 aktualisieren
+	$( "#balls" ).text(monsterCounter);
 	console.log(monsterCounter);
 }

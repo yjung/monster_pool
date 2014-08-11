@@ -28,6 +28,7 @@ function lochColliderErstellen(x, y, z, points)
 	colliderBox.position.y=y;
 	colliderBox.position.z=z;
 	
+	colliderBox.collision_flags = 4;
 	game.szene.add(colliderBox);
 	
 	
@@ -55,6 +56,8 @@ function lochColliderErstellen(x, y, z, points)
 		  game.szene.remove( object); //3. Remove Kugel (game-szene remove)	  	
 		  monsterCounter -= 1; //4. Counter von 15 bis 0 aktualisieren
 		  scoreCounter += points;
+		  $( "#points" ).text(scoreCounter);
+		  $( "#balls" ).text(monsterCounter);
 	      console.log(monsterCounter);
 	      console.log("scoreCounter:");
 	      console.log(scoreCounter);

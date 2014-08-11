@@ -218,6 +218,15 @@ td {
 	background-image: url(../img/trenner.jpg);
 }
 
+#scoreboard {
+	position:absolute;
+	top:0px;
+	right:0px
+	height:80px;
+	width:300px;
+	background:#000000;
+}
+
 #viewport {
 	position: absolute;
 	height: 100%;
