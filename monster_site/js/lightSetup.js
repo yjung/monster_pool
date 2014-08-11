@@ -35,7 +35,7 @@ function setupLights()
     var poolLight = new THREE.SpotLight(PooltableLightColor);
     poolLight.position.set(0, 60, 00);
     poolLight.target.position = new THREE.Vector3( 0, 0, 0);
-    poolLight.intensity = PooltableLightIntens;
+    poolLight.intensity = 1;
     poolLight.castShadow = true;
     game.szene.add(poolLight);
         
@@ -59,6 +59,7 @@ function setupLights()
         
     //Licht zur allgemeinen raumaufhellung  
 	var ambientLight = new THREE.PointLight( PooltableLightColor, 0.51, 250 );
+	    ambientLight.intensity = 1;
 	ambientLight.position.set( 0, 0, 0 );
 	game.szene.add(ambientLight);
 

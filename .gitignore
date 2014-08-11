@@ -14,3 +14,5 @@ wp-config.php
 .DS_Store
 *.sublime-project
 *.sublime-workspace
+monster_site/.metadata
+.metadata

@@ -16,7 +16,7 @@ function raumLaden()
 		map : THREE.ImageUtils.loadTexture("assets/dae/tex/dielen.png")
 	});
 
-	ColladaLoader.load('assets/dae/raum_a05.dae', function(collada)
+	ColladaLoader.load('assets/dae/raum.dae', function(collada)
 	{
 
 		var modelScene = collada.scene;
@@ -27,9 +27,11 @@ function raumLaden()
 			// Geometrie aus der .dae-Szene extrahieren
 			var modelMaterial = modelScene.children[i].children[0].material;
 
+			console.log(modelMaterial);
+
 			game.raum.i = new THREE.Mesh(modelGeometry, modelMaterial);
 			game.raum.i.scale.set(0.25, 0.25, 0.25);
-
+			game.raum.i.receiveShadow = true;
 			// Collada Room zur Szene hinzufuegen
 			game.szene.add(game.raum.i);
 
@@ -57,7 +59,7 @@ function raumLaden()
 	});
 
 	// Moebel laden
-	ColladaLoader.load('assets/dae/tischeStuehle_a01.dae', function(collada)
+	ColladaLoader.load('assets/dae/tischeStuehle.dae', function(collada)
 	{
 
 		var modelScene = collada.scene;
@@ -81,30 +83,30 @@ function raumLaden()
 function erstelleUmgebungsCollider()
 {
 	// Boden
-	var umgebungsCollider = new Physijs.BoxMesh(new THREE.CubeGeometry(240, 1, 200), lTransparentT, 0);
+	var umgebungsCollider = new Physijs.BoxMesh(new THREE.CubeGeometry(240, 1, 200), pTransparentT, 0);
 
 	// Eingangswand
-	var eingangsWand = new Physijs.BoxMesh(new THREE.CubeGeometry(2, 50, 200), lTransparentT, 0);
+	var eingangsWand = new Physijs.BoxMesh(new THREE.CubeGeometry(2, 50, 200), pTransparentT, 0);
 	eingangsWand.position.x = -120;
 	umgebungsCollider.add(eingangsWand);
 
 	// Thekenwand
-	var thekenWand = new Physijs.BoxMesh(new THREE.CubeGeometry(2, 50, 200), lTransparentT, 0);
+	var thekenWand = new Physijs.BoxMesh(new THREE.CubeGeometry(2, 50, 200), pTransparentT, 0);
 	thekenWand.position.x = 120;
 	umgebungsCollider.add(thekenWand);
 
 	// Fensterwand
-	var fensterWand = new Physijs.BoxMesh(new THREE.CubeGeometry(240, 50, 2), lTransparentT, 0);
+	var fensterWand = new Physijs.BoxMesh(new THREE.CubeGeometry(240, 50, 2), pTransparentT, 0);
 	fensterWand.position.z = 90;
 	umgebungsCollider.add(fensterWand);
 
 	// Eckwand
-	var eckWand = new Physijs.BoxMesh(new THREE.CubeGeometry(240, 50, 2), lTransparentT, 0);
+	var eckWand = new Physijs.BoxMesh(new THREE.CubeGeometry(240, 50, 2), pTransparentT, 0);
 	eckWand.position.z = -90;
 	umgebungsCollider.add(eckWand);
 
 	// Ecke
-	var ecke = new Physijs.BoxMesh(new THREE.CubeGeometry(65, 50, 2), lTransparentT, 0);
+	var ecke = new Physijs.BoxMesh(new THREE.CubeGeometry(65, 50, 2), pTransparentT, 0);
 	ecke.rotation.y = -0.78;
 	ecke.position.z = -65;
 	ecke.position.x = 95;
@@ -124,7 +126,6 @@ function lichterLaden()
 	{
 
 		var modelScene = collada.scene;
-		console.log(modelScene);
 		var szenenbestandteile = modelScene.children.length;
 		for (var i = 0; i < szenenbestandteile; i++) 
 		{
@@ -138,7 +139,7 @@ function lichterLaden()
 			// Collada Spotlight lampe zur Szene hinzufuegen
 			game.szene.add(element);
 		}
-	})
+	});
 	
 	// //Lampe fuer Flaechenlichter laden
 	// LightColladaLoader.load('assets/dae/lampeArea.dae', function(collada) {

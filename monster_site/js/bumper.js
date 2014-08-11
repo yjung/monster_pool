@@ -18,7 +18,7 @@ function erstelleBumper(loader, xPosition, yPosition, zPosition) {
 		bumper.position.z = zPosition;
 
 		game.szene.add(bumper);
-		// Collada Table Alpha zur Szene hinzufuegen
+		
 	});
 
 }

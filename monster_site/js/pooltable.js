@@ -15,7 +15,7 @@ function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine 
 		
 		game.tisch.i = new THREE.Mesh(modelGeometry, modelMaterial);			// Einzelteile zusammenfuegen
 		game.tisch.i.scale.set(0.25,0.25,0.25);									// FIX: Sollte im dae-File behoben werden!
-		game.tisch.reciveShadow = true;										//Not shure ob das da hin soll ;D
+		game.tisch.i.castShadow = true;											//Not shure ob das da hin soll ;D
 		
 		game.szene.add(game.tisch.i); 											// Collada-Table zur Szene hinzufuegen
 		
@@ -29,7 +29,7 @@ function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine 
 		var colliderGeometrie = colliderObjekt.children[0].geometry;
 		// var colliderMaterial = colliderObjekt.children[0].material;
 
-		var collider = new Physijs.BoxMesh(colliderGeometrie, lTransparentT,0);
+		var collider = new Physijs.BoxMesh(colliderGeometrie, pTransparentT,0);
 		collider.scale.set(0.25,0.25,0.25);
 		collider.position.x = colliderPosition.x * 0.25;
 		collider.position.y = colliderPosition.y * 0.25;
@@ -50,7 +50,17 @@ function erstelleHindernisse(ColladaLoader){
 	var rotZiel = new THREE.Vector3(0,70,0);	// Endrotation Slider-Animation
 	
 	erstelleSlider(posStart, posZiel, rotStart, rotZiel);
-	// erstelleBumper(ColladaLoader, 2, 18, 0);
-
+	
+	erstelleBumper(ColladaLoader, 12, 18, 21);
+	erstelleBumper(ColladaLoader, 10, 18, 22);
+	erstelleBumper(ColladaLoader, 9, 18, 24);
+	
+	erstelleBumper(ColladaLoader, -12, 18, 21);
+	erstelleBumper(ColladaLoader, -10, 18, 22);
+	erstelleBumper(ColladaLoader, -9, 18, 24);
+	
+	erstelleRampe(ColladaLoader, -10, 22, 22);
+	
+	
 }
 

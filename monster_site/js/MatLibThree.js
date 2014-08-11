@@ -23,7 +23,7 @@ var lChromeT;
 var lRedWireframeT, lGreenWireframeT, lBlueWireframeT;
 
 // Phongs
-var pRedT, pGreenT, pBlueT, pGreyT, pWhiteT;
+var pRedT, pGreenT, pBlueT, pGreyT, pWhiteT, pTransparentT;
 
 var pGreyReflectiveT;
 
@@ -285,5 +285,13 @@ pYellowWireframeT = new THREE.MeshPhongMaterial({
 	color : 0xffff00,
 	ambient : 0xffff00,
 	wireframe : true
+});
+
+pTransparentT = new THREE.MeshPhongMaterial({
+	color : 0xffffff,
+	ambient : 0xffffff,
+	transparent : true,
+	opacity : 0,
+	wireframe : false
 });
 //var materialGround = new THREE.MeshPhongMaterial( { color: 0xff0000, ambient: 0xaaaaaa, specular: 0xaaaaaa, perPixel: true,  vertexColors: THREE.FaceColors } );
