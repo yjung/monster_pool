@@ -59,7 +59,10 @@ function erstelleHindernisse(ColladaLoader){
 	erstelleBumper(ColladaLoader, -10, 18, 22);
 	erstelleBumper(ColladaLoader, -9, 18, 24);
 	
-	erstelleRampe(ColladaLoader, -10, 22, 22);
+	// erstelleRampe(ColladaLoader, -10, 22, 22);
+	erstelleRampeJS(9,18,20, 2.2);
+	erstelleRampeJS(-9,18,20, 0.8);
+	
 	
 	
 }
