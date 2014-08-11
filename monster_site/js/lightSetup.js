@@ -24,7 +24,7 @@ function setupLights()
     poolLight.target.position = new THREE.Vector3( 0, 0, -40);
     poolLight.intensity = PooltableLightIntens;
     poolLight.castShadow = true;
-    // game.szene.add(poolLight);
+    game.szene.add(poolLight);
 
     // add spotlight for the PoolTable2
     var poolLight = new THREE.SpotLight(PooltableLightColor);
@@ -33,7 +33,7 @@ function setupLights()
     poolLight.target.position = new THREE.Vector3( 0, 0, 40);
     poolLight.intensity = PooltableLightIntens;
     poolLight.castShadow = true;
-    // game.szene.add(poolLight);
+    game.szene.add(poolLight);
     
      // add spotlight for the PoolTable3
     var poolLight = new THREE.SpotLight(PooltableLightColor);
@@ -42,7 +42,7 @@ function setupLights()
     poolLight.target.position = new THREE.Vector3( 0, 0, 0);
     poolLight.intensity = 1;
     poolLight.castShadow = true;
-    // game.szene.add(poolLight);
+    game.szene.add(poolLight);
         
   	//Tischlichter
   	var tischLightIntens = 2.0;
@@ -65,9 +65,10 @@ function setupLights()
     game.szene.add(tischLicht);     
         
     //Licht zur allgemeinen raumaufhellung  
-	// var ambientLight = new THREE.PointLight( PooltableLightColor, 0.51, 250 );
-	    // ambientLight.intensity = 1;
-	// ambientLight.position.set( 0, 0, 0 );
-	// game.szene.add(ambientLight);
+	var ambientLight = new THREE.PointLight( PooltableLightColor, 0.51, 250 );
+	ambientLight.name = "Ambiente";
+	ambientLight.intensity = 1;
+	ambientLight.position.set( 0, 0, 0 );
+	game.szene.add(ambientLight);
 
 };
