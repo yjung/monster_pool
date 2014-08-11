@@ -26,7 +26,7 @@ function setupLights() {
 
 	// add spotlight for the PoolTable1
 	var poolLight = new THREE.SpotLight(PooltableLightColor);
-	poolLight.name = "Ueber Kugeln";
+	poolLight.name = "Ueber_Kugeln";
 	poolLight.position.set(00, 60, -40);
 	poolLight.target.position = new THREE.Vector3(0, 0, -40);
 	poolLight.intensity = PooltableLightIntens;
@@ -36,7 +36,7 @@ function setupLights() {
 
 	// add spotlight for the PoolTable2
 	var poolLight = new THREE.SpotLight(PooltableLightColor);
-	poolLight.name = "Ueber Startposition";
+	poolLight.name = "Ueber_Startposition";
 	poolLight.position.set(0, 60, 40);
 	poolLight.target.position = new THREE.Vector3(0, 0, 40);
 	poolLight.intensity = PooltableLightIntens;
@@ -84,9 +84,6 @@ function setupLights() {
 	lichter.push(ambientLight);
 	// Lichtquelle in die Sammlung einfuegen
 
-	console.log("Lichtquellen-Sammlung: ");
-	console.log(lichter);
-
 	lichtquellenEinfuegen(lichter);
 	// Einfuegen der Lichtquellen in die Szene
 };
@@ -109,10 +106,10 @@ function lichtGUIerstellen(lichterSammlung) {
 			intensitaet : lichterSammlung[i].intensity,
 		};
 		var bezeichner = lichterSammlung[i].name;
-		game.debugGUI.bezeichner = lichtquellen.add(paramLicht, 'intensitaet').min(0).max(10).step(0.25).listen().name(lichterSammlung[i].name);
+		game.debugGUI.bezeichner = lichtquellen.add(paramLicht, 'intensitaet').min(0).max(10).step(0.1).listen().name(lichterSammlung[i].name);
 
 		// Event on change in 'offsetZ'
-		game.debugGUI.bezeichner.onFinishChange(function(value) {
+		game.debugGUI.bezeichner.onChange(function(value) {
 			intensitaet = value;
 			for (var i = 0; i < lichterSammlung.length; i++){
 				if(lichterSammlung[i].name = bezeichner){					

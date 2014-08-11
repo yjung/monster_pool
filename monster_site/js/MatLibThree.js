@@ -95,7 +95,8 @@ lBlackT = new THREE.MeshLambertMaterial({
 
 lWhiteT = new THREE.MeshLambertMaterial({
 	color : 0xffffff,
-	ambient : 0xffffff
+	ambient : 0xffffff,
+	needsUpdate : true,
 });
 
 lChromeT = new THREE.MeshLambertMaterial({
