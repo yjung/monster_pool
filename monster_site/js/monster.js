@@ -42,8 +42,8 @@ function ladeAnimation() {
     game.monster.skinnedMesh.position.y = 30;
     game.monster.skinnedMesh.position.z = 10;
 
-    console.log("skinny");
-    console.log(game.monster.skinnedMesh);
+    // console.log("skinny");
+    // console.log(game.monster.skinnedMesh);
 
     game.szene.add(game.monster.skinnedMesh);
 

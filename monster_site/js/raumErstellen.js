@@ -26,9 +26,6 @@ function raumLaden()
 			var modelGeometry = modelScene.children[i].children[0].geometry;
 			// Geometrie aus der .dae-Szene extrahieren
 			var modelMaterial = modelScene.children[i].children[0].material;
-
-			console.log(modelMaterial);
-
 			game.raum.i = new THREE.Mesh(modelGeometry, modelMaterial);
 			game.raum.i.scale.set(0.25, 0.25, 0.25);
 			game.raum.i.receiveShadow = true;
