@@ -8,7 +8,7 @@ function initialisiere() {
 	$( "#header" ).removeClass( "header-big" );
 	$( "#header" ).addClass( "header-small" );
 	
-	
+	$( "#scoreboard" ).css("right","0px");
 			
 	
 	Physijs.scripts.worker = 'lib/physijs_worker.js';        // Physi.js-Worker einbinden
