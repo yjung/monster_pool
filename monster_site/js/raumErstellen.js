@@ -49,7 +49,7 @@ function raumLaden()
 
 			var element = new THREE.Mesh(modelGeometry, modelMaterial);
 			element.scale.set(0.25, 0.25, 0.25);
-
+			element.receiveShadow = true;
 			// Collada Bar zur Szene hinzufuegen
 			game.szene.add(element);
 		}
@@ -69,7 +69,7 @@ function raumLaden()
 
 			var element = new THREE.Mesh(modelGeometry, modelMaterial);
 			element.scale.set(0.25, 0.25, 0.25);
-
+			element.receiveShadow = true;
 			// Collada Tische und stuehle zur Szene hinzufuegen
 			game.szene.add(element);
 		}

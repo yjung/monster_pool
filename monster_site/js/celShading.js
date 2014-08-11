@@ -20,7 +20,7 @@ function celGUIerstellen() {
 
 
 	game.debugGUI.kontur.onFinishChange(function(value) {
-		console.log(value);
+		game.renderer.celShading = value;
 	});
 
 	game.debugGUI.strichstaerke.onFinishChange(function(value) {
