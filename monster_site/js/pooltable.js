@@ -64,6 +64,9 @@ function erstelleHindernisse(ColladaLoader){
 	erstelleRampeJS(-9,18,20, 0.8);
 	
 	
+	erstellePaddleJS(-9,18,10, 2.8);
+	
+	
 	
 }
 
