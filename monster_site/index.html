@@ -46,6 +46,8 @@
     <script type="text/javascript" src="js/main.js"></script>					<!-- Mainloop -->
     <script type="text/javascript" src="js/initalisierung.js"></script>			<!-- Initialisierung -->
     <script type="text/javascript" src="js/gui.js"></script>    				<!-- GUI -->
+    <script type="text/javascript" src="js/spielEnde.js"></script>			<!-- SpielEnde -->
+    <script type="text/javascript" src="js/neustart.js"></script>			<!-- Neu Start -->
 
 	<!-- Leveldesign -->
     <!-- <script type="text/javascript" src="js/dummyTisch.js"></script> -->				<!-- dummyTisch -->
@@ -122,6 +124,11 @@
 				Kugeln:<div id="balls">15</div>
 			</div>
     		</div>
+    		<div id='gameEnde'>
+				<p>Great! You got lots of points in this game.</p>
+				<p>Points:</p><div id='finalScore'>0</div>
+				<a href='#' onclick='neustarten()'>Press here to play again</a>
+			</div>
 		</div>
 		<!-- /////////////////		FOOTER		/////////////////-->
 		<div id=footer><a id="impressum" href="#"  data-toggle="modal" data-target="#impressumModal">Impressum</a></div>
