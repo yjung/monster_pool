@@ -2,8 +2,7 @@
 function initialisiere() {
     "use strict";                                                   // Strict-Mode 
 
-	$("#info").hide();	
-	
+	$("#info").hide();
 	var name = $("#inputName").val();
 	$( "#header" ).removeClass( "header-big" );
 	$( "#header" ).addClass( "header-small" );
@@ -17,8 +16,8 @@ function initialisiere() {
     window.addEventListener('resize', onWindowResize, false);   // Eventlistener fuer Groessenaenderung
     
     window.game.monster = {};								// Sammlung fuer alle Monster im Spiel	
-    var monsterCounter=15; //Counter fuer Kugeln (Monster) im Spiel (wird in loecherTrigger.js aktualisiert)
-    var scoreCounter=0; //Counter fuer Score vom Spiel (wird in loecherTrigger.js aktualisiert)
+    game.monsterCounter=15; //Counter fuer Kugeln (Monster) im Spiel (wird in loecherTrigger.js und raumErstellen.js aktualisiert)
+    game.scoreCounter=0; //Counter fuer Score vom Spiel (wird in loecherTrigger.js aktualisiert)
     
 	game.modus = {
 		statisch : 0,           // Position ist fixiert
@@ -112,7 +111,7 @@ function initialisiere() {
     ladePooltable();                             // Nicht-Physisches, detailliertes Model des Tisches laden    
     ladeKugeln();                             // Nicht-Physisches, detailliertes Model des Tisches laden
     // createDummyTisch();                         // Dummy-Tisch aus physikalischen Grundobjekten erstellen
-    sceneLaden();                        //Alpha Tisch aus Colada File Laden
+    sceneLaden();                        //Alpha Tisch aus Colada File Laden^
     loecherTrigger();							//Lade die Triggers von den Loechern
     createWhiteBall(0,22,15);                    // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
     //ladeMonster();								// Lade ein Monster (Bernd)
