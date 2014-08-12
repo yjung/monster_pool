@@ -6,7 +6,7 @@
 function loecherTrigger()
 {
 	//1. Collider-Boxen Erstellen (Ghosts)
-	//1.1 6 Boxen erstellen (Wo?)
+	//1.1 6 Boxen erstellen (Wo?)	
 	lochColliderErstellen(-13, 16, -25, 30);
 	lochColliderErstellen(13, 16, -25, 30);
 	lochColliderErstellen(-13, 16, 1, 20);
@@ -38,8 +38,15 @@ function lochColliderErstellen(x, y, z, points)
 		 }
 		 else
 		 {
-		 	
-		 	monsterCollideHole(object);
+		 	game.szene.remove( object); //3. Remove Kugel (game-szene remove)	  	
+		  game.monsterCounter -= 1; //4. Counter von 15 bis 0 aktualisieren
+		  game.scoreCounter += points;
+		  $( "#points" ).text(game.scoreCounter);
+		  $( "#balls" ).text(game.monsterCounter);
+	      /*console.log(monsterCounter);
+	      console.log("scoreCounter:");
+	      console.log(scoreCounter);*/
+		 	//monsterCollideHole(object);
 		 }
 	  
     });
@@ -52,10 +59,9 @@ function lochColliderErstellen(x, y, z, points)
     }
 
 	function monsterCollideHole(object){
-	
 		  game.szene.remove( object); //3. Remove Kugel (game-szene remove)	  	
-		  monsterCounter -= 1; //4. Counter von 15 bis 0 aktualisieren
-		  scoreCounter += points;
+		  game.monsterCounter -= 1; //4. Counter von 15 bis 0 aktualisieren
+		  game.scoreCounter += points;
 		  $( "#points" ).text(scoreCounter);
 		  $( "#balls" ).text(monsterCounter);
 	      console.log(monsterCounter);
