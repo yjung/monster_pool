@@ -34,13 +34,9 @@
     <script type="text/javascript" src="lib/Tween.js"></script>   	 <!-- FullScreen.js -->
 
 	
-
-
     <!-- Programmlogik-->
-    <script type="text/javascript" src="js/gui.js"></script>    				<!-- GUI -->
     <script type="text/javascript" src="js/statistik.js"></script>				<!-- Statistik -->
     <script type="text/javascript" src="js/sound.js"></script>				<!-- Statistik -->
-    <script type="text/javascript" src="js/postprocessing.js"></script>			<!-- Post-Processing -->
     <script type="text/javascript" src="js/renderer.js"></script>				<!-- Renderer -->
     <script type="text/javascript" src="js/tastatur.js"></script>				<!-- Tastatur -->
     <script type="text/javascript" src="js/OrbitControls.js"></script>			<!-- OrbitControls -->
@@ -49,8 +45,7 @@
     <script type="text/javascript" src="js/monster.js"></script>				<!-- Monster -->    
     <script type="text/javascript" src="js/main.js"></script>					<!-- Mainloop -->
     <script type="text/javascript" src="js/initalisierung.js"></script>			<!-- Initialisierung -->
-    <script type="text/javascript" src="js/spielEnde.js"></script>			<!-- Spiel Ende -->
-    <script type="text/javascript" src="js/neustart.js"></script>			<!-- Spiel Neu Starten -->
+    <script type="text/javascript" src="js/gui.js"></script>    				<!-- GUI -->
 
 	<!-- Leveldesign -->
     <!-- <script type="text/javascript" src="js/dummyTisch.js"></script> -->				<!-- dummyTisch -->
@@ -60,6 +55,7 @@
     <script type="text/javascript" src="js/slider.js"></script>					<!-- Slider -->
     <script type="text/javascript" src="js/bumper.js"></script>					<!-- Bumper -->
     <script type="text/javascript" src="js/rampe.js"></script>					<!-- Rampe -->
+    <script type="text/javascript" src="js/paddle.js"></script>					<!-- Paddle -->
     <script type="text/javascript" src="js/lightSetup.js"></script>				<!-- Licht -->
     <script type="text/javascript" src="js/raumErstellen.js"></script>			<!-- Raum -->
     <script type="text/javascript" src="js/minimap.js"></script>				<!-- Minimap -->
@@ -67,12 +63,14 @@
     <script type="text/javascript" src="js/MatLibPhysi.js"></script>			<!-- Materialbibliothek fuer Physi.js -->
 	
 	<!-- Post-Processing -->
+    <script type="text/javascript" src="js/postprocessing.js"></script>			<!-- Post-Processing -->
     <script type="text/javascript" src="lib/EffectComposer.js"></script>         <!-- Effect Composer-->
     <script type="text/javascript" src="lib/RenderPass.js"></script>             <!-- Render-Pass -->
     <script type="text/javascript" src="lib/ShaderPass.js"></script>             <!-- Shader-Pass.js -->    
     <script type="text/javascript" src="lib/MaskPass.js"></script>               <!-- Mask-Pass -->    
     <script type="text/javascript" src="lib/BloomPass.js"></script>              <!-- Bloom-Pass -->    
     <script type="text/javascript" src="shaders/EdgeShader.js"></script>              <!-- Bloom-Pass -->    
+    <script type="text/javascript" src="shaders/CannyEdgePass.js"></script>              <!-- Bloom-Pass -->    
     <script type="text/javascript" src="lib/FilmPass.js"></script>               <!-- Film-Pass -->    
     <script type="text/javascript" src="lib/CopyShader.js"></script>             <!-- Copy-Shader.js -->    
     <script type="text/javascript" src="lib/ConvolutionShader.js"></script>      <!-- Convolution-Shader -->      
@@ -83,7 +81,7 @@
 
 
 </head>
-	<body onload="">
+	<body onload="initialisiere()">
 		<!-- /////////////////		HEADER		/////////////////-->
 		<div id=header class="header-big">
     		<img id="imgBanner" src="img/MonsterPool_Logo.png" />
@@ -123,12 +121,6 @@
 				Points:<div id="points">0</div>
 				Kugeln:<div id="balls">15</div>
 			</div>
-    		</div>
-    		<div id='gameEnde'>
-    			<p>Congratulations! You got a great Score!</p>
-    			<p>Score:</p><div id='finalScore'>0</div>
-    			<a href='#' onclick='neustarten()'>Press here start a new game</a>
-    			
     		</div>
 		</div>
 		<!-- /////////////////		FOOTER		/////////////////-->
