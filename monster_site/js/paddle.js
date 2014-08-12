@@ -21,7 +21,7 @@ function erstellePaddleJS(PosX, PosY, PosZ, RotY)
 		// paddleBump.scale.set(0.25,0.25,0.25);
 		game.szene.add(paddle);
 		
-		onsole.log("paddle");
+		console.log("paddle");
 		console.log(paddle);
 	
 	});
