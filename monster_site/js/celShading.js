@@ -11,21 +11,13 @@ function celGUIerstellen() {
 	// Parameter-Liste fuer das Cel-Shading
 	var paramCelShading = {
 		kontur : false,
-		konturFarbe : [ 0, 0, 0, 1 ], // RGB with alpha
 		strichstaerke : 0,
 	};
 
 	// Post-Processingeintraege hinzufuegen
-	game.debugGUI.konturfarbe = celShading.addColor(paramCelShading, 'konturFarbe').name("Kontur-Farbe").listen();
-	game.debugGUI.kontur = celShading.add(paramCelShading, 'kontur').listen();
-	game.debugGUI.strichstaerke = celShading.add(paramCelShading, 'strichstaerke').min(0.0).max(10.0).step(0.01).listen().name("Kontur");
+	game.debugGUI.kontur =celShading.add(paramCelShading, 'kontur').listen();
+	game.debugGUI.strichstaerke =celShading.add(paramCelShading, 'strichstaerke').min(0.0).max(10.0).step(0.01).listen().name("Kontur");
 
-
-	game.debugGUI.konturfarbe.onChange(function(value) {
-		var neueFarbe = new THREE.Vector4(value[0]/255,value[1]/255,value[2]/255,value[3]/255);
-		edgePass.uniforms.uBorderColor.value = neueFarbe;
-		console.log(edgePass.uniforms.uBorderColor.value);
-	});
 
 	game.debugGUI.kontur.onFinishChange(function(value) {
 		game.renderer.celShading = value;
@@ -66,9 +58,4 @@ function modifiziereLambertShading() {
 		 "	if (vlf>=0.95) { gl_FragColor = vec4(mix( basecolor, vec3(0.75), 0.5), alpha); }",
 
 		"	gl_FragColor.xyz *= vLightFront;", "}"].join("\n");
-}
-
-function initialisiereCelShading(){
-	game.celShading = {};                                        // Globalen Namespace schaffen
-	game.celShading.borderColor = new THREE.Vector4(0,0,0,1);
 }

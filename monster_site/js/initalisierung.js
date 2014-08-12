@@ -2,17 +2,19 @@
 function initialisiere() {
     "use strict";                                                   // Strict-Mode 
 
-	$("#info").hide();
+	$("#viewport").css("visibility","visible");
+	
+	$("#info").remove();
 	var name = $("#inputName").val();
 	$( "#header" ).removeClass( "header-big" );
 	$( "#header" ).addClass( "header-small" );
 	
 	$( "#scoreboard" ).css("right","0px");
 			
-	
+
 	Physijs.scripts.worker = 'lib/physijs_worker.js';        // Physi.js-Worker einbinden
 	Physijs.scripts.ammo = '../lib/ammo.js';                    // Bibliotheksverweis zu Ammo
-    window.game = {};                                           // Globalen Namespace schaffen
+    window.game = {};   
     window.addEventListener('resize', onWindowResize, false);   // Eventlistener fuer Groessenaenderung
     
     window.game.monster = {};								// Sammlung fuer alle Monster im Spiel	
@@ -99,7 +101,6 @@ function initialisiere() {
     }, false);
 
 	/* Post-Processing */
-	initialisiereCelShading();
 	erstelleComposer();				// Effekt-Composer erstellen
 	game.postProcessing = false;	// Postprocessing standardmaessig deaktiviert
 
@@ -123,11 +124,11 @@ function initialisiere() {
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
 
 
-	// var achsendreibein = new THREE.AxisHelper(50);
-	// achsendreibein.position.y = 20;
-    // game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
+	var achsendreibein = new THREE.AxisHelper(50);
+	achsendreibein.position.y = 20;
+    game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
 
-	erstelleMinimap();
+	erstelleMinimap();	
 
     /* Ende der Initialisierung / Aufruf des Mainloops */
 	mainloop();

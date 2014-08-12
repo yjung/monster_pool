@@ -58,9 +58,8 @@ function mainloop() {
 
 	}
 
-
+	updateStatistik(true, true);
 	// Statistiken aktualisieren
-	updateStatistik();	
 
 	// Iteriere über alle Controller der DebugGUI
 	if (game.debugGUI)
@@ -68,8 +67,19 @@ function mainloop() {
 			game.debugGUI.__controllers[i].updateDisplay();
 		}
 
-	if (animate) {
+	if ((animate)&&(game.monsterCounter>0)) {
 		requestID = window.requestAnimationFrame(mainloop);
+	}
+	else
+	{
+		if(game.monsterCounter<=0)
+		{
+			
+			window.cancelAnimationFrame(requestID);
+			requestID = undefined;			
+			game.clock.stop();
+			spielEnden();
+		}
 	}
 	// Mainloop erneut durchlaufen
 };

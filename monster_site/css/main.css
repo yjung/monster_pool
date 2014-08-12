@@ -237,12 +237,17 @@ td {
 	height:80px;
 	width:300px;
 	background:#000000;
+	/*visibility:hidden;*/	
 }
 
+#gameEnde {
+	visibility:hidden;
+}
 #viewport {
 	position: absolute;
 	height: 100%;
 	width: 100%;
+	visibility:hidden;
 }
 
 #minimapViewport {

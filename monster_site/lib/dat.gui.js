@@ -106,9 +106,8 @@ dat.utils.common = (function () {
     
     each: function(obj, itr, scope) {
 
-      if (!obj) return;
-
-      if (ARR_EACH && obj.forEach && obj.forEach === ARR_EACH) { 
+      
+      if (ARR_EACH && obj.forEach === ARR_EACH) { 
         
         obj.forEach(itr, scope);
         
@@ -780,8 +779,6 @@ dat.controllers.NumberController = (function (Controller, common) {
          */
         step: function(v) {
           this.__step = v;
-          this.__impliedStep = v;
-          this.__precision = numDecimals(v);
           return this;
         }
 
@@ -1674,8 +1671,6 @@ dat.GUI = dat.gui.GUI = (function (css, saveDialogueContents, styleSheet, contro
         SUPPORTS_LOCAL_STORAGE &&
             localStorage.getItem(getLocalStorageHash(this, 'isLocal')) === 'true';
 
-    var saveToLocalStorage;
-
     Object.defineProperties(this,
 
         /** @lends dat.gui.GUI.prototype */
@@ -1931,14 +1926,9 @@ dat.GUI = dat.gui.GUI = (function (css, saveDialogueContents, styleSheet, contro
       addResizeHandle(this);
     }
 
-    saveToLocalStorage = function () {
-      if (SUPPORTS_LOCAL_STORAGE && localStorage.getItem(getLocalStorageHash(_this, 'isLocal')) === 'true') {
-        localStorage.setItem(getLocalStorageHash(_this, 'gui'), JSON.stringify(_this.getSaveObject()));
-      }
+    function saveToLocalStorage() {
+      localStorage.setItem(getLocalStorageHash(_this, 'gui'), JSON.stringify(_this.getSaveObject()));
     }
-
-    // expose this method publicly
-    this.saveToLocalStorageIfPossible = saveToLocalStorage;
 
     var root = _this.getRoot();
     function resetWidth() {
@@ -2236,7 +2226,6 @@ dat.GUI = dat.gui.GUI = (function (css, saveDialogueContents, styleSheet, contro
 
           this.load.remembered[this.preset] = getCurrentPreset(this);
           markPresetModified(this, false);
-          this.saveToLocalStorageIfPossible();
 
         },
 
@@ -2253,7 +2242,6 @@ dat.GUI = dat.gui.GUI = (function (css, saveDialogueContents, styleSheet, contro
           this.load.remembered[presetName] = getCurrentPreset(this);
           this.preset = presetName;
           addPresetOption(this, presetName, true);
-          this.saveToLocalStorageIfPossible();
 
         },
 

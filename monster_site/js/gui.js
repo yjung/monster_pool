@@ -2,7 +2,7 @@ function createGUI() {
 	console.log("--Erstelle Debug-GUI.--");
 	game.debugGUI = new dat.GUI({
 		autoPlace : false, // Eigene Platzierung ermoeglichen
-		width : 450	// Breite etwas reduzieren
+		width : 220	// Breite etwas reduzieren
 	});
 
 	// Vater-Div abrufen und gui anhaengen
