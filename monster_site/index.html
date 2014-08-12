@@ -49,6 +49,8 @@
     <script type="text/javascript" src="js/monster.js"></script>				<!-- Monster -->    
     <script type="text/javascript" src="js/main.js"></script>					<!-- Mainloop -->
     <script type="text/javascript" src="js/initalisierung.js"></script>			<!-- Initialisierung -->
+    <script type="text/javascript" src="js/spielEnde.js"></script>			<!-- Spiel Ende -->
+    <script type="text/javascript" src="js/neustart.js"></script>			<!-- Spiel Neu Starten -->
 
 	<!-- Leveldesign -->
     <!-- <script type="text/javascript" src="js/dummyTisch.js"></script> -->				<!-- dummyTisch -->
@@ -81,7 +83,7 @@
 
 
 </head>
-	<body onload="initialisiere()">
+	<body onload="">
 		<!-- /////////////////		HEADER		/////////////////-->
 		<div id=header class="header-big">
     		<img id="imgBanner" src="img/MonsterPool_Logo.png" />
@@ -121,6 +123,12 @@
 				Points:<div id="points">0</div>
 				Kugeln:<div id="balls">15</div>
 			</div>
+    		</div>
+    		<div id='gameEnde'>
+    			<p>Congratulations! You got a great Score!</p>
+    			<p>Score:</p><div id='finalScore'>0</div>
+    			<a href='#' onclick='neustarten()'>Press here start a new game</a>
+    			
     		</div>
 		</div>
 		<!-- /////////////////		FOOTER		/////////////////-->
