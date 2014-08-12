@@ -6,10 +6,7 @@ function erstelleMinimap(){
     // var bottom = (window.innerHeight - 230) / -64;
     // var near = -500;
     // var far = 1000;
-//     
-    console.log(window.innerWidth);
-    console.log(window.innerHeight);
-    
+
     var x = window.innerWidth;
     var y = window.innerHeight - 160;
     var faktor = 32;
@@ -23,10 +20,10 @@ function erstelleMinimap(){
     
     
     // Konsolenausgabe zum Testen der oberen Werte
-    console.log("left: "+left);
-    console.log("right: "+right);
-    console.log("top: "+top);
-    console.log("bottom: "+bottom);
+    // console.log("left: "+left);
+    // console.log("right: "+right);
+    // console.log("top: "+top);
+    // console.log("bottom: "+bottom);
     // console.log("near: "+near);
     // console.log("far: "+far);
     

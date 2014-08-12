@@ -10,6 +10,8 @@ function createWhiteBall(x,y,z) {
     game.whiteBall.position.x = x;
     game.whiteBall.position.y = y;
     game.whiteBall.position.z = z;
+
+    game.whiteBall.material.needsUpdate = true;
     // Hinzufuegen zur Szene
     game.szene.add(game.whiteBall);
 }

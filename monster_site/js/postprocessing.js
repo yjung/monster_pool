@@ -15,7 +15,11 @@ function erstelleComposer() {
 
 	var effektFilm = new THREE.FilmPass(0.8, 0.325, 256, false);	// Film-Effekt-Pass
 	var effektBloomPass = new THREE.BloomPass(3, 25, 5, 256);		// Bloom-Effekt
-	var celShader = new THREE.ShaderPass(CelShader);			// Custom-Shader
+	var edgePass = new THREE.ShaderPass(THREE.EdgeShader);			// Custom-Shader
+	edgePass.uniforms['aspect'].value.x = window.innerWidth;
+	edgePass.uniforms['aspect'].value.y = window.innerHeight;
+	
+	
 	var customShader = new THREE.ShaderPass(CustomShader);			// Custom-Shader
 	
 	
@@ -56,7 +60,7 @@ function erstelleComposer() {
 	game.composerCelShading.setSize(game.breite, game.hoehe);									// Groesse setzen
 	
 	game.composerCelShading.addPass(renderPass);		// Normales Bild rendern
-	game.composerCelShading.addPass(celShader);		// Custom-Effekt
+	game.composerCelShading.addPass(edgePass);		// Custom-Effekt
 	game.composerCelShading.addPass(effectcopy);		// Standard-Copy-Shader zum finalen rendern
 
 	// Composer CustomShader
@@ -65,7 +69,7 @@ function erstelleComposer() {
 	game.composerCustom.setSize(game.breite, game.hoehe);									// Groesse setzen
 	
 	game.composerCustom.addPass(renderPass);		// Normales Bild rendern
-	game.composerCustom.addPass(customShader);		// Custom-Effekt
+	game.composerCustom.addPass(edgePass);		// Custom-Effekt
 	game.composerCustom.addPass(effectcopy);		// Standard-Copy-Shader zum finalen rendern
 
 }

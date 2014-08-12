@@ -26,9 +26,6 @@ function raumLaden()
 			var modelGeometry = modelScene.children[i].children[0].geometry;
 			// Geometrie aus der .dae-Szene extrahieren
 			var modelMaterial = modelScene.children[i].children[0].material;
-
-			console.log(modelMaterial);
-
 			game.raum.i = new THREE.Mesh(modelGeometry, modelMaterial);
 			game.raum.i.scale.set(0.25, 0.25, 0.25);
 			game.raum.i.receiveShadow = true;
@@ -52,7 +49,7 @@ function raumLaden()
 
 			var element = new THREE.Mesh(modelGeometry, modelMaterial);
 			element.scale.set(0.25, 0.25, 0.25);
-
+			element.receiveShadow = true;
 			// Collada Bar zur Szene hinzufuegen
 			game.szene.add(element);
 		}
@@ -72,7 +69,7 @@ function raumLaden()
 
 			var element = new THREE.Mesh(modelGeometry, modelMaterial);
 			element.scale.set(0.25, 0.25, 0.25);
-
+			element.receiveShadow = true;
 			// Collada Tische und stuehle zur Szene hinzufuegen
 			game.szene.add(element);
 		}

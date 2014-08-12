@@ -40,16 +40,16 @@ function mainloop() {
 
 	} else {// Postprocessing ist aktiviert
 		if (game.renderer.filmEffect) {
-			game.composerFilm.render(delta);
+			game.composerFilm.render();
 		}
 		if (game.renderer.bloomPass) {
-			game.composerBloomPass.render(delta);
+			game.composerBloomPass.render();
 		}
 		if (game.renderer.celShading) {
-			game.composerCelShading.render(delta);
+			game.composerCelShading.render();
 		}
 		if (game.renderer.custom) {
-			game.composerCustom.render(delta);
+			game.composerCustom.render();
 		} else {
 			game.renderer.setViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 			game.renderer.render(game.szene, game.kamera);
