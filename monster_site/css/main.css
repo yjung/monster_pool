@@ -224,6 +224,12 @@ td {
 	background-image: url(../img/trenner.png);
 }
 
+#impressum{
+	position:absolute;
+	top:10px;
+	left:30px;
+}
+
 #scoreboard {
 	position:absolute;
 	top:0px;
