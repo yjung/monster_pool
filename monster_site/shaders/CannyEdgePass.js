@@ -43,9 +43,9 @@ CannyEdgePass = {
 		"	vec2 pixelLeft_Coord = vUv + vec2(-offset.x, 0.0);",
 		"	vec2 gradient = vec2(length(texture2D(tDiffuse, pixelRight_Coord).xyz - texture2D(tDiffuse, pixelLeft_Coord).xyz), length(texture2D(tDiffuse, pixelTop_Coord).xyz - texture2D(tDiffuse, pixelBottom_Coord).xyz));",
 		
-		"	gradientColor= vec4(length(gradient));",
+		"	gradientColor = vec4(length(gradient));",
 		" if(gradientColor.x < 0.15 && gradientColor.y < 0.15 && gradientColor.z < 0.15){discard;}",
-		"	else{gl_FragColor = uBorderColor;}",		
+		"	else{gl_FragColor = vec4(mix( gradientColor, uBorderColor, 0.5));}",			
 		"}"
 	].join("\n")
 
