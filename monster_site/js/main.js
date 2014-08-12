@@ -58,8 +58,9 @@ function mainloop() {
 
 	}
 
-	updateStatistik(true, true);
+
 	// Statistiken aktualisieren
+	updateStatistik();	
 
 	// Iteriere über alle Controller der DebugGUI
 	if (game.debugGUI)

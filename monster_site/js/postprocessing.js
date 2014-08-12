@@ -15,7 +15,7 @@ function erstelleComposer() {
 
 	var effektFilm = new THREE.FilmPass(0.8, 0.325, 256, false);	// Film-Effekt-Pass
 	var effektBloomPass = new THREE.BloomPass(3, 25, 5, 256);		// Bloom-Effekt
-	var edgePass = new THREE.ShaderPass(CannyEdgePass);			// Custom-Shader
+	edgePass = new THREE.ShaderPass(CannyEdgePass);			// Custom-Shader
 	edgePass.renderToScreen = true;
 
 	

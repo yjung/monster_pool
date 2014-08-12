@@ -99,6 +99,7 @@ function initialisiere() {
     }, false);
 
 	/* Post-Processing */
+	initialisiereCelShading();
 	erstelleComposer();				// Effekt-Composer erstellen
 	game.postProcessing = false;	// Postprocessing standardmaessig deaktiviert
 

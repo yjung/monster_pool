@@ -5,7 +5,8 @@ CannyEdgePass = {
 		// tDiffuse ist von Three.js vorgegeben und enthaelt die Textur des vorangegangenen Shaders.
 		"tDiffuse": { type: "t", value: null }, // Type 't' fuer Textur. 
 		"opacity":  { type: "f", value: 1.0 },
-		"uAspect": { type: "v2", value: new THREE.Vector2(parseFloat(window.innerWidth), parseFloat(window.innerHeight)) }
+		"uAspect": { type: "v2", value: new THREE.Vector2(parseFloat(window.innerWidth), parseFloat(window.innerHeight)) },
+		"uBorderColor": { type: "v4", value: new THREE.Vector4(0.0, 0.0, 0.0, 1.0)},
 	},
 
 	vertexShader: [
@@ -26,13 +27,14 @@ CannyEdgePass = {
 		"uniform sampler2D tDiffuse;",
 		"uniform float opacity;",
 		"uniform vec2 uAspect;",
+		"uniform vec4 uBorderColor;",
 		
 		// varying Variablen unterscheiden sich fuer jeden Pixel, der durchlaufen wird und werden vom Vertex-Shader entgegen genommen.
 		"varying vec2 vUv;",	// UV-Koordinaten, die vom Vertex-Shader uebergeben wurden.
 		"vec4 texel = texture2D( tDiffuse, vUv );",
 		"vec4 gradientColor = vec4(0.0, 0.0, 0.0, 0.0);",
 		// Eigene Variablendeklaration
-		"vec2 offset  = 1.0 / (uAspect / 0.5 );",
+		"vec2 offset  = 1.0 / (uAspect / 1.0 );",
 
 		"void main() {",
 		"	vec2 pixelTop_Coord = vUv + vec2(0.0, offset.y);",
@@ -43,7 +45,7 @@ CannyEdgePass = {
 		
 		"	gradientColor= vec4(length(gradient));",
 		" if(gradientColor.x < 0.15 && gradientColor.y < 0.15 && gradientColor.z < 0.15){discard;}",
-		"	else{gl_FragColor = gradientColor;}",		
+		"	else{gl_FragColor = uBorderColor;}",		
 		"}"
 	].join("\n")
 
