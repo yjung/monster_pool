@@ -48,7 +48,7 @@ function raumLaden()
 			var modelMaterial = modelScene.children[i].children[0].material;
 
 			var element = new THREE.Mesh(modelGeometry, modelMaterial);
-			element.scale.set(0.25, 0.25, 0.25);
+			// element.scale.set(0.25, 0.25, 0.25);
 			element.receiveShadow = true;
 			// Collada Bar zur Szene hinzufuegen
 			game.szene.add(element);
