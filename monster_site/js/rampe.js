@@ -5,7 +5,7 @@ function erstelleRampe(loader, xPosition, yPosition, zPosition, yRotation)
 
 
 	// Slider einladen
-	ColladaLoader.load('assets/dae/rampe.dae', function(collada) 
+	ColladaLoader.load('assets/dae/rampe_a03.dae', function(collada) 
 	{
 
 		var modelScene = collada.scene;
@@ -21,6 +21,9 @@ function erstelleRampe(loader, xPosition, yPosition, zPosition, yRotation)
 		rampe.position.y = yPosition;
 		rampe.position.z = zPosition;
 		rampe.rotation.y = yRotation;
+		rampe.scale.x = 50.0;
+		rampe.scale.y = 50.0;
+		rampe.scale.z = 50.0;
 		game.szene.add(rampe);
 		
 		// Collider importieren
@@ -32,14 +35,19 @@ function erstelleRampe(loader, xPosition, yPosition, zPosition, yRotation)
 		var colliderGeometrie = colliderObjekt.geometry;
 		// var colliderMaterial = colliderObjekt.children[0].material;
 
-		var collider = new Physijs.BoxMesh(colliderGeometrie, pBlueWireframeT,0);
+		var collider = new Physijs.BoxMesh(colliderGeometrie, pRedWireframeT,0);
 		// collider.scale.set(0.25,0.25,0.25);
-		collider.position.x = colliderPosition.x;
-		collider.position.y = colliderPosition.y;
-		collider.position.z = colliderPosition.z;
-
+		collider.position.x = xPosition+colliderObjekt.position.x;
+		collider.position.y = yPosition+colliderObjekt.position.y;
+		collider.position.z = zPosition+colliderObjekt.position.z;
+		collider.rotation.y = yRotation;
+		collider.scale.x = 50.0;
+		collider.scale.y = 50.0;
+		collider.scale.z = 50.0;
+		collider.rotation.x = 0.09086;
 		game.szene.add(collider);
 			console.log(collider);
+			
 		};
 	});
 };

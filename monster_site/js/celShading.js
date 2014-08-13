@@ -15,7 +15,7 @@ function celGUIerstellen() {
 		strichstaerke : 0,
 	};
 
-	game.renderer.celShading = true;
+	game.renderer.celShading = false; // Default = true
 	// Post-Processingeintraege hinzufuegen
 	game.debugGUI.konturfarbe = celShading.addColor(paramCelShading, 'konturFarbe').name("Kontur-Farbe").listen();
 	game.debugGUI.kontur = celShading.add(paramCelShading, 'kontur').listen();
