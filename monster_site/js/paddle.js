@@ -23,7 +23,7 @@ function erstellePaddleJS(PosX, PosY, PosZ, RotY)
 		console.log("paddle");
 		console.log(paddle);
 	
-		var paddleLeftPivot = new Physijs.BoxMesh(new THREE.CubeGeometry(1, 1, 1), pTransparentT, 0);
+		var paddleLeftPivot = new Physijs.BoxMesh(new THREE.BoxGeometry(1, 1, 1), pTransparentT, 0);
 
 		paddleLeftPivot.position.x = PosX;
 		paddleLeftPivot.position.y = PosY;
@@ -48,7 +48,7 @@ function erstellePaddleJS(PosX, PosY, PosZ, RotY)
 
 function createLeftFlipper()
 {
-	var flipperLeft = new Physijs.BoxMesh(new THREE.CubeGeometry(12, 2, 2), Physijs.createMaterial(new THREE.MeshPhongMaterial(
+	var flipperLeft = new Physijs.BoxMesh(new THREE.BoxGeometry(12, 2, 2), Physijs.createMaterial(new THREE.MeshPhongMaterial(
 	{
 		opacity : 0.6,
 		transparent : true
@@ -58,7 +58,7 @@ function createLeftFlipper()
 	flipperLeft.position.z = 0;
 	flipperLeft.castShadow = true;
 	scene.add(flipperLeft);
-	var flipperLeftPivot = new Physijs.SphereMesh(new THREE.CubeGeometry(1, 1, 1), ground_material, 0);
+	var flipperLeftPivot = new Physijs.SphereMesh(new THREE.BoxGeometry(1, 1, 1), ground_material, 0);
 
 
 

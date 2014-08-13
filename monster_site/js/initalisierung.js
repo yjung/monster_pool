@@ -116,7 +116,7 @@ function initialisiere() {
     sceneLaden();                        //Alpha Tisch aus Colada File Laden^
     loecherTrigger();							//Lade die Triggers von den Loechern
     createWhiteBall(0,22,15);                    // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
-    //ladeMonster();								// Lade ein Monster (Bernd)
+    ladeMonster();								// Lade ein Monster (Bernd)
     ladeAnimation();
 	createGUI();								// Debugging-GUI erstellen
 	celGUIerstellen();

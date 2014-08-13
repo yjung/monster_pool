@@ -11,7 +11,7 @@ function queueLaden() {
         game.queue = new Physijs.CylinderMesh(daeGeometrie, queueMaterial, 0);   // Objekterzeugung
         game.queue._physijs.collision_flags = 4; 		                    // COLLISION IST ZUM BUGFIXING NOCH DEAKTIVIERT
 
-        game.queue.useQuaternion = true;
+        //game.queue.useQuaternion = true;
 
         game.queue.rotation.copy(game.kamera.rotation);
 

@@ -80,30 +80,30 @@ function raumLaden()
 function erstelleUmgebungsCollider()
 {
 	// Boden
-	var umgebungsCollider = new Physijs.BoxMesh(new THREE.CubeGeometry(240, 1, 200), pTransparentT, 0);
+	var umgebungsCollider = new Physijs.BoxMesh(new THREE.BoxGeometry(240, 1, 200), pTransparentT, 0);
 
 	// Eingangswand
-	var eingangsWand = new Physijs.BoxMesh(new THREE.CubeGeometry(2, 50, 200), pTransparentT, 0);
+	var eingangsWand = new Physijs.BoxMesh(new THREE.BoxGeometry(2, 50, 200), pTransparentT, 0);
 	eingangsWand.position.x = -120;
 	umgebungsCollider.add(eingangsWand);
 
 	// Thekenwand
-	var thekenWand = new Physijs.BoxMesh(new THREE.CubeGeometry(2, 50, 200), pTransparentT, 0);
+	var thekenWand = new Physijs.BoxMesh(new THREE.BoxGeometry(2, 50, 200), pTransparentT, 0);
 	thekenWand.position.x = 120;
 	umgebungsCollider.add(thekenWand);
 
 	// Fensterwand
-	var fensterWand = new Physijs.BoxMesh(new THREE.CubeGeometry(240, 50, 2), pTransparentT, 0);
+	var fensterWand = new Physijs.BoxMesh(new THREE.BoxGeometry(240, 50, 2), pTransparentT, 0);
 	fensterWand.position.z = 90;
 	umgebungsCollider.add(fensterWand);
 
 	// Eckwand
-	var eckWand = new Physijs.BoxMesh(new THREE.CubeGeometry(240, 50, 2), pTransparentT, 0);
+	var eckWand = new Physijs.BoxMesh(new THREE.BoxGeometry(240, 50, 2), pTransparentT, 0);
 	eckWand.position.z = -90;
 	umgebungsCollider.add(eckWand);
 
 	// Ecke
-	var ecke = new Physijs.BoxMesh(new THREE.CubeGeometry(65, 50, 2), pTransparentT, 0);
+	var ecke = new Physijs.BoxMesh(new THREE.BoxGeometry(65, 50, 2), pTransparentT, 0);
 	ecke.rotation.y = -0.78;
 	ecke.position.z = -65;
 	ecke.position.x = 95;

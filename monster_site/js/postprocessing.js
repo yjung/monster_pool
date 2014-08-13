@@ -12,6 +12,7 @@ function erstelleComposer() {
 	}
 
 	var renderPass = new THREE.RenderPass(game.szene, game.kamera);	// Renderpass fuer Szene aus Kamera
+	// var renderPassMap = new THREE.RenderPass(game.szene, game.mapCamera);
 
 	var effektFilm = new THREE.FilmPass(0.8, 0.325, 256, false);	// Film-Effekt-Pass
 	var effektBloomPass = new THREE.BloomPass(3, 25, 5, 256);		// Bloom-Effekt
@@ -55,6 +56,7 @@ function erstelleComposer() {
 	
 	
 	// Composer CelShader
+	
 	var renderTarget = new THREE.WebGLRenderTarget(game.breite, game.hoehe, parameters);	// Rendertarget-Objekt fuer Renderer-Initialisierung
 	game.composerCelShading = new THREE.EffectComposer(game.renderer, renderTarget);			// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren
 	game.composerCelShading.setSize(game.breite, game.hoehe);									// Groesse setzen
@@ -62,6 +64,13 @@ function erstelleComposer() {
 	game.composerCelShading.addPass(renderPass);		// Normales Bild rendern
 	game.composerCelShading.addPass(edgePass);			// Custom-Effekt
 	// game.composerCelShading.addPass(effectcopy);		// Standard-Copy-Shader zum finalen rendern
+
+	// code fuer minimap effect composer
+	// game.mapComposerCelShading = new THREE.EffectComposer(game.renderer, renderTarget);
+	// game.mapComposerCelShading.setSize(512,512);
+	// game.mapComposerCelShading.addPass(renderPassMap);
+	// game.mapComposerCelShading.addPass(edgePass);
+
 
 	// Composer CustomShader
 	var renderTarget = new THREE.WebGLRenderTarget(game.breite, game.hoehe, parameters);	// Rendertarget-Objekt fuer Renderer-Initialisierung
