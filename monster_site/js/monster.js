@@ -2,20 +2,13 @@ function ladeMonster() {
 
 	var loader = new THREE.JSONLoader();
 
-    loader.load('assets/json/bernd.js', function (geometry, materials) {
+    loader.load('assets/json/Bernd5Redu.js', function (geometry, materials) {
 
       game.monster.bernd = new Physijs.SphereMesh(
         geometry,
         new THREE.MeshFaceMaterial(materials),
         100
       );
-
-      game.monster.bernd.rotation.y = -Math.PI / 2;
-
-      for (var i = 0; i < materials.length; i++) {
-        var mat = materials[i];
-      }
-      console.log(game.monster.bernd);
 
     game.monster.bernd.position.x = 5;
     game.monster.bernd.position.y = 30;
@@ -25,7 +18,7 @@ function ladeMonster() {
     });
 };
 
-function ladeAnimation() {
+function ladeAnimation() { 
 
   var loader = new THREE.JSONLoader(); 
   loader.load("assets/json/cubeTutorial_004.js", function (geometry, materials) {

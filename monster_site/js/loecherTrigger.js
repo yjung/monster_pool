@@ -34,6 +34,7 @@ function lochColliderErstellen(x, y, z, points)
 	
 	colliderBox.addEventListener('collision', function(object) {
 		if(object === game.whiteBall){
+			soundEffekt("ball-loch");	
 		  	window.setTimeout(whiteCollideHole, 2000);
 		 }
 		 else
@@ -45,8 +46,7 @@ function lochColliderErstellen(x, y, z, points)
     
      function whiteCollideHole() {
  	
-  		  console.log('BOLA BLANCA!!');
-  		  positionBall(0,22,15);
+  		  positionBall(0,22,15);	
 	  
     }
 
@@ -56,6 +56,7 @@ function lochColliderErstellen(x, y, z, points)
 		  game.scoreCounter += points;
 		  $( "#points" ).text(game.scoreCounter);
 		  $( "#balls" ).text(game.monsterCounter);
+		  soundEffekt("ball-loch");
 	
 	}
 }
