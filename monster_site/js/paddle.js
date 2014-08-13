@@ -18,12 +18,31 @@ function erstellePaddleJS(PosX, PosY, PosZ, RotY)
 		paddle.position.y = PosY;
 		paddle.position.z = PosZ;
 		paddle.rotation.y = RotY;
-		// paddleBump.scale.set(0.25,0.25,0.25);
+		paddle.castShadow = true;
 		game.szene.add(paddle);
-		
 		console.log("paddle");
 		console.log(paddle);
 	
+		var paddleLeftPivot = new Physijs.BoxMesh(new THREE.CubeGeometry(1, 1, 1), pTransparentT, 0);
+
+		paddleLeftPivot.position.x = PosX;
+		paddleLeftPivot.position.y = PosY;
+		paddleLeftPivot.position.z = PosZ;
+		paddleLeftPivot.rotation.y = 1.4;
+		paddleLeftPivot.castShadow = true;
+		game.szene.add(paddleLeftPivot);
+		
+		var constraint = new Physijs.HingeConstraint(paddle, paddleLeftPivot, paddleLeftPivot.position, new THREE.Vector3(0, 1, 0));
+		//            var constraint = new Physijs.HingeConstraint(cube1, new THREE.Vector3(0,0,0), new THREE.Vector3(0,1,0));
+		game.szene.addConstraint(constraint);
+
+		constraint.setLimits(-2.2, // minimum angle of motion, in radians, from the point object 1 starts (going back)
+		-0.6, // maximum angle of motion, in radians, from the point object 1 starts (going forward)
+		0.1, // applied as a factor to constraint error, how big the kantelpunt is moved when a constraint is hit
+		0 // controls bounce at limit (0.0 == no bounce)
+		);
+
+	return constraint;
 	});
 }
 
@@ -40,6 +59,8 @@ function createLeftFlipper()
 	flipperLeft.castShadow = true;
 	scene.add(flipperLeft);
 	var flipperLeftPivot = new Physijs.SphereMesh(new THREE.CubeGeometry(1, 1, 1), ground_material, 0);
+
+
 
 	flipperLeftPivot.position.y = 21;
 	flipperLeftPivot.position.x = -15;

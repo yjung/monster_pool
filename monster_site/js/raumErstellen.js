@@ -3,7 +3,7 @@ function sceneLaden()
 {
 	raumLaden();
 	erstelleUmgebungsCollider();
-	lichterLaden();
+	// lichterLaden();
 }
 
 function raumLaden()
