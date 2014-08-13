@@ -10,11 +10,12 @@ function celGUIerstellen() {
 
 	// Parameter-Liste fuer das Cel-Shading
 	var paramCelShading = {
-		kontur : false,
+		kontur : true,
 		konturFarbe : [ 0, 0, 0, 1 ], // RGB with alpha
 		strichstaerke : 0,
 	};
 
+	game.renderer.celShading = true;
 	// Post-Processingeintraege hinzufuegen
 	game.debugGUI.konturfarbe = celShading.addColor(paramCelShading, 'konturFarbe').name("Kontur-Farbe").listen();
 	game.debugGUI.kontur = celShading.add(paramCelShading, 'kontur').listen();
@@ -72,6 +73,4 @@ function modifiziereLambertShading() {
 }
 
 function initialisiereCelShading(){
-	game.celShading = {};                                        // Globalen Namespace schaffen
-	game.celShading.borderColor = new THREE.Vector4(0,0,0,1);
 }

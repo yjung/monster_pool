@@ -15,7 +15,7 @@ function setupLights() {
 	//wirft nen fehler
 	barLight.castShadow = true;
 	// Schattenwurf aktivieren
-	barLight.intensity = 10;
+	barLight.intensity = 6;
 	lichter.push(barLight);
 	// Lichtquelle in die Sammlung einfuegen
 
@@ -27,7 +27,7 @@ function setupLights() {
 	UeberKugel.name = "Ueber_Kugeln";
 	UeberKugel.position.set(00, 60, -40);
 	UeberKugel.target.position = new THREE.Vector3(0, 0, -40);
-	UeberKugel.intensity = 0.75;
+	UeberKugel.intensity = 0.7;
 	UeberKugel.castShadow = true;
 	lichter.push(UeberKugel);
 	// Lichtquelle in die Sammlung einfuegen
@@ -37,7 +37,7 @@ function setupLights() {
 	UeberStart.name = "Ueber_Startposition";
 	UeberStart.position.set(0, 60, 40);
 	UeberStart.target.position = new THREE.Vector3(0, 0, 40);
-	UeberStart.intensity = 0.75;
+	UeberStart.intensity = 0.7;
 	UeberStart.castShadow = true;
 	lichter.push(UeberStart);
 	// Lichtquelle in die Sammlung einfuegen
@@ -47,20 +47,19 @@ function setupLights() {
 	UeberMitte.name = "Pooltisch-Mitte";
 	UeberMitte.position.set(0, 60, 00);
 	UeberMitte.target.position = new THREE.Vector3(0, 0, 0);
-	UeberMitte.intensity = 0.75;
+	UeberMitte.intensity = 0.7;
 	UeberMitte.castShadow = true;
 	lichter.push(UeberMitte);
 	// Lichtquelle in die Sammlung einfuegen
 
 	//Tischlichter
-	var tischLightIntens = 2.0;
 	var TischLightColor = 0xFF7F24;
 
 	var tischLicht = new THREE.SpotLight(TischLightColor);
 	tischLicht.name = "Tisch Ecke";
 	tischLicht.position.set(-100, 60, -5);
 	tischLicht.target.position = new THREE.Vector3(tischLicht.position.x, 0, tischLicht.position.z);
-	tischLicht.intensity = tischLightIntens;
+	tischLicht.intensity = 2.5;
 	tischLicht.castShadow = true;
 	lichter.push(tischLicht);
 	// Lichtquelle in die Sammlung einfuegen
@@ -69,7 +68,7 @@ function setupLights() {
 	tischLicht.name = "Tischgruppe Tuer";
 	tischLicht.position.set(-100, 60, 60);
 	tischLicht.target.position = new THREE.Vector3(tischLicht.position.x, 0, tischLicht.position.z);
-	tischLicht.intensity = tischLightIntens;
+	tischLicht.intensity = 2.5;
 	tischLicht.castShadow = true;
 	lichter.push(tischLicht);
 	// Lichtquelle in die Sammlung einfuegen
