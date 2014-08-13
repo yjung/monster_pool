@@ -11,15 +11,15 @@ function celGUIerstellen() {
 	// Parameter-Liste fuer das Cel-Shading
 	var paramCelShading = {
 		kontur : true,
+		offset: 0.75,
 		konturFarbe : [ 0, 0, 0, 1 ], // RGB with alpha
-		strichstaerke : 0,
 	};
 
 	game.renderer.celShading = true;
 	// Post-Processingeintraege hinzufuegen
+	game.debugGUI.kontur = celShading.add(paramCelShading, 'kontur').name("Kontur").listen();
 	game.debugGUI.konturfarbe = celShading.addColor(paramCelShading, 'konturFarbe').name("Kontur-Farbe").listen();
-	game.debugGUI.kontur = celShading.add(paramCelShading, 'kontur').listen();
-	game.debugGUI.strichstaerke = celShading.add(paramCelShading, 'strichstaerke').min(0.0).max(10.0).step(0.01).listen().name("Kontur");
+	game.debugGUI.offset = celShading.add(paramCelShading, 'offset').min(0.0).max(2.0).step(0.01).name("Offset").listen();
 
 
 	game.debugGUI.konturfarbe.onChange(function(value) {
@@ -28,13 +28,14 @@ function celGUIerstellen() {
 		console.log(edgePass.uniforms.uBorderColor.value);
 	});
 
+	game.debugGUI.offset.onChange(function(value) {
+		edgePass.uniforms.uOffset.value = value;
+	});
+
 	game.debugGUI.kontur.onFinishChange(function(value) {
 		game.renderer.celShading = value;
 	});
 
-	game.debugGUI.strichstaerke.onFinishChange(function(value) {
-		console.log(value);
-	});
 
 	celShading.open();
 	console.log(game.szene);
