@@ -29,7 +29,7 @@ function createGUI() {
 	};
 
 	paramPostprocessing = {
-		enable : false,
+		enable : true,
 		filmEffekt : false,
 		bloomPass : false,
 		custom : false,

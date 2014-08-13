@@ -102,7 +102,7 @@ function initialisiere() {
 
 	/* Post-Processing */
 	erstelleComposer();				// Effekt-Composer erstellen
-	game.postProcessing = false;	// Postprocessing standardmaessig deaktiviert
+	game.postProcessing = true;	// Postprocessing standardmaessig deaktiviert
 
 	/* Sound */
 	game.ambientSound = document.createElement("audio");

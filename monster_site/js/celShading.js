@@ -10,11 +10,12 @@ function celGUIerstellen() {
 
 	// Parameter-Liste fuer das Cel-Shading
 	var paramCelShading = {
-		kontur : false,
+		kontur : true,
 		konturFarbe : [ 0, 0, 0, 1 ], // RGB with alpha
 		strichstaerke : 0,
 	};
 
+	game.renderer.celShading = true;
 	// Post-Processingeintraege hinzufuegen
 	game.debugGUI.konturfarbe = celShading.addColor(paramCelShading, 'konturFarbe').name("Kontur-Farbe").listen();
 	game.debugGUI.kontur = celShading.add(paramCelShading, 'kontur').listen();
@@ -57,18 +58,19 @@ function modifiziereLambertShading() {
 		"	float vlf = vLightFront[0];",
 
 		// This version presevers colors, but looks less cartoonish (good with simple textures, colors)
-		// "	if (vlf< 0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.5), alpha); }", "	if (vlf>=0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.3), alpha); }", "	if (vlf>=0.75) { gl_FragColor = vec4(mix( basecolor, vec3(1.0), 0.0), alpha); }", "	if (vlf>=0.95) { gl_FragColor = vec4(mix( basecolor, vec3(1.0), 0.3), alpha); }",
+		// "	if (vlf< 0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.5), alpha); }",
+		// "	if (vlf>=0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.3), alpha); }", 
+		// "	if (vlf>=0.75) { gl_FragColor = vec4(mix( basecolor, vec3(1.0), 0.0), alpha); }", 
+		// "	if (vlf>=0.95) { gl_FragColor = vec4(mix( basecolor, vec3(1.0), 0.3), alpha); }",
 
 		// This version looks more cartoonish, but washes colors out (looks good with complex textures)
-		"	if (vlf< 0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.5), alpha); }",
-		 "	if (vlf>=0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.25), 0.5), alpha); }",
-		 "	if (vlf>=0.75) { gl_FragColor = vec4(mix( basecolor, vec3(0.5), 0.5), alpha); }",
-		 "	if (vlf>=0.95) { gl_FragColor = vec4(mix( basecolor, vec3(0.75), 0.5), alpha); }",
+		"	if (vlf< 0.25) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.5), alpha); }",
+		 "	if (vlf>=0.25) { gl_FragColor = vec4(mix( basecolor, vec3(0.25), 0.5), alpha); }",
+		 "	if (vlf>=0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.5), 0.5), alpha); }",
+		 "	if (vlf>=0.75) { gl_FragColor = vec4(mix( basecolor, vec3(0.75), 0.5), alpha); }",
 
 		"	gl_FragColor.xyz *= vLightFront;", "}"].join("\n");
 }
 
 function initialisiereCelShading(){
-	game.celShading = {};                                        // Globalen Namespace schaffen
-	game.celShading.borderColor = new THREE.Vector4(0,0,0,1);
 }

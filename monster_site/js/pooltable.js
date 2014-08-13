@@ -60,8 +60,8 @@ function erstelleHindernisse(ColladaLoader){
 	erstelleBumper(ColladaLoader, -9, 18, 24);
 	
 	// erstelleRampe(ColladaLoader, -10, 22, 22);
-	erstelleRampeJS(9,18,20, 2.2);
-	erstelleRampeJS(-9,18,20, 0.8);
+	// erstelleRampeJS(9,18,20, 2.2);
+	// erstelleRampeJS(-9,18,20, 0.8);
 	
 	erstellePaddleJS(-10,18,-2, -1.7);
 	erstellePaddleJS(10,18,2, 1.7);
