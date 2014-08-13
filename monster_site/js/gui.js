@@ -130,9 +130,15 @@ function createGUI() {
 		game.vollbild = value;
 		if (value && THREEx.FullScreen.available() && !THREEx.FullScreen.activated()) {
 			THREEx.FullScreen.request(document.getElementById("viewport"));
+			$( "#viewport" ).addClass( "vollbild" );
+			$( "canvas" ).addClass( "vollbild" );
 			onWindowResize();
+			
 		} else {
 			THREEx.FullScreen.cancel();
+			$( "#viewport" ).removeClass( "vollbild" );
+			$( "canvas" ).removeClass( "vollbild" );
+			$( "canvas" ).addClass( "canvas" );
 			onWindowResize();
 		}
 	});

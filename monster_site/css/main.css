@@ -243,6 +243,17 @@ td {
 #gameEnde {
 	visibility:hidden;
 }
+
+.vollbild {
+	position: absolute !important;
+	top: 0px !important;
+	height: 100% !important;
+}
+
+.canvas{
+	width: 100% !important;
+}
+
 #viewport {
 	position: absolute;
 	height: 100%;
