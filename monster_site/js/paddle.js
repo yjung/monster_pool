@@ -22,15 +22,12 @@ function erstellePaddleJS(PosX, PosY, PosZ, RotY)
 		game.szene.add(paddle);
 		console.log("paddle: v");
 		console.log(paddle);
-<<<<<<< HEAD
+
 		console.log("//Paddleend: ^");
 	});
 		
 		var paddleLeftPivot = new Physijs.SphereMesh(new THREE.CubeGeometry(1, 1, 1), lGreenT, 0);
-=======
-	
-		var paddleLeftPivot = new Physijs.BoxMesh(new THREE.BoxGeometry(1, 1, 1), pTransparentT, 0);
->>>>>>> a623498011e601a0abed10065e134c395fba6489
+
 
 		paddleLeftPivot.position.x = PosX;
 		paddleLeftPivot.position.y = PosY;
@@ -52,10 +49,10 @@ function erstellePaddleJS(PosX, PosY, PosZ, RotY)
 			1 // controls bounce at limit (0.0 == no bounce)
 		);
 
-<<<<<<< HEAD
+
 		return constraint;
 }//end ErstellePaddleJS
-=======
+
 	return constraint;
 	});
 }
@@ -96,5 +93,5 @@ function createLeftFlipper()
 	0.1, // applied as a factor to constraint error, how big the kantelpunt is moved when a constraint is hit
 	0 // controls bounce at limit (0.0 == no bounce)
 	);
->>>>>>> a623498011e601a0abed10065e134c395fba6489
+
 

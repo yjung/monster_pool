@@ -5,11 +5,8 @@ function createWhiteBall(x,y,z) {
     var restitution = 10;   // low restitution
 
     // Grundobjekterzeugung mit Material aus angelegter Bibliothek
-<<<<<<< HEAD
-    game.whiteBall = new Physijs.SphereMesh(new THREE.SphereGeometry(0.75, 16, 16), lWhiteT, 1000);
-=======
     game.whiteBall = new Physijs.ConvexMesh(new THREE.SphereGeometry(0.75, 16, 16), lWhiteBallP, 100);
->>>>>>> a623498011e601a0abed10065e134c395fba6489
+
     // Initiale Positionierung in der Welt
     game.whiteBall.position.x = x;
     game.whiteBall.position.y = y;
