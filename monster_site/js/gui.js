@@ -40,6 +40,7 @@ function createGUI() {
 	paramOptions = {
 		vollbild : false,
 		sound : false,
+		effectSound : false,
 	};
 
 	// Steuerungseintraege hinzufuegen
@@ -61,6 +62,7 @@ function createGUI() {
 	// Optionen-Eintraege hinzufuegen
 	game.debugGUI.vollbild = options.add(paramOptions, 'vollbild').listen().name("Vollbildmodus");
 	game.debugGUI.sound = options.add(paramOptions, 'sound').listen().name("Sound");
+	game.debugGUI.effectSound = options.add(paramOptions, 'effectSound').listen().name("Sound Effects");
 
 	game.debugGUI.autoListen = true;
 
@@ -152,6 +154,10 @@ function createGUI() {
 			soundAmbience('ambience');
 			game.ambientSound.volume = 0.5;
 		}
+	});
+	
+		game.debugGUI.effectSound.onChange(function(value) {
+		game.effectSound = value;
 	});
 
 	// GUI im Allgemeinen standardmaessig oeffnen
