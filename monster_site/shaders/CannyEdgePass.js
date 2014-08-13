@@ -7,6 +7,7 @@ CannyEdgePass = {
 		"opacity":  { type: "f", value: 1.0 },
 		"uAspect": { type: "v2", value: new THREE.Vector2(parseFloat(window.innerWidth), parseFloat(window.innerHeight)) },
 		"uBorderColor": { type: "v4", value: new THREE.Vector4(0.0, 0.0, 0.0, 1.0)},
+		"uOffset": { type: "f", value: 1.0},
 	},
 
 	vertexShader: [
@@ -28,13 +29,14 @@ CannyEdgePass = {
 		"uniform float opacity;",
 		"uniform vec2 uAspect;",
 		"uniform vec4 uBorderColor;",
+		"uniform float uOffset;",
 		
 		// varying Variablen unterscheiden sich fuer jeden Pixel, der durchlaufen wird und werden vom Vertex-Shader entgegen genommen.
 		"varying vec2 vUv;",	// UV-Koordinaten, die vom Vertex-Shader uebergeben wurden.
 		"vec4 texel = texture2D( tDiffuse, vUv );",
 		"vec4 gradientColor = vec4(0.0, 0.0, 0.0, 0.0);",
 		// Eigene Variablendeklaration
-		"vec2 offset  = 1.0 / (uAspect / 1.0 );",
+		"vec2 offset  = uOffset / (uAspect / 1.0 );",
 
 		"void main() {",
 		"	vec2 pixelTop_Coord = vUv + vec2(0.0, offset.y);",

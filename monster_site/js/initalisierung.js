@@ -107,6 +107,9 @@ function initialisiere() {
 	/* Sound */
 	game.ambientSound = document.createElement("audio");
 	game.soundAn = false;
+	
+	/* Ambient Sound*/
+	game.effectSound = false;
 
     /* Spielumgebung einladen */
 	queueLaden();                               // Queue laden
@@ -124,9 +127,9 @@ function initialisiere() {
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
 
 
-	var achsendreibein = new THREE.AxisHelper(50);
-	achsendreibein.position.y = 20;
-    game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
+	// var achsendreibein = new THREE.AxisHelper(50);
+	// achsendreibein.position.y = 20;
+    // game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
 
 	erstelleMinimap();	
 
