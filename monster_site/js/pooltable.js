@@ -58,7 +58,7 @@ function erstelleHindernisse(ColladaLoader){
 	var rotStart = new THREE.Vector3(0,110,0);	// Startrotation Slider-Animation
 	var rotZiel = new THREE.Vector3(0,70,0);	// Endrotation Slider-Animation
 	
-	erstelleSlider(posStart, posZiel, rotStart, rotZiel);
+	// erstelleSlider(posStart, posZiel, rotStart, rotZiel);
 	
 	erstelleBumper(ColladaLoader, 12, 18, 21);
 	erstelleBumper(ColladaLoader, 10, 18, 22);
@@ -75,7 +75,7 @@ function erstelleHindernisse(ColladaLoader){
 	erstellePaddleJS(-10,18,-2, -1.7);
 	erstellePaddleJS(10,18,2, 1.7);
 	
-	erstelleRampe(ColladaLoader, 9,18,20, 2.2);
+	erstelleRampe(ColladaLoader, 0,18,-10, -1.57);
 	
 }
 
