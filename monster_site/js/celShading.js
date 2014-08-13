@@ -57,13 +57,16 @@ function modifiziereLambertShading() {
 		"	float vlf = vLightFront[0];",
 
 		// This version presevers colors, but looks less cartoonish (good with simple textures, colors)
-		// "	if (vlf< 0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.5), alpha); }", "	if (vlf>=0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.3), alpha); }", "	if (vlf>=0.75) { gl_FragColor = vec4(mix( basecolor, vec3(1.0), 0.0), alpha); }", "	if (vlf>=0.95) { gl_FragColor = vec4(mix( basecolor, vec3(1.0), 0.3), alpha); }",
+		// "	if (vlf< 0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.5), alpha); }",
+		// "	if (vlf>=0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.3), alpha); }", 
+		// "	if (vlf>=0.75) { gl_FragColor = vec4(mix( basecolor, vec3(1.0), 0.0), alpha); }", 
+		// "	if (vlf>=0.95) { gl_FragColor = vec4(mix( basecolor, vec3(1.0), 0.3), alpha); }",
 
 		// This version looks more cartoonish, but washes colors out (looks good with complex textures)
-		"	if (vlf< 0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.5), alpha); }",
-		 "	if (vlf>=0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.25), 0.5), alpha); }",
-		 "	if (vlf>=0.75) { gl_FragColor = vec4(mix( basecolor, vec3(0.5), 0.5), alpha); }",
-		 "	if (vlf>=0.95) { gl_FragColor = vec4(mix( basecolor, vec3(0.75), 0.5), alpha); }",
+		"	if (vlf< 0.25) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.5), alpha); }",
+		 "	if (vlf>=0.25) { gl_FragColor = vec4(mix( basecolor, vec3(0.25), 0.5), alpha); }",
+		 "	if (vlf>=0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.5), 0.5), alpha); }",
+		 "	if (vlf>=0.75) { gl_FragColor = vec4(mix( basecolor, vec3(0.75), 0.5), alpha); }",
 
 		"	gl_FragColor.xyz *= vLightFront;", "}"].join("\n");
 }
