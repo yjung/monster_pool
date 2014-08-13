@@ -7,15 +7,15 @@
 
 function soundEffekt(dateiname) {
 
-	var sound = new Audio();
-	sound.src = null;
-
+	
+	if(game.effectSound===true){
+		var sound = new Audio();
+		sound.src = null;
 	if (sound.canPlayType("audio/mpeg")) {
 		sound.src = 'assets/audio/' + dateiname + '.mp3';
 	} else if (sound.canPlayType('audio/ogg')) {
 		sound.src = 'assets/audio/' + dateiname + '.ogg';
 	}
-
 	// Falls Datei gefunden, laden und abspielen
 	if (sound.src) {
 		sound.load();
@@ -24,6 +24,7 @@ function soundEffekt(dateiname) {
 			// Abspielen
 			sound.play();
 		});
+	}
 	}
 };
 
