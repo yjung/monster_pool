@@ -6,12 +6,21 @@ function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine 
 	ColladaLoader.load('assets/dae/pooltable.dae', function(collada) {
 
 		var modelScene = collada.scene;
+		console.log(modelScene);
 		var tischbestandteile = 6; 												// Aktuell besteht das Tischmodell aus 7 Einzelteilen 
 		var szenenbestandteile = modelScene.children.length;					// Abfragen wieiviel Objekte noch folgen (Das sind Collider)
 
 		for (var i = 0; i < tischbestandteile; i++) {								// Fuer alle Tischteile
 		var modelGeometry = modelScene.children[i].children[0].geometry; 		// Geometrie aus der .dae-Szene extrahieren
 		var modelMaterial = modelScene.children[i].children[0].material;		// Material aus der .dae-Szene extrahieren
+		
+		// Erstes Objekt ist die Filzflaeche. Fuer dieses wird ein Physijs-Material benoetigt.
+		if(i==0){
+			modelMaterial = Physijs.createMaterial((modelMaterial),
+			0.1, // friction
+			1.0 // restitution
+);
+		}
 		
 		game.tisch.i = new THREE.Mesh(modelGeometry, modelMaterial);			// Einzelteile zusammenfuegen
 		game.tisch.i.scale.set(0.25,0.25,0.25);									// FIX: Sollte im dae-File behoben werden!

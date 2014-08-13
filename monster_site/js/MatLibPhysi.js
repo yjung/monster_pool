@@ -1,17 +1,11 @@
 /* Libary for physical materials.*/
 
+var lWhiteBallP;
 
-var ground;
+lWhiteBallP = Physijs.createMaterial(new THREE.MeshLambertMaterial({
+	color : 0xffffff,
+	ambient : 0xffffff,
+}), 0.1, // friction
+1.0 // restitution
+);
 
-
-ground = Physijs.createMaterial(new THREE.MeshPhongMaterial({
-					color : 0xff0000
-
-				}), 1, // high friction
-				.7 // low restitution
-				);
-
-
-
-
-//var materialGround = new THREE.MeshPhongMaterial( { color: 0xff0000, ambient: 0xaaaaaa, specular: 0xaaaaaa, perPixel: true,  vertexColors: THREE.FaceColors } );
