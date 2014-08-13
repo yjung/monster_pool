@@ -4,7 +4,7 @@ function erstelleRampe(loader, xPosition, yPosition, zPosition) {
 
 
 	// Slider einladen
-	ColladaLoader.load('assets/dae/rampeN.dae', function(collada) {
+	ColladaLoader.load('assets/dae/rampe.dae', function(collada) {
 
 		var modelScene = collada.scene.children[0].children[0];
 		var modelGeometry = modelScene.geometry;
