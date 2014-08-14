@@ -1,6 +1,8 @@
 // Initialisierung der Lichtquellen fuer die gesamte Szene
 function setupLights() {
-	console.log("--Erstelle Lichtquellen.--");
+	if(debugMode){		
+		console.log("--Erstelle Lichtquellen.--");
+	}
 
 	var lichter = [];
 	// Sammlung fuer alle Lichtquellen der Szene

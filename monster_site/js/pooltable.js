@@ -1,12 +1,15 @@
 // Tisch einladen und initialisieren
 function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine fehlen (Export error oder altes File¿)*/
 {
+	if(debugMode){
+		console.log("--Lade Billardtisch--");
+	}
+	
 	var ColladaLoader = new THREE.ColladaLoader();
 	// JSON-Loader erstellen
 	ColladaLoader.load('assets/dae/pooltable.dae', function(collada) {
 
 		var modelScene = collada.scene;
-		console.log(modelScene);
 		var tischbestandteile = 6; 												// Aktuell besteht das Tischmodell aus 7 Einzelteilen 
 		var szenenbestandteile = modelScene.children.length;					// Abfragen wieiviel Objekte noch folgen (Das sind Collider)
 
@@ -52,6 +55,10 @@ function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine 
 }
 
 function erstelleHindernisse(ColladaLoader){
+	
+	if(debugMode){
+		console.log("--Lade Hindernisse--");
+	}
 	
 	var posStart = new THREE.Vector3(8,17,22);	// Startpunkt Slider-Animation
 	var posZiel = new THREE.Vector3(-8,17,22);	// Endpunkt Slider-Animation

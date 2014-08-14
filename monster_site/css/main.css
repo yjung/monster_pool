@@ -231,11 +231,14 @@ td {
 }
 
 #scoreboard {
+	font-family: comicNew;
+	font-weight: bold;
 	position:absolute;
 	top:0px;
 	right:0px
 	height:80px;
 	width:300px;
+	padding: 10px;
 	background:#000000;
 	/*visibility:hidden;*/	
 }
@@ -267,6 +270,21 @@ td {
 	height: 140px;
 	margin: 20px;
 	background: black;
+}
+
+/* ==========================================================================
+   Fonts
+   ========================================================================== */
+
+@font-face {
+    font-family: comicNew;
+    src: url(../fonts/ComicNeue-Light.woff);
+}
+
+@font-face {
+    font-family: comicNew;
+    src: url(../fonts/ComicNeue-Bold.woff);
+    font-weight: bold;
 }
 
 /* ==========================================================================

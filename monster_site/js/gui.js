@@ -1,5 +1,8 @@
 function createGUI() {
-	console.log("--Erstelle Debug-GUI.--");
+	if(debugMode){		
+		console.log("--Erstelle Debug-GUI.--");
+	}
+	
 	game.debugGUI = new dat.GUI({
 		autoPlace : false, // Eigene Platzierung ermoeglichen
 		width : 220	// Breite etwas reduzieren
@@ -16,7 +19,6 @@ function createGUI() {
 	// Ordner fuer die Kategorien erstellen
 	var controls = game.debugGUI.addFolder('Controls');
 	var postprocessing = game.debugGUI.addFolder('Postprocessing - Allgmein');
-
 	var options = game.debugGUI.addFolder('Options');
 
 	paramControls = {

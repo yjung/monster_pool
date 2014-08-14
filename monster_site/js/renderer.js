@@ -4,7 +4,9 @@
  * 			aktualisieren.
  *//////////////////////////////////////////////////////////////////////////////////
 function setupRenderer(breite, hoehe) {
-	console.log("--Initialisiere Renderer.--");
+	if(debugMode){
+	console.log("--Initialisiere Renderer.--");		
+	}
 	if (window.WebGLRenderingContext) {				// Falls WebGL verfuegbar
 		var renderer = new THREE.WebGLRenderer({	// Renderer intialisieren
 			antialias : true						// antialias standardmaessig an

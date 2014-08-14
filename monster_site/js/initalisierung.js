@@ -1,6 +1,12 @@
 // once everything is loaded, we run our Three.js stuff.
 function initialisiere() {
     "use strict";                                                   // Strict-Mode 
+	
+	window.debugMode = 0;
+	if(debugMode){
+		console.log("--Initialisierung--");
+	}
+
 
 	$("#viewport").css("visibility","visible");
 	
@@ -122,7 +128,7 @@ function initialisiere() {
     ladeMonster();								// Lade ein Monster (Bernd)
     ladeAnimation();
 	createGUI();								// Debugging-GUI erstellen
-	celGUIerstellen();
+	celShadingKonturGUI();
 	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
 
