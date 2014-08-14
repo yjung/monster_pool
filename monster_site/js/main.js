@@ -2,8 +2,6 @@ var requestID;
 var animate = true;
 // Abfangen von Benutzereingaben zum Anpassen der Szene
 function benutzereingaben() {
-	// HIER ERGAENZEN
-	queueAktualisieren();
 	// Aktualisierung der Queue-Position
 	checkKeyboard();
 }
@@ -41,7 +39,7 @@ function mainloop() {
 		if (game.renderer.bloomPass) {
 			game.composerBloomPass.render();
 		}
-		if (game.renderer.celShading) {
+		if (game.renderer.celShadingKontur) {
 			if (game.monster.animation) {
 				game.monster.animation.update(0.01);
 			}

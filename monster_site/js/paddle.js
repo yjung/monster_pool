@@ -51,11 +51,7 @@ function erstellePaddleJS(PosX, PosY, PosZ, RotY)
 
 
 		return constraint;
-}//end ErstellePaddleJS
-
-	return constraint;
-	});
-}
+	};
 
 function createLeftFlipper()
 {
@@ -93,5 +89,5 @@ function createLeftFlipper()
 	0.1, // applied as a factor to constraint error, how big the kantelpunt is moved when a constraint is hit
 	0 // controls bounce at limit (0.0 == no bounce)
 	);
-
+}
 

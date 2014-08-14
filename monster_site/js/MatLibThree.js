@@ -197,8 +197,8 @@ pGreyT = new THREE.MeshPhongMaterial({
 pGreyReflectiveT = new THREE.MeshPhongMaterial({
 	color : 0x777777,
 	ambient : 0x777777,
-	combine : THREE.Multiply,
-	envMap : cubeTarget,
+	// combine : THREE.Multiply,
+	// envMap : cubeTarget,
 	reflectivity : 0.75,
 });
 
@@ -216,40 +216,19 @@ pBlackT = new THREE.MeshPhongMaterial({
 pChromeT = new THREE.MeshPhongMaterial({
 	color : 0xffffff,
 	ambient : 0xffffff,
-	combine : THREE.Multiply,
-	envMap : cubeTarget,
+	// combine : THREE.Multiply,
+	// envMap : cubeTarget,
 	reflectivity : 0.5,
 	metal : true,
 // side: THREE.DoubleSide,
 });
 
-var pWhiteMetalT= new THREE.MeshPhongMaterial({
-	color : 0xffffff,
-	ambient : 0xffffff,
-	combine : THREE.Multiply,
-	envMap : cubeTarget,
-	reflectivity : 0.25,
-	metal : true,
-// side: THREE.DoubleSide,
-});
-
-
-pSilverBlueCarPaintT = new THREE.MeshPhongMaterial({
-	color : 0xccccce,
-	ambient : 0xddddff,
-	emissive: 0x111112,
-	combine : THREE.Multiply,
-	envMap : cubeTarget,
-	reflectivity : 0.2,
-	metal : true,
-// side: THREE.DoubleSide,
-});
 
 pBlackGlasT = new THREE.MeshPhongMaterial({
 	color : 0x111111,
 	ambient : 0x111111,
-	combine : THREE.MixOperation,
-	envMap : cubeTarget,
+	// combine : THREE.MixOperation,
+	// envMap : cubeTarget,
 	reflectivity : 0.2,
 	metal : false,
 	// transparent : true,

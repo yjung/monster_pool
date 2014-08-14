@@ -4,22 +4,22 @@
 
 modifiziereLambertShading();
 
-function celGUIerstellen() {
+function celShadingKonturGUI() {
 	// Ordner fuer die Cel-Shading-Einstellungen
-	var celShading = game.debugGUI.addFolder('Cel-Shading - Mathias');
+	var celShadingKontur = game.debugGUI.addFolder('Cel-Shading (Kontur) - Mathias');
 
 	// Parameter-Liste fuer das Cel-Shading
-	var paramCelShading = {
+	var paramCelShadingKontur = {
 		kontur : true,
 		offset: 0.75,
 		konturFarbe : [ 0, 0, 0, 1 ], // RGB with alpha
 	};
 
-	game.renderer.celShading = false; // Default = true
+	game.renderer.celShadingKontur = true; // Default = true
 	// Post-Processingeintraege hinzufuegen
-	game.debugGUI.kontur = celShading.add(paramCelShading, 'kontur').name("Kontur").listen();
-	game.debugGUI.konturfarbe = celShading.addColor(paramCelShading, 'konturFarbe').name("Kontur-Farbe").listen();
-	game.debugGUI.offset = celShading.add(paramCelShading, 'offset').min(0.0).max(2.0).step(0.01).name("Offset").listen();
+	game.debugGUI.kontur = celShadingKontur.add(paramCelShadingKontur, 'kontur').name("Kontur").listen();
+	game.debugGUI.konturfarbe = celShadingKontur.addColor(paramCelShadingKontur, 'konturFarbe').name("Kontur-Farbe").listen();
+	game.debugGUI.offset = celShadingKontur.add(paramCelShadingKontur, 'offset').min(0.0).max(2.0).step(0.01).name("Offset").listen();
 
 
 	game.debugGUI.konturfarbe.onChange(function(value) {
@@ -37,12 +37,11 @@ function celGUIerstellen() {
 	});
 
 
-	celShading.open();
-	console.log(game.szene);
-	// Ordner standardmaessig oeffnen
+	celShadingKontur.open(); 	// Ordner standardmaessig oeffnen
 }
 
 function modifiziereLambertShading() {
+
 		/* Entfernen nicht benoetigter Leerzeichen. */
 		THREE.ShaderLib['lambert'].fragmentShader = THREE.ShaderLib['lambert'].fragmentShader.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
 		THREE.ShaderLib['lambert'].fragmentShader = "uniform vec3 diffuse;\n" + THREE.ShaderLib['lambert'].fragmentShader.substr(0, THREE.ShaderLib['lambert'].fragmentShader.length - 1);
@@ -73,5 +72,8 @@ function modifiziereLambertShading() {
 		"	gl_FragColor.xyz *= vLightFront;", "}"].join("\n");
 }
 
-function initialisiereCelShading(){
+function shadingGUIerstellen(){
+		// Ordner fuer die Cel-Shading-Einstellungen
+	var celShading = game.debugGUI.addFolder('Cel-Shading (Kontur) - Mathias');
+
 }
