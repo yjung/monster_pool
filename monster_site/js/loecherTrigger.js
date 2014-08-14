@@ -36,6 +36,7 @@ function lochColliderErstellen(x, y, z, points)
 		if(object === game.whiteBall){
 			soundEffekt("ball-loch");	
 		  	window.setTimeout(whiteCollideHole, 2000);
+		  	setTimer("White Ball is in the hole! Wait: ",2);
 		 }
 		 else
 		 {

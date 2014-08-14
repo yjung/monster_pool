@@ -162,6 +162,7 @@ function roomCollideEvent(object)
 	if (object === game.whiteBall)
 	{
 		window.setTimeout(whiteCollideRoom, 3000);
+		setTimer("White Ball fell down! Wait: ",3);
 	}
 	else
 	{

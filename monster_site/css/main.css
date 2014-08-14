@@ -239,10 +239,23 @@ td {
 	height:80px;
 	width:300px;
 	padding: 10px;
-	background:#000000;
-	/*visibility:hidden;*/	
+	background:#000000;	
 }
 
+#divTimer {
+	font-family: comicNew;
+	font-weight: bold;
+	position:absolute;
+	height:80px;
+	width:300px;
+	padding: 10px;
+	background:#000000;
+}
+
+#divSeconds{	
+	font-size: 3em;
+	text-align:center;
+}
 #gameEnde {
 	visibility:hidden;
 }
