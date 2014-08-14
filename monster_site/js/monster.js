@@ -4,17 +4,20 @@ function ladeMonster() {
 
     loader.load('assets/json/Bernd5Redu.js', function (geometry, materials) {
 
-      game.monster.bernd = new Physijs.SphereMesh(
-        geometry,
-        new THREE.MeshFaceMaterial(materials),
+      var sphere = new Physijs.SphereMesh(
+        new THREE.SphereGeometry(0.75, 16, 16),
+        pTransparentT,
         100
       );
 
-    game.monster.bernd.position.x = 5;
-    game.monster.bernd.position.y = 30;
-    game.monster.bernd.position.z = 0;
+    sphere.add(new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials)));
 
-    game.szene.add(game.monster.bernd);
+    sphere.position.x = 5;
+    sphere.position.y = 30;
+    sphere.position.z = 0;
+    sphere.castShadow = true;
+
+    game.szene.add(sphere);
     });
 };
 

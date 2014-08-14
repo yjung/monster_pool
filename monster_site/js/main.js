@@ -49,10 +49,10 @@ function mainloop() {
 			//game.renderer.setViewport(0, 0, screenWidth, screenHeight);
 			//game.renderer.clear(false, true, false);
 			game.composerCelShading.render();
-			//game.renderer.clear(false, false, false);
-			//game.renderer.setViewport(10, screenHeight - 160 - 120, 240, 140);
+			game.renderer.clear(false, false, false);
+			game.renderer.setViewport(10, screenHeight - 160 - 120, 240, 140);
 			// // game.mapComposerCelShading.render();
-			//game.renderer.render(game.szene, game.mapCamera);
+			game.renderer.render(game.szene, game.mapCamera);
 
 		}
 		if (game.renderer.custom) {
