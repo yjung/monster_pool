@@ -22,9 +22,9 @@ function ladeKugeln(){
 		game.szene.add(kugel);
 		
 			kugel.addEventListener('collision', function(object) {
-				patron= new RegExp("^ball"); //Pattern: The name starts with ball
-				// console.log("Comparacion con "+object.name+": "+patron.test(object.name));
-				if((object === game.whiteBall)||(patron.test(object.name))){
+				pattern = new RegExp("^ball"); //Pattern: The name starts with ball
+				// console.log("Comparacion con "+object.name+": "+pattern.test(object.name));
+				if((object === game.whiteBall)||(pattern.test(object.name))){
 					soundEffekt("ball-ball");
 				}					
 			  

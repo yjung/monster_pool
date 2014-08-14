@@ -4,13 +4,39 @@ function ladeMonster() {
 
     loader.load('assets/json/Bernd5Redu.js', function (geometry, materials) {
 
-      var sphere = new Physijs.SphereMesh(
+    var glowMaterial = new THREE.ShaderMaterial( 
+    {
+        uniforms: 
+      { 
+        "c":   { type: "f", value: 0.0 },
+        "p":   { type: "f", value: 10.0 },
+        glowColor: { type: "c", value: new THREE.Color(0xff0000) },
+        viewVector: { type: "v3", value: game.kamera.position }
+      },
+      // vertexShader:   document.getElementById( 'vertexShader'   ).textContent,
+      vertexShader:   GlowShader.vertexShader,
+      fragmentShader: GlowShader.fragmentShader,
+      side: THREE.FrontSide,
+      blending: THREE.AdditiveBlending,
+      transparent: true
+    }   );
+
+    var sphere = new Physijs.SphereMesh(
         new THREE.SphereGeometry(0.75, 16, 16),
-        pTransparentT,
+        glowMaterial,
         100
       );
 
+    sphere.name = "ball";
     sphere.add(new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials)));
+
+    sphere.addEventListener( 'collision', function( other_object,
+      relative_velocity, relative_rotation, contact_normal ) {
+        if (other_object === game.whiteBall || pattern.test(other_object.name)) {
+             animiereMonsterSphere(sphere);
+             soundEffekt("ball-ball");
+        } 
+      });
 
     sphere.position.x = 5;
     sphere.position.y = 30;
@@ -20,6 +46,46 @@ function ladeMonster() {
     game.szene.add(sphere);
     });
 };
+
+function animiereMonsterSphere (sphereObject) {
+  var sphere = sphereObject;
+
+  var cValue = sphere.material.uniforms["c"].value;
+    var pValue = sphere.material.uniforms["p"].value;
+
+    var currentValue = {
+      cValue : sphere.material.uniforms["c"].value,
+      pValue : sphere.material.uniforms["p"].value
+    };
+
+    var gradientTrans = {
+      cValue: 0.0,
+      pValue: 10.0
+    };
+
+    var gradientGlow = {
+      cValue: 1.0,
+      pValue: 0.2
+    };
+
+    tweenToGlow = new TWEEN.Tween(currentValue).to(gradientGlow, 20);
+    tweenToTrans = new TWEEN.Tween(currentValue).to(gradientTrans, 1500);
+
+    tweenToGlow.onUpdate(function() {
+      sphere.material.uniforms["c"].value = currentValue.cValue;
+      sphere.material.uniforms["p"].value = currentValue.pValue;
+    });
+
+    tweenToTrans.onUpdate(function() {
+      sphere.material.uniforms["c"].value = currentValue.cValue;
+      sphere.material.uniforms["p"].value = currentValue.pValue;
+    });
+
+    tweenToGlow.chain(tweenToTrans);
+    //tweenToTrans.chain(tweenToGlow);
+
+    tweenToGlow.start();
+}
 
 function ladeAnimation() { 
 

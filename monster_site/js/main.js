@@ -19,6 +19,11 @@ function mainloop() {
 	game.szene.simulate(undefined, 1);
 	// Physiksimulation
 
+	// Animation fuer Test-Monster-Animation
+	if (game.monster.animation) {
+				game.monster.animation.update(0.01);
+	}
+
 	var screenWidth = window.innerWidth, screenHeight = window.innerHeight;
 
 	game.renderer.clear(true, false, false);
@@ -40,9 +45,6 @@ function mainloop() {
 			game.composerBloomPass.render();
 		}
 		if (game.renderer.celShadingKontur) {
-			if (game.monster.animation) {
-				game.monster.animation.update(0.01);
-			}
 			// Code fuer Minimap bisher auskommentiert
 			//game.renderer.setViewport(0, 0, screenWidth, screenHeight);
 			//game.renderer.clear(false, true, false);
