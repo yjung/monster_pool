@@ -128,7 +128,8 @@ function initialisiere() {
     ladeMonster();								// Lade ein Monster (Bernd)
     ladeAnimation();
 	createGUI();								// Debugging-GUI erstellen
-	celShadingKonturGUI();
+	celShadingGUIKontur();
+	celShadingGUIShading();
 	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
 
