@@ -125,7 +125,7 @@ function initialisiere() {
     sceneLaden();                        //Alpha Tisch aus Colada File Laden^
     loecherTrigger();							//Lade die Triggers von den Loechern
     createWhiteBall(0,22,15);                    // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
-    ladeMonster();								// Lade ein Monster (Bernd)
+    loadMonsters();								// Lade ein Monster (Bernd)
     ladeAnimation();
 	createGUI();								// Debugging-GUI erstellen
 	celShadingKonturGUI();
@@ -133,9 +133,9 @@ function initialisiere() {
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
 
 
-	// var achsendreibein = new THREE.AxisHelper(50);
-	// achsendreibein.position.y = 20;
-    // game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
+	var achsendreibein = new THREE.AxisHelper(50);
+	achsendreibein.position.y = 20;
+    game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
 
 	erstelleMinimap();	
 
