@@ -91,7 +91,8 @@ function erstelleHindernisse(ColladaLoader){
 	
 
 	
-	 erstelleRampe(ColladaLoader, 0,18,-10, -1.57);
+	 erstelleRampe(ColladaLoader, 9,18,20, 2.2);
+	 erstelleRampe(ColladaLoader, -9,18,20, 0.8);
 	
 };
 function stuff()
