@@ -26,8 +26,15 @@ function positionBall(x,y,z){
 	
 }
 
-function applyForce(){
+function applyForce(bumperForce){
   	effect = new THREE.Vector3( paramControls.stosskraftX, paramControls.stosskraftY, paramControls.stosskraftZ);
   	offset = new THREE.Vector3( paramControls.offsetX, paramControls.offsetY, paramControls.offsetZ );
-  	game.whiteBall.applyImpulse( effect, offset );
+  	
+  	if(bumperForce){
+  		bumperForce = new THREE.Vector3( bumperForce.x, 0, bumperForce.z);
+		bumperForce.multiplyScalar(-10000000);
+  		game.whiteBall.applyImpulse( bumperForce, offset );
+  	}else{
+  		game.whiteBall.applyImpulse( effect, offset );
+  	}
 };
