@@ -9,13 +9,14 @@ function erstelleRampe(loader, xPosition, yPosition, zPosition, yRotation)
 	{
 
 		var modelScene = collada.scene;
+		console.log(modelScene);
 		var rampenbestandteile = 1;
 		var szenenbestandteile = modelScene.children.length;
 		/* Geometrie aus der .dae-Szene extrahieren*/
 		var modelGeometry = modelScene.children[0].children[0].geometry;
 		var modelMaterial = modelScene.children[0].children[0].material;
 		// Referenz auf Geometrie von Objekt 1 der eingeladenen .dae-Szene
-		var rampe = new THREE.Mesh(modelGeometry, pBlueWireframeT);
+		var rampe = new THREE.Mesh(modelGeometry, modelMaterial);
 
 		rampe.position.x = xPosition;
 		rampe.position.y = yPosition;
@@ -35,7 +36,7 @@ function erstelleRampe(loader, xPosition, yPosition, zPosition, yRotation)
 		var colliderGeometrie = colliderObjekt.geometry;
 		// var colliderMaterial = colliderObjekt.children[0].material;
 
-		var collider = new Physijs.BoxMesh(colliderGeometrie, pRedWireframeT,0);
+		var collider = new Physijs.ConvexMesh(colliderGeometrie, pTransparentT,0);
 		// collider.scale.set(0.25,0.25,0.25);
 		collider.position.x = xPosition+colliderObjekt.position.x;
 		collider.position.y = yPosition+colliderObjekt.position.y;
