@@ -1,28 +1,23 @@
 // Tisch einladen und initialisieren
-function sceneLaden()
-{
+function sceneLaden() {
 	raumLaden();
 	erstelleUmgebungsCollider();
 	// lichterLaden();
 }
 
-function raumLaden()
-{
+function raumLaden() {
 	var ColladaLoader = new THREE.ColladaLoader();
 	// JSON-Loader erstellen
 
-	material = new THREE.MeshLambertMaterial(
-	{
+	material = new THREE.MeshLambertMaterial({
 		map : THREE.ImageUtils.loadTexture("assets/dae/tex/dielen.png")
 	});
 
-	ColladaLoader.load('assets/dae/raum.dae', function(collada)
-	{
+	ColladaLoader.load('assets/dae/raum.dae', function(collada) {
 
 		var modelScene = collada.scene;
 		var szenenbestandteile = modelScene.children.length;
-		for (var i = 0; i < szenenbestandteile; i++)
-		{
+		for (var i = 0; i < szenenbestandteile; i++) {
 			var modelGeometry = modelScene.children[i].children[0].geometry;
 			// Geometrie aus der .dae-Szene extrahieren
 			var modelMaterial = modelScene.children[i].children[0].material;
@@ -36,13 +31,11 @@ function raumLaden()
 	});
 
 	// Bar laden
-	ColladaLoader.load('assets/dae/bar.dae', function(collada)
-	{
+	ColladaLoader.load('assets/dae/bar.dae', function(collada) {
 
 		var modelScene = collada.scene;
 		var szenenbestandteile = modelScene.children.length;
-		for (var i = 0; i < szenenbestandteile; i++)
-		{
+		for (var i = 0; i < szenenbestandteile; i++) {
 			var modelGeometry = modelScene.children[i].children[0].geometry;
 			// Geometrie aus der .dae-Szene extrahieren
 			var modelMaterial = modelScene.children[i].children[0].material;
@@ -55,14 +48,57 @@ function raumLaden()
 		}
 	});
 
+	// Girlande laden
+
+	var texture = THREE.ImageUtils.loadTexture('assets/dae/tex/girlande.png', {}, function() {
+		var plane = new THREE.PlaneGeometry( 100, 20 );
+		texture.needsUpdate = true;		// important
+		// uniforms
+		var uniforms = {
+			        color: { type: "c", value: new THREE.Color( 0x000 ) }, // material is "red"
+			texture : {
+				type : "t",
+				value : texture
+			},
+		};
+
+		// attributes
+		var attributes = {
+		};
+
+		// material
+		var material = new THREE.ShaderMaterial({
+			attributes : attributes,
+			uniforms : uniforms,
+			vertexShader : document.getElementById('TransparentVS').textContent,
+			fragmentShader : document.getElementById('TransparentFS').textContent
+		});
+		
+		var girlande = new THREE.Mesh(plane, material);
+
+		girlande.position.x = -80;
+		girlande.position.y = 40;
+		girlande.position.z = -60;
+
+		girlande.rotation.y = 0.785;
+
+		var girlande2 = new THREE.Mesh(plane, material);
+		girlande2.position.x = 80;
+		girlande2.position.y = 32.5;
+		girlande2.position.z = 40;
+
+		girlande2.rotation.y = -1.57;
+		// Collada Bar zur Szene hinzufuegen
+		game.szene.add(girlande);
+		game.szene.add(girlande2);
+	});
+
 	// Moebel laden
-	ColladaLoader.load('assets/dae/tischeStuehle.dae', function(collada)
-	{
+	ColladaLoader.load('assets/dae/tischeStuehle.dae', function(collada) {
 
 		var modelScene = collada.scene;
 		var szenenbestandteile = modelScene.children.length;
-		for (var i = 0; i < szenenbestandteile; i++)
-		{
+		for (var i = 0; i < szenenbestandteile; i++) {
 			var modelGeometry = modelScene.children[i].children[0].geometry;
 			// Geometrie aus der .dae-Szene extrahieren
 			var modelMaterial = modelScene.children[i].children[0].material;
@@ -77,8 +113,7 @@ function raumLaden()
 }
 
 // Collider erstellen
-function erstelleUmgebungsCollider()
-{
+function erstelleUmgebungsCollider() {
 	// Boden
 	var umgebungsCollider = new Physijs.BoxMesh(new THREE.BoxGeometry(240, 1, 200), pTransparentT, 0);
 
@@ -115,17 +150,14 @@ function erstelleUmgebungsCollider()
 }
 
 //Lade LampenObjekte (Spotlight lampe und Area Light Lampe)
-function lichterLaden()
-{
+function lichterLaden() {
 	var LightColladaLoader = new THREE.ColladaLoader();
 	// Lampe fuer Spotlichter laden
-	LightColladaLoader.load('assets/dae/lampeSpot.dae', function(collada) 
-	{
+	LightColladaLoader.load('assets/dae/lampeSpot.dae', function(collada) {
 
 		var modelScene = collada.scene;
 		var szenenbestandteile = modelScene.children.length;
-		for (var i = 0; i < szenenbestandteile; i++) 
-		{
+		for (var i = 0; i < szenenbestandteile; i++) {
 			var modelGeometry = modelScene.children[i].children[0].geometry;
 			// Geometrie aus der .dae-Szene extrahieren
 			var modelMaterial = modelScene.children[i].children[0].material;
@@ -137,47 +169,41 @@ function lichterLaden()
 			game.szene.add(element);
 		}
 	});
-	
+
 	// //Lampe fuer Flaechenlichter laden
 	// LightColladaLoader.load('assets/dae/lampeArea.dae', function(collada) {
 
-		// var modelScene = collada.scene;
-		// console.log(modelScene);
-		// var szenenbestandteile = modelScene.children.length;
-		// for (var i = 0; i < szenenbestandteile; i++) {
-			// var modelGeometry = modelScene.children[i].children[0].geometry;
-			// // Geometrie aus der .dae-Szene extrahieren
-			// var modelMaterial = modelScene.children[i].children[0].material;
+	// var modelScene = collada.scene;
+	// console.log(modelScene);
+	// var szenenbestandteile = modelScene.children.length;
+	// for (var i = 0; i < szenenbestandteile; i++) {
+	// var modelGeometry = modelScene.children[i].children[0].geometry;
+	// // Geometrie aus der .dae-Szene extrahieren
+	// var modelMaterial = modelScene.children[i].children[0].material;
 
-			// var element = new THREE.Mesh(modelGeometry, modelMaterial);
-			// // element.scale.set(0.25, 0.25, 0.25);
-			// // Collada Area Light lampe zur Szene hinzufuegen
-			// game.szene.add(element);
-		// }
+	// var element = new THREE.Mesh(modelGeometry, modelMaterial);
+	// // element.scale.set(0.25, 0.25, 0.25);
+	// // Collada Area Light lampe zur Szene hinzufuegen
+	// game.szene.add(element);
+	// }
 	// })
 }
 
-function roomCollideEvent(object)
-{
-	if (object === game.whiteBall)
-	{
+function roomCollideEvent(object) {
+	if (object === game.whiteBall) {
 		window.setTimeout(whiteCollideRoom, 3000);
-		setTimer("White Ball fell down! Wait: ",3);
-	}
-	else
-	{
+		setTimer("White Ball fell down! Wait: ", 3);
+	} else {
 		monsterCollideRoom();
 	}
 }
 
-function whiteCollideRoom()
-{
+function whiteCollideRoom() {
 	positionBall(0, 22, 15);
 }
 
-function monsterCollideRoom()
-{
+function monsterCollideRoom() {
 	game.monsterCounter -= 1;
 	//Counter von 15 bis 0 aktualisieren
-	$( "#balls" ).text(game.monsterCounter);
+	$("#balls").text(game.monsterCounter);
 }

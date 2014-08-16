@@ -169,6 +169,7 @@
 		</script>
 
 		<script type="x-shader/x-fragment" id="fragmentshader">
+
 			uniform sampler2D hatch1;
 			uniform sampler2D hatch2;
 			uniform sampler2D hatch3;
@@ -263,6 +264,39 @@
 			vec4 c = src * dst;
 
 			gl_FragColor = vec4( c.rgb, 1. );
+			}
+
+		</script>
+
+		<script id="TransparentVS" type="x-shader/x-vertex">
+
+			varying vec2 vUv;
+
+			void main() {
+
+			vUv = uv;
+
+			gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+			}
+
+		</script>
+
+		<script id="TransparentFS" type="x-shader/x-fragment">
+
+			uniform vec3 color;
+			uniform sampler2D texture;
+
+			varying vec2 vUv;
+
+			void main() {
+
+			vec4 tColor = texture2D( texture, vUv );
+
+			gl_FragColor = vec4( mix( color, tColor.rgb, tColor.a ), 1.0 );
+			
+			if(gl_FragColor == vec4(0.0,0.0,0.0,1.0)){discard;}
+
 			}
 
 		</script>
