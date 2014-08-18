@@ -6,7 +6,7 @@ var grid = [
               '~','~','~','~','#','~','~','~','~',
            ];
 var offset = 9;
-var monsterAmount = 15;
+var gridPosition = new THREE.Vector3(-4.25, 18.75, -18);
 var gridSymbols =  {
   '#': 1.5,
   '.': 0.25,
@@ -28,8 +28,6 @@ function getRandomColor() {
 }
 
 function loadMonsters() {
-  var monsters = new Array();
-  var gridPosition = new THREE.Vector3(-4.25, 18.75, -18);
   var ballPosition = new THREE.Vector3(0, 0, 0);
   var j = 1;
   var k = 1;
@@ -38,8 +36,6 @@ function loadMonsters() {
   ballPosition.z += gridPosition.z;
 
   for (var i = 0; i < grid.length; i++) {
-    var monsterProps = {};
-
     if (i === 0) {
       ballPosition.x += gridSymbols[grid[i]];
     }
@@ -54,13 +50,13 @@ function loadMonsters() {
     }
 
     if (grid[i] === '#') {
-      monsterProps['position'] = ballPosition.clone();
-      monsterProps['asset'] = monsterAssets[Math.floor(Math.random() * monsterAssets.length)];
-      monsterProps['color'] = getRandomColor();
-      monsterProps['name']  = 'ball'+j;
+      loadMonster(
+            monsterAssets[Math.floor(Math.random() * monsterAssets.length)],
+            getRandomColor(),
+            'ball'+j,
+            ballPosition.clone()
+      );
       j += 1;
-      monsters.push(monsterProps);
-      loadMonster(monsterProps['asset'], monsterProps['color'], monsterProps['name'], monsterProps['position']);
     }
   }
 }
@@ -161,12 +157,7 @@ function placeMonsters() {
   }
 }
 */
-/*function changePosition(char, position) {
-  if (char === )
 
-  return position;
-}
-*/
 function loadMonster(path, color, name, position) {
   var pattern = new RegExp("^ball");
   var loader = new THREE.JSONLoader();
@@ -207,8 +198,6 @@ function loadMonster(path, color, name, position) {
 
       game.szene.add(sphere);
   });
-
-  
 };
 
 function animiereMonsterSphere (sphereObject) {
