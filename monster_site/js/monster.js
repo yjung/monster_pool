@@ -1,30 +1,147 @@
-var grid = [
-              '#','.','#','.','#','.','#','.','#',
-              '~','#','.','#','.','#','.','#','~',
-              '~','~','#','.','#','.','#','~','~',
-              '~','~','~','#','.','#','~','~','~',
-              '~','~','~','~','#','~','~','~','~',
-           ];
-var offset = 9;
-var gridPosition = new THREE.Vector3(-4.25, 18.75, -18);
-var gridSymbols =  {
-  '#': 1.5,
-  '.': 0.25,
-  '~': 0.75,
-};
-var rowDistance = 1.5;
+var grids = [
+              { 
+                'grid': [
+                  '#','.','#','.','#','.','#','.','#',
+                  '~','#','.','#','.','#','.','#','~',
+                  '~','~','#','.','#','.','#','~','~',
+                  '~','~','~','#','.','#','~','~','~',
+                  '~','~','~','~','#','~','~','~','~'
+                ],
+                'gridSymbols': {
+                  '#': 1.5,
+                  '.': 0.25,
+                  '~': 0.75
+                },
+                'offset': 9,
+                'gridPosition': new THREE.Vector3(-4.25, 18.75, -18),
+                'placeSymbol': '#',
+                'rowDistance': 1.5
+              },
+              { 
+                'grid': [
+                  '~','~','~','~','#','~','~','~','~',
+                  '~','~','~','#','.','#','~','~','~',
+                  '~','~','#','.','#','.','#','~','~',
+                  '~','#','.','#','.','#','.','#','~',
+                  '#','.','#','.','#','.','#','.','#'
+                 ],
+                'gridSymbols': {
+                  '#': 1.5,
+                  '.': 0.25,
+                  '~': 0.75
+                },
+                'offset': 9,
+                'gridPosition': new THREE.Vector3(-5.25, 18.75, -18),
+                'placeSymbol': '#',
+                'rowDistance' : 1.5
+              },
+              { 
+                'grid': [
+                  '~','~','~','~','#','~','~','~','~',
+                  '~','~','~','#','.','#','~','~','~',
+                  '~','~','#','.','#','.','#','~','~',
+                  '~','#','.','#','.','#','.','#','~',
+                  '#','.','#','.','#','.','#','.','#',
+                  '~','#','.','#','.','#','.','#','~',
+                  '~','~','#','.','#','.','#','~','~',
+                  '~','~','~','#','.','#','~','~','~',
+                  '~','~','~','~','#','~','~','~','~'
+                 ],
+                'gridSymbols': {
+                  '#': 1.5,
+                  '.': 0.25,
+                  '~': 0.75
+                },
+                'offset': 9,
+                'gridPosition': new THREE.Vector3(-5.25, 18.75, -18),
+                'placeSymbol': '#',
+                'rowDistance' : 1.5
+              },
+              { 
+                'grid': [
+                  '~','~','~','~','#','~','~','~','~',
+                  '~','~','~','#','.','#','~','~','~',
+                  '~','~','#','.','#','.','#','~','~',
+                  '~','#','.','#','.','#','.','#','~',
+                  '#','.','+','.','#','.','+','.','#',
+                  '~','#','.','#','.','#','.','#','~',
+                  '~','~','#','.','#','.','#','~','~',
+                  '~','~','~','#','.','#','~','~','~',
+                  '~','~','~','~','#','~','~','~','~'
+                 ],
+                'gridSymbols': {
+                  '#': 1.5,
+                  '.': 0.25,
+                  '~': 0.75,
+                  '+': 1.5
+                },
+                'offset': 9,
+                'gridPosition': new THREE.Vector3(-5.25, 18.75, -18),
+                'placeSymbol': '#',
+                'rowDistance' : 1.5
+              },
+              { 
+                'grid': [
+                  '+','+','#','+','+','+','+','+','#','+','+',
+                  '+','+','+','#','+','+','+','#','+','+','+',
+                  '+','+','#','#','#','#','#','#','#','+','+',
+                  '+','#','#','+','#','#','#','+','#','#','+',
+                  '#','#','#','#','#','#','#','#','#','#','#',
+                  '#','+','#','#','#','#','#','#','#','+','#',
+                  '#','+','#','+','+','+','+','+','#','+','#',
+                  '+','+','+','#','#','+','#','#','+','+','+'
+                 ],
+                'gridSymbols': {
+                  '#': 1.5,
+                  '.': 0.25,
+                  '~': 0.75,
+                  '+': 1.5
+                },
+                'offset': 11,
+                'gridPosition': new THREE.Vector3(-10.25, 18.75, -10),
+                'placeSymbol': '#',
+                'rowDistance' : 2
+              },
+  ];
+
+var chosenGrid    = grids[4];
+var grid          = chosenGrid['grid'];
+var offset        = chosenGrid['offset'];
+var gridPosition  = chosenGrid['gridPosition'];
+var gridSymbols   = chosenGrid['gridSymbols'];
+var rowDistance   = chosenGrid['rowDistance'];
+var placeSymbol   = chosenGrid['placeSymbol'];
+
+var ballname      = 'ball';
 var monsterAssets = [
                   'assets/json/Bernd5Redu.js'
-               ];
+    ];
+var colorPalettes = [ [
+                        // C64-Palette
+                        0x000000,
+                        0xffffff,
+                        0x883932,
+                        0x67b6bd,
+                        0x8b3f96,
+                        0x55a049,
+                        0x40318d,
+                        0xbfce72,
+                        0x8b5429,
+                        0x574200,
+                        0xb86962,
+                        0x505050,
+                        0x787878,
+                        0x94e089,
+                        0x7869c4,
+                        0x9f9f9f
+                      ]
+];
+var chosenPalette = colorPalettes[0];
 
 function getRandomColor() {
-    var letters = '0123456789ABCDEF'.split('');
-    var color = '0x';
-    for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    color = parseInt(color);
-    return color;
+  var rand = Math.floor(Math.random() * chosenPalette.length);
+  console.log(rand);
+  return chosenPalette[rand];
 }
 
 function loadMonsters() {
@@ -49,114 +166,17 @@ function loadMonsters() {
       ballPosition.x += gridSymbols[grid[i]];
     }
 
-    if (grid[i] === '#') {
+    if (grid[i] === placeSymbol) {
       loadMonster(
             monsterAssets[Math.floor(Math.random() * monsterAssets.length)],
             getRandomColor(),
-            'ball'+j,
+            ballname+j,
             ballPosition.clone()
       );
       j += 1;
     }
   }
 }
-
-
-/*function placeMonster() {
-  var gridPosition = new THREE.Vector3(-4.25, 18.75, -15);
-  var ballPosition = new THREE.Vector3(0, 0, 0);
-  k = 1;
-  ballPosition.x += gridPosition.x;
-  ballPosition.y += gridPosition.y;
-  ballPosition.z += gridPosition.z;
-
-  for (var i = 0; i < grid.length; i++) {
-    if (i == 0) {
-      console.log(k+".Reihe:");    
-      ballPosition.x += gridSymbols[grid[i]];
-    }
-    else if (i % offset == 0) {
-      ballPosition.x = gridPosition.x;
-      ballPosition.z += 1.5;
-      k += 1;
-      console.log(k+".Reihe:");
-      ballPosition.x += gridSymbols[grid[i]];
-    }
-    else {
-      ballPosition.x += gridSymbols[grid[i]];
-    }
-  }
-}
-
-function placeMonsters() {
-  var gridPosition = new THREE.Vector3(-4.25, 18.75, -15);
-  var ballPosition = new THREE.Vector3(0, 0, 0);
-  var j = 1;
-  var k = 1;
-  ballPosition.x += gridPosition.x;
-  ballPosition.y += gridPosition.y;
-  ballPosition.z += gridPosition.z;
-
-  for (var i = 0; i < grid.length; i++) {
-    if (i === 0) {
-      console.log(k+".Reihe:");    
-      switch (grid[i]) {
-        case '#':
-            console.log(grid[i]);    
-            ballPosition.x += 1.5;
-            j += 1;
-            break;
-        case '.':
-            console.log(grid[i]);    
-            ballPosition.x += 0.25; 
-            break;
-        case '~':
-            console.log(grid[i]);    
-            ballPosition.x += 0.75;
-            break;
-      }
-    } else if ((i % offset) === 0) {
-      ballPosition.z += 1.5;
-      ballPosition.x = 0;
-      k += 1;
-      console.log(k+".Reihe:");
-      switch (grid[i]) {
-        case '#':
-            console.log(grid[i]);    
-            loadMonster('assets/json/Bernd5Redu.js', 0x0000ff, 'ball'+j, ballPosition);
-            j += 1;
-            break;
-        case '.':
-            console.log(grid[i]);    
-            ballPosition.x += 0.25; 
-            break;
-        case '~':
-            console.log(grid[i]);    
-            ballPosition.x += 0.75;
-            break;
-      }
-    }
-    else {
-      switch (grid[i]) {
-        case '#':
-            console.log(grid[i]);    
-            loadMonster('assets/json/Bernd5Redu.js', 0x0000ff, 'ball'+j, ballPosition);
-            ballPosition.x += 1.5;
-            j += 1;
-            break;
-        case '.':
-            console.log(grid[i]);    
-            ballPosition.x += 0.25; 
-            break;
-        case '~':
-            console.log(grid[i]);    
-            ballPosition.x += 0.75;
-            break;
-      }
-    }
-  }
-}
-*/
 
 function loadMonster(path, color, name, position) {
   var pattern = new RegExp("^ball");
@@ -178,7 +198,6 @@ function loadMonster(path, color, name, position) {
         transparent: true
       });
 
-      // Erstelle Kugel fuer
       var sphere = new Physijs.ConvexMesh(
           new THREE.SphereGeometry(0.75, 16, 16),
           glowMaterial,
