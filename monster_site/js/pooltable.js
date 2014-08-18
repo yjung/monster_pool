@@ -67,32 +67,35 @@ function erstelleHindernisse(ColladaLoader){
 	
 	// erstelleSlider(posStart, posZiel, rotStart, rotZiel);
 	
-	erstelleBumper(ColladaLoader, 12, 18, 21);
-	erstelleBumper(ColladaLoader, 10, 18, 22);
-	erstelleBumper(ColladaLoader, 9, 18, 24);
+	// erstelleBumper(ColladaLoader, 12, 18, 21);
+	// erstelleBumper(ColladaLoader, 10, 18, 22);
+	// erstelleBumper(ColladaLoader, 9, 18, 24);
+// 	
+	// erstelleBumper(ColladaLoader, -12, 18, 21);
+	// erstelleBumper(ColladaLoader, -10, 18, 22);
+	// erstelleBumper(ColladaLoader, -9, 18, 24);
 	
-	erstelleBumper(ColladaLoader, -12, 18, 21);
-	erstelleBumper(ColladaLoader, -10, 18, 22);
-	erstelleBumper(ColladaLoader, -9, 18, 24);
-	
-	// erstelleRampe(ColladaLoader, -10, 22, 22);
-	// erstelleRampeJS(9,18,20, 2.2);
-	// erstelleRampeJS(-9,18,20, 0.8);
-	
-	
-	//Paddel erstellen und animation anschmeißen
-	// var paddleLeftConstraint = erstellePaddleJS(-10,18,-2, -1.7);
-	// var paddleRightConstraint = erstellePaddleJS(10,18,2, 1.7);
-	// console.log(paddleLeftConstraint);
-	// paddleLeftConstraint.enableAngularMotor(-10, 2);
-                
-    // paddleRightConstraint.enableAngularMotor(-1 * -10, 2);
-	// updateMotor();
-	
+				// erstelleRampe(ColladaLoader, -10, 22, 22);
+				// erstelleRampeJS(9,18,20, 2.2);
+				// erstelleRampeJS(-9,18,20, 0.8);
+				
+				
+				//Paddel erstellen und animation anschmeißen
+				// var paddleLeftConstraint = erstellePaddleJS(-10,18,-2, -1.7);
+				// var paddleRightConstraint = erstellePaddleJS(10,18,2, 1.7);
+				// console.log(paddleLeftConstraint);
+				// paddleLeftConstraint.enableAngularMotor(-10, 2);
+			                
+			    // paddleRightConstraint.enableAngularMotor(-1 * -10, 2);
+				// updateMotor();
+				
 
 	
-	 erstelleRampe(ColladaLoader, 9,18,20, 2.2);
-	 erstelleRampe(ColladaLoader, -9,18,20, 0.8);
+	 // erstelleRampe(ColladaLoader, 9,18,20, 2.2);
+	 // erstelleRampe(ColladaLoader, -9,18,20, 0.8);
+	 
+	 erstelleRampe(ColladaLoader, 9,18,-20, 3.9269908169872414); 	//Rechte Rampe
+	 erstelleRampe(ColladaLoader, -9,18,-20, -0.7853981633974483);	//Linke Rampe
 	
 };
 function stuff()
