@@ -16,7 +16,7 @@ function mainloop() {
 	// Interpolationsschritt von Animationstweens
 	game.orbitControls.update(delta);
 	// Steuerung in Zeitabhängigkeit aktualisieren
-	game.szene.simulate(undefined, 1);
+	game.szene.simulate(undefined, 20);
 	// Physiksimulation
 
 	// Animation fuer Test-Monster-Animation
