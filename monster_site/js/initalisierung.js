@@ -23,7 +23,7 @@ function initialisiere() {
     window.game = {};   
     window.addEventListener('resize', onWindowResize, false);   // Eventlistener fuer Groessenaenderung
     
-    window.game.monster = {};								// Sammlung fuer alle Monster im Spiel	
+    window.game.monsterBalls = [];								// Sammlung fuer alle Monster im Spiel	
     game.monsterCounter=15; //Counter fuer Kugeln (Monster) im Spiel (wird in loecherTrigger.js und raumErstellen.js aktualisiert)
     game.scoreCounter=0; //Counter fuer Score vom Spiel (wird in loecherTrigger.js aktualisiert)
     
@@ -134,9 +134,9 @@ function initialisiere() {
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
 
 
-	var achsendreibein = new THREE.AxisHelper(50);
-	achsendreibein.position.y = 20;
-    game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
+	// var achsendreibein = new THREE.AxisHelper(50);
+	// achsendreibein.position.y = 20;
+ //    game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
 
 	erstelleMinimap();	
 

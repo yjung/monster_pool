@@ -9,7 +9,7 @@ function erstelleRampe(loader, xPosition, yPosition, zPosition, yRotation)
 	{
 
 		var modelScene = collada.scene;
-		console.log(modelScene);
+		// console.log(modelScene);
 		var rampenbestandteile = 1;
 		var szenenbestandteile = modelScene.children.length;
 		/* Geometrie aus der .dae-Szene extrahieren*/
@@ -47,7 +47,7 @@ function erstelleRampe(loader, xPosition, yPosition, zPosition, yRotation)
 		collider.scale.z = 50.0;
 		collider.rotation.x = 0.09086;
 		game.szene.add(collider);
-			console.log(collider);
+			// console.log(collider);
 			
 		};
 	});

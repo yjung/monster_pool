@@ -9,7 +9,7 @@ function erstelleMinimap(){
 
     var x = window.innerWidth;
     var y = window.innerHeight - 160;
-    var faktor = 64;
+    var faktor = 32;
     
     var left = x/-faktor;
     var right = x/faktor;

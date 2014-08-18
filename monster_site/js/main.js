@@ -20,8 +20,8 @@ function mainloop() {
 	// Physiksimulation
 
 	// Animation fuer Test-Monster-Animation
-	if (game.monster.animation) {
-				game.monster.animation.update(0.01);
+	if (game.monsterBalls.animation) {
+				game.monsterBalls.animation.update(0.01);
 	}
 
 	var screenWidth = window.innerWidth, screenHeight = window.innerHeight;
