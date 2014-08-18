@@ -82,27 +82,26 @@ var grids = [
               },
               { 
                 'grid': [
-                  '+','+','#','+','+','+','+','+','#','+','+',
-                  '+','+','+','#','+','+','+','#','+','+','+',
-                  '+','+','#','#','#','#','#','#','#','+','+',
-                  '+','#','#','+','#','#','#','+','#','#','+',
-                  '#','#','#','#','#','#','#','#','#','#','#',
-                  '#','+','#','#','#','#','#','#','#','+','#',
-                  '#','+','#','+','+','+','+','+','#','+','#',
-                  '+','+','+','#','#','+','#','#','+','+','+'
+                  '+','+','#','.','+','+','+','+','+','#','.','+','+','+','+','+','+','+','+','+','+',
+                  '+','+','+','#','+','+','+','#','+','+','+','+','+','+','+','+','+','+','+','+','+',
+                  '+','+','#','.','#','.','#','.','#','.','#','.','#','.','#','+','+','+','+','+','+',
+                  '+','#','.','#','.','+','#','.','#','.','#','.','+','#','.','#','+','+','+','+','+',
+                  '#','.','#','.','#','.','#','.','#','.','#','.','#','.','#','.','#','.','#','.','#',
+                  '#','.','+','#','.','#','.','#','.','#','.','#','.','#','.','#','.','+','#','.','+',
+                  '#','.','+','#','.','+','+','+','+','+','#','.','+','+','#','.','+','+','+','+','+',
+                  '+','+','+','#','.','#','.','+','#','.','#','.','+','+','+','+','+','+','+','+','+'
                  ],
                 'gridSymbols': {
                   '#': 1.5,
                   '.': 0.25,
-                  '~': 0.75,
                   '+': 1.5
                 },
-                'offset': 11,
-                'gridPosition': new THREE.Vector3(-10.25, 18.75, -10),
+                'offset': 21,
+                'gridPosition': new THREE.Vector3(-10.5, 18.75, -10),
                 'placeSymbol': '#',
-                'rowDistance' : 2
+                'rowDistance' : 1.75,
               },
-  ];
+];
 
 var chosenGrid    = grids[4];
 var grid          = chosenGrid['grid'];
@@ -111,6 +110,7 @@ var gridPosition  = chosenGrid['gridPosition'];
 var gridSymbols   = chosenGrid['gridSymbols'];
 var rowDistance   = chosenGrid['rowDistance'];
 var placeSymbol   = chosenGrid['placeSymbol'];
+var ballMargin    = chosenGrid['ballMargin'];
 
 var ballname      = 'ball';
 var monsterAssets = [
@@ -138,12 +138,6 @@ var colorPalettes = [ [
 ];
 var chosenPalette = colorPalettes[0];
 
-function getRandomColor() {
-  var rand = Math.floor(Math.random() * chosenPalette.length);
-  console.log(rand);
-  return chosenPalette[rand];
-}
-
 function loadMonsters() {
   var ballPosition = new THREE.Vector3(0, 0, 0);
   var j = 1;
@@ -169,7 +163,7 @@ function loadMonsters() {
     if (grid[i] === placeSymbol) {
       loadMonster(
             monsterAssets[Math.floor(Math.random() * monsterAssets.length)],
-            getRandomColor(),
+            chosenPalette[Math.floor(Math.random() * chosenPalette.length)],
             ballname+j,
             ballPosition.clone()
       );
