@@ -36,7 +36,7 @@ function erstelleRampe(loader, xPosition, yPosition, zPosition, yRotation)
 		var colliderGeometrie = colliderObjekt.geometry;
 		// var colliderMaterial = colliderObjekt.children[0].material;
 
-		var collider = new Physijs.ConvexMesh(colliderGeometrie, pTransparentT,0);
+		var collider = new Physijs.ConvexMesh(colliderGeometrie, pRedWireframeT,0);
 		// collider.scale.set(0.25,0.25,0.25);
 		collider.position.x = xPosition+colliderObjekt.position.x;
 		collider.position.y = yPosition+colliderObjekt.position.y;
