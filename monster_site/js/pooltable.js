@@ -88,23 +88,17 @@ function erstelleHindernisse(ColladaLoader){
 	
 	 
  	 
-	// erstelleBumper(ColladaLoader, 12, 18, -21);
-	// erstelleBumper(ColladaLoader, 10, 18, -22);
-	// erstelleBumper(ColladaLoader, 9, 18, -24);
-// 	
-	// erstelleBumper(ColladaLoader, -12, 18, -21);
-	// erstelleBumper(ColladaLoader, -10, 18, -22);
-	// erstelleBumper(ColladaLoader, -9, 18, -24);
+	erstelleBumper(ColladaLoader, 12, 18, -21);
+	erstelleBumper(ColladaLoader, 10, 18, -22);
+	erstelleBumper(ColladaLoader, 9, 18, -24);
+	
+	erstelleBumper(ColladaLoader, -12, 18, -21);
+	erstelleBumper(ColladaLoader, -10, 18, -22);
+	erstelleBumper(ColladaLoader, -9, 18, -24);
 	 
-	 erstelleRampe(ColladaLoader, 9,18,-20, 3.9269908169872414); 	//Rechte Rampe
-	 erstelleRampe(ColladaLoader, -9,18,-20, -0.7853981633974483);	//Linke Rampe
-	 // erstelleRampe(ColladaLoader, -7,17.8, 15, 0);	//Linke Rampe
-	 
+	 erstelleRampe(ColladaLoader, 9,18,-20, 3.9269908169872414, true); 	//Rechte Rampe
+	 erstelleRampe(ColladaLoader, -9,18,-20, -0.7853981633974483, false);	//Linke Rampe
 
-	 
-	 //rampen andere Seite
-	 // erstelleRampe(ColladaLoader, 9,18,20, 2.2);
-	 // erstelleRampe(ColladaLoader, -9,18,20, 0.8);
 };
 function stuff()
 {
