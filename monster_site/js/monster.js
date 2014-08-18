@@ -1,5 +1,5 @@
 var grids = {
-              'cone': { 
+              'triangle': { 
                         'grid': [
                           '#','.','#','.','#','.','#','.','#',
                           '~','#','.','#','.','#','.','#','~',
@@ -18,7 +18,7 @@ var grids = {
                         'rowDistance': 1.5
                       },
               
-              'coneReverse': { 
+              'triangleReversed': { 
                         'grid': [
                           '~','~','~','~','#','~','~','~','~',
                           '~','~','~','#','.','#','~','~','~',
@@ -107,7 +107,7 @@ var grids = {
                       },
 };
 
-var chosenGrid    = grids['diamondWithHole'];
+var chosenGrid    = grids['cone'];
 var grid          = chosenGrid['grid'];
 var offset        = chosenGrid['offset'];
 var gridPosition  = chosenGrid['gridPosition'];
