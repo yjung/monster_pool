@@ -31,7 +31,7 @@ function erstelleRampe(loader, xPosition, yPosition, zPosition, yRotation, recht
 		rampe.scale.z = 50.0;
 		game.szene.add(rampe);
 
-		var collider = new Physijs.BoxMesh(new THREE.BoxGeometry(2, 4, 1.9), pGreenWireframeT, 0);
+		var collider = new Physijs.BoxMesh(new THREE.BoxGeometry(2, 4, 1.9), pTransparentT, 0);
 		collider.position.y = rampe.position.y - 0.5;
 	
 		if (rechts == true)

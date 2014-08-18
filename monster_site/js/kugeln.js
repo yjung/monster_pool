@@ -12,7 +12,7 @@ function ladeKugeln(){
 		var kugelGeometrie = modelScene.children[i].children[0].geometry;
 		var kugelMaterial = modelScene.children[i].children[0].material;
 		
-		var kugel = new Physijs.SphereMesh(kugelGeometrie, Physijs.createMaterial((kugelMaterial),	0.1, 1.0),100);
+		var kugel = new Physijs.SphereMesh(kugelGeometrie, Physijs.createMaterial((kugelMaterial),	0.1, 1.0),800);
 		kugel.name="ball-"+i;
 		// kugel.scale.set(0.25,0.25,0.25);
 		kugel.position.x = kugelPosition.x * 0.25;
