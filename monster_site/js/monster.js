@@ -103,7 +103,7 @@ var grids = [
               },
 ];
 
-var chosenGrid    = grids[4];
+var chosenGrid    = grids[0];
 var grid          = chosenGrid['grid'];
 var offset        = chosenGrid['offset'];
 var gridPosition  = chosenGrid['gridPosition'];
@@ -140,8 +140,8 @@ var chosenPalette = colorPalettes[0];
 
 function loadMonsters() {
   var ballPosition = new THREE.Vector3(0, 0, 0);
+  var i = 0;
   var j = 1;
-  var k = 1;
   ballPosition.x += gridPosition.x;
   ballPosition.y += gridPosition.y;
   ballPosition.z += gridPosition.z;
@@ -153,7 +153,6 @@ function loadMonsters() {
     else if (i % offset === 0) {
       ballPosition.x = gridPosition.x;
       ballPosition.z += rowDistance;
-      k += 1;
       ballPosition.x += gridSymbols[grid[i]];
     }
     else {
@@ -170,6 +169,29 @@ function loadMonsters() {
       j += 1;
     }
   }
+
+/*  ballPosition.x += gridSymbols[grid[i]];
+  do {
+    if (i % offset === 0) {
+      ballPosition.x = gridPosition.x;
+      ballPosition.z += rowDistance;
+      ballPosition.x += gridSymbols[grid[i]];
+    }
+    else {
+      ballPosition.x += gridSymbols[grid[i]];
+    }
+
+    if (grid[i] === placeSymbol) {
+      loadMonster(
+            monsterAssets[Math.floor(Math.random() * monsterAssets.length)],
+            chosenPalette[Math.floor(Math.random() * chosenPalette.length)],
+            ballname+j,
+            ballPosition.clone()
+      );
+      j += 1;
+    }
+  i += 1;
+  } while (i < grid.length);*/
 }
 
 function loadMonster(path, color, name, position) {
