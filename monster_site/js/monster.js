@@ -107,7 +107,7 @@ var grids = {
                       },
 };
 
-var chosenGrid    = grids['cone'];
+var chosenGrid    = grids['triangle'];
 var grid          = chosenGrid['grid'];
 var offset        = chosenGrid['offset'];
 var gridPosition  = chosenGrid['gridPosition'];
