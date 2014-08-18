@@ -12,18 +12,10 @@ var gridSymbols =  {
   '.': 0.25,
   '~': 0.75,
 };
+var rowDistance = 1.5;
 var monsterAssets = [
                   'assets/json/Bernd5Redu.js'
                ];
-function loadMonsters() {
-  var geometry = new THREE.BoxGeometry( 8.5, 1.55, 6.25);
-  var material = new THREE.MeshBasicMaterial(pWhiteWireframeT);
-  var cube = new THREE.Mesh(geometry, material);
-  cube.position.x = 0;
-  cube.position.y = 18.75;
-  cube.position.z = -15;
-  game.szene.add(cube);
-}
 
 function getRandomColor() {
     var letters = '0123456789ABCDEF'.split('');
@@ -35,15 +27,73 @@ function getRandomColor() {
     return color;
 }
 
-function prepareMonsters() {
-  // get Random Monster asset
-  // get random color
-  // determine position of monster
-  // load monster
+function loadMonsters() {
+  var monsters = new Array();
+  var gridPosition = new THREE.Vector3(-4.25, 18.75, -18);
+  var ballPosition = new THREE.Vector3(0, 0, 0);
+  var j = 1;
+  var k = 1;
+  ballPosition.x += gridPosition.x;
+  ballPosition.y += gridPosition.y;
+  ballPosition.z += gridPosition.z;
+
+  for (var i = 0; i < grid.length; i++) {
+    var monsterProps = {};
+
+    if (i === 0) {
+      ballPosition.x += gridSymbols[grid[i]];
+    }
+    else if (i % offset === 0) {
+      ballPosition.x = gridPosition.x;
+      ballPosition.z += rowDistance;
+      k += 1;
+      ballPosition.x += gridSymbols[grid[i]];
+    }
+    else {
+      ballPosition.x += gridSymbols[grid[i]];
+    }
+
+    if (grid[i] === '#') {
+      monsterProps['position'] = ballPosition.clone();
+      monsterProps['asset'] = monsterAssets[Math.floor(Math.random() * monsterAssets.length)];
+      monsterProps['color'] = getRandomColor();
+      monsterProps['name']  = 'ball'+j;
+      j += 1;
+      monsters.push(monsterProps);
+      loadMonster(monsterProps['asset'], monsterProps['color'], monsterProps['name'], monsterProps['position']);
+    }
+  }
+}
+
+
+/*function placeMonster() {
+  var gridPosition = new THREE.Vector3(-4.25, 18.75, -15);
+  var ballPosition = new THREE.Vector3(0, 0, 0);
+  k = 1;
+  ballPosition.x += gridPosition.x;
+  ballPosition.y += gridPosition.y;
+  ballPosition.z += gridPosition.z;
+
+  for (var i = 0; i < grid.length; i++) {
+    if (i == 0) {
+      console.log(k+".Reihe:");    
+      ballPosition.x += gridSymbols[grid[i]];
+    }
+    else if (i % offset == 0) {
+      ballPosition.x = gridPosition.x;
+      ballPosition.z += 1.5;
+      k += 1;
+      console.log(k+".Reihe:");
+      ballPosition.x += gridSymbols[grid[i]];
+    }
+    else {
+      ballPosition.x += gridSymbols[grid[i]];
+    }
+  }
 }
 
 function placeMonsters() {
-  var gridPosition = new THREE.Vector3(0, 18.75, -15);
+  var gridPosition = new THREE.Vector3(-4.25, 18.75, -15);
   var ballPosition = new THREE.Vector3(0, 0, 0);
   var j = 1;
   var k = 1;
@@ -110,64 +160,56 @@ function placeMonsters() {
     }
   }
 }
-
+*/
 /*function changePosition(char, position) {
   if (char === )
 
   return position;
 }
 */
-function loadMonster(path, color, name) {
-
-  console.log(path);
-  console.log(color);
-  monsterReturned = "Hello";
-
-
+function loadMonster(path, color, name, position) {
+  var pattern = new RegExp("^ball");
   var loader = new THREE.JSONLoader();
   loader.load(path, function (geometry, materials) {
+      var glowMaterial = new THREE.ShaderMaterial( 
+      {
+        uniforms: 
+        { 
+          "c":   { type: "f", value: 0.0 },
+          "p":   { type: "f", value: 10.0 },
+          glowColor: { type: "c", value: new THREE.Color(color) },
+          viewVector: { type: "v3", value: game.kamera.position }
+        },
+        vertexShader:   GlowShader.vertexShader,
+        fragmentShader: GlowShader.fragmentShader,
+        side: THREE.FrontSide,
+        blending: THREE.AdditiveBlending,
+        transparent: true
+      });
 
+      // Erstelle Kugel fuer
+      var sphere = new Physijs.ConvexMesh(
+          new THREE.SphereGeometry(0.75, 16, 16),
+          glowMaterial,
+          100
+        );
+      sphere.add(new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials)));
+
+      sphere.addEventListener('collision', function( other_object,
+        relative_velocity, relative_rotation, contact_normal ) {
+          if (other_object === game.whiteBall || pattern.test(other_object.name)) {
+               animiereMonsterSphere(sphere);
+               soundEffekt("ball-ball");
+          } 
+      });
+
+      sphere.position = position;
+
+      game.szene.add(sphere);
   });
 
-  return monsterReturned;
+  
 };
-
-function loadMonsterMesh(url) {
-  return function(geometry, materials) {
-        // Glow-Material definieren
-    var glowMaterial = new THREE.ShaderMaterial( 
-    {
-      uniforms: 
-      { 
-        "c":   { type: "f", value: 0.0 },
-        "p":   { type: "f", value: 50.0 },
-        glowColor: { type: "c", value: new THREE.Color(color) },
-        viewVector: { type: "v3", value: game.kamera.position }
-      },
-      vertexShader:   GlowShader.vertexShader,
-      fragmentShader: GlowShader.fragmentShader,
-      side: THREE.FrontSide,
-      blending: THREE.AdditiveBlending,
-      transparent: true
-    });
-
-    // Erstelle Kugel fuer
-    var sphere = new Physijs.ConvexMesh(
-        new THREE.SphereGeometry(0.75, 16, 16),
-        glowMaterial,
-        100
-      );
-    sphere.add(new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials)));
-
-    sphere.addEventListener('collision', function( other_object,
-      relative_velocity, relative_rotation, contact_normal ) {
-        if (other_object === game.whiteBall || pattern.test(other_object.name)) {
-             animiereMonsterSphere(sphere);
-             soundEffekt("ball-ball");
-        } 
-    });
-  }
-}
 
 function animiereMonsterSphere (sphereObject) {
   var sphere = sphereObject;
@@ -182,7 +224,7 @@ function animiereMonsterSphere (sphereObject) {
 
     var gradientTrans = {
       cValue: 0.0,
-      pValue: 50.0
+      pValue: 10.0
     };
 
     var gradientGlow = {

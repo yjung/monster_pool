@@ -120,7 +120,7 @@ function initialisiere() {
     /* Spielumgebung einladen */
 	queueLaden();                               // Queue laden
     ladePooltable();                             // Nicht-Physisches, detailliertes Model des Tisches laden    
-    ladeKugeln();                             // Nicht-Physisches, detailliertes Model des Tisches laden
+    // ladeKugeln();                             // Nicht-Physisches, detailliertes Model des Tisches laden
     // createDummyTisch();                         // Dummy-Tisch aus physikalischen Grundobjekten erstellen
     sceneLaden();                        //Alpha Tisch aus Colada File Laden^
     loecherTrigger();							//Lade die Triggers von den Loechern
