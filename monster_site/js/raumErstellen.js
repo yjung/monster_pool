@@ -95,7 +95,6 @@ function raumLaden() {
 
 	// Moebel laden
 	ColladaLoader.load('assets/dae/tischeStuehle.dae', function(collada) {
-
 		var modelScene = collada.scene;
 		var szenenbestandteile = modelScene.children.length;
 		for (var i = 0; i < szenenbestandteile; i++) {
@@ -104,8 +103,6 @@ function raumLaden() {
 			var modelMaterial = modelScene.children[i].children[0].material;
 
 			var element = new THREE.Mesh(modelGeometry, modelMaterial);
-			element.scale.set(0.25, 0.25, 0.25);
-			element.receiveShadow = true;
 			// Collada Tische und stuehle zur Szene hinzufuegen
 			game.szene.add(element);
 		}
