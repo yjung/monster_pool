@@ -135,7 +135,7 @@ function initialisiere() {
     loecherTrigger();							//Lade die Triggers von den Loechern
     createWhiteBall(0,22,15);                    // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
     // loadMonsters();								// Lade ein Monster (Bernd)
-    ladeAnimation();
+    // ladeAnimation();
 	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
 
@@ -145,7 +145,7 @@ function initialisiere() {
  //    game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
 
 	erstelleMinimap();	
-    dummyTexturhinzufuegen();               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
+    // dummyTexturhinzufuegen();               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
     /* Ende der Initialisierung / Aufruf des Mainloops */
-	// mainloop();
+	mainloop();
 };

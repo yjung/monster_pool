@@ -56,7 +56,10 @@ function erstelleComposer() {
 	
 	
 	// Composer CelShader
-	var hatchPass = new THREE.RenderPass(game.szene, game.kamera, hatchingMaterial, new THREE.Color("rgb(0,0,0)"), new THREE.Color("rgb(0,0,0)"));	// Renderpass, der die Szene komplett im Hatching-Stil rendert.
+	// var hatchPass = new THREE.RenderPass(game.szene, game.kamera, hatchingMaterial, new THREE.Color("rgb(0,0,0)"), new THREE.Color("rgb(0,0,0)"));	// Renderpass, der die Szene komplett im Hatching-Stil rendert.
+	// game.szene.overrideMaterial = hatchingMaterial;
+	// console.log(game.szene);
+	var hatchPass = new THREE.RenderPass(game.szene, game.kamera, hatchingMaterial, 0, 0);	// Renderpass, der die Szene komplett im Hatching-Stil rendert.
 	
 	var renderTarget = new THREE.WebGLRenderTarget(game.breite, game.hoehe, parameters);	// Rendertarget-Objekt fuer Renderer-Initialisierung
 	game.composerCelShading = new THREE.EffectComposer(game.renderer, renderTarget);			// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren

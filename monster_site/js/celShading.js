@@ -69,6 +69,31 @@ function modifiziereLambertShading() {
 		"	gl_FragColor.xyz *= vLightFront;", "}"].join("\n");
 }
 
+function erstelleCelShadingMaterial(beschreibung, textur, farbe){
+var shaderUniforms = THREE.UniformsUtils.clone( CelShader.uniforms );
+
+var defines = {};
+if(textur){	
+	defines[ "USE_MAP" ] = true;
+	shaderUniforms[ "map" ].value = textur;
+}else{
+	defines[ "USE_MAP" ] = false;
+}
+
+	// shaderUniforms[ "diffuse" ].value = farbe;
+
+
+return  new THREE.ShaderMaterial({
+                    name: beschreibung,
+                    defines     : defines,
+                    uniforms    : shaderUniforms,
+                    vertexShader: CelShader.vertexShader,
+                    fragmentShader: CelShader.fragmentShader,
+                    fog:false,
+                    lights:true
+                });
+}
+
 function celShadingGUIShading(){
 
 }
@@ -135,8 +160,8 @@ function erstelleHatchingGUI(){
 		hatch6: { type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/" + id + '5.jpg' ) },
 		repeat: { type: 'v2', value: new THREE.Vector2( 0, 0 ) }
 	},
-		vertexShader:   document.getElementById( 'vertexshader' ).textContent,
-		fragmentShader: document.getElementById( 'fragmentshader' ).textContent
+		vertexShader:   document.getElementById( 'hatchingVS' ).textContent,
+		fragmentShader: document.getElementById( 'hatchingFS' ).textContent
 	});
 	
 		hatchingMaterial.uniforms.repeat.value.set( 1,1 );
