@@ -22,7 +22,7 @@ function raumLaden() {
 			// Geometrie aus der .dae-Szene extrahieren
 			var modelMaterial = modelScene.children[i].children[0].material;
 			game.raum.i = new THREE.Mesh(modelGeometry, modelMaterial);
-			game.raum.i.scale.set(0.25, 0.25, 0.25);
+			// game.raum.i.scale.set(0.25, 0.25, 0.25);
 			game.raum.i.receiveShadow = true;
 			// Collada Room zur Szene hinzufuegen
 			game.szene.add(game.raum.i);
