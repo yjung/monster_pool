@@ -26,8 +26,9 @@ function mainloop() {
 
 	var screenWidth = window.innerWidth, screenHeight = window.innerHeight;
 
-	game.renderer.clear(true, false, false);
-	// (color, depth, stencil)
+	game.renderer.clear(true, false, false);	// (color, depth, stencil)
+	updateHatching();
+	
 	if (!game.postProcessing) {// Falls Post-Processing deaktiviert
 		
 		game.renderer.render(game.szene, game.kamera);

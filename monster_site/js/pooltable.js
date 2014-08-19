@@ -242,17 +242,3 @@ function createRightFlipper()
     return constraint;
 }
 
-var direction = 1;
-
-render = function () 
-{
-    requestAnimationFrame(render);
-    renderer.render(scene, camera);
-    render_stats.update();
-    ground.__dirtyRotation = true;
-    scene.simulate(undefined, 2);
-};
-
-
-
-
