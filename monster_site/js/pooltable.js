@@ -19,18 +19,10 @@ function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine 
 		
 		// Erstes Objekt ist die Filzflaeche. Fuer dieses wird ein Physijs-Material benoetigt.
 		if(i==0){
-			modelMaterial = Physijs.createMaterial((modelMaterial),
-			0.1, // friction
-			1.0 // restitution
-);
-		}
+			modelMaterial = Physijs.createMaterial((modelMaterial),	0.1, 1.0);}
 		
 		game.tisch.i = new THREE.Mesh(modelGeometry, modelMaterial);			// Einzelteile zusammenfuegen
-		game.tisch.i.scale.set(0.25,0.25,0.25);									// FIX: Sollte im dae-File behoben werden!
-		game.tisch.i.castShadow = true;											//Not shure ob das da hin soll ;D
-		
 		game.szene.add(game.tisch.i); 											// Collada-Table zur Szene hinzufuegen
-		
 		}
 		
 		// Collider importieren
@@ -40,15 +32,9 @@ function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine 
 		var colliderPosition = colliderObjekt.position;
 		var colliderGeometrie = colliderObjekt.children[0].geometry;
 		// var colliderMaterial = colliderObjekt.children[0].material;
-
 		var collider = new Physijs.BoxMesh(colliderGeometrie, pTransparentT,0);
-		collider.scale.set(0.25,0.25,0.25);
-		collider.position.x = colliderPosition.x * 0.25;
-		collider.position.y = colliderPosition.y * 0.25;
-		collider.position.z = colliderPosition.z * 0.25;
-
-		game.szene.add(collider);
-		// Collada Table Alpha zur Szene hinzufuegen
+		collider.position = colliderPosition;
+		game.szene.add(collider); 		// Collada Table Alpha zur Szene hinzufuegen
 		}
 	});
 	erstelleHindernisse(ColladaLoader);
