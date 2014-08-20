@@ -133,7 +133,9 @@
 		<script type="text/javascript" src="shaders/CustomShader.js"></script>
 		<!-- Skript fuer Cel-Shading-Modifikationen -->
 		<script type="text/javascript" src="js/celShading.js"></script>
-		<script type="x-shader/x-vertex" id="vertexshader">
+		
+		
+		<script type="x-shader/x-vertex" id="hatchingVS">
 			varying vec3 vNormal;
 			varying vec2 vUv;
 			varying float depth;
@@ -168,7 +170,7 @@
 
 		</script>
 
-		<script type="x-shader/x-fragment" id="fragmentshader">
+		<script type="x-shader/x-fragment" id="hatchingFS">
 
 			uniform sampler2D hatch1;
 			uniform sampler2D hatch2;

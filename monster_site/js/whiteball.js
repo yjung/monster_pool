@@ -1,11 +1,19 @@
 // Weisse Kugel aus physikalischem Grundobjekt
 function createWhiteBall(x,y,z) {
+	
+	// erstelleCelShadingMaterial("whiteballMat");
 
     var friction = 10;      // low friction
     var restitution = 10;   // low restitution
 
     // Grundobjekterzeugung mit Material aus angelegter Bibliothek
-    game.whiteBall = new Physijs.ConvexMesh(new THREE.SphereGeometry(0.75, 16, 16), lWhiteBallP, 800);
+    game.whiteBall = new Physijs.ConvexMesh(new THREE.SphereGeometry(0.75, 16, 16), 
+    	erstelleCelShadingMaterial(
+    		"whiteBallMat",						// Bezeichnung
+    		false,								// Textur
+    		new THREE.Vector3(1,0,0)		// Farbe
+    		),
+    800);
 
     // Initiale Positionierung in der Welt
     game.whiteBall.position.x = x;
@@ -14,6 +22,7 @@ function createWhiteBall(x,y,z) {
 
     // Hinzufuegen zur Szene
     game.szene.add(game.whiteBall);
+    console.log(game.whiteBall);
 }
 
 function positionBall(x,y,z){

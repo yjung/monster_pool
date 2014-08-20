@@ -23,6 +23,11 @@ function initialisiere() {
     window.game = {};   
     window.addEventListener('resize', onWindowResize, false);   // Eventlistener fuer Groessenaenderung
     
+	// Cel-Shading-Namespace
+	window.game = {};
+	window.game.celShading = {};
+	window.game.celShading.hatching = {};
+    
     window.game.monsterBalls = [];								// Sammlung fuer alle Monster im Spiel	
     game.monsterCounter=15; //Counter fuer Kugeln (Monster) im Spiel (wird in loecherTrigger.js und raumErstellen.js aktualisiert)
     game.scoreCounter=0; //Counter fuer Score vom Spiel (wird in loecherTrigger.js aktualisiert)
@@ -106,7 +111,12 @@ function initialisiere() {
 
     }, false);
 
-	/* Post-Processing */
+	createGUI();								// Debugging-GUI erstellen
+	/* Post-Processing - Cel-Shading*/
+	celShadingGUIKontur();
+	celShadingGUIShading();
+	erstelleHatchingGUI();
+	/* Post-Processing - Allgemein*/	
 	erstelleComposer();				// Effekt-Composer erstellen
 	game.postProcessing = true;	// Postprocessing standardmaessig deaktiviert
 
@@ -121,15 +131,11 @@ function initialisiere() {
 	queueLaden();                               // Queue laden
     ladePooltable();                             // Nicht-Physisches, detailliertes Model des Tisches laden    
     ladeKugeln();                             // Nicht-Physisches, detailliertes Model des Tisches laden
-    // createDummyTisch();                         // Dummy-Tisch aus physikalischen Grundobjekten erstellen
     sceneLaden();                        //Alpha Tisch aus Colada File Laden^
     loecherTrigger();							//Lade die Triggers von den Loechern
     createWhiteBall(0,22,15);                    // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
     // loadMonsters();								// Lade ein Monster (Bernd)
-    ladeAnimation();
-	createGUI();								// Debugging-GUI erstellen
-	celShadingGUIKontur();
-	celShadingGUIShading();
+    // ladeAnimation();
 	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
 
@@ -139,7 +145,7 @@ function initialisiere() {
  //    game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
 
 	erstelleMinimap();	
-
+    // dummyTexturhinzufuegen();               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
     /* Ende der Initialisierung / Aufruf des Mainloops */
 	mainloop();
 };

@@ -35,10 +35,10 @@ function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine 
 		var collider = new Physijs.BoxMesh(colliderGeometrie, pTransparentT,0);
 		collider.position = colliderPosition;
 		game.szene.add(collider); 		// Collada Table Alpha zur Szene hinzufuegen
-		}
+		};
 	});
 	erstelleHindernisse(ColladaLoader);
-}
+};
 
 function erstelleHindernisse(ColladaLoader){
 	
@@ -136,7 +136,7 @@ function createLeftFlipper()
 		);
 		return constraint;
 	});//end Loader Load
-}//end createLeftFlipper
+};//end createLeftFlipper
 
 
 function createRightFlipper()
@@ -179,7 +179,7 @@ function createRightFlipper()
 		);
 		return constraint;
 	});//end Loader Load
-}//end createLeftFlipper
+};//end createLeftFlipper
 
 
 
@@ -270,5 +270,45 @@ var gui = new dat.GUI();
     game.szene.simulate();	
 }
 
+
+// function createRightFlipper() 
+// {
+    // var flipperright = new Physijs.BoxMesh(
+            // new THREE.CubeGeometry(12, 2, 2), Physijs.createMaterial(new THREE.MeshPhongMaterial(
+                    // {opacity: 0.6, transparent: true}
+            // )), 0.3
+    // );
+    // flipperright.position.x = 8;
+    // flipperright.position.y = 2;
+    // flipperright.position.z = 0;
+    // flipperright.castShadow = true;
+    // scene.add(flipperright);
+    // var flipperLeftPivot = new Physijs.SphereMesh(
+            // new THREE.CubeGeometry(1, 1, 1), ground_material, 0);
+// 
+    // flipperLeftPivot.position.y = 2;
+    // flipperLeftPivot.position.x = 15;
+    // flipperLeftPivot.position.z = 0;
+    // flipperLeftPivot.rotation.y = 1.4;
+    // flipperLeftPivot.castShadow = true;
+// 
+    // scene.add(flipperLeftPivot);
+// 
+    // // when looking at the axis, the axis of object two are used.
+    // // so as long as that one is the same as the scene, no problems
+    // // rotation and axis are relative to object2. If position == cube2.position it works as expected
+    // var constraint = new Physijs.HingeConstraint(flipperright, flipperLeftPivot, flipperLeftPivot.position, new THREE.Vector3(0, 1, 0));
+// //            var constraint = new Physijs.HingeConstraint(cube1, new THREE.Vector3(0,0,0), new THREE.Vector3(0,1,0));
+    // scene.addConstraint(constraint);
+// 
+    // constraint.setLimits(
+            // -2.2, // minimum angle of motion, in radians, from the point object 1 starts (going back)
+            // -0.6, // maximum angle of motion, in radians, from the point object 1 starts (going forward)
+            // 0.1, // applied as a factor to constraint error, how big the kantelpunt is moved when a constraint is hit
+            // 0 // controls bounce at limit (0.0 == no bounce)
+    // );
+// 
+    // return constraint;
+// }
 
 
