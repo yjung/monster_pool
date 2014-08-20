@@ -184,7 +184,8 @@ var ballMargin    = chosenGrid["ballMargin"];
 
 var ballname      = "ball";
 var monsterAssets = [
-                  "assets/json/Bernd5Redu.js"
+                  "assets/json/Bernd5Redu.js",
+                  "assets/json/Sumoaqua.js",
     ];
 var colorPalettes = {
                       "c64": [
@@ -272,10 +273,11 @@ function loadMonster(path, color, name, position) {
       {
         uniforms: 
         { 
-          "c":   { type: "f", value: 0.0 },
+          "c":   { type: "f", value: 0.5 },
           "p":   { type: "f", value: 10.0 },
           glowColor: { type: "c", value: new THREE.Color(color) },
-          viewVector: { type: "v3", value: game.kamera.position }
+          // viewVector: { type: "v3", value: game.kamera.position }
+          viewVector: { type: "v3", value: new THREE.Vector3(20,20,20) }
         },
         vertexShader:   GlowShader.vertexShader,
         fragmentShader: GlowShader.fragmentShader,
