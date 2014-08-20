@@ -13,7 +13,11 @@ var grids = {
                           "~": 0.75
                         },
                         "offset": 9,
-                        "gridPosition": new THREE.Vector3(-4.25, 18.75, -18),
+                        "gridPosition": {
+                          "x": -4.25,
+                          "y": 18.75,
+                          "z": -18
+                        },
                         "placeSymbol": "#",
                         "rowDistance": 1.5
                       },
@@ -32,7 +36,57 @@ var grids = {
                           "~": 0.75
                         },
                         "offset": 9,
-                        "gridPosition": new THREE.Vector3(-5.25, 18.75, -18),
+                        "gridPosition": {
+                          "x": -5.25,
+                          "y": 18.75,
+                          "z": -18
+                        },
+                        "placeSymbol": "#",
+                        "rowDistance" : 1.5
+                      },
+
+              "block": { 
+                        "grid": [
+                          "#",".","#",".","#",".","#",".","#",
+                          "#",".","#",".","#",".","#",".","#",
+                          "#",".","#",".","#",".","#",".","#",
+                          "#",".","#",".","#",".","#",".","#",
+                          "#",".","#",".","#",".","#",".","#",
+                         ],
+                        "gridSymbols": {
+                          "#": 1.5,
+                          ".": 0.25,
+                          "~": 0.75
+                        },
+                        "offset": 9,
+                        "gridPosition": {
+                          "x": -5.25,
+                          "y": 18.75,
+                          "z": -18
+                        },
+                        "placeSymbol": "#",
+                        "rowDistance" : 1.5
+                      },
+
+              "chess": { 
+                        "grid": [
+                          "#","+","#","+","#","+","#","+","#",
+                          "+","#","+","#","+","#","+","#","+",
+                          "#","+","#","+","#","+","#","+","#",
+                          "+","#","+","#","+","#","+","#","+",
+                          "#","+","#","+","#","+","#","+","#",
+                         ],
+                        "gridSymbols": {
+                          "#": 1.5,
+                          ".": 0.25,
+                          "~": 0.75
+                        },
+                        "offset": 9,
+                        "gridPosition": {
+                          "x": -5.25,
+                          "y": 18.75,
+                          "z": -18
+                        },
                         "placeSymbol": "#",
                         "rowDistance" : 1.5
                       },
@@ -55,7 +109,11 @@ var grids = {
                           "~": 0.75
                         },
                         "offset": 9,
-                        "gridPosition": new THREE.Vector3(-5.25, 18.75, -18),
+                        "gridPosition": {
+                          "x": -5.25,
+                          "y": 18.75,
+                          "z": -18
+                        },
                         "placeSymbol": "#",
                         "rowDistance" : 1.5
                       },
@@ -79,7 +137,11 @@ var grids = {
                           "+": 1.5
                         },
                         "offset": 9,
-                        "gridPosition": new THREE.Vector3(-5.25, 18.75, -18),
+                        "gridPosition": {
+                          "x": -5.25,
+                          "y": 18.75,
+                          "z": -18
+                        },
                         "placeSymbol": "#",
                         "rowDistance" : 1.5
                       },
@@ -101,11 +163,15 @@ var grids = {
                           "+": 1.5
                         },
                         "offset": 21,
-                        "gridPosition": new THREE.Vector3(-10.5, 18.75, -10),
+                        "gridPosition": {
+                          "x": -10.5,
+                          "y": 18.75,
+                          "z": -10
+                        },
                         "placeSymbol": "#",
-                        "rowDistance" : 1.75,
-                      },
-};
+                        "rowDistance" : 1.75
+                      }
+}
 
 var chosenGrid    = grids["triangle"];
 var grid          = chosenGrid["grid"];
@@ -197,7 +263,7 @@ function loadMonsters() {
   i += 1;
   } while (i < grid.length);*/
 }
-
+ 
 function loadMonster(path, color, name, position) {
   var pattern = new RegExp("^ball");
   var loader = new THREE.JSONLoader();
