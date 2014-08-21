@@ -12,7 +12,13 @@ function erstelleBumper(loader, xPosition, yPosition, zPosition)
 		/* Geometrie aus der .dae-Szene extrahieren*/
 		var modelMaterial = modelScene.material;
 		// Referenz auf Geometrie von Objekt 1 der eingeladenen .dae-Szene
-		var bumper = new Physijs.SphereMesh(modelGeometry, modelMaterial, 0);
+		var bumper = new Physijs.SphereMesh(modelGeometry, 
+		erstelleCelShadingMaterial(
+    			"bumperMat",												// Bezeichnung
+    			THREE.ImageUtils.loadTexture( "assets/dae/tex/bumper.jpg" ),// Textur
+    			new THREE.Vector3(1,0,0)									// Farbe
+    		),
+ 		0);
 
 		bumper.position.x = xPosition;
 		bumper.position.y = yPosition;
