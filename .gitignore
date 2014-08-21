@@ -16,3 +16,4 @@ wp-config.php
 *.sublime-workspace
 monster_site/.metadata
 .metadata
+.settings/
