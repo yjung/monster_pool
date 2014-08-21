@@ -38,7 +38,6 @@ function celShadingGUIKontur() {
 };
 
 function modifiziereLambertShading() {
-
 		/* Entfernen nicht benoetigter Leerzeichen. */
 		THREE.ShaderLib['lambert'].fragmentShader = THREE.ShaderLib['lambert'].fragmentShader.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
 		THREE.ShaderLib['lambert'].fragmentShader = "uniform vec3 diffuse;\n" + THREE.ShaderLib['lambert'].fragmentShader.substr(0, THREE.ShaderLib['lambert'].fragmentShader.length - 1);
@@ -111,6 +110,7 @@ function erstelleHatchingGUI(){
         };
 
 	var Settings = function() {
+		this.aktivieren = false;
 		this.ambient = 1;
 		this.diffuse = 100;
 		this.specular = 100;
@@ -128,6 +128,7 @@ function erstelleHatchingGUI(){
 		for( var j in presets ) {
 			presetSelector[ j ] = j;
 		}
+	game.celShading.hatching.aktivieren = celShadingHatching.add(game.celShading.hatching.settings, 'aktivieren', false ).listen();
 	celShadingHatching.add(game.celShading.hatching.settings, 'preset', presetSelector );
 	celShadingHatching.add(game.celShading.hatching.settings, 'ambient', 0.0, 100.0 );
 	celShadingHatching.add(game.celShading.hatching.settings, 'diffuse', 0.0, 100.0 );
@@ -137,6 +138,17 @@ function erstelleHatchingGUI(){
 	celShadingHatching.add(game.celShading.hatching.settings, 'invertRim' );
 	celShadingHatching.add(game.celShading.hatching.settings, 'displayOutline' );
 	celShadingHatching.addColor(game.celShading.hatching.settings, 'inkColor' );
+	
+	game.celShading.hatching.aktivieren.onChange(function(value) {
+		for(var i = 0; i < game.gameObjects.length; i++){
+		if(value){			
+		game.gameObjects[i].material.uniforms['hatchingAktiv'].value = 1;
+		}else{
+		game.gameObjects[i].material.uniforms['hatchingAktiv'].value = 0;			
+		}
+		console.log(game.gameObjects);
+	}
+	});
 	
 	var id = 'hatch_';
 
