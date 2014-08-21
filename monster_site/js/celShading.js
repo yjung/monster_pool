@@ -37,37 +37,6 @@ function celShadingGUIKontur() {
 	celShadingKontur.open(); 	// Ordner standardmaessig oeffnen
 };
 
-function modifiziereLambertShading() {
-		/* Entfernen nicht benoetigter Leerzeichen. */
-		THREE.ShaderLib['lambert'].fragmentShader = THREE.ShaderLib['lambert'].fragmentShader.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-		THREE.ShaderLib['lambert'].fragmentShader = "uniform vec3 diffuse;\n" + THREE.ShaderLib['lambert'].fragmentShader.substr(0, THREE.ShaderLib['lambert'].fragmentShader.length - 1);
-		THREE.ShaderLib['lambert'].fragmentShader += [
-		
-		"#ifdef USE_MAP",
-		"	gl_FragColor = texture2D( map, vUv );",
-		"#else",
-		"	gl_FragColor = vec4(diffuse, 1.0);", 
-		"#endif", 
-		
-		"	vec3 basecolor = vec3(gl_FragColor[0], gl_FragColor[1], gl_FragColor[2]);",
-		"	float alpha = gl_FragColor[3];",
-		"	float vlf = vLightFront[0];",
-
-		// This version presevers colors, but looks less cartoonish (good with simple textures, colors)
-		// "	if (vlf< 0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.5), alpha); }",
-		// "	if (vlf>=0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.3), alpha); }", 
-		// "	if (vlf>=0.75) { gl_FragColor = vec4(mix( basecolor, vec3(1.0), 0.0), alpha); }", 
-		// "	if (vlf>=0.95) { gl_FragColor = vec4(mix( basecolor, vec3(1.0), 0.3), alpha); }",
-
-		// This version looks more cartoonish, but washes colors out (looks good with complex textures)
-		"	if (vlf< 0.25) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.5), alpha); }",
-		 "	if (vlf>=0.25) { gl_FragColor = vec4(mix( basecolor, vec3(0.25), 0.5), alpha); }",
-		 "	if (vlf>=0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.5), 0.5), alpha); }",
-		 "	if (vlf>=0.75) { gl_FragColor = vec4(mix( basecolor, vec3(0.75), 0.5), alpha); }",
-
-		"	gl_FragColor.xyz *= vLightFront;", "}"].join("\n");
-};
-
 function erstelleCelShadingMaterial(beschreibung, textur, farbe){
 var shaderUniforms = THREE.UniformsUtils.clone( CelShader.uniforms );
 
@@ -82,8 +51,8 @@ if(textur){
 
 	// shaderUniforms[ "diffuse" ].value = farbe;
 
-
-return  new THREE.ShaderMaterial({
+game.celShadingMaterials.push(
+	new THREE.ShaderMaterial({
                     name: beschreibung,
                     defines     : defines,
                     uniforms    : shaderUniforms,
@@ -91,7 +60,10 @@ return  new THREE.ShaderMaterial({
                     fragmentShader: CelShader.fragmentShader,
                     fog:false,
                     lights:true
-                });
+                })
+	);
+	
+	return game.celShadingMaterials[game.celShadingMaterials.length-1];
 }
 
 function celShadingGUIShading(){
@@ -140,13 +112,13 @@ function erstelleHatchingGUI(){
 	celShadingHatching.addColor(game.celShading.hatching.settings, 'inkColor' );
 	
 	game.celShading.hatching.aktivieren.onChange(function(value) {
-		for(var i = 0; i < game.gameObjects.length; i++){
+		for(var i = 0; i < game.celShadingMaterials.length; i++){
+		console.log(game.celShadingMaterials[i]);
 		if(value){			
-		game.gameObjects[i].material.uniforms['hatchingAktiv'].value = 1;
+		game.celShadingMaterials[i].uniforms['hatchingAktiv'].value = 1;
 		}else{
-		game.gameObjects[i].material.uniforms['hatchingAktiv'].value = 0;			
+		game.celShadingMaterials[i].uniforms['hatchingAktiv'].value = 0;			
 		}
-		console.log(game.gameObjects);
 	}
 	});
 	
@@ -264,9 +236,9 @@ function updateHatching(){
     // theta = lon * Math.PI / 180;
 
     hatchingMaterial.uniforms.ambientWeight.value =  game.celShading.hatching.settings.ambient / 100;
-            hatchingMaterial.uniforms.diffuseWeight.value =  game.celShading.hatching.settings.diffuse / 100;
-            hatchingMaterial.uniforms.rimWeight.value =  game.celShading.hatching.settings.rim / 100;
-            hatchingMaterial.uniforms.specularWeight.value =  game.celShading.hatching.settings.specular / 100;
+    hatchingMaterial.uniforms.diffuseWeight.value =  game.celShading.hatching.settings.diffuse / 100;
+    hatchingMaterial.uniforms.rimWeight.value =  game.celShading.hatching.settings.rim / 100;
+    hatchingMaterial.uniforms.specularWeight.value =  game.celShading.hatching.settings.specular / 100;
             hatchingMaterial.uniforms.shininess.value =  game.celShading.hatching.settings.shininess;
             hatchingMaterial.uniforms.invertRim.value =  game.celShading.hatching.settings.invertRim?1:0;
 
