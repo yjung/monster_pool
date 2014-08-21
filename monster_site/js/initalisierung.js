@@ -25,6 +25,7 @@ function initialisiere() {
     
 	// Cel-Shading-Namespace
 	window.game.gameObjects = new Array();
+	window.game.celShadingMaterials = new Array();
 	window.game.celShading = {};
 	window.game.celShading.hatching = {};
     
