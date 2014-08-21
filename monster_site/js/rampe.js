@@ -19,7 +19,13 @@ function erstelleRampe(loader, xPosition, yPosition, zPosition, yRotation, recht
 		var modelGeometry = modelScene.children[0].children[0].geometry;
 		var modelMaterial = modelScene.children[0].children[0].material;
 		// Referenz auf Geometrie von Objekt 1 der eingeladenen .dae-Szene
-		var rampe = new THREE.Mesh(modelGeometry, modelMaterial);
+		var rampe = new THREE.Mesh(modelGeometry, 
+    	erstelleCelShadingMaterial(
+    		"rampeMat",						// Bezeichnung
+    		THREE.ImageUtils.loadTexture( "assets/dae/tex/Rampe_Tex.png" ),								// Textur
+    		new THREE.Vector3(1,1,1)		// Farbe
+    		)
+);
 		// var rampe = new THREE.Mesh(modelGeometry, pBlueWireframeT);
 
 		rampe.position.x = xPosition;

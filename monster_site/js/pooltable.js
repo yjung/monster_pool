@@ -103,7 +103,7 @@ function createLeftFlipper()
    	var paddle;
 	loader.load('assets/json/paddle.js', function(geometry, materials){
 		// var paddleBump = new Physijs.BoxMesh(paddle, Physijs.createMaterial(new THREE.MeshPhongMaterial(
-		paddle = new Physijs.BoxMesh(geometry, new THREE.MeshFaceMaterial(materials), 0);
+		paddle = new Physijs.BoxMesh(geometry, new THREE.MeshLambertMaterial(materials), 0);
 		game.szene.add(paddle);
 
 		// var flipperLeft = new Physijs.BoxMesh(geometry, Physijs.createMaterial(new THREE.MeshPhongMaterial({opacity : 0.6, transparent : true})), 0.3);
