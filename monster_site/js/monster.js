@@ -184,8 +184,18 @@ var ballMargin    = chosenGrid["ballMargin"];
 
 var ballname      = "ball";
 var monsterAssets = [
-                  "assets/json/Bernd5Redu.js",
-                  "assets/json/Sumoaqua.js",
+                      // {
+                      //   "mesh": "assets/json/Bernd5Redu.js",
+                      //   "texture": "assets/json/tex/bernd_reduced5.png"
+                      // },
+                      {
+                        "mesh": "assets/json/Bernd8test.js",
+                        "texture": "assets/json/tex/bernd_reduced5.png"
+                      },
+                      {
+                        "mesh": "assets/json/Sumoaqua.js",
+                        "texture": "assets/json/tex/SumaquaLowPoliBUNT3_4.jpg"
+                      }
     ];
 var colorPalettes = {
                       "c64": [
@@ -206,7 +216,7 @@ var colorPalettes = {
                         0x7869c4,
                         0x9f9f9f
                       ]
-};
+}
 var chosenPalette = colorPalettes["c64"];
 
 function loadMonsters() {
@@ -231,8 +241,10 @@ function loadMonsters() {
     }
 
     if (grid[i] === placeSymbol) {
+      var monsterAsset = monsterAssets[Math.floor(Math.random() * monsterAssets.length)];
       loadMonster(
-            monsterAssets[Math.floor(Math.random() * monsterAssets.length)],
+            monsterAsset["mesh"],
+            monsterAsset["texture"],
             chosenPalette[Math.floor(Math.random() * chosenPalette.length)],
             ballname+j,
             ballPosition.clone()
@@ -265,10 +277,10 @@ function loadMonsters() {
   } while (i < grid.length);*/
 }
  
-function loadMonster(path, color, name, position) {
+function loadMonster(pathMesh, pathTexture, color, name, position) {
   var pattern = new RegExp("^ball");
   var loader = new THREE.JSONLoader();
-  loader.load(path, function (geometry, materials) {
+  loader.load(pathMesh, function (geometry, materials) {
       var glowMaterial = new THREE.ShaderMaterial( 
       {
         uniforms: 
@@ -286,12 +298,15 @@ function loadMonster(path, color, name, position) {
         transparent: true
       });
 
+      var celShadingMaterial = erstelleCelShadingMaterial("monsterMaterial",
+                                  THREE.ImageUtils.loadTexture(pathTexture), new THREE.Vector3(0,0,0));
+
       var sphere = new Physijs.ConvexMesh(
           new THREE.SphereGeometry(0.75, 16, 16),
           glowMaterial,
           100
         );
-      sphere.add(new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials)));
+      sphere.add(new THREE.Mesh(geometry, celShadingMaterial));
 
       sphere.addEventListener("collision", function( other_object,
         relative_velocity, relative_rotation, contact_normal ) {
