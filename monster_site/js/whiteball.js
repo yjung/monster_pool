@@ -11,7 +11,7 @@ function createWhiteBall(x,y,z) {
     	erstelleCelShadingMaterial(
     		"whiteBallMat",						// Bezeichnung
     		false,								// Textur
-    		new THREE.Vector3(1,0,0)		// Farbe
+    		new THREE.Vector3(1,1,1)		// Farbe
     		),
     800);
 
@@ -22,7 +22,6 @@ function createWhiteBall(x,y,z) {
 
     // Hinzufuegen zur Szene
     game.szene.add(game.whiteBall);
-    console.log(game.whiteBall);
 }
 
 function positionBall(x,y,z){

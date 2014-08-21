@@ -1,18 +1,15 @@
 // Tisch einladen und initialisieren
 function sceneLaden() {
 	raumLaden();
+	girlandeLaden();
+	moebelLaden();
 	erstelleUmgebungsCollider();
 	// lichterLaden();
 }
 
 function raumLaden() {
+
 	var ColladaLoader = new THREE.ColladaLoader();
-	// JSON-Loader erstellen
-
-	material = new THREE.MeshLambertMaterial({
-		map : THREE.ImageUtils.loadTexture("assets/dae/tex/dielen.png")
-	});
-
 	ColladaLoader.load('assets/dae/raum.dae', function(collada) {
 
 		var modelScene = collada.scene;
@@ -21,7 +18,10 @@ function raumLaden() {
 			var modelGeometry = modelScene.children[i].children[0].geometry;
 			// Geometrie aus der .dae-Szene extrahieren
 			var modelMaterial = modelScene.children[i].children[0].material;
-			game.raum.i = new THREE.Mesh(modelGeometry, modelMaterial);
+			game.raum.i = new THREE.Mesh(modelGeometry, erstelleCelShadingMaterial("raumMat", // Bezeichnung
+			THREE.ImageUtils.loadTexture("assets/dae/tex/raumTex.jpg"), // Textur
+			new THREE.Vector3(1, 0, 0)	// Farbe
+			));
 			// game.raum.i.scale.set(0.25, 0.25, 0.25);
 			game.raum.i.receiveShadow = true;
 			// Collada Room zur Szene hinzufuegen
@@ -41,21 +41,26 @@ function raumLaden() {
 			var modelMaterial = modelScene.children[i].children[0].material;
 
 			var element = new THREE.Mesh(modelGeometry, modelMaterial);
-			// element.scale.set(0.25, 0.25, 0.25);
 			element.receiveShadow = true;
 			// Collada Bar zur Szene hinzufuegen
 			game.szene.add(element);
 		}
 	});
 
-	// Girlande laden
+}
 
+// Girlande laden
+function girlandeLaden() {
 	var texture = THREE.ImageUtils.loadTexture('assets/dae/tex/girlande.png', {}, function() {
-		var plane = new THREE.PlaneGeometry( 100, 20 );
-		texture.needsUpdate = true;		// important
+		var plane = new THREE.PlaneGeometry(100, 20);
+		texture.needsUpdate = true;
+		// important
 		// uniforms
 		var uniforms = {
-			        color: { type: "c", value: new THREE.Color( 0x000 ) }, // material is "red"
+			color : {
+				type : "c",
+				value : new THREE.Color(0x000)
+			}, // material is "red"
 			texture : {
 				type : "t",
 				value : texture
@@ -73,7 +78,7 @@ function raumLaden() {
 			vertexShader : document.getElementById('TransparentVS').textContent,
 			fragmentShader : document.getElementById('TransparentFS').textContent
 		});
-		
+
 		var girlande = new THREE.Mesh(plane, material);
 
 		girlande.position.x = -80;
@@ -92,19 +97,28 @@ function raumLaden() {
 		game.szene.add(girlande);
 		game.szene.add(girlande2);
 	});
+}
 
+function moebelLaden() {
 	// Moebel laden
+	var ColladaLoader = new THREE.ColladaLoader();
 	ColladaLoader.load('assets/dae/tischeStuehle.dae', function(collada) {
 		var modelScene = collada.scene;
 		var szenenbestandteile = modelScene.children.length;
 		for (var i = 0; i < szenenbestandteile; i++) {
 			var modelGeometry = modelScene.children[i].children[0].geometry;
 			// Geometrie aus der .dae-Szene extrahieren
-			var modelMaterial = modelScene.children[i].children[0].material;
+			var diffuseColor = modelScene.children[i].children[0].material.color;
 
-			var element = new THREE.Mesh(modelGeometry, modelMaterial);
-			// Collada Tische und stuehle zur Szene hinzufuegen
-			game.szene.add(element);
+
+			var element = new THREE.Mesh(modelGeometry, 
+				erstelleCelShadingMaterial(
+					"moebelMat", // Bezeichnung
+					false, // Textur
+					new THREE.Vector3(diffuseColor.r,diffuseColor.g,diffuseColor.b)		// Farbe
+		));
+		// Collada Tische und stuehle zur Szene hinzufuegen
+		game.szene.add(element);
 		}
 	});
 }
@@ -204,3 +218,4 @@ function monsterCollideRoom() {
 	//Counter von 15 bis 0 aktualisieren
 	$("#balls").text(game.monsterCounter);
 }
+

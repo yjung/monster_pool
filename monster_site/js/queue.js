@@ -8,7 +8,13 @@ function queueLaden() {
 		var daeMaterial = collada.scene.children[0].children[0].material;
         /*Physikalischer Queue mit Physi.js*/
         var queueMaterial = daeMaterial;         // Physi.js-Material initialisieren
-        game.queue = new Physijs.CylinderMesh(daeGeometrie, queueMaterial, 0);   // Objekterzeugung
+        game.queue = new Physijs.CylinderMesh(daeGeometrie, 
+			erstelleCelShadingMaterial(
+    			"queueMat",						// Bezeichnung
+    			THREE.ImageUtils.loadTexture( "assets/dae/tex/queue.jpg" ),							// Textur
+    			new THREE.Vector3(1,0,0)		// Farbe
+    		),
+		0);   // Objekterzeugung
         game.queue._physijs.collision_flags = 4; 		                    // COLLISION IST ZUM BUGFIXING NOCH DEAKTIVIERT
 
         //game.queue.useQuaternion = true;

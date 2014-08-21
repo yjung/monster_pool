@@ -1,5 +1,5 @@
 
-	modifiziereLambertShading();
+	// modifiziereLambertShading();
 
 function celShadingGUIKontur() {
 	// Ordner fuer die Cel-Shading-Einstellungen
@@ -35,7 +35,7 @@ function celShadingGUIKontur() {
 
 
 	celShadingKontur.open(); 	// Ordner standardmaessig oeffnen
-}
+};
 
 function modifiziereLambertShading() {
 
@@ -67,7 +67,7 @@ function modifiziereLambertShading() {
 		 "	if (vlf>=0.75) { gl_FragColor = vec4(mix( basecolor, vec3(0.75), 0.5), alpha); }",
 
 		"	gl_FragColor.xyz *= vLightFront;", "}"].join("\n");
-}
+};
 
 function erstelleCelShadingMaterial(beschreibung, textur, farbe){
 var shaderUniforms = THREE.UniformsUtils.clone( CelShader.uniforms );
@@ -78,6 +78,7 @@ if(textur){
 	shaderUniforms[ "map" ].value = textur;
 }else{
 	defines[ "USE_MAP" ] = false;
+	shaderUniforms[ "diffuse" ].value = farbe;
 }
 
 	// shaderUniforms[ "diffuse" ].value = farbe;
