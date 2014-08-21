@@ -2826,7 +2826,7 @@ dat.GUI = dat.gui.GUI = (function (css, saveDialogueContents, styleSheet, contro
 
     if (controllerArray.length != 0) {
 
-      requestAnimationFrame(function() {
+      window.requestAnimationFrame(function() {
         updateDisplays(controllerArray);
       });
 

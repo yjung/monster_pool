@@ -5,6 +5,7 @@ function erstelleTastaturSteuerung() {
 function checkKeyboard(){
 	if(game.keyboard.pressed("x")){
 		console.log("Queue-Stoss");
+		soundEffekt("ball-queue");
 		applyForce();
 	}
 

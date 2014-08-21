@@ -12,14 +12,27 @@ function ladeKugeln(){
 		var kugelGeometrie = modelScene.children[i].children[0].geometry;
 		var kugelMaterial = modelScene.children[i].children[0].material;
 		
-		var kugel = new Physijs.SphereMesh(kugelGeometrie, kugelMaterial,100);
-
-		// kugel.scale.set(0.25,0.25,0.25);
+		var kugel = new Physijs.SphereMesh(kugelGeometrie, Physijs.createMaterial(
+			erstelleCelShadingMaterial("raumMat", // Bezeichnung
+				THREE.ImageUtils.loadTexture(kugelMaterial.map.sourceFile), // Textur
+				new THREE.Vector3(1, 0, 0)	// Farbe
+		),
+		0.1, 1.0),800);
+		kugel.name="ball-"+i;
 		kugel.position.x = kugelPosition.x * 0.25;
 		kugel.position.y = kugelPosition.y * 0.25;
 		kugel.position.z = kugelPosition.z * 0.25;
 // 
 		game.szene.add(kugel);
+		
+			kugel.addEventListener('collision', function(object) {
+				pattern = new RegExp("^ball"); //Pattern: The name starts with ball
+				// console.log("Comparacion con "+object.name+": "+pattern.test(object.name));
+				if((object === game.whiteBall)||(pattern.test(object.name))){
+					soundEffekt("ball-ball");
+				}					
+			  
+		    });
 		}
 	});
 };

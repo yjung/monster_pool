@@ -1,6 +1,12 @@
 // once everything is loaded, we run our Three.js stuff.
 function initialisiere() {
     "use strict";                                                   // Strict-Mode 
+	
+	window.debugMode = 0;
+	if(debugMode){
+		console.log("--Initialisierung--");
+	}
+
 
 	$("#viewport").css("visibility","visible");
 	
@@ -17,7 +23,13 @@ function initialisiere() {
     window.game = {};   
     window.addEventListener('resize', onWindowResize, false);   // Eventlistener fuer Groessenaenderung
     
-    window.game.monster = {};								// Sammlung fuer alle Monster im Spiel	
+	// Cel-Shading-Namespace
+	window.game.gameObjects = new Array();
+	window.game.celShadingMaterials = new Array();
+	window.game.celShading = {};
+	window.game.celShading.hatching = {};
+    
+    window.game.monsterBalls = [];								// Sammlung fuer alle Monster im Spiel	
     game.monsterCounter=15; //Counter fuer Kugeln (Monster) im Spiel (wird in loecherTrigger.js und raumErstellen.js aktualisiert)
     game.scoreCounter=0; //Counter fuer Score vom Spiel (wird in loecherTrigger.js aktualisiert)
     
@@ -100,36 +112,41 @@ function initialisiere() {
 
     }, false);
 
-	/* Post-Processing */
+	createGUI();								// Debugging-GUI erstellen
+	/* Post-Processing - Cel-Shading*/
+	celShadingGUIKontur();
+	celShadingGUIShading();
+	erstelleHatchingGUI();
+	/* Post-Processing - Allgemein*/	
 	erstelleComposer();				// Effekt-Composer erstellen
-	game.postProcessing = false;	// Postprocessing standardmaessig deaktiviert
+	game.postProcessing = true;	// Postprocessing standardmaessig deaktiviert
 
 	/* Sound */
 	game.ambientSound = document.createElement("audio");
 	game.soundAn = false;
+	
+	/* Ambient Sound*/
+	game.effectSound = false;
 
     /* Spielumgebung einladen */
 	queueLaden();                               // Queue laden
     ladePooltable();                             // Nicht-Physisches, detailliertes Model des Tisches laden    
     ladeKugeln();                             // Nicht-Physisches, detailliertes Model des Tisches laden
-    // createDummyTisch();                         // Dummy-Tisch aus physikalischen Grundobjekten erstellen
     sceneLaden();                        //Alpha Tisch aus Colada File Laden^
     loecherTrigger();							//Lade die Triggers von den Loechern
     createWhiteBall(0,22,15);                    // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
-    //ladeMonster();								// Lade ein Monster (Bernd)
-    ladeAnimation();
-	createGUI();								// Debugging-GUI erstellen
-	celGUIerstellen();
+    // loadMonsters();								// Lade ein Monster (Bernd)
+    // ladeAnimation();
 	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
 
 
-	var achsendreibein = new THREE.AxisHelper(50);
-	achsendreibein.position.y = 20;
-    game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
+	// var achsendreibein = new THREE.AxisHelper(50);
+	// achsendreibein.position.y = 20;
+ //    game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
 
 	erstelleMinimap();	
-
+    // dummyTexturhinzufuegen();               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
     /* Ende der Initialisierung / Aufruf des Mainloops */
 	mainloop();
 };

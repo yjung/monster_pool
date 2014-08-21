@@ -231,18 +231,45 @@ td {
 }
 
 #scoreboard {
+	font-family: comicNew;
+	font-weight: bold;
 	position:absolute;
 	top:0px;
 	right:0px
 	height:80px;
 	width:300px;
-	background:#000000;
-	/*visibility:hidden;*/	
+	padding: 10px;
+	background:#000000;	
 }
 
+#divTimer {
+	font-family: comicNew;
+	font-weight: bold;
+	position:absolute;
+	height:80px;
+	width:300px;
+	padding: 10px;
+	background:#000000;
+}
+
+#divSeconds{	
+	font-size: 3em;
+	text-align:center;
+}
 #gameEnde {
 	visibility:hidden;
 }
+
+.vollbild {
+	position: absolute !important;
+	top: 0px !important;
+	height: 100% !important;
+}
+
+.canvas{
+	width: 100% !important;
+}
+
 #viewport {
 	position: absolute;
 	height: 100%;
@@ -256,6 +283,21 @@ td {
 	height: 140px;
 	margin: 20px;
 	background: black;
+}
+
+/* ==========================================================================
+   Fonts
+   ========================================================================== */
+
+@font-face {
+    font-family: comicNew;
+    src: url(../fonts/ComicNeue-Light.woff);
+}
+
+@font-face {
+    font-family: comicNew;
+    src: url(../fonts/ComicNeue-Bold.woff);
+    font-weight: bold;
 }
 
 /* ==========================================================================

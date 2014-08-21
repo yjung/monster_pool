@@ -2,8 +2,6 @@ var requestID;
 var animate = true;
 // Abfangen von Benutzereingaben zum Anpassen der Szene
 function benutzereingaben() {
-	// HIER ERGAENZEN
-	queueAktualisieren();
 	// Aktualisierung der Queue-Position
 	checkKeyboard();
 }
@@ -18,24 +16,26 @@ function mainloop() {
 	// Interpolationsschritt von Animationstweens
 	game.orbitControls.update(delta);
 	// Steuerung in Zeitabhängigkeit aktualisieren
-	game.szene.simulate(undefined, 1);
+	game.szene.simulate(undefined, 20);
 	// Physiksimulation
 
-	var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
+	// Animation fuer Test-Monster-Animation
+	if (game.monsterBalls.animation) {
+				game.monsterBalls.animation.update(0.01);
+	}
 
-	game.renderer.clear(true, false, false);
-	// (color, depth, stencil)
+	var screenWidth = window.innerWidth, screenHeight = window.innerHeight;
+
+	game.renderer.clear(true, false, false);	// (color, depth, stencil)
+	updateHatching();
+	
 	if (!game.postProcessing) {// Falls Post-Processing deaktiviert
-		if (game.monster.animation) {
-			game.monster.animation.update(0.01);
-		}
-		game.renderer.setViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-		game.renderer.clear();
+		
 		game.renderer.render(game.szene, game.kamera);
 		// Falls Postprocessing aktiv, aber kein Effekt gesetzt normal rendern
 		game.renderer.clear(false, true, false);
 		// Depth-Cache muss noch entleert werden
-		game.renderer.setViewport(10, SCREEN_HEIGHT - 160 - 120, 240, 140);
+		game.renderer.setViewport(10, screenHeight - 160 - 120, 240, 140);
 		game.renderer.render(game.szene, game.mapCamera);
 
 	} else {// Postprocessing ist aktiviert
@@ -45,13 +45,21 @@ function mainloop() {
 		if (game.renderer.bloomPass) {
 			game.composerBloomPass.render();
 		}
-		if (game.renderer.celShading) {
+		if (game.renderer.celShadingKontur) {
+			// Code fuer Minimap bisher auskommentiert
+			//game.renderer.setViewport(0, 0, screenWidth, screenHeight);
+			//game.renderer.clear(false, true, false);
 			game.composerCelShading.render();
+			game.renderer.clear(false, false, false);
+			game.renderer.setViewport(10, screenHeight - 160 - 120, 240, 140);
+			// // game.mapComposerCelShading.render();
+			game.renderer.render(game.szene, game.mapCamera);
+
 		}
 		if (game.renderer.custom) {
 			game.composerCustom.render();
 		} else {
-			game.renderer.setViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+			game.renderer.setViewport(0, 0, screenWidth, screenHeight);
 			game.renderer.render(game.szene, game.kamera);
 
 		}

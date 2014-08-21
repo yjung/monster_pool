@@ -1,18 +1,27 @@
 // Weisse Kugel aus physikalischem Grundobjekt
 function createWhiteBall(x,y,z) {
+	
+	// erstelleCelShadingMaterial("whiteballMat");
 
-    var friction = 0.25;      // low friction
-    var restitution = 0.87;   // low restitution
+    var friction = 10;      // low friction
+    var restitution = 10;   // low restitution
 
     // Grundobjekterzeugung mit Material aus angelegter Bibliothek
-    game.whiteBall = new Physijs.SphereMesh(new THREE.SphereGeometry(0.75, 16, 16), lWhiteT, 100);
+    game.whiteBall = new Physijs.ConvexMesh(new THREE.SphereGeometry(0.75, 16, 16), 
+    	erstelleCelShadingMaterial(
+    		"whiteBallMat",						// Bezeichnung
+    		false,								// Textur
+    		new THREE.Vector3(1,1,1)		// Farbe
+    		),
+    800);
+
     // Initiale Positionierung in der Welt
     game.whiteBall.position.x = x;
     game.whiteBall.position.y = y;
     game.whiteBall.position.z = z;
 
-    game.whiteBall.material.needsUpdate = true;
     // Hinzufuegen zur Szene
+	game.gameObjects.push(game.whiteBall);
     game.szene.add(game.whiteBall);
 }
 
@@ -26,8 +35,15 @@ function positionBall(x,y,z){
 	
 }
 
-function applyForce(){
+function applyForce(bumperForce){
   	effect = new THREE.Vector3( paramControls.stosskraftX, paramControls.stosskraftY, paramControls.stosskraftZ);
   	offset = new THREE.Vector3( paramControls.offsetX, paramControls.offsetY, paramControls.offsetZ );
-  	game.whiteBall.applyImpulse( effect, offset );
+  	
+  	if(bumperForce){
+  		bumperForce = new THREE.Vector3( bumperForce.x, 0, bumperForce.z);
+		bumperForce.multiplyScalar(-10000000);
+  		game.whiteBall.applyImpulse( bumperForce, offset );
+  	}else{
+  		game.whiteBall.applyImpulse( effect, offset );
+  	}
 };

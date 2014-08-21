@@ -1,5 +1,8 @@
 function createGUI() {
-	console.log("--Erstelle Debug-GUI.--");
+	if(debugMode){		
+		console.log("--Erstelle Debug-GUI.--");
+	}
+	
 	game.debugGUI = new dat.GUI({
 		autoPlace : false, // Eigene Platzierung ermoeglichen
 		width : 220	// Breite etwas reduzieren
@@ -16,7 +19,6 @@ function createGUI() {
 	// Ordner fuer die Kategorien erstellen
 	var controls = game.debugGUI.addFolder('Controls');
 	var postprocessing = game.debugGUI.addFolder('Postprocessing - Allgmein');
-
 	var options = game.debugGUI.addFolder('Options');
 
 	paramControls = {
@@ -29,7 +31,7 @@ function createGUI() {
 	};
 
 	paramPostprocessing = {
-		enable : false,
+		enable : true,
 		filmEffekt : false,
 		bloomPass : false,
 		custom : false,
@@ -40,6 +42,7 @@ function createGUI() {
 	paramOptions = {
 		vollbild : false,
 		sound : false,
+		effectSound : false,
 	};
 
 	// Steuerungseintraege hinzufuegen
@@ -61,6 +64,7 @@ function createGUI() {
 	// Optionen-Eintraege hinzufuegen
 	game.debugGUI.vollbild = options.add(paramOptions, 'vollbild').listen().name("Vollbildmodus");
 	game.debugGUI.sound = options.add(paramOptions, 'sound').listen().name("Sound");
+	game.debugGUI.effectSound = options.add(paramOptions, 'effectSound').listen().name("Sound Effects");
 
 	game.debugGUI.autoListen = true;
 
@@ -130,9 +134,15 @@ function createGUI() {
 		game.vollbild = value;
 		if (value && THREEx.FullScreen.available() && !THREEx.FullScreen.activated()) {
 			THREEx.FullScreen.request(document.getElementById("viewport"));
+			$( "#viewport" ).addClass( "vollbild" );
+			$( "canvas" ).addClass( "vollbild" );
 			onWindowResize();
+			
 		} else {
 			THREEx.FullScreen.cancel();
+			$( "#viewport" ).removeClass( "vollbild" );
+			$( "canvas" ).removeClass( "vollbild" );
+			$( "canvas" ).addClass( "canvas" );
 			onWindowResize();
 		}
 	});
@@ -146,6 +156,10 @@ function createGUI() {
 			soundAmbience('ambience');
 			game.ambientSound.volume = 0.5;
 		}
+	});
+	
+		game.debugGUI.effectSound.onChange(function(value) {
+		game.effectSound = value;
 	});
 
 	// GUI im Allgemeinen standardmaessig oeffnen

@@ -1,240 +1,537 @@
 <!DOCTYPE html>
 <html class="no-js">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Monster Pool</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Monster Pool</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="lib/bootstrap-3.2.0-dist/css/bootstrap.css">
-    <link rel="stylesheet" href="css/main.css">    
-    <script src="lib/jquery-1.11.0.min.js"></script>
-    <!--<script src="lib/modernizr-2.7.1.min.js"></script>-->
-    <script src="lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-     <!--<script src="js/vendor/jquery-1.11.0.min.js"></script>
-    <script src="js/vendor/modernizr-2.7.1.min.js"></script>-->
-    <script src="js/plugins.js"></script>
+		<!-- Place favicon.ico and apple-touch-icon(s) in the root directory -->
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="lib/bootstrap-3.2.0-dist/css/bootstrap.css">
+		<link rel="stylesheet" href="css/main.css">
+		<script src="lib/jquery-1.11.0.min.js"></script>
+		<!--<script src="lib/modernizr-2.7.1.min.js"></script>-->
+		<script src="lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+		<!--<script src="js/vendor/jquery-1.11.0.min.js"></script>
+		<script src="js/vendor/modernizr-2.7.1.min.js"></script>-->
+		<script src="js/plugins.js"></script>
 
+		<!-- Einbinden von WebGL-Bibliotheken / - Frameworks -->
+		<script type="text/javascript" src="lib/three.js"></script>
+		<!-- Three.js -->
+		<script type="text/javascript" src="lib/physi.js"></script>
+		<!-- Physi.js -->
+		<script type="text/javascript" src="lib/ColladaLoader.js"></script>
+		<!-- ColladaLoader.js -->
 
-    <!-- Einbinden von WebGL-Bibliotheken / - Frameworks -->
-    <script type="text/javascript" src="lib/three.js"></script>                  <!-- Three.js -->
-    <script type="text/javascript" src="lib/physi.js"></script>                  <!-- Physi.js -->
-    <script type="text/javascript" src="lib/ColladaLoader.js"></script>          <!-- ColladaLoader.js -->
+		<!-- Helper-Frameworks -->
+		<script type="text/javascript" src="lib/dat.gui.js"></script>
+		<!-- dat.GUI -->
+		<script type="text/javascript" src="lib/stats.js"></script>
+		<!-- Stats.js -->
+		<script type="text/javascript" src="lib/threex.rendererstats.js"></script>
+		<!-- Renderstats.js -->
+		<script type="text/javascript" src="lib/THREEx.KeyboardState.js"></script>
+		<!-- KeyboardState.js -->
+		<script type="text/javascript" src="lib/THREEx.FullScreen.js"></script>
+		<!-- FullScreen.js -->
+		<script type="text/javascript" src="lib/tweenjs-0.5.1.min.js"></script>
+		<!-- FullScreen.js -->
+		<script type="text/javascript" src="lib/Tween.js"></script>
+		<!-- FullScreen.js -->
 
-	<!-- Helper-Frameworks -->
-    <script type="text/javascript" src="lib/dat.gui.js"></script>                <!-- dat.GUI -->
-    <script type="text/javascript" src="lib/stats.js"></script>                  <!-- Stats.js -->
-    <script type="text/javascript" src="lib/threex.rendererstats.js"></script>   <!-- Renderstats.js -->
-    <script type="text/javascript" src="lib/THREEx.KeyboardState.js"></script>   <!-- KeyboardState.js -->
-    <script type="text/javascript" src="lib/THREEx.FullScreen.js"></script>   	 <!-- FullScreen.js -->
-    <script type="text/javascript" src="lib/tweenjs-0.5.1.min.js"></script>   	 <!-- FullScreen.js -->
-    <script type="text/javascript" src="lib/Tween.js"></script>   	 <!-- FullScreen.js -->
+		<!-- Programmlogik-->
+		<script type="text/javascript" src="js/statistik.js"></script>
+		<!-- Statistik -->
+		<script type="text/javascript" src="js/sound.js"></script>
+		<!-- Statistik -->
+		<script type="text/javascript" src="js/renderer.js"></script>
+		<!-- Renderer -->
+		<script type="text/javascript" src="js/tastatur.js"></script>
+		<!-- Tastatur -->
+		<script type="text/javascript" src="js/OrbitControls.js"></script>
+		<!-- OrbitControls -->
+		<script type="text/javascript" src="js/whiteball.js"></script>
+		<!-- Whiteball -->
+		<script type="text/javascript" src="js/queue.js"></script>
+		<!-- Queue -->
+		<script type="text/javascript" src="js/monster.js"></script>
+		<!-- Monster -->
+		<script type="text/javascript" src="js/main.js"></script>
+		<!-- Mainloop -->
+		<script type="text/javascript" src="js/initalisierung.js"></script>
+		<!-- Initialisierung -->
+		<script type="text/javascript" src="js/gui.js"></script>
+		<!-- GUI -->
+		<script type="text/javascript" src="js/spielEnde.js"></script>
+		<!-- SpielEnde -->
+		<script type="text/javascript" src="js/neustart.js"></script>
+		<!-- Neu Start -->
+		<script type="text/javascript" src="js/timer.js"></script>
+		<!-- Timer for white ball -->
 
-	
-    <!-- Programmlogik-->
-    <script type="text/javascript" src="js/statistik.js"></script>				<!-- Statistik -->
-    <script type="text/javascript" src="js/sound.js"></script>				<!-- Statistik -->
-    <script type="text/javascript" src="js/renderer.js"></script>				<!-- Renderer -->
-    <script type="text/javascript" src="js/tastatur.js"></script>				<!-- Tastatur -->
-    <script type="text/javascript" src="js/OrbitControls.js"></script>			<!-- OrbitControls -->
-    <script type="text/javascript" src="js/whiteball.js"></script>				<!-- Whiteball -->
-    <script type="text/javascript" src="js/queue.js"></script>					<!-- Queue -->
-    <script type="text/javascript" src="js/monster.js"></script>				<!-- Monster -->    
-    <script type="text/javascript" src="js/main.js"></script>					<!-- Mainloop -->
-    <script type="text/javascript" src="js/initalisierung.js"></script>			<!-- Initialisierung -->
-    <script type="text/javascript" src="js/gui.js"></script>    				<!-- GUI -->
+		<!-- Leveldesign -->
+		<!-- <script type="text/javascript" src="js/dummyTisch.js"></script> -->
+		<!-- dummyTisch -->
+		<script type="text/javascript" src="js/pooltable.js"></script>
+		<!-- Tisch -->
+		<script type="text/javascript" src="js/loecherTrigger.js"></script>
+		<!-- Trigger fuer Loecher -->
+		<script type="text/javascript" src="js/kugeln.js"></script>
+		<!-- Kugeln -->
+		<script type="text/javascript" src="js/slider.js"></script>
+		<!-- Slider -->
+		<script type="text/javascript" src="js/bumper.js"></script>
+		<!-- Bumper -->
+		<script type="text/javascript" src="js/rampe.js"></script>
+		<!-- Rampe -->
+		<script type="text/javascript" src="js/paddle.js"></script>
+		<!-- Paddle -->
+		<script type="text/javascript" src="js/lightSetup.js"></script>
+		<!-- Licht -->
+		<script type="text/javascript" src="js/raumErstellen.js"></script>
+		<!-- Raum -->
+		<script type="text/javascript" src="js/minimap.js"></script>
+		<!-- Minimap -->
+		<script type="text/javascript" src="js/MatLibThree.js"></script>
+		<!-- Materialbibliothek fuer Three.js -->
+		<script type="text/javascript" src="js/MatLibPhysi.js"></script>
+		<!-- Materialbibliothek fuer Physi.js -->
 
-	<!-- Leveldesign -->
-    <!-- <script type="text/javascript" src="js/dummyTisch.js"></script> -->				<!-- dummyTisch -->
-    <script type="text/javascript" src="js/pooltable.js"></script>					<!-- Tisch -->
-    <script type="text/javascript" src="js/loecherTrigger.js"></script>			<!-- Trigger fuer Loecher -->
-    <script type="text/javascript" src="js/kugeln.js"></script>					<!-- Kugeln -->
-    <script type="text/javascript" src="js/slider.js"></script>					<!-- Slider -->
-    <script type="text/javascript" src="js/bumper.js"></script>					<!-- Bumper -->
-    <script type="text/javascript" src="js/rampe.js"></script>					<!-- Rampe -->
-    <script type="text/javascript" src="js/paddle.js"></script>					<!-- Paddle -->
-    <script type="text/javascript" src="js/lightSetup.js"></script>				<!-- Licht -->
-    <script type="text/javascript" src="js/raumErstellen.js"></script>			<!-- Raum -->
-    <script type="text/javascript" src="js/minimap.js"></script>				<!-- Minimap -->
-    <script type="text/javascript" src="js/MatLibThree.js"></script>			<!-- Materialbibliothek fuer Three.js -->
-    <script type="text/javascript" src="js/MatLibPhysi.js"></script>			<!-- Materialbibliothek fuer Physi.js -->
-	
-	<!-- Post-Processing -->
-    <script type="text/javascript" src="js/postprocessing.js"></script>			<!-- Post-Processing -->
-    <script type="text/javascript" src="lib/EffectComposer.js"></script>         <!-- Effect Composer-->
-    <script type="text/javascript" src="lib/RenderPass.js"></script>             <!-- Render-Pass -->
-    <script type="text/javascript" src="lib/ShaderPass.js"></script>             <!-- Shader-Pass.js -->    
-    <script type="text/javascript" src="lib/MaskPass.js"></script>               <!-- Mask-Pass -->    
-    <script type="text/javascript" src="lib/BloomPass.js"></script>              <!-- Bloom-Pass -->    
-    <script type="text/javascript" src="shaders/EdgeShader.js"></script>              <!-- Bloom-Pass -->    
-    <script type="text/javascript" src="shaders/CannyEdgePass.js"></script>              <!-- Bloom-Pass -->    
-    <script type="text/javascript" src="lib/FilmPass.js"></script>               <!-- Film-Pass -->    
-    <script type="text/javascript" src="lib/CopyShader.js"></script>             <!-- Copy-Shader.js -->    
-    <script type="text/javascript" src="lib/ConvolutionShader.js"></script>      <!-- Convolution-Shader -->      
-	<script type="text/javascript" src="shaders/CelShader.js"></script>			 <!-- Cel-Shader --> 
-    <script type="text/javascript" src="lib/FilmShader.js"></script>             <!-- Film-Shader -->    
-	<script type="text/javascript" src="shaders/CustomShader.js"></script>		 <!-- Beispiel fuer einen eigenen Shader -->
-	<script type="text/javascript" src="js/celShading.js"></script>				 <!-- Skript fuer Cel-Shading-Modifikationen -->
+		<!-- Post-Processing -->
+		<script type="text/javascript" src="js/postprocessing.js"></script>
+		<!-- Post-Processing -->
+		<script type="text/javascript" src="lib/EffectComposer.js"></script>
+		<!-- Effect Composer-->
+		<script type="text/javascript" src="lib/RenderPass.js"></script>
+		<!-- Render-Pass -->
+		<script type="text/javascript" src="lib/ShaderPass.js"></script>
+		<!-- Shader-Pass.js -->
+		<script type="text/javascript" src="lib/MaskPass.js"></script>
+		<!-- Mask-Pass -->
+		<script type="text/javascript" src="lib/BloomPass.js"></script>
+		<!-- Bloom-Pass -->
+		<script type="text/javascript" src="shaders/EdgeShader.js"></script>
+		<!-- Bloom-Pass -->
+		<script type="text/javascript" src="shaders/CannyEdgePass.js"></script>
+		<!-- Bloom-Pass -->
+		<script type="text/javascript" src="shaders/GlowShader.js"></script>
+		<!-- Glow-Shader -->
+		<script type="text/javascript" src="lib/FilmPass.js"></script>
+		<!-- Film-Pass -->
+		<script type="text/javascript" src="lib/CopyShader.js"></script>
+		<!-- Copy-Shader.js -->
+		<script type="text/javascript" src="lib/ConvolutionShader.js"></script>
+		<!-- Convolution-Shader -->
+		<!-- Cel-Shader -->
+		<script type="text/javascript" src="shaders/CelShader.js"></script>
+		<!-- Film-Shader -->
+		<script type="text/javascript" src="lib/FilmShader.js"></script>
+		<!-- Beispiel fuer einen eigenen Shader -->
+		<script type="text/javascript" src="shaders/CustomShader.js"></script>
+		<!-- Skript fuer Cel-Shading-Modifikationen -->
+		<script type="text/javascript" src="js/celShading.js"></script>
+		
+		
+		<script type="x-shader/x-vertex" id="hatchingVS">
+			varying vec3 vNormal;
+			varying vec2 vUv;
+			varying float depth;
+			varying vec3 vPosition;
+			varying float nDotVP;
+			varying vec3 pos;
 
+			uniform vec2 repeat;
+			uniform vec3 lightPosition;
+			uniform float showOutline;
 
-</head>
+			void main() {
+
+			float w = 1.;
+			vec3 posInc = vec3( 0. );
+			if( showOutline == 1. ) posInc = w * normal;
+
+			vUv = repeat * uv;
+
+			vec4 mvPosition = modelViewMatrix * vec4( position + posInc, 1.0 );
+			vPosition = mvPosition.xyz;
+			gl_Position = projectionMatrix * mvPosition;
+			pos = gl_Position.xyz;
+
+			vNormal = normalMatrix * normal;
+			depth = ( length( position.xyz ) / 90. );
+			depth = .5 + .5 * depth;
+
+			nDotVP = max( 0., dot( vNormal, normalize( vec3( lightPosition ) ) ) );
+
+			}
+
+		</script>
+
+		<script type="x-shader/x-fragment" id="hatchingFS">
+
+			uniform sampler2D hatch1;
+			uniform sampler2D hatch2;
+			uniform sampler2D hatch3;
+			uniform sampler2D hatch4;
+			uniform sampler2D hatch5;
+			uniform sampler2D hatch6;
+			uniform sampler2D paper;
+			uniform vec2 resolution;
+			uniform vec2 bkgResolution;
+			uniform vec3 lightPosition;
+
+			vec3 color = vec3( 1., 0., 1. );
+			vec3 lightColor = vec3( 1. );
+
+			varying vec2 vUv;
+			varying vec3 vNormal;
+			varying float depth;
+			varying vec3 vPosition;
+			varying float nDotVP;
+			varying vec3 pos;
+
+			uniform float ambientWeight;
+			uniform float diffuseWeight;
+			uniform float rimWeight;
+			uniform float specularWeight;
+			uniform float shininess;
+			uniform int invertRim;
+			uniform float showOutline;
+			uniform vec4 inkColor;
+
+			vec4 shade() {
+
+			float diffuse = nDotVP;
+			float specular = 0.;
+			float ambient = 1.;
+
+			vec3 n = normalize( vNormal );
+
+			vec3 r = -reflect(lightPosition, n);
+			r = normalize(r);
+			vec3 v = -vPosition.xyz;
+			v = normalize(v);
+			float nDotHV = max( 0., dot( r, v ) );
+
+			if( nDotVP != 0. ) specular = pow ( nDotHV, shininess );
+			float rim = max( 0., abs( dot( n, normalize( -vPosition.xyz ) ) ) );
+			if( invertRim == 1 ) rim = 1. - rim;
+
+			float shading = ambientWeight * ambient + diffuseWeight * diffuse + rimWeight * rim + specularWeight * specular;
+
+			vec4 c;
+			float step = 1. / 6.;
+
+			if( shading <= step ){
+			c = mix( texture2D( hatch6, vUv ), texture2D( hatch5, vUv ), 6. * shading );
+			}
+			if( shading > step && shading <= 2. * step ){
+			c = mix( texture2D( hatch5, vUv ), texture2D( hatch4, vUv) , 6. * ( shading - step ) );
+			}
+			if( shading > 2. * step && shading <= 3. * step ){
+			c = mix( texture2D( hatch4, vUv ), texture2D( hatch3, vUv ), 6. * ( shading - 2. * step ) );
+			}
+			if( shading > 3. * step && shading <= 4. * step ){
+			c = mix( texture2D( hatch3, vUv ), texture2D( hatch2, vUv ), 6. * ( shading - 3. * step ) );
+			}
+			if( shading > 4. * step && shading <= 5. * step ){
+			c = mix( texture2D( hatch2, vUv ), texture2D( hatch1, vUv ), 6. * ( shading - 4. * step ) );
+			}
+			if( shading > 5. * step ){
+			c = mix( texture2D( hatch1, vUv ), vec4( 1. ), 6. * ( shading - 5. * step ) );
+			}
+
+			vec4 src = mix( mix( inkColor, vec4( 1. ), c.r ), c, .5 );
+			//c = 1. - ( 1. - src ) * ( 1. - dst );
+			//c = vec4( min( src.r, dst.r ), min( src.g, dst.g ), min( src.b, dst.b ), 1. );
+
+			//c = vec4( gl_FragCoord.x / resolution.x, gl_FragCoord.y / resolution.y, 0., 1. );
+
+			return src;
+			}
+
+			void main() {
+
+			vec2 nUV = vec2( mod( gl_FragCoord.x, bkgResolution.x ) / bkgResolution.x, mod( gl_FragCoord.y, bkgResolution.y ) / bkgResolution.y );
+			vec4 dst = vec4( texture2D( paper, nUV ).rgb, 1. );
+			vec4 src;
+
+			//if( showOutline == 1 ) src = .5 * inkColor;
+			//else src = shade();
+			src = ( .5 * inkColor ) * vec4( showOutline ) + vec4( 1. - showOutline ) * shade();
+
+			vec4 c = src * dst;
+
+			gl_FragColor = vec4( c.rgb, 1. );
+			}
+
+		</script>
+
+		<script id="TransparentVS" type="x-shader/x-vertex">
+
+			varying vec2 vUv;
+
+			void main() {
+
+			vUv = uv;
+
+			gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+			}
+
+		</script>
+
+		<script id="TransparentFS" type="x-shader/x-fragment">
+
+			uniform vec3 color;
+			uniform sampler2D texture;
+
+			varying vec2 vUv;
+
+			void main() {
+
+			vec4 tColor = texture2D( texture, vUv );
+
+			gl_FragColor = vec4( mix( color, tColor.rgb, tColor.a ), 1.0 );
+			
+			if(gl_FragColor == vec4(0.0,0.0,0.0,1.0)){discard;}
+
+			}
+
+		</script>
+
+	</head>
 	<body onload="initialisiere()">
 		<!-- /////////////////		HEADER		/////////////////-->
 		<div id=header class="header-big">
-    		<img id="imgBanner" src="img/MonsterPool_Logo.png" />
-    		
-    		<!-- /////////////////		MENUE		/////////////////-->
-    		<nav class="navbar_navbar-default" role="navigation">
-			  <div class="container-fluid">			    
-			    <div class="collapse_navbar-collapse" id="bs-example-navbar-collapse-1">
-			      <ul class="nav navbar-nav">
-			        <li><a href="#" data-toggle="modal" data-target="#controlsModal">Controls</a></li>
-			        <li><a href="#" data-toggle="modal" data-target="#einstellungModal">Einstellung</a></li>
-			        <li><a href="#" data-toggle="modal" data-target="#hilfeModal">Spiel Hilfe</a></li>
-			        <li><a href="#" data-toggle="modal" data-target="#aboutModal">About</a></li>
-			      </ul>			      
-			    </div><!-- /.navbar-collapse -->
-			  </div><!-- /.container-fluid -->
+			<img id="imgBanner" src="img/MonsterPool_Logo.png" />
+
+			<!-- /////////////////		MENUE		/////////////////-->
+			<nav class="navbar_navbar-default" role="navigation">
+				<div class="container-fluid">
+					<div class="collapse_navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li>
+								<a href="#" data-toggle="modal" data-target="#controlsModal">Controls</a>
+							</li>
+							<li>
+								<a href="#" data-toggle="modal" data-target="#einstellungModal">Einstellung</a>
+							</li>
+							<li>
+								<a href="#" data-toggle="modal" data-target="#hilfeModal">Spiel Hilfe</a>
+							</li>
+							<li>
+								<a href="#" data-toggle="modal" data-target="#aboutModal">About</a>
+							</li>
+						</ul>
+					</div><!-- /.navbar-collapse -->
+				</div><!-- /.container-fluid -->
 			</nav>
-			
-			
-    		<!--<div id=headertrenner></div>-->
+
+			<!--<div id=headertrenner></div>-->
 		</div>
 		<!-- /////////////////		CONTENT		/////////////////-->
 		<div id=contentwrapper>
 			<div id='info'>
-				<p>Bored of the normal Billard, with the same elements of always, then Monster Pool is for you. Monster Pool is the amazing game, in which you will hit monsters intead of normal balls</p>
+				<p>
+					Bored of the normal Billard, with the same elements of always, then Monster Pool is for you. Monster Pool is the amazing game, in which you will hit monsters intead of normal balls
+				</p>
 				<form action="">
 					<label for="inputName">Name:</label>
-					<input type="text" name="inputName" id="inputName"><br>
+					<input type="text" name="inputName" id="inputName">
+					<br>
 					<a href='#' onclick='initialisiere()'>Press here to play</a>
 					<!--<input type="submit" onclick='initialisiere()' value="Press here to play">-->
 				</form>
-				
+
 			</div>
 
-    		<div id="viewport">
-			<div id="scoreboard">
-				Points:<div id="points">0</div>
-				Kugeln:<div id="balls">15</div>
+			<div id="viewport">
+				<div id="scoreboard">
+					Points:
+					<div id="points">
+						0
+					</div>
+					Kugeln:
+					<div id="balls">
+						15
+					</div>
+				</div>
 			</div>
-    		</div>
+			<div id='gameEnde'>
+				<p>
+					Great! You got lots of points in this game.
+				</p>
+				<p>
+					Points:
+				</p>
+				<div id='finalScore'>
+					0
+				</div>
+				<a href='#' onclick='neustarten()'>Press here to play again</a>
+			</div>
 		</div>
 		<!-- /////////////////		FOOTER		/////////////////-->
-		<div id=footer><a id="impressum" href="#"  data-toggle="modal" data-target="#impressumModal">Impressum</a></div>
+		<div id=footer>
+			<a id="impressum" href="#"  data-toggle="modal" data-target="#impressumModal">Impressum</a>
+		</div>
 		<!-- /////////////////    Modal Impressum ///////////////////-->
 		<div class="modal fade" id="impressumModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Impressum</h4>
-		      </div>
-		      <div class="modal-body">
-		        Angaben nach § 5 Telemediengesetz<br><br>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Impressum</h4>
+					</div>
+					<div class="modal-body">
+						Angaben nach § 5 Telemediengesetz
+						<br>
+						<br>
 
-				<p>Name und Anschrift: TODO<br>
-				TODO<br>
-				TODO<br></p>
-				
-				<p>Internet: TODO</p>
-				
-				<p>Gesetzlicher Vertreter: TODO</p>
-				
-				<p>Webmaster: TODO<br>
-				 Telefon: TODO<br>
-				 Telefax: TODO<br>
-				 eMail: TODO</p>
-				 
-				 <p>Haftungsausschluss<br><br>
+						<p>
+							Name und Anschrift: TODO
+							<br>
+							TODO
+							<br>
+							TODO
+							<br>
+						</p>
 
-					Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Sie stellen kein Angebot der Hochschule Fulda dar. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		      </div>
-		    </div>
-		  </div>
+						<p>
+							Internet: TODO
+						</p>
+
+						<p>
+							Gesetzlicher Vertreter: TODO
+						</p>
+
+						<p>
+							Webmaster: TODO
+							<br>
+							Telefon: TODO
+							<br>
+							Telefax: TODO
+							<br>
+							eMail: TODO
+						</p>
+
+						<p>
+							Haftungsausschluss
+							<br>
+							<br>
+
+							Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Sie stellen kein Angebot der Hochschule Fulda dar. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							Close
+						</button>
+					</div>
+				</div>
+			</div>
 		</div>
-		
-				<!-- /////////////////    Modal Controls ///////////////////-->
+
+		<!-- /////////////////    Modal Controls ///////////////////-->
 		<div class="modal fade" id="controlsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Controls</h4>
-		      </div>
-		      <div class="modal-body">
-		        <p></p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-		        <p></p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		      </div>
-		    </div>
-		  </div>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Controls</h4>
+					</div>
+					<div class="modal-body">
+						<p></p>
+						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. <p></p>
+						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							Close
+						</button>
+					</div>
+				</div>
+			</div>
 		</div>
-		
-			<!-- /////////////////    Modal Einstellung ///////////////////-->
+
+		<!-- /////////////////    Modal Einstellung ///////////////////-->
 		<div class="modal fade" id="einstellungModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Einstellung</h4>
-		      </div>
-		      <div class="modal-body">
-		        <p></p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-		        <p></p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		      </div>
-		    </div>
-		  </div>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Einstellung</h4>
+					</div>
+					<div class="modal-body">
+						<p></p>
+						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. <p></p>
+						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							Close
+						</button>
+					</div>
+				</div>
+			</div>
 		</div>
-		
-			<!-- /////////////////    Modal Hilfe ///////////////////-->
+
+		<!-- /////////////////    Modal Hilfe ///////////////////-->
 		<div class="modal fade" id="hilfeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Spiel Hilfe</h4>
-		      </div>
-		      <div class="modal-body">
-		        <p></p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-		        <p></p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		      </div>
-		    </div>
-		  </div>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">Spiel Hilfe</h4>
+					</div>
+					<div class="modal-body">
+						<p></p>
+						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. <p></p>
+						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							Close
+						</button>
+					</div>
+				</div>
+			</div>
 		</div>
-		
-			<!-- /////////////////    Modal About ///////////////////-->
+
+		<!-- /////////////////    Modal About ///////////////////-->
 		<div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		        <h4 class="modal-title" id="myModalLabel">About</h4>
-                  <!-- ACHTUNG: die id "myModalLabel" wurde mehrfach vergeben, was fehlerhaft ist -->
-		      </div>
-		      <div class="modal-body">
-		        <p></p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-		        <p></p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		      </div>
-		    </div>
-		  </div>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">
+							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+						</button>
+						<h4 class="modal-title" id="myModalLabel">About</h4>
+						<!-- ACHTUNG: die id "myModalLabel" wurde mehrfach vergeben, was fehlerhaft ist -->
+					</div>
+					<div class="modal-body">
+						<p></p>
+						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. <p></p>
+						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							Close
+						</button>
+					</div>
+				</div>
+			</div>
 		</div>
 
 	</body>
