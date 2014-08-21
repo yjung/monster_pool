@@ -24,7 +24,7 @@ function initialisiere() {
     window.addEventListener('resize', onWindowResize, false);   // Eventlistener fuer Groessenaenderung
     
 	// Cel-Shading-Namespace
-	window.game = {};
+	window.game.gameObjects = new Array();
 	window.game.celShading = {};
 	window.game.celShading.hatching = {};
     

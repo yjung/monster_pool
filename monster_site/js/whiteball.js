@@ -21,6 +21,7 @@ function createWhiteBall(x,y,z) {
     game.whiteBall.position.z = z;
 
     // Hinzufuegen zur Szene
+	game.gameObjects.push(game.whiteBall);
     game.szene.add(game.whiteBall);
 }
 
