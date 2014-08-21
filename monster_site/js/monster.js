@@ -1,4 +1,27 @@
 var grids = {
+              "doppelRaute": { 
+                        "grid": [
+                          "~","#","~","+","+","+","-","#","~",
+                          "#","~","#","+","+","+","#","~","#",
+                          "~","#","~","+","+","+","-","#","~",
+                        ],
+                        "gridSymbols": {
+                          "#": 1.5,
+                          ".": 0.25,
+                          "~": 0.75,
+                          "+": 4,
+                          "-": 1.5
+                        },
+                        "offset": 9,
+                        "gridPosition": {
+                          "x": -10.25,
+                          "y": 18.75,
+                          "z": -10
+                        },
+                        "placeSymbol": "#",
+                        "rowDistance": 1.5
+                      },
+
               "triangle": { 
                         "grid": [
                           "#",".","#",".","#",".","#",".","#",
@@ -173,7 +196,7 @@ var grids = {
                       }
 }
 
-var chosenGrid    = grids["triangle"];
+var chosenGrid    = grids["doppelRaute"];
 var grid          = chosenGrid["grid"];
 var offset        = chosenGrid["offset"];
 var gridPosition  = chosenGrid["gridPosition"];
