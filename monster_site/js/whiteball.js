@@ -7,13 +7,13 @@ function createWhiteBall(x,y,z) {
     var restitution = 10;   // low restitution
 
     // Grundobjekterzeugung mit Material aus angelegter Bibliothek
-    game.whiteBall = new Physijs.ConvexMesh(new THREE.SphereGeometry(0.75, 16, 16), 
+    game.whiteBall = new Physijs.ConvexMesh(new THREE.SphereGeometry(0.75, 16, 16), Physijs.createMaterial(
     	erstelleCelShadingMaterial(
     		"whiteBallMat",						// Bezeichnung
-    		false,								// Textur
-    		new THREE.Vector3(1,1,1)		// Farbe
+    		THREE.ImageUtils.loadTexture("../assets/dae/tex/Weiße_Kugel.jpg"),								// Textur
+    		new THREE.Vector3(1,0,0)		// Farbe
     		),
-    800);
+    0.1,0.1),800);
 
     // Initiale Positionierung in der Welt
     game.whiteBall.position.x = x;
