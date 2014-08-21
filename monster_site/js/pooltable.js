@@ -85,8 +85,9 @@ function erstelleHindernisse(ColladaLoader){
 
 function erstellePaddleMitAnimation()
 {
-	var flipperLeftConstraint = createLeftFlipper();
-	var flipperRightConstraint = createRightFlipper();
+								/**erstelleflipper (enablemotor, PaddlePos, PivotPos, rechts);**/
+	var flipperLeftConstraint = erstelleFlipper(false, new THREE.Vector3(-8,19,0),new THREE.Vector3(-10,19,0),false);
+	var flipperRightConstraint = erstelleFlipper(false, new THREE.Vector3(8,19,0),new THREE.Vector3(10,19,0),true);
 
 	// var controls = controler();
 	// controls.updateMotor;
@@ -96,147 +97,149 @@ function erstellePaddleMitAnimation()
 
 };//end Stuff 
 
-function createLeftFlipper()
-{
-	var loader = new THREE.JSONLoader();
-   	var flipperLeft;
-   	var paddle;
-   	   	
-   	enableMotor = false;
-	acceleration = 2;
-	velocity = -10;
-	
-	loader.load('assets/json/paddle.js', function(geometry, materials){
-		// var paddleBump = new Physijs.BoxMesh(paddle, Physijs.createMaterial(new THREE.MeshPhongMaterial(
-		paddle = new Physijs.BoxMesh(geometry, new THREE.MeshLambertMaterial(materials), 0);
-		game.szene.add(paddle);
 
-		// var flipperLeft = new Physijs.BoxMesh(geometry, Physijs.createMaterial(new THREE.MeshPhongMaterial({opacity : 0.6, transparent : true})), 0.3);
-		var flipperLeft = new Physijs.BoxMesh(paddle.geometry, paddle.material, 0.3);
-			flipperLeft.position.x = -6;
-			flipperLeft.position.y = 19;
-			flipperLeft.position.z = 0;
-			flipperLeft.castShadow = true;
-			game.szene.add(flipperLeft);
-		
-		var flipperLeftPivot = new Physijs.SphereMesh(new THREE.BoxGeometry(1, 1, 1), pGreenT, 0);
-			flipperLeftPivot.position.x = -10;
-			flipperLeftPivot.position.y = 19;
-			flipperLeftPivot.position.z = 0;
-			flipperLeftPivot.rotation.y = 1.4;
-			flipperLeftPivot.castShadow = true;
-			game.szene.add(flipperLeftPivot);
-	
-		// when looking at the axis, the axis of object two are used.
-		// so as long as that one is the same as the scene, no problems
-		// rotation and axis are relative to object2. If position == cube2.position it works as expected
-		hhconstraint = new Physijs.HingeConstraint(flipperLeft, flipperLeftPivot, flipperLeftPivot.position, new THREE.Vector3(0, 1, 0));
-		//            var constraint = new Physijs.HingeConstraint(cube1, new THREE.Vector3(0,0,0), new THREE.Vector3(0,1,0));
-		game.szene.addConstraint(hhconstraint);
-	
-		hhconstraint.setLimits(-2.2, // minimum angle of motion, in radians, from the point object 1 starts (going back)
-		-0.6, // maximum angle of motion, in radians, from the point object 1 starts (going forward)
-		0.1, // applied as a factor to constraint error, how big the kantelpunt is moved when a constraint is hit
-		0 // controls bounce at limit (0.0 == no bounce)
-		);
-		if(enableMotor)
-		{	
-		hhconstraint.disableMotor();
-		hhconstraint.enableAngularMotor(velocity, acceleration);
-		}
-		else
-		{
-			hhconstraint.disableMotor();
-		}
-		
-		return hhconstraint;
-	});//end Loader Load
-
-	
-};//end createLeftFlipper
-
-function createRightFlipper()
-{
-	var loader = new THREE.JSONLoader();
-   	var flipperRight;
-   	var paddle;
-   	
-   	enableMotor = false;
-	acceleration = 2;
-	velocity = -10;
-	
-	loader.load('assets/json/paddle.js', function(geometry, materials)
-	{
-		// var paddleBump = new Physijs.BoxMesh(paddle, Physijs.createMaterial(new THREE.MeshPhongMaterial(
-		paddle = new Physijs.BoxMesh(geometry, new THREE.MeshFaceMaterial(materials), 0);
-		game.szene.add(paddle);
-
-		// var flipperLeft = new Physijs.BoxMesh(geometry, Physijs.createMaterial(new THREE.MeshPhongMaterial({opacity : 0.6, transparent : true})), 0.3);
-		var flipperRight = new Physijs.BoxMesh(paddle.geometry, paddle.material, 0.3);
-			flipperRight.position.x = 6;
-			flipperRight.position.y = 19;
-			flipperRight.position.z = 0;
-			flipperRight.castShadow = true;
-			game.szene.add(flipperRight);
-		
-		var flipperRightPivot = new Physijs.SphereMesh(new THREE.BoxGeometry(1, 1, 1), pGreenT, 0);
-			flipperRightPivot.position.x = 10;
-			flipperRightPivot.position.y = 19;
-			flipperRightPivot.position.z = 0;
-			flipperRightPivot.rotation.y = 1.4;
-			flipperRightPivot.castShadow = true;
-			game.szene.add(flipperRightPivot);
-	
-		// when looking at the axis, the axis of object two are used.
-		// so as long as that one is the same as the scene, no problems
-		// rotation and axis are relative to object2. If position == cube2.position it works as expected
-		hhconstraint = new Physijs.HingeConstraint(flipperRight, flipperRightPivot, flipperRightPivot.position, new THREE.Vector3(0, 1, 0));
-		//            var constraint = new Physijs.HingeConstraint(cube1, new THREE.Vector3(0,0,0), new THREE.Vector3(0,1,0));
-		game.szene.addConstraint(hhconstraint);
-	
-		hhconstraint.setLimits(-2.2, // minimum angle of motion, in radians, from the point object 1 starts (going back)
-		-0.6, // maximum angle of motion, in radians, from the point object 1 starts (going forward)
-		0.1, // applied as a factor to constraint error, how big the kantelpunt is moved when a constraint is hit
-		0 // controls bounce at limit (0.0 == no bounce)
-		);
-	if(enableMotor)
-	{	
-	hhconstraint.disableMotor();
-	hhconstraint.enableAngularMotor(velocity, acceleration);
-	}
-	else
-	{
-		hhconstraint.disableMotor();
-	}
-	return hhconstraint;
-	});//end Loader Load
-
-};//end createLeftFlipper
-
-function controler()
-{
-		console.log(this);
-		this.enableMotor = false;
-		this.acceleration = 2;
-		this.velocity = -10;
-		this.updateMotor = function ()
-		{
-			if (controls.enableMotor) 
-			{
-				// velocity is the velocity we are going for.
-				// acceleration is how fast we're going to reach it
-				flipperLeftConstraint.disableMotor();
-				flipperLeftConstraint.enableAngularMotor(controls.velocity, controls.acceleration);
-				flipperRightConstraint.disableMotor();
-				flipperRightConstraint.enableAngularMotor(-1 * controls.velocity, controls.acceleration);
-			} else 
-			{
-				flipperLeftConstraint.disableMotor();
-				flipperRightConstraint.disableMotor();
-			}
-		};//end Update motor
-		
-};//end Controls
+// function createLeftFlipper()
+// {
+	// var loader = new THREE.JSONLoader();
+   	// var flipperLeft;
+   	// var paddle;
+//    	   	
+   	// enableMotor = false;
+	// acceleration = 2;
+	// velocity = -10;
+// 	
+	// loader.load('assets/json/paddle.js', function(geometry, materials){
+		// // var paddleBump = new Physijs.BoxMesh(paddle, Physijs.createMaterial(new THREE.MeshPhongMaterial(
+		// paddle = new Physijs.BoxMesh(geometry, new THREE.MeshFaceMaterial(materials), 0);
+		// game.szene.add(paddle);
+// 
+		// // var flipperLeft = new Physijs.BoxMesh(geometry, Physijs.createMaterial(new THREE.MeshPhongMaterial({opacity : 0.6, transparent : true})), 0.3);
+		// var flipperLeft = new Physijs.BoxMesh(paddle.geometry, paddle.material, 0.2);
+			// flipperLeft.position.x = -9;
+			// flipperLeft.position.y = 18;
+			// flipperLeft.position.z = 0;
+			// flipperLeft.castShadow = true;
+			// game.szene.add(flipperLeft);
+// 		
+		// var flipperLeftPivot = new Physijs.SphereMesh(new THREE.SphereGeometry(1, 1, 1), pGreenT, 0);
+			// flipperLeftPivot.position.x = -10;
+			// flipperLeftPivot.position.y = 19;
+			// flipperLeftPivot.position.z = 0;
+			// flipperLeftPivot.rotation.y = 1.4;
+			// flipperLeftPivot.castShadow = true;
+			// game.szene.add(flipperLeftPivot);
+// 	
+		// // when looking at the axis, the axis of object two are used.
+		// // so as long as that one is the same as the scene, no problems
+		// // rotation and axis are relative to object2. If position == cube2.position it works as expected
+		// hhconstraint = new Physijs.HingeConstraint(flipperLeft, flipperLeftPivot, flipperLeftPivot.position, new THREE.Vector3(0, 1, 0));
+		// //            var constraint = new Physijs.HingeConstraint(cube1, new THREE.Vector3(0,0,0), new THREE.Vector3(0,1,0));
+		// game.szene.addConstraint(hhconstraint);
+// 	
+		// hhconstraint.setLimits(-2.2, // minimum angle of motion, in radians, from the point object 1 starts (going back)
+		// -0.6, // maximum angle of motion, in radians, from the point object 1 starts (going forward)
+		// 0.1, // applied as a factor to constraint error, how big the kantelpunt is moved when a constraint is hit
+		// 0 // controls bounce at limit (0.0 == no bounce)
+		// );
+		// if(enableMotor)
+		// {	
+		// hhconstraint.disableMotor();
+		// hhconstraint.enableAngularMotor(velocity, acceleration);
+		// }
+		// else
+		// {
+			// hhconstraint.disableMotor();
+		// }
+// 		
+		// return hhconstraint;
+	// });//end Loader Load
+// 
+// 	
+// };//end createLeftFlipper
+// 
+// function createRightFlipper()
+// {
+	// var loader = new THREE.JSONLoader();
+   	// var flipperRight;
+   	// var paddle;
+//    	
+   	// enableMotor = false;
+	// acceleration = 2;
+	// velocity = -10;
+// 	
+	// loader.load('assets/json/paddle.js', function(geometry, materials)
+	// {
+		// // var paddleBump = new Physijs.BoxMesh(paddle, Physijs.createMaterial(new THREE.MeshPhongMaterial(
+		// paddle = new Physijs.BoxMesh(geometry, new THREE.MeshFaceMaterial(materials), 0);
+		// game.szene.add(paddle);
+// 
+		// // var flipperLeft = new Physijs.BoxMesh(geometry, Physijs.createMaterial(new THREE.MeshPhongMaterial({opacity : 0.6, transparent : true})), 0.3);
+		// var flipperRight = new Physijs.BoxMesh(paddle.geometry, paddle.material, 0.2);
+			// flipperRight.position.x = 9;
+			// flipperRight.position.y = 18;
+			// flipperRight.position.z = 0;
+			// flipperRight.rotation.y = 3.141592653589793;
+			// flipperRight.castShadow = true;
+			// game.szene.add(flipperRight);
+// 		
+		// var flipperRightPivot = new Physijs.SphereMesh(new THREE.SphereGeometry(1, 1, 1), pGreenT, 0);
+			// flipperRightPivot.position.x = 10;
+			// flipperRightPivot.position.y = 19;
+			// flipperRightPivot.position.z = 0;
+			// flipperRightPivot.rotation.y = 1.4;
+			// flipperRightPivot.castShadow = true;
+			// game.szene.add(flipperRightPivot);
+// 	
+		// // when looking at the axis, the axis of object two are used.
+		// // so as long as that one is the same as the scene, no problems
+		// // rotation and axis are relative to object2. If position == cube2.position it works as expected
+		// hhconstraint = new Physijs.HingeConstraint(flipperRight, flipperRightPivot, flipperRightPivot.position, new THREE.Vector3(0, 1, 0));
+		// //            var constraint = new Physijs.HingeConstraint(cube1, new THREE.Vector3(0,0,0), new THREE.Vector3(0,1,0));
+		// game.szene.addConstraint(hhconstraint);
+// 	
+		// hhconstraint.setLimits(-2.2, // minimum angle of motion, in radians, from the point object 1 starts (going back)
+		// -0.6, // maximum angle of motion, in radians, from the point object 1 starts (going forward)
+		// 0.1, // applied as a factor to constraint error, how big the kantelpunt is moved when a constraint is hit
+		// 0 // controls bounce at limit (0.0 == no bounce)
+		// );
+	// if(enableMotor)
+	// {	
+	// hhconstraint.disableMotor();
+	// hhconstraint.enableAngularMotor(velocity, acceleration);
+	// }
+	// else
+	// {
+		// hhconstraint.disableMotor();
+	// }
+	// return hhconstraint;
+	// });//end Loader Load
+// 
+// };//end createLeftFlipper
+// 
+// function controler()
+// {
+		// console.log(this);
+		// this.enableMotor = false;
+		// this.acceleration = 2;
+		// this.velocity = -10;
+		// this.updateMotor = function ()
+		// {
+			// if (controls.enableMotor) 
+			// {
+				// // velocity is the velocity we are going for.
+				// // acceleration is how fast we're going to reach it
+				// flipperLeftConstraint.disableMotor();
+				// flipperLeftConstraint.enableAngularMotor(controls.velocity, controls.acceleration);
+				// flipperRightConstraint.disableMotor();
+				// flipperRightConstraint.enableAngularMotor(-1 * controls.velocity, controls.acceleration);
+			// } else 
+			// {
+				// flipperLeftConstraint.disableMotor();
+				// flipperRightConstraint.disableMotor();
+			// }
+		// };//end Update motor
+// 		
+// };//end Controls
 
 function loadDatGUI()
 {
