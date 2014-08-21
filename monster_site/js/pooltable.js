@@ -46,12 +46,12 @@ function erstelleHindernisse(ColladaLoader){
 		console.log("--Lade Hindernisse--");
 	}
 	
-	var posStart = new THREE.Vector3(8,17,22);	// Startpunkt Slider-Animation
-	var posZiel = new THREE.Vector3(-8,17,22);	// Endpunkt Slider-Animation
+	var posStart = new THREE.Vector3(8,18,22);	// Startpunkt Slider-Animation
+	var posZiel = new THREE.Vector3(-8,18,22);	// Endpunkt Slider-Animation
 	var rotStart = new THREE.Vector3(0,110,0);	// Startrotation Slider-Animation
 	var rotZiel = new THREE.Vector3(0,70,0);	// Endrotation Slider-Animation
 	
-	// erstelleSlider(posStart, posZiel, rotStart, rotZiel);	//Erstellt Slider und started Animation
+	erstelleSlider(posStart, posZiel, rotStart, rotZiel);	//Erstellt Slider und started Animation
 
 	erstelleBumper(ColladaLoader, 12, 18, -21);
 	erstelleBumper(ColladaLoader, 10, 18, -22);
@@ -72,10 +72,7 @@ function erstelleHindernisse(ColladaLoader){
 			                
 			    // paddleRightConstraint.enableAngularMotor(-1 * -10, 2);
 				// updateMotor();
-				
 
-	
-	
 	 erstellePaddleMitAnimation();
  	 
 
@@ -86,8 +83,8 @@ function erstelleHindernisse(ColladaLoader){
 function erstellePaddleMitAnimation()
 {
 								/**erstelleflipper (enablemotor, PaddlePos, PivotPos, rechts);**/
-	var flipperLeftConstraint = erstelleFlipper(false, new THREE.Vector3(-8,19,0),new THREE.Vector3(-10,19,0),false);
-	var flipperRightConstraint = erstelleFlipper(false, new THREE.Vector3(8,19,0),new THREE.Vector3(10,19,0),true);
+	var flipperLeftConstraint = erstelleFlipper(false, new THREE.Vector3(-8,19,20),new THREE.Vector3(-10,19,20),false);
+	var flipperRightConstraint = erstelleFlipper(false, new THREE.Vector3(8,19,20),new THREE.Vector3(10,19,20),true);
 
 	// var controls = controler();
 	// controls.updateMotor;
