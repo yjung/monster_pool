@@ -207,13 +207,29 @@ var ballMargin    = chosenGrid["ballMargin"];
 
 var ballname      = "ball";
 var monsterAssets = [
-                      // {
-                      //   "mesh": "assets/json/Bernd5Redu.js",
-                      //   "texture": "assets/json/tex/bernd_reduced5.png"
-                      // },
                       {
-                        "mesh": "assets/json/Bernd8test.js",
-                        "texture": "assets/json/tex/bernd_reduced5.png"
+                        "mesh": "assets/json/Bernd5Redu.js",
+                        "texture": "assets/json/tex/bernd_Tex1.png"
+                      },
+                      {
+                        "mesh": "assets/json/Bernd5Redu.js",
+                        "texture": "assets/json/tex/bernd_Tex2.png"
+                      },
+                      {
+                        "mesh": "assets/json/Bernd5Redu.js",
+                        "texture": "assets/json/tex/bernd_Tex3.png"
+                      },
+                      {
+                        "mesh": "assets/json/Bernd5Redu.js",
+                        "texture": "assets/json/tex/bernd_Tex4.png"
+                      },
+                      {
+                        "mesh": "assets/json/Bernd5Redu.js",
+                        "texture": "assets/json/tex/bernd_Tex5.png"
+                      },
+                      {
+                        "mesh": "assets/json/Bernd5Redu.js",
+                        "texture": "assets/json/tex/bernd_Tex6.png"
                       },
                       {
                         "mesh": "assets/json/Sumoaqua.js",
