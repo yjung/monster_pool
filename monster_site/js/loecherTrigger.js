@@ -55,6 +55,11 @@ function lochColliderErstellen(x, y, z, points)
 		  game.szene.remove( object); //3. Remove Kugel (game-szene remove)	  	
 		  game.monsterCounter -= 1; //4. Counter von 15 bis 0 aktualisieren
 		  game.scoreCounter += points;
+		  spriteErstellen(x, y+5, z, points);
+		  console.log('x='+x);
+		  console.log('y='+y);
+		  console.log('z='+z);
+		  console.log('points='+points);
 		  $( "#points" ).text(game.scoreCounter);
 		  $( "#balls" ).text(game.monsterCounter);
 		  soundEffekt("ball-loch");
