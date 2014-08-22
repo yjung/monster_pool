@@ -116,9 +116,9 @@ function moebelLaden() {
 					"moebelMat", // Bezeichnung
 					false, // Textur
 					new THREE.Vector3(diffuseColor.r,diffuseColor.g,diffuseColor.b)		// Farbe
-		));
-		// Collada Tische und stuehle zur Szene hinzufuegen
-		game.szene.add(element);
+			));
+			element.castShadow = true;
+		game.szene.add(element);			// Collada Tische und stuehle zur Szene hinzufuegen
 		}
 	});
 }
