@@ -337,15 +337,15 @@ function loadMonster(pathMesh, pathTexture, color, name, position) {
         transparent: true
       });
 
-      // var celShadingMaterial = erstelleCelShadingMaterial("monsterMaterial",
-                                  // THREE.ImageUtils.loadTexture(pathTexture), new THREE.Vector3(0,0,0));
+      var celShadingMaterial = erstelleCelShadingMaterial("monsterMaterial",
+                                  THREE.ImageUtils.loadTexture(pathTexture), new THREE.Vector3(0,0,0));
 
       var sphere = new Physijs.ConvexMesh(
           new THREE.SphereGeometry(0.75, 16, 16),
           glowMaterial,
           100
         );
-      sphere.add(new THREE.Mesh(geometry, pBlueT));
+      sphere.add(new THREE.Mesh(geometry, celShadingMaterial));
 
       sphere.addEventListener("collision", function( other_object,
         relative_velocity, relative_rotation, contact_normal ) {

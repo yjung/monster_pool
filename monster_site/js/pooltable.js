@@ -19,8 +19,21 @@ function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine 
 		
 		// Erstes Objekt ist die Filzflaeche. Fuer dieses wird ein Physijs-Material benoetigt.
 		if(i==0){
-			modelMaterial = Physijs.createMaterial((modelMaterial),	0.1, 1.0);}
-		
+			modelMaterial = Physijs.createMaterial(
+    			erstelleCelShadingMaterial(
+    				"filzMat",						// Bezeichnung
+    				THREE.ImageUtils.loadTexture("assets/dae/tex/filz.jpg"),								// Textur
+    				new THREE.Vector3(1,0,0)		// Farbe
+    		), 0.1, 1.0);
+    	}else{
+			var diffuseColor = modelScene.children[i].children[0].material.color;
+    		
+    		modelMaterial = erstelleCelShadingMaterial(
+    			"filzMat",						// Bezeichnung
+    			false,							// Textur
+				new THREE.Vector3(diffuseColor.r,diffuseColor.g,diffuseColor.b)		// Farbe
+    		);
+    	}
 		game.tisch.i = new THREE.Mesh(modelGeometry, modelMaterial);			// Einzelteile zusammenfuegen
 		game.szene.add(game.tisch.i); 											// Collada-Table zur Szene hinzufuegen
 		}
@@ -73,7 +86,7 @@ function erstelleHindernisse(ColladaLoader){
 			    // paddleRightConstraint.enableAngularMotor(-1 * -10, 2);
 				// updateMotor();
 
-	 erstellePaddleMitAnimation();
+	 // erstellePaddleMitAnimation();
  	 
 
 };
