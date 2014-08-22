@@ -115,7 +115,7 @@ function initialisiere() {
 	createGUI();								// Debugging-GUI erstellen
 	/* Post-Processing - Cel-Shading*/
 	celShadingGUIKontur();
-	celShadingGUIShading();
+	// celShadingGUIShading();
 	erstelleHatchingGUI();
 	/* Post-Processing - Allgemein*/	
 	erstelleComposer();				// Effekt-Composer erstellen
@@ -146,7 +146,6 @@ function initialisiere() {
  //    game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
 
 	erstelleMinimap();	
-    // dummyTexturhinzufuegen();               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
     /* Ende der Initialisierung / Aufruf des Mainloops */
 	mainloop();
 };

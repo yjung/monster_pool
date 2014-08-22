@@ -30,7 +30,8 @@ uniforms: THREE.UniformsUtils.merge( [
 		"hatch4": { type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/hatch_3.jpg") },
 		"hatch5": { type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/hatch_4.jpg") },
 		"hatch6": { type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/hatch_5.jpg") },
-		"repeat": { type: 'v2', value: new THREE.Vector2( 0, 0 ) }
+		"paper": { type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/paper.jpg") },
+		"repeat": { type: 'v2', value: new THREE.Vector2( 1, 1 ) }
     }
 ]),
 
@@ -200,10 +201,7 @@ fragmentShader: [
 			"}",
 
 			"vec4 src = mix( mix( inkColor, vec4( 1. ), c.r ), c, .5 );",
-			"//c = 1. - ( 1. - src ) * ( 1. - dst );",
-			"//c = vec4( min( src.r, dst.r ), min( src.g, dst.g ), min( src.b, dst.b ), 1. );",
 
-			"//c = vec4( gl_FragCoord.x / resolution.x, gl_FragCoord.y / resolution.y, 0., 1. );",
 
 			"return src;",
 			"}",
@@ -267,23 +265,24 @@ fragmentShader: [
 		 "	if (vlf>=0.75) { gl_FragColor = vec4(mix( basecolor, vec3(0.75), 0.5), alpha); }",
 
 		"	gl_FragColor.xyz *= vLightFront;",
+			"vec3 temp = gl_FragColor.xyz;",
 		
 		
 		"// Hatching-Part",
-		"if(hatchingAktiv != 0.0){", 
+		"if(hatchingAktiv > 0.0){", 
+		
 			"vec2 nUV = vec2( mod( gl_FragCoord.x, bkgResolution.x ) / bkgResolution.x, mod( gl_FragCoord.y, bkgResolution.y ) / bkgResolution.y );",
 			"vec4 dst = vec4( texture2D( paper, nUV ).rgb, 1. );",
 			"vec4 src;",
 
-			"//if( showOutline == 1 ) src = .5 * inkColor;",
-			"//else src = shade();",
+
 			"src = ( .5 * inkColor ) * vec4( showOutline ) + vec4( 1. - showOutline ) * shade();",
 
 			"vec4 c = src * dst;",
+			"gl_FragColor = vec4(mix(temp, c.rgb, 1.0), alpha);",
 
-			"gl_FragColor = vec4( c.rgb, 1. );",
+
 		"}",
-
     "}"
 
 ].join("\n")

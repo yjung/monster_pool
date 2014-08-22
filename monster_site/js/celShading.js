@@ -49,6 +49,16 @@ if(textur){
 	shaderUniforms[ "diffuse" ].value = farbe;
 }
 
+	shaderUniforms[ "repeat" ].value.set( 2,2 );
+	shaderUniforms[ "hatch1" ].value.wrapS = THREE.RepeatWrapping;
+	shaderUniforms[ "hatch1" ].value.wrapT = THREE.RepeatWrapping;
+	// game.celShadingMaterials[i].uniforms.hatch1.value.wrapS = game.celShadingMaterials[i].uniforms.hatch1.value.wrapT = THREE.RepeatWrapping;
+	// game.celShadingMaterials[i].uniforms.hatch2.value.wrapS = game.celShadingMaterials[i].uniforms.hatch2.value.wrapT = THREE.RepeatWrapping;
+	// game.celShadingMaterials[i].uniforms.hatch3.value.wrapS = game.celShadingMaterials[i].uniforms.hatch3.value.wrapT = THREE.RepeatWrapping;
+	// game.celShadingMaterials[i].uniforms.hatch4.value.wrapS = game.celShadingMaterials[i].uniforms.hatch4.value.wrapT = THREE.RepeatWrapping;
+	// game.celShadingMaterials[i].uniforms.hatch5.value.wrapS = game.celShadingMaterials[i].uniforms.hatch5.value.wrapT = THREE.RepeatWrapping;
+	// game.celShadingMaterials[i].uniforms.hatch6.value.wrapS = game.celShadingMaterials[i].uniforms.hatch6.value.wrapT = THREE.RepeatWrapping;
+
 	// shaderUniforms[ "diffuse" ].value = farbe;
 
 game.celShadingMaterials.push(
@@ -64,11 +74,7 @@ game.celShadingMaterials.push(
 	);
 	
 	return game.celShadingMaterials[game.celShadingMaterials.length-1];
-}
-
-function celShadingGUIShading(){
-
-}
+};
 
 function erstelleHatchingGUI(){
 	// Ordner fuer die Cel-Shading-Einstellungen
@@ -122,150 +128,44 @@ function erstelleHatchingGUI(){
 	}
 	});
 	
-	var id = 'hatch_';
-
-	hatchingMaterial = new THREE.ShaderMaterial( {
-		uniforms:{
-		showOutline: { type: 'f', value: 0 },
-		ambientWeight: { type: 'f', value : 0 },
-		diffuseWeight: { type: 'f', value : 1 },
-		rimWeight: { type: 'f', value : 1 },
-		specularWeight: { type: 'f', value : 1 },
-		shininess: { type: 'f', value : 1 },
-		invertRim: { type: 'i', value: 0 },
-		inkColor: { type: 'v4', value: new THREE.Vector3( 0, 0,0 ) },
-		resolution: { type: 'v2', value: new THREE.Vector2( 0, 0 ) },
-		bkgResolution: { type: 'v2', value: new THREE.Vector2( 0, 0 ) },
-		lightPosition: { type: 'v3', value: new THREE.Vector3( -100, 100, 0 ) },
-		hatch1: { type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/" + id + '0.jpg' ) },
-		hatch2: { type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/" + id + '1.jpg' ) },
-		hatch3: { type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/" + id + '2.jpg' ) },
-		hatch4: { type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/" + id + '3.jpg' ) },
-		hatch5: { type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/" + id + '4.jpg' ) },
-		hatch6: { type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/" + id + '5.jpg' ) },
-		repeat: { type: 'v2', value: new THREE.Vector2( 0, 0 ) }
-	},
-		vertexShader:   document.getElementById( 'hatchingVS' ).textContent,
-		fragmentShader: document.getElementById( 'hatchingFS' ).textContent
-	});
-	
-		hatchingMaterial.uniforms.repeat.value.set( 1,1 );
-		hatchingMaterial.uniforms.hatch1.value.wrapS = hatchingMaterial.uniforms.hatch1.value.wrapT = THREE.RepeatWrapping;
-		hatchingMaterial.uniforms.hatch2.value.wrapS = hatchingMaterial.uniforms.hatch2.value.wrapT = THREE.RepeatWrapping;
-		hatchingMaterial.uniforms.hatch3.value.wrapS = hatchingMaterial.uniforms.hatch3.value.wrapT = THREE.RepeatWrapping;
-		hatchingMaterial.uniforms.hatch4.value.wrapS = hatchingMaterial.uniforms.hatch4.value.wrapT = THREE.RepeatWrapping;
-		hatchingMaterial.uniforms.hatch5.value.wrapS = hatchingMaterial.uniforms.hatch5.value.wrapT = THREE.RepeatWrapping;
-		hatchingMaterial.uniforms.hatch6.value.wrapS = hatchingMaterial.uniforms.hatch6.value.wrapT = THREE.RepeatWrapping;
-		
 		hatchingVoreinstellung( 'Default' );     
 		
-		function hatchingVoreinstellung( id ) {
-			for( var j in presets[ id ] ) {
-				game.celShading.hatching.settings[ j ] = presets[ id ][ j ];
-            }
-			game.celShading.hatching.settings.preset = id;
-			game.celShading.hatching.settings.currentPreset = id;
-        }; 
-}
-
-function hexToRgb(hex) {
-	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-	return result ? {
-		r: parseInt(result[1], 16),
-		g: parseInt(result[2], 16),
-		b: parseInt(result[3], 16)
-	} : null;
-};
-
-    
-function dummyTexturhinzufuegen()
-{
-    var dummyTexture = new THREE.DataTexture( new Uint8Array( [ 255, 255, 255 ] ), 1, 1, THREE.RGBFormat );
-	dummyTexture.needsUpdate = true;
-
-	game.szene.traverse(function (node){
-		// console.log("traverse")
-    	// console.log(node);
-    	if ( node.material && node.material.map == null) {
-        	node.material.map = dummyTexture;
-        	node.material.needsUpdate = true;
-
-    		node.geometry.computeBoundingBox();
-
-    		var max     = node.geometry.boundingBox.max;
-    		var min     = node.geometry.boundingBox.min;
-
-    		var offset  = new THREE.Vector2(0 - min.x, 0 - min.y);
-    		var range   = new THREE.Vector2(max.x - min.x, max.y - min.y);
-
-    		node.geometry.faceVertexUvs[0] = [];
-    		var faces = node.geometry.faces;
-
-    		for (i = 0; i < node.geometry.faces.length ; i++) {
-
-      			var v1 = node.geometry.vertices[faces[i].a];
-      			var v2 = node.geometry.vertices[faces[i].b];
-      			var v3 = node.geometry.vertices[faces[i].c];
-
-      			node.geometry.faceVertexUvs[0].push([
-        		new THREE.Vector2( ( v1.x + offset.x ) / range.x , ( v1.y + offset.y ) / range.y ),
-        		new THREE.Vector2( ( v2.x + offset.x ) / range.x , ( v2.y + offset.y ) / range.y ),
-        		new THREE.Vector2( ( v3.x + offset.x ) / range.x , ( v3.y + offset.y ) / range.y )]);
-			}
-
-			node.geometry.uvsNeedUpdate = true;
-			node.geometry.buffersNeedUpdate = true;
+	function hatchingVoreinstellung( id ) {
+		for( var j in presets[ id ] ) {
+			game.celShading.hatching.settings[ j ] = presets[ id ][ j ];
 		}
-	});
-	mainloop();
+		game.celShading.hatching.settings.preset = id;
+		game.celShading.hatching.settings.currentPreset = id;
+	}; 
 };
-
 
 function updateHatching(){
+	game.renderer.clear();
+	for(var i = 0; i < game.celShadingMaterials.length; i++){
+
+	
 	var pId =  game.celShading.hatching.settings.preset;
 	if( pId !=  game.celShading.hatching.settings.currentPreset ) hatchingVoreinstellung( pId );
             
 	var time = Date.now() * 0.005;
 
-	// nlat = Math.max( - 85, Math.min( 85, nlat ) );
+	// console.log(game.celShadingMaterials.length);
 
-	// lat += ( nlat - lat ) * .1;
-    // lon += ( nlon - lon ) * .1;
+    game.celShadingMaterials[i].uniforms.ambientWeight.value =  game.celShading.hatching.settings.ambient / 100;
+    game.celShadingMaterials[i].uniforms.diffuseWeight.value =  game.celShading.hatching.settings.diffuse / 100;
+    game.celShadingMaterials[i].uniforms.rimWeight.value =  game.celShading.hatching.settings.rim / 100;
+    game.celShadingMaterials[i].uniforms.specularWeight.value =  game.celShading.hatching.settings.specular / 100;
+	game.celShadingMaterials[i].uniforms.shininess.value =  game.celShading.hatching.settings.shininess;
+	game.celShadingMaterials[i].uniforms.invertRim.value =  game.celShading.hatching.settings.invertRim?1:0;
 
-    // phi = ( 90 - lat ) * Math.PI / 180;
-    // theta = lon * Math.PI / 180;
+	game.celShadingMaterials[i].uniforms.inkColor.value.set(  game.celShading.hatching.settings.inkColor[ 0 ] / 255,  game.celShading.hatching.settings.inkColor[ 1 ] / 255,  game.celShading.hatching.settings.inkColor[ 2 ] / 255, 1 );
 
-    hatchingMaterial.uniforms.ambientWeight.value =  game.celShading.hatching.settings.ambient / 100;
-    hatchingMaterial.uniforms.diffuseWeight.value =  game.celShading.hatching.settings.diffuse / 100;
-    hatchingMaterial.uniforms.rimWeight.value =  game.celShading.hatching.settings.rim / 100;
-    hatchingMaterial.uniforms.specularWeight.value =  game.celShading.hatching.settings.specular / 100;
-            hatchingMaterial.uniforms.shininess.value =  game.celShading.hatching.settings.shininess;
-            hatchingMaterial.uniforms.invertRim.value =  game.celShading.hatching.settings.invertRim?1:0;
-
-            /*var c = hexToRgb(  game.celShading.hatching.settings.inkColor );
-            hatchingMaterial.uniforms.inkColor.value.set( c.r / 255, c.g / 255, c.b / 255, 1 );
-            outlineMaterial.uniforms.inkColor.value.set( c.r / 255, c.g / 255, c.b / 255, 1 );*/
-
-            hatchingMaterial.uniforms.inkColor.value.set(  game.celShading.hatching.settings.inkColor[ 0 ] / 255,  game.celShading.hatching.settings.inkColor[ 1 ] / 255,  game.celShading.hatching.settings.inkColor[ 2 ] / 255, 1 );
-
-            // if( mesh ) {
-                // mesh.rotation.x += .01;
-                // mesh.rotation.y += .005;
-                // mesh.rotation.z += .007;
-// 
-                // var t = .001 * Date.now();
-                // mesh.material.uniforms.lightPosition.value.x = 100 * Math.cos( t );
-                // mesh.material.uniforms.lightPosition.value.z = 100 * Math.sin( t );
-            // }
-
-            game.renderer.clear();
-            if(  game.celShading.hatching.settings.displayOutline ) {
-                hatchingMaterial.depthWrite = false;
-                hatchingMaterial.uniforms.showOutline.value = 1;
-                game.renderer.render( game.szene, game.kamera );
+		if( game.celShading.hatching.settings.displayOutline ) {
+			game.celShadingMaterials[i].depthWrite = false;
+			game.celShadingMaterials[i].uniforms.showOutline.value = 1;
+			game.renderer.render( game.szene, game.kamera );
             }
-            hatchingMaterial.depthWrite = true;
-            hatchingMaterial.uniforms.showOutline.value = 0;
-            
-
+            game.celShadingMaterials[i].depthWrite = true;
+            game.celShadingMaterials[i].uniforms.showOutline.value = 0;
+           }
 };
