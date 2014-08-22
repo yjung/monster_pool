@@ -10,7 +10,7 @@ function createWhiteBall(x,y,z) {
     game.whiteBall = new Physijs.ConvexMesh(new THREE.SphereGeometry(0.75, 16, 16), Physijs.createMaterial(
     	erstelleCelShadingMaterial(
     		"whiteBallMat",						// Bezeichnung
-    		THREE.ImageUtils.loadTexture("../assets/dae/tex/Weiße_Kugel.jpg"),								// Textur
+    		THREE.ImageUtils.loadTexture("assets/dae/tex/weisseKugel.jpg"),								// Textur
     		new THREE.Vector3(1,0,0)		// Farbe
     		),
     0.1,0.1),800);

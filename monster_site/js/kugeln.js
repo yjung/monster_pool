@@ -12,11 +12,11 @@ function ladeKugeln(){
 		var kugelGeometrie = modelScene.children[i].children[0].geometry;
 		var kugelMaterial = modelScene.children[i].children[0].material;
 		
-		var kugel = new Physijs.SphereMesh(kugelGeometrie, Physijs.createMaterial(
-			erstelleCelShadingMaterial("raumMat", // Bezeichnung
-				THREE.ImageUtils.loadTexture(kugelMaterial.map.sourceFile), // Textur
-				new THREE.Vector3(1, 0, 0)	// Farbe
-		),
+		var kugel = new Physijs.SphereMesh(kugelGeometrie, Physijs.createMaterial(pBlueT,
+			// erstelleCelShadingMaterial("raumMat", // Bezeichnung
+				// THREE.ImageUtils.loadTexture(kugelMaterial.map.sourceFile), // Textur
+				// new THREE.Vector3(1, 0, 0)	// Farbe
+		// ),
 		0.1, 1.0),800);
 		kugel.name="ball-"+i;
 		kugel.position.x = kugelPosition.x * 0.25;

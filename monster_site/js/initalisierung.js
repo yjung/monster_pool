@@ -131,11 +131,11 @@ function initialisiere() {
     /* Spielumgebung einladen */
 	queueLaden();                               // Queue laden
     ladePooltable();                             // Nicht-Physisches, detailliertes Model des Tisches laden    
-    ladeKugeln();                             // Nicht-Physisches, detailliertes Model des Tisches laden
+    // ladeKugeln();                             // Nicht-Physisches, detailliertes Model des Tisches laden
     sceneLaden();                        //Alpha Tisch aus Colada File Laden^
     loecherTrigger();							//Lade die Triggers von den Loechern
     createWhiteBall(0,22,15);                    // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
-    loadMonsters();								// Lade ein Monster (Bernd)
+    // loadMonsters();								// Lade ein Monster (Bernd)
     // ladeAnimation();
 	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen

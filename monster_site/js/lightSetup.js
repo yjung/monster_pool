@@ -50,9 +50,8 @@ function setupLights() {
 	UeberMitte.position.set(0, 60, 00);
 	UeberMitte.target.position = new THREE.Vector3(0, 0, 0);
 	UeberMitte.intensity = 0.7;
-	UeberMitte.castShadow = true;
-	lichter.push(UeberMitte);
-	// Lichtquelle in die Sammlung einfuegen
+	// UeberMitte.castShadow = true;
+	lichter.push(UeberMitte);	// Lichtquelle in die Sammlung einfuegen
 
 	//Tischlichter
 	var TischLightColor = 0xFF7F24;
@@ -99,14 +98,14 @@ function setupLights() {
 	tischLicht.intensity = TischIntens;
 	tischLicht.castShadow = true;
 	lichter.push(tischLicht);
-	// Lichtquelle in die Sammlung einfuegen
-
+	// // Lichtquelle in die Sammlung einfuegen
+// 
 	var tischLicht = new THREE.SpotLight(TischLightColor);
 	tischLicht.name = "Tisch Wand2";
 	tischLicht.position.set(10, 60, -80);
 	tischLicht.target.position = new THREE.Vector3(tischLicht.position.x, 0, tischLicht.position.z);
 	tischLicht.intensity = TischIntens;
-	tischLicht.castShadow = true;
+	// tischLicht.castShadow = true;
 	lichter.push(tischLicht);
 	// Lichtquelle in die Sammlung einfuegen
 	//Licht zur allgemeinen raumaufhellung
