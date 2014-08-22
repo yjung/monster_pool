@@ -1,7 +1,6 @@
 // once everything is loaded, we run our Three.js stuff.
 function initialisiere() {
     "use strict";                                                   // Strict-Mode 
-	
 	window.debugMode = 0;
 	if(debugMode){
 		console.log("--Initialisierung--");
@@ -23,6 +22,10 @@ function initialisiere() {
     window.game = {};   
     window.addEventListener('resize', onWindowResize, false);   // Eventlistener fuer Groessenaenderung
     
+    //game.ballNumber is the variable to change, if we want to change the number of balls
+    game.ballNumber=23;
+	$( "#balls" ).text(game.ballNumber);
+	
 	// Cel-Shading-Namespace
 	window.game.gameObjects = new Array();
 	window.game.celShadingMaterials = new Array();
@@ -30,7 +33,7 @@ function initialisiere() {
 	window.game.celShading.hatching = {};
     
     window.game.monsterBalls = [];								// Sammlung fuer alle Monster im Spiel	
-    game.monsterCounter=15; //Counter fuer Kugeln (Monster) im Spiel (wird in loecherTrigger.js und raumErstellen.js aktualisiert)
+    game.monsterCounter=game.ballNumber; //Counter fuer Kugeln (Monster) im Spiel (wird in loecherTrigger.js und raumErstellen.js aktualisiert)
     game.scoreCounter=0; //Counter fuer Score vom Spiel (wird in loecherTrigger.js aktualisiert)
     
 	game.modus = {

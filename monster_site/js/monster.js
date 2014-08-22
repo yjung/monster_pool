@@ -205,7 +205,7 @@ var rowDistance   = chosenGrid["rowDistance"];
 var placeSymbol   = chosenGrid["placeSymbol"];
 var ballMargin    = chosenGrid["ballMargin"];
 
-var ballname      = "ball";
+var ballname      = "ball-";
 var monsterAssets = [
                       {
                         "mesh": "assets/json/Bernd5Redu.js",
@@ -261,7 +261,7 @@ var chosenPalette = colorPalettes["c64"];
 function loadMonsters() {
   var ballPosition = new THREE.Vector3(0, 0, 0);
   var i = 0;
-  var j = 1;
+  var j = 15;
   ballPosition.x += gridPosition.x;
   ballPosition.y += gridPosition.y;
   ballPosition.z += gridPosition.z;
@@ -356,7 +356,7 @@ function loadMonster(pathMesh, pathTexture, color, name, position) {
       });
 
       sphere.position = position;
-
+	  sphere.name=name;
       game.szene.add(sphere);
   });
 };

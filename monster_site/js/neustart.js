@@ -1,14 +1,16 @@
 function neustarten()
 {
 	
-	game.monsterCounter=15;
+	game.monsterCounter=game.ballNumber;
 	game.scoreCounter=0;
 	//animate = true;
 	
 	$( "#points" ).text(game.scoreCounter);
-    $( "#balls" ).text(game.monsterCounter);                    
+    $( "#balls" ).text(game.ballNumber);                    
 	$("#viewport").css("visibility","visible");
+	removeAllBalls();
 	ladeKugeln();
+	loadMonsters();	
 	//game.kamera.position.set(0,20,3);
 	game.szene.remove( game.whiteBall);
 	game.szene.remove( game.queue);
@@ -17,4 +19,15 @@ function neustarten()
 	//game.whiteBall.position.set(0,22,15);	
 	mainloop();
 	
+}
+
+function removeAllBalls(){
+	console.log(game.ballNumber);
+	for(i=0;i<game.ballNumber;i++)
+	{
+		object = game.szene.getObjectByName('ball-'+i);
+		if(typeof(object) !== 'undefined'){
+			game.szene.remove( object);
+		}
+	}
 }

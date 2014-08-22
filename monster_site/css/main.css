@@ -402,6 +402,48 @@ td {
           border-radius: 0 !important;
 }
 
+/* CHANGES BOOTSTRAP modal */
+
+.modal-impressum {
+	height: 520px !important;
+	margin-top: -260px !important;
+}
+
+.modal-controls {
+	height: 500px !important;
+	margin-top: -250px !important;
+}
+
+.modal-einstellung {
+	height: 500px !important;
+	margin-top: -250px !important;
+}
+
+.modal-hilfe {
+	height: 500px !important;
+	margin-top: -250px !important;
+}
+
+.modal-about {
+	height: 500px !important;
+	margin-top: -250px !important;
+}
+
+.modal-dialog-center {
+    width: 600px !important;    
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;    
+    margin-left: -300px !important;
+    padding: 0px !important;
+}
+
+.inner-modal-dialog-center {
+    position:absolute;
+    height: 100% !important;
+}
+
+
 
    ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
