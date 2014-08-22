@@ -17,6 +17,11 @@ html {
     overflow-x:hidden;
 }
 
+body {
+	font-family: comicNew;
+	font-weight: bold;
+}
+
 h1 {
 	font-size: 3em;
 }
@@ -232,7 +237,7 @@ td {
 
 #scoreboard {
 	font-family: comicNew;
-	font-weight: bold;
+	
 	position:absolute;
 	top:0px;
 	right:0px
