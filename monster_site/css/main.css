@@ -155,12 +155,31 @@ td {
 	background-image: url(../img/header_bg.png);	
 }
 
-#imgBanner
+.imgBannerBig
+{
+	position:absolute;
+	width:552px;
+	height:150px;
+	right:0px;
+}
+
+.imgBannerSmall
 {
 	width:151px;
 	height:41px;
 }
 
+.navbarBig
+{
+	position:absolute;
+	top:155px;
+}
+
+.navbarSmall
+{
+	position:absolute;
+	top:46px;
+}
 #headertrenner {
 	height:40px;
 	min-width:100%;
@@ -181,10 +200,18 @@ td {
 
 	width: 100%;
 	
-	background-image: url(../img/header_bg.png);
+	/*background-image: url(../img/header_bg.png);*/
+	background-image: url(../img/filz.jpg);
 	background-repeat:repeat;
 
 	color:#FFFFFF;
+}
+
+.content{
+	position:absolute;
+	top:10px;
+	left:30px;
+	width:40%;
 }
 
 #content{

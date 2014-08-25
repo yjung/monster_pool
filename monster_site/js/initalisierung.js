@@ -13,6 +13,10 @@ function initialisiere() {
 	var name = $("#inputName").val();
 	$( "#header" ).removeClass( "header-big" );
 	$( "#header" ).addClass( "header-small" );
+	$( "#imgHeader" ).removeClass( "imgBannerBig" );
+	$( "#imgBanner" ).addClass( "imgBannerSmall" );
+	$( "#navbar" ).removeClass( "navbarBig" );
+	$( "#navbar" ).addClass( "navbarSmall" );
 	
 	$( "#scoreboard" ).css("right","0px");
 			

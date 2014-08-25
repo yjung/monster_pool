@@ -6,7 +6,8 @@ function neustarten()
 	//animate = true;
 	
 	$( "#points" ).text(game.scoreCounter);
-    $( "#balls" ).text(game.ballNumber);                    
+    $( "#balls" ).text(game.ballNumber);
+    $("#gameEnde").css("visibility","hidden");                    
 	$("#viewport").css("visibility","visible");
 	removeAllBalls();
 	ladeKugeln();
@@ -22,7 +23,7 @@ function neustarten()
 }
 
 function removeAllBalls(){
-	console.log(game.ballNumber);
+	//console.log(game.ballNumber);
 	for(i=0;i<game.ballNumber;i++)
 	{
 		object = game.szene.getObjectByName('ball-'+i);
