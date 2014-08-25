@@ -867,31 +867,31 @@ fragmentShader: [
 		// "	if (vlf>=0.95) { gl_FragColor = vec4(mix( basecolor, vec3(1.0), 0.3), alpha); }",
 
 		// This version looks more cartoonish, but washes colors out (looks good with complex textures)
-		"	if (vlf< 0.25) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.5), alpha); }",
-		 "	if (vlf>=0.25) { gl_FragColor = vec4(mix( basecolor, vec3(0.25), 0.5), alpha); }",
-		 "	if (vlf>=0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.5), 0.5), alpha); }",
-		 "	if (vlf>=0.75) { gl_FragColor = vec4(mix( basecolor, vec3(0.75), 0.5), alpha); }",
+		"	if (vlf < 0.25) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.5), alpha); }",
+		"	if (vlf >= 0.25) { gl_FragColor = vec4(mix( basecolor, vec3(0.25), 0.5), alpha); }",
+		"	if (vlf >= 0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.5), 0.5), alpha); }",
+		"	if (vlf >= 0.75) { gl_FragColor = vec4(mix( basecolor, vec3(0.75), 0.5), alpha); }",
 
 		"	gl_FragColor.xyz *= vLightFront;",
-			"vec3 temp = gl_FragColor.xyz;",
+		"	vec3 temp = gl_FragColor.xyz;",
 		
 		
 		"// Hatching-Part",
-		"if(hatchingAktiv > 0.0){", 
+		// "if(hatchingAktiv > 0.0){", 
 		
-			"vec2 nUV = vec2( mod( gl_FragCoord.x, bkgResolution.x ) / bkgResolution.x, mod( gl_FragCoord.y, bkgResolution.y ) / bkgResolution.y );",
-			"vec4 dst = vec4( texture2D( paper, nUV ).rgb, 1. );",
-			"vec4 src;",
+			// "vec2 nUV = vec2( mod( gl_FragCoord.x, bkgResolution.x ) / bkgResolution.x, mod( gl_FragCoord.y, bkgResolution.y ) / bkgResolution.y );",
+			// "vec4 dst = vec4( texture2D( paper, nUV ).rgb, 1. );",
+			// "vec4 src;",
+// 			
+			// "src = vec4( 1. ) * shade();",
+// 
+			// "vec4 c = src / dst;",
+			// "gl_FragColor = vec4( c.rgb, 1. );",
+			// "temp = src.xyz * temp;",
 
-
-			"src = ( .5 * inkColor ) * vec4( showOutline ) + vec4( 1. - showOutline ) * shade();",
-
-			"vec4 c = src * dst;",
-			"gl_FragColor = vec4(mix(temp, c.rgb, 1.0), alpha);",
-
-
+			// "gl_FragColor *= src;",
 		"}",
-    "}"
+    // "}"
 
 ].join("\n")
 

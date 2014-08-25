@@ -8,6 +8,7 @@ function benutzereingaben() {
 
 // Mainloop des Spiels von dem aus aktualisiert und gerendert wird
 function mainloop() {
+	updateHatching();
 	benutzereingaben();
 	// Benutzereingaben abfangen
 	var delta = game.clock.getDelta();
@@ -27,9 +28,13 @@ function mainloop() {
 	var screenWidth = window.innerWidth, screenHeight = window.innerHeight;
 
 	game.renderer.clear(true, false, false);	// (color, depth, stencil)
-	updateHatching();
 	
 	if (!game.postProcessing) {// Falls Post-Processing deaktiviert
+		
+		
+
+
+		
 		
 		game.renderer.render(game.szene, game.kamera);
 		// Falls Postprocessing aktiv, aber kein Effekt gesetzt normal rendern
@@ -59,12 +64,21 @@ function mainloop() {
 		if (game.renderer.custom) {
 			game.composerCustom.render();
 		} else {
-			game.renderer.setViewport(0, 0, screenWidth, screenHeight);
-			game.renderer.render(game.szene, game.kamera);
-
-		}
-
-	}
+			// console.log("Outline");
+			// for(var i = 0; i < game.celShadingMaterials.length; i++){
+				// if(  game.celShading.hatching.settings.displayOutline ) {
+					// game.celShadingMaterials[i].depthWrite = false;
+					// game.celShadingMaterials[i].uniforms.showOutline.value = 1;
+					// game.renderer.setViewport(0, 0, screenWidth, screenHeight);
+					// game.renderer.render(game.szene, game.kamera);
+				// }
+				// game.celShadingMaterials[i].depthWrite = true;
+				// game.celShadingMaterials[i].uniforms.showOutline.value = 0;
+				game.renderer.setViewport(0, 0, screenWidth, screenHeight);
+				game.renderer.render(game.szene, game.kamera);
+			}
+	// }
+}
 
 	updateStatistik(true, true);
 	// Statistiken aktualisieren
