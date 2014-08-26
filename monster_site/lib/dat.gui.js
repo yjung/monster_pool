@@ -3070,7 +3070,7 @@ dat.controllers.ColorController = (function (Controller, dom, Color, interpret, 
     linearGradient(value_field, 'top', 'rgba(0,0,0,0)', '#000');
 
     common.extend(this.__hue_field.style, {
-      width: '15px',
+      width: '10px',
       height: '100px',
       display: 'inline-block',
       border: '1px solid #555',
