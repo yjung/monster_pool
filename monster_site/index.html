@@ -137,36 +137,24 @@
 		<script type="text/javascript" src="shaders/CustomShader.js"></script>
 		<!-- Skript fuer Cel-Shading-Modifikationen -->
 		<script type="text/javascript" src="js/celShading.js"></script>
-
+		<!-- Shader (VS) fuer Transparenz-->
 		<script id="TransparentVS" type="x-shader/x-vertex">
-
 			varying vec2 vUv;
-
 			void main() {
-
-			vUv = uv;
-
-			gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-
+				vUv = uv;
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
 			}
-
 		</script>
-
+		<!-- Shader (FS) fuer Transparenz-->
 		<script id="TransparentFS" type="x-shader/x-fragment">
-
 			uniform vec3 color;
 			uniform sampler2D texture;
-
 			varying vec2 vUv;
 
 			void main() {
-
-			vec4 tColor = texture2D( texture, vUv );
-
-			gl_FragColor = vec4( mix( color, tColor.rgb, tColor.a ), 1.0 );
-			
-			if(gl_FragColor == vec4(0.0,0.0,0.0,1.0)){discard;}
-
+				vec4 tColor = texture2D( texture, vUv );
+				gl_FragColor = vec4( mix( color, tColor.rgb, tColor.a ), 1.0 );
+				if(gl_FragColor == vec4(0.0,0.0,0.0,1.0)){discard;}
 			}
 
 		</script>
