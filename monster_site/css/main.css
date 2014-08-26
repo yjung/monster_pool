@@ -292,6 +292,10 @@ td {
 	visibility:hidden;
 }
 
+#einstellungContent{
+	visibility:hidden;
+}
+
 .vollbild {
 	position: absolute !important;
 	top: 0px !important;
@@ -437,13 +441,13 @@ td {
 }
 
 .modal-controls {
-	height: 500px !important;
-	margin-top: -250px !important;
+	height: 300px !important;
+	margin-top: -150px !important;
 }
 
 .modal-einstellung {
-	height: 500px !important;
-	margin-top: -250px !important;
+	height: 274px !important;
+	margin-top: -137px !important;
 }
 
 .modal-hilfe {
@@ -452,8 +456,8 @@ td {
 }
 
 .modal-about {
-	height: 500px !important;
-	margin-top: -250px !important;
+	height: 350px !important;
+	margin-top: -175px !important;
 }
 
 .modal-dialog-center {

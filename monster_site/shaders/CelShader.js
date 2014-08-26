@@ -45,32 +45,7 @@ uniforms: THREE.UniformsUtils.merge( [
 		"shadowBias" : { type: "fv1", value: [] },
 		"shadowDarkness": { type: "fv1", value: [] },
 		"shadowMatrix" : { type: "m4v", value: [] },
-						    
-	// Hatching-spezifischer Code
-		"ambient"  : { type: "c", value: new THREE.Color( 0xffffff ) },
-		"emissive" : { type: "c", value: new THREE.Color( 0x000000 ) },
-		"wrapRGB"  : { type: "v3", value: new THREE.Vector3( 1, 1, 1 ) },
-		"diffuse"  : { type: "v3", value: new THREE.Vector3( 1, 1, 1 ) },
-		"hatchingAktiv"  : { type: "f", value: 0},
-		"showOutline": { type: 'f', value: 0 },
-		"ambientWeight": { type: 'f', value : 0 },
-		"diffuseWeight": { type: 'f', value : 1 },
-		"rimWeight": { type: 'f', value : 1 },
-		"specularWeight": { type: 'f', value : 1 },
-		"shininess": { type: 'f', value : 1 },
-		"invertRim": { type: 'i', value: 0 },
-		"inkColor": { type: 'v4', value: new THREE.Vector3( 0, 0,0 ) },
-		"resolution": { type: 'v2', value: new THREE.Vector2( 0, 0 ) },
-		"bkgResolution": { type: 'v2', value: new THREE.Vector2( 0, 0 ) },
-		"lightPosition": { type: 'v3', value: new THREE.Vector3( -100, 100, 0 ) },
-		"hatch1": { type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/hatch_0.jpg") },
-		"hatch2": { type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/hatch_1.jpg") },
-		"hatch3": { type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/hatch_2.jpg") },
-		"hatch4": { type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/hatch_3.jpg") },
-		"hatch5": { type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/hatch_4.jpg") },
-		"hatch6": { type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/hatch_5.jpg") },
-		"paper": { type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/paper.jpg") },
-		"repeat": { type: 'v2', value: new THREE.Vector2( 1, 1 ) }
+
 	}
 ]),
 
@@ -394,7 +369,7 @@ vertexShader: [
 			"		vec3 lVector = lPosition.xyz - mvPosition.xyz;",
 			"		float spotEffect = dot( spotLightDirection[ i ], normalize( spotLightPosition[ i ] - worldPosition.xyz ) );",
 			"		if ( spotEffect > spotLightAngleCos[ i ] ) {",
-			"			spotEffect = max( pow( spotEffect, spotLightExponent[ i ] ), 0.0 );",
+			"			spotEffect = max( pow( abs(spotEffect), spotLightExponent[ i ] ), 0.0 );",									// Korrektur: abs()
 			"			float lDistance = 1.0;",
 			"			if ( spotLightDistance[ i ] > 0.0 )",
 			"				lDistance = 1.0 - min( ( length( lVector ) / spotLightDistance[ i ] ), 1.0 );",
@@ -470,7 +445,7 @@ vertexShader: [
 fragmentShader: [
 	"uniform vec3 diffuse;",
 	"uniform float opacity;",
-	"uniform float hatchingAktiv;	//Hatching",
+	// "uniform float hatchingAktiv;	//Hatching",		// TODO
 	"uniform sampler2D hatch1;		//Hatching",
 	"uniform sampler2D hatch2;		//Hatching",
 	"uniform sampler2D hatch3;		//Hatching",
@@ -481,6 +456,7 @@ fragmentShader: [
 	"uniform vec2 resolution;		//Hatching",
 	"uniform vec2 bkgResolution;	//Hatching",
 	"uniform vec3 lightPosition;	//Hatching",
+	
 	"uniform float ambientWeight;	//Hatching",
 	"uniform float diffuseWeight;	//Hatching",
 	"uniform float rimWeight;		//Hatching",
@@ -647,9 +623,9 @@ fragmentShader: [
                 "gl_FragColor.xyz *= vLightFront;",
             "else",
                 "gl_FragColor.xyz *= vLightBack;",
-        "#else",
-            "gl_FragColor.xyz *= vLightFront;",
-        "#endif",
+        	"#else",
+            	"gl_FragColor.xyz *= vLightFront;",
+        	"#endif",
 
         // THREE.ShaderChunk[ "lightmap_fragment" ]
 			"#ifdef USE_LIGHTMAP",
@@ -860,11 +836,11 @@ fragmentShader: [
 		"	float alpha = gl_FragColor[3];",
 		"	float vlf = vLightFront[0];",
 
-		// This version presevers colors, but looks less cartoonish (good with simple textures, colors)
-		// "	if (vlf< 0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.5), alpha); }",
-		// "	if (vlf>=0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.3), alpha); }", 
-		// "	if (vlf>=0.75) { gl_FragColor = vec4(mix( basecolor, vec3(1.0), 0.0), alpha); }", 
-		// "	if (vlf>=0.95) { gl_FragColor = vec4(mix( basecolor, vec3(1.0), 0.3), alpha); }",
+		// // This version presevers colors, but looks less cartoonish (good with simple textures, colors)
+		// // "	if (vlf< 0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.5), alpha); }",
+		// // "	if (vlf>=0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.3), alpha); }", 
+		// // "	if (vlf>=0.75) { gl_FragColor = vec4(mix( basecolor, vec3(1.0), 0.0), alpha); }", 
+		// // "	if (vlf>=0.95) { gl_FragColor = vec4(mix( basecolor, vec3(1.0), 0.3), alpha); }",
 
 		// This version looks more cartoonish, but washes colors out (looks good with complex textures)
 		"	if (vlf < 0.25) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.5), alpha); }",
@@ -873,23 +849,26 @@ fragmentShader: [
 		"	if (vlf >= 0.75) { gl_FragColor = vec4(mix( basecolor, vec3(0.75), 0.5), alpha); }",
 
 		"	gl_FragColor.xyz *= vLightFront;",
-		"	vec3 temp = gl_FragColor.xyz;",
+		"	vec3 celColor = gl_FragColor.xyz;",
 		
 		
 		"// Hatching-Part",
 		// "if(hatchingAktiv > 0.0){", 
 		
-			// "vec2 nUV = vec2( mod( gl_FragCoord.x, bkgResolution.x ) / bkgResolution.x, mod( gl_FragCoord.y, bkgResolution.y ) / bkgResolution.y );",
-			// "vec4 dst = vec4( texture2D( paper, nUV ).rgb, 1. );",
-			// "vec4 src;",
-// 			
-			// "src = vec4( 1. ) * shade();",
-// 
-			// "vec4 c = src / dst;",
-			// "gl_FragColor = vec4( c.rgb, 1. );",
-			// "temp = src.xyz * temp;",
+			"vec2 nUV = vec2( mod( gl_FragCoord.x, bkgResolution.x ) / bkgResolution.x, mod( gl_FragCoord.y, bkgResolution.y ) / bkgResolution.y );",
+			"vec4 dst = vec4( texture2D( paper, nUV ).rgb, 1. );",
+			"vec4 src;",
+			
+			"src = ( .5 * inkColor ) * vec4( showOutline ) + vec4( 1. - showOutline ) * shade();",
 
-			// "gl_FragColor *= src;",
+			"vec4 c = src * dst;",
+			// "gl_FragColor = vec4( c.rgb, 1. );",
+			"vec3 hatchingColor = vec3(c.rgb);",
+			
+			// "vec3 mixColor = mix( hatchingColor.rgb, celColor.rgb, 0.75 ); ",
+			"vec3 mixColor = hatchingColor.rgb * celColor.rgb; ",
+
+			"gl_FragColor = vec4(mixColor.rgb, 1.0);",
 		"}",
     // "}"
 

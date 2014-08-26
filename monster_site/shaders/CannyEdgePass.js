@@ -7,7 +7,7 @@ CannyEdgePass = {
 		"opacity":  { type: "f", value: 1.0 },
 		"uAspect": { type: "v2", value: new THREE.Vector2(parseFloat(window.innerWidth), parseFloat(window.innerHeight)) },
 		"uBorderColor": { type: "v4", value: new THREE.Vector4(0.0, 0.0, 0.0, 1.0)},
-		"uOffset": { type: "f", value: 1.0},
+		"uOffset": { type: "f", value: 0.3},
 	},
 
 	vertexShader: [

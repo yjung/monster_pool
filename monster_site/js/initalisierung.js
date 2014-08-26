@@ -7,6 +7,8 @@ function initialisiere() {
 	}
 
 
+	$("#einstellungContent").css("visibility","visible");
+	$("#einstellungStart").css("visibility","hidden");
 	$("#viewport").css("visibility","visible");
 	
 	$("#info").remove();
@@ -129,7 +131,7 @@ function initialisiere() {
 	game.postProcessing = true;	// Postprocessing standardmaessig deaktiviert
 
 	/* Sound */
-	game.ambientSound = document.createElement("audio");
+	game.ambientSound = new Audio();//document.createElement("audio");
 	game.soundAn = false;
 	
 	/* Ambient Sound*/

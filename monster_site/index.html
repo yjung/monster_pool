@@ -73,6 +73,8 @@
 		<!-- Timer for white ball -->
 		<script type="text/javascript" src="js/spriteInfo.js"></script>
 		<!-- Sprite-Objekt -->
+		<script type="text/javascript" src="js/einstellung.js"></script>
+		<!-- Einstellung fuer Modal Window -->
 
 		<!-- Leveldesign -->
 		<!-- <script type="text/javascript" src="js/dummyTisch.js"></script> -->
@@ -135,148 +137,6 @@
 		<script type="text/javascript" src="shaders/CustomShader.js"></script>
 		<!-- Skript fuer Cel-Shading-Modifikationen -->
 		<script type="text/javascript" src="js/celShading.js"></script>
-		<!-- Shader für Motion blur und Tilt shift -->
-		<script type="text/javascript" src="shaders/HorizontalBlurShader.js"></script>
-		<script type="text/javascript" src="shaders/VerticalBlurShader.js"></script>
-		<script type="text/javascript" src="shaders/HorizontalTiltShiftShader.js"></script>
-		<script type="text/javascript" src="shaders/VerticalTiltShiftShader.js"></script>
-		
-		
-		
-		<script type="x-shader/x-vertex" id="hatchingVS">
-			varying vec3 vNormal;
-			varying vec2 vUv;
-			varying float depth;
-			varying vec3 vPosition;
-			varying float nDotVP;
-			varying vec3 pos;
-
-			uniform vec2 repeat;
-			uniform vec3 lightPosition;
-			uniform float showOutline;
-
-			void main() {
-
-			float w = 1.;
-			vec3 posInc = vec3( 0. );
-			if( showOutline == 1. ) posInc = w * normal;
-
-			vUv = repeat * uv;
-
-			vec4 mvPosition = modelViewMatrix * vec4( position + posInc, 1.0 );
-			vPosition = mvPosition.xyz;
-			gl_Position = projectionMatrix * mvPosition;
-			pos = gl_Position.xyz;
-
-			vNormal = normalMatrix * normal;
-			depth = ( length( position.xyz ) / 90. );
-			depth = .5 + .5 * depth;
-
-			nDotVP = max( 0., dot( vNormal, normalize( vec3( lightPosition ) ) ) );
-
-			}
-
-		</script>
-
-		<script type="x-shader/x-fragment" id="hatchingFS">
-
-			uniform sampler2D hatch1;
-			uniform sampler2D hatch2;
-			uniform sampler2D hatch3;
-			uniform sampler2D hatch4;
-			uniform sampler2D hatch5;
-			uniform sampler2D hatch6;
-			uniform sampler2D paper;
-			uniform vec2 resolution;
-			uniform vec2 bkgResolution;
-			uniform vec3 lightPosition;
-
-			vec3 color = vec3( 1., 0., 1. );
-			vec3 lightColor = vec3( 1. );
-
-			varying vec2 vUv;
-			varying vec3 vNormal;
-			varying float depth;
-			varying vec3 vPosition;
-			varying float nDotVP;
-			varying vec3 pos;
-
-			uniform float ambientWeight;
-			uniform float diffuseWeight;
-			uniform float rimWeight;
-			uniform float specularWeight;
-			uniform float shininess;
-			uniform int invertRim;
-			uniform float showOutline;
-			uniform vec4 inkColor;
-
-			vec4 shade() {
-
-			float diffuse = nDotVP;
-			float specular = 0.;
-			float ambient = 1.;
-
-			vec3 n = normalize( vNormal );
-
-			vec3 r = -reflect(lightPosition, n);
-			r = normalize(r);
-			vec3 v = -vPosition.xyz;
-			v = normalize(v);
-			float nDotHV = max( 0., dot( r, v ) );
-
-			if( nDotVP != 0. ) specular = pow ( nDotHV, shininess );
-			float rim = max( 0., abs( dot( n, normalize( -vPosition.xyz ) ) ) );
-			if( invertRim == 1 ) rim = 1. - rim;
-
-			float shading = ambientWeight * ambient + diffuseWeight * diffuse + rimWeight * rim + specularWeight * specular;
-
-			vec4 c;
-			float step = 1. / 6.;
-
-			if( shading <= step ){
-			c = mix( texture2D( hatch6, vUv ), texture2D( hatch5, vUv ), 6. * shading );
-			}
-			if( shading > step && shading <= 2. * step ){
-			c = mix( texture2D( hatch5, vUv ), texture2D( hatch4, vUv) , 6. * ( shading - step ) );
-			}
-			if( shading > 2. * step && shading <= 3. * step ){
-			c = mix( texture2D( hatch4, vUv ), texture2D( hatch3, vUv ), 6. * ( shading - 2. * step ) );
-			}
-			if( shading > 3. * step && shading <= 4. * step ){
-			c = mix( texture2D( hatch3, vUv ), texture2D( hatch2, vUv ), 6. * ( shading - 3. * step ) );
-			}
-			if( shading > 4. * step && shading <= 5. * step ){
-			c = mix( texture2D( hatch2, vUv ), texture2D( hatch1, vUv ), 6. * ( shading - 4. * step ) );
-			}
-			if( shading > 5. * step ){
-			c = mix( texture2D( hatch1, vUv ), vec4( 1. ), 6. * ( shading - 5. * step ) );
-			}
-
-			vec4 src = mix( mix( inkColor, vec4( 1. ), c.r ), c, .5 );
-			//c = 1. - ( 1. - src ) * ( 1. - dst );
-			//c = vec4( min( src.r, dst.r ), min( src.g, dst.g ), min( src.b, dst.b ), 1. );
-
-			//c = vec4( gl_FragCoord.x / resolution.x, gl_FragCoord.y / resolution.y, 0., 1. );
-
-			return src;
-			}
-
-			void main() {
-
-			vec2 nUV = vec2( mod( gl_FragCoord.x, bkgResolution.x ) / bkgResolution.x, mod( gl_FragCoord.y, bkgResolution.y ) / bkgResolution.y );
-			vec4 dst = vec4( texture2D( paper, nUV ).rgb, 1. );
-			vec4 src;
-
-			//if( showOutline == 1 ) src = .5 * inkColor;
-			//else src = shade();
-			src = ( .5 * inkColor ) * vec4( showOutline ) + vec4( 1. - showOutline ) * shade();
-
-			vec4 c = src * dst;
-
-			gl_FragColor = vec4( c.rgb, 1. );
-			}
-
-		</script>
 
 		<script id="TransparentVS" type="x-shader/x-vertex">
 
@@ -457,8 +317,12 @@
 					</div>
 					<div class="modal-body">
 						<p></p>
-						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. <p></p>
-						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+						<p>The controls for the game are quite simple:</p>
+						<ul>
+						<li>Just press the right click of the mouse or touchpad and move around to see your surroundings.</li>
+						<li>In order to change the point where you hit the ball, just press the right button of your mouse or touchpad and move it to move the queue.</li>
+						<li>X – Press this key to hit the ball</li>
+						</ul>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">
@@ -480,9 +344,19 @@
 						<h4 class="modal-title" id="myModalLabel">Einstellung</h4>
 					</div>
 					<div class="modal-body">
-						<p></p>
-						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. <p></p>
-						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+						 <form action="">
+						 <div id="einstellungStart">
+						 	<p>You have to start the game to see this options</p>
+						 </div>
+						 <div id="einstellungContent">
+						  <p>Check the elements, in order to activate the options, that you would like to use:</p>
+						  <p>
+						     <!--<input type="checkbox" id="checkFullscreen" name="fullscreen" value="fullscreen"> Fullscreen<br>-->
+						    <input type="checkbox" id="checkSound" name="sound" value="sound"> Sound<br>
+						    <input type="checkbox" id="checkSoundEffects"name="soundEffects" value="soundEffects"> Sound Effects
+						  </p>
+						</form>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">
@@ -529,9 +403,14 @@
 						<!-- ACHTUNG: die id "myModalLabel" wurde mehrfach vergeben, was fehlerhaft ist -->
 					</div>
 					<div class="modal-body">
-						<p></p>
-						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. <p></p>
-						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+						<p>
+						Monster Pool is a web based game developed for the lecture of Computer Games in the University of Applied Sciences Fulda. There are beside balls, some monsters and obstacles in order to make the game more interesting. The goal of the game is to put all monsters and balls in the holes. You can get a different quantity of points depending on the hole you aim to. The points are distributed in the following way:
+						</p>
+						<ul>
+						<li>You get 10 points, if you aim to the holes behind the slider.</li>
+						<li>20 points if you aim to the center holes.</li>
+						<li>You get the great quantity of 30 points if you aim to the holes that are surrounded by bumpes and accessible through the ramp.</li>
+						</ul>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">
