@@ -446,7 +446,7 @@ OrbitControls = function(object, domElement) {
 
 		if (scope.enabled === false)
 			return;
-		event.preventDefault();
+		// event.preventDefault();
 
 		if (event.button === 0) {
 			if (scope.noRotate === true)

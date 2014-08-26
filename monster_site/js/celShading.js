@@ -7,7 +7,7 @@ function celShadingGUIKontur() {
 
 	// Parameter-Liste fuer das Cel-Shading
 	var paramCelShadingKontur = {
-		edgeDetection : "Canny",
+		edgeDetection : ["Canny", "TODO"],
 		kontur : true,
 		offset: 0.3,
 		konturFarbe : [ 0, 0, 0, 1 ], // RGB with alpha
@@ -15,7 +15,7 @@ function celShadingGUIKontur() {
 
 	game.renderer.celShadingKontur = true; // Default = true
 	// Post-Processingeintraege hinzufuegen
-	game.debugGUI.edgeDetection = celShadingKontur.add(paramCelShadingKontur, 'edgeDetection', ["Canny", "TODO"]).name("Edge-Detection");
+	game.debugGUI.edgeDetection = celShadingKontur.add(paramCelShadingKontur, 'edgeDetection', ['Canny', 'TODO']).name("Edge-Detection");
 	game.debugGUI.kontur = celShadingKontur.add(paramCelShadingKontur, 'kontur').name("Kontur").listen();
 	game.debugGUI.konturfarbe = celShadingKontur.addColor(paramCelShadingKontur, 'konturFarbe').name("Kontur-Farbe").listen();
 	game.debugGUI.offset = celShadingKontur.add(paramCelShadingKontur, 'offset').min(0.0).max(2.0).step(0.01).name("Offset").listen();
