@@ -135,6 +135,12 @@
 		<script type="text/javascript" src="shaders/CustomShader.js"></script>
 		<!-- Skript fuer Cel-Shading-Modifikationen -->
 		<script type="text/javascript" src="js/celShading.js"></script>
+		<!-- Shader für Motion blur und Tilt shift -->
+		<script type="text/javascript" src="shaders/HorizontalBlurShader.js"></script>
+		<script type="text/javascript" src="shaders/VerticalBlurShader.js"></script>
+		<script type="text/javascript" src="shaders/HorizontalTiltShiftShader.js"></script>
+		<script type="text/javascript" src="shaders/VerticalTiltShiftShader.js"></script>
+		
 		
 		
 		<script type="x-shader/x-vertex" id="hatchingVS">
@@ -306,7 +312,7 @@
 		</script>
 
 	</head>
-	<body onload="">
+	<body onload="initialisiere()">
 		<!-- /////////////////		HEADER		/////////////////-->
 		<div id=header class="header-big">
 			<img id="imgBanner" class="imgBannerBig" src="img/MonsterPool_Logo.png" />
@@ -339,7 +345,7 @@
 		<div id=contentwrapper>
 			<div id='info' class="content">
 				<p>
-					Bored of the normal Billard? with the same elements of always? then Monster Pool is for you. Monster Pool is the amazing game, in which you will hit monsters intead of normal balls.
+					Bored of the normal Billard? with the same elements of always? then Monster Pool is for you. Monster Pool is the amazing game, in which you will hit monsters AND normal balls.
 				</p>
 				<form action="">
 					<label for="inputName">Name:</label>
