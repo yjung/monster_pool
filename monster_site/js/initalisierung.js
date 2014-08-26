@@ -131,7 +131,7 @@ function initialisiere() {
 	game.postProcessing = true;	// Postprocessing standardmaessig deaktiviert
 
 	/* Sound */
-	game.ambientSound = document.createElement("audio");
+	game.ambientSound = new Audio();//document.createElement("audio");
 	game.soundAn = false;
 	
 	/* Ambient Sound*/

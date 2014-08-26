@@ -1,10 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
   	document.querySelector('#checkSoundEffects').addEventListener('change', function(){
         if (this.checked) {
-            console.log('checked se');
             game.effectSound = true;
         }else{
-        	console.log('unchecked se');
         	game.effectSound = false;
         }
     });
@@ -32,12 +30,10 @@ document.addEventListener('DOMContentLoaded', function () {
     
     document.querySelector('#checkSound').addEventListener('change', function(){
         if (this.checked) {
-            console.log('checked s');
             soundAmbience('ambience');
 			game.ambientSound.volume = 0.5;
             game.soundAn = true;
         }else{
-        	console.log('unchecked s');
         	game.ambientSound.volume = 0;
         	game.soundAn = false;
         }
