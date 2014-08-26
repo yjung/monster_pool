@@ -38,6 +38,10 @@ function spriteErstellen(x, y, z, points)
 
 function updateSprite(){
 	//Update Sprite to look at camera
+	var pLocal = new THREE.Vector3( 0, 0, -1 );
+	var pWorld = pLocal.applyMatrix4( game.kamera.matrixWorld );
+	var dir = pWorld.sub( game.kamera.position ).normalize();
+	console.log(dir);
 }
 function removeSprite(spriteInfo)
 {

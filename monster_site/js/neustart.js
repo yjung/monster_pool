@@ -4,7 +4,8 @@ function neustarten()
 	game.monsterCounter=game.ballNumber;
 	game.scoreCounter=0;
 	//animate = true;
-	
+	$("#einstellungContent").css("visibility","visible");
+	$("#einstellungStart").css("visibility","hidden");
 	$( "#points" ).text(game.scoreCounter);
     $( "#balls" ).text(game.ballNumber);
     $("#gameEnde").css("visibility","hidden");                    
