@@ -73,6 +73,8 @@
 		<!-- Timer for white ball -->
 		<script type="text/javascript" src="js/spriteInfo.js"></script>
 		<!-- Sprite-Objekt -->
+		<script type="text/javascript" src="js/einstellung.js"></script>
+		<!-- Einstellung fuer Modal Window -->
 
 		<!-- Leveldesign -->
 		<!-- <script type="text/javascript" src="js/dummyTisch.js"></script> -->
@@ -315,8 +317,12 @@
 					</div>
 					<div class="modal-body">
 						<p></p>
-						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. <p></p>
-						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+						<p>The controls for the game are quite simple:</p>
+						<ul>
+						<li>Just press the right click of the mouse or touchpad and move around to see your surroundings.</li>
+						<li>In order to change the point where you hit the ball, just press the right button of your mouse or touchpad and move it to move the queue.</li>
+						<li>X – Press this key to hit the ball</li>
+						</ul>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">
@@ -338,9 +344,19 @@
 						<h4 class="modal-title" id="myModalLabel">Einstellung</h4>
 					</div>
 					<div class="modal-body">
-						<p></p>
-						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. <p></p>
-						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+						 <form action="">
+						 <div id="einstellungStart">
+						 	<p>You have to start the game to see this options</p>
+						 </div>
+						 <div id="einstellungContent">
+						  <p>Check the elements, in order to activate the options, that you would like to use:</p>
+						  <p>
+						     <!--<input type="checkbox" id="checkFullscreen" name="fullscreen" value="fullscreen"> Fullscreen<br>-->
+						    <input type="checkbox" id="checkSound" name="sound" value="sound"> Sound<br>
+						    <input type="checkbox" id="checkSoundEffects"name="soundEffects" value="soundEffects"> Sound Effects
+						  </p>
+						</form>
+						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">
@@ -387,9 +403,14 @@
 						<!-- ACHTUNG: die id "myModalLabel" wurde mehrfach vergeben, was fehlerhaft ist -->
 					</div>
 					<div class="modal-body">
-						<p></p>
-						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. <p></p>
-						Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+						<p>
+						Monster Pool is a web based game developed for the lecture of Computer Games in the University of Applied Sciences Fulda. There are beside balls, some monsters and obstacles in order to make the game more interesting. The goal of the game is to put all monsters and balls in the holes. You can get a different quantity of points depending on the hole you aim to. The points are distributed in the following way:
+						</p>
+						<ul>
+						<li>You get 10 points, if you aim to the holes behind the slider.</li>
+						<li>20 points if you aim to the center holes.</li>
+						<li>You get the great quantity of 30 points if you aim to the holes that are surrounded by bumpes and accessible through the ramp.</li>
+						</ul>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">

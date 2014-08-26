@@ -7,6 +7,8 @@ function initialisiere() {
 	}
 
 
+	$("#einstellungContent").css("visibility","visible");
+	$("#einstellungStart").css("visibility","hidden");
 	$("#viewport").css("visibility","visible");
 	
 	$("#info").remove();
