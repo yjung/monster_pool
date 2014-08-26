@@ -126,8 +126,11 @@ function initialisiere() {
 	// celShadingGUIShading();
 	erstelleHatchingGUI();
 	/* Post-Processing - Allgemein*/	
+	initialisiereMotionBlur();
 	erstelleComposer();				// Effekt-Composer erstellen
 	game.postProcessing = true;	// Postprocessing standardmaessig deaktiviert
+	
+	// Motion-Blur
 
 	/* Sound */
 	game.ambientSound = new Audio();//document.createElement("audio");
@@ -154,6 +157,7 @@ function initialisiere() {
  //    game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
 
 	erstelleMinimap();	
+		game.renderer.celShadingKontur = true; // Default = true
     /* Ende der Initialisierung / Aufruf des Mainloops */
 	mainloop();
 };

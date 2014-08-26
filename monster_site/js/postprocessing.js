@@ -19,12 +19,13 @@ function erstelleComposer() {
 	edgePass = new THREE.ShaderPass(CannyEdgePass);			// Custom-Shader
 	edgePass.renderToScreen = true;
 
-	
+	game.motionBlur.hblur = new THREE.ShaderPass( THREE.HorizontalBlurShader );
+	game.motionBlur.vblur = new THREE.ShaderPass( THREE.VerticalBlurShader );
+	game.motionBlur.vblur.renderToScreen = true;
 	
 	var customShader = new THREE.ShaderPass(CustomShader);			// Custom-Shader
 	
-	
-	var effectcopy = new THREE.ShaderPass(THREE.CopyShader);		// Kopier-Shader fuer Effekte, die nicht selbst/direkt gerendert werden koennen
+	effectcopy = new THREE.ShaderPass(THREE.CopyShader);		// Kopier-Shader fuer Effekte, die nicht selbst/direkt gerendert werden koennen
 	effectcopy.renderToScreen = true;								// Als Letzten markieren bzw. final auf das Canvas rendern
 	
 	// Parameter fuer den Renderer festlegen
@@ -71,21 +72,15 @@ function erstelleComposer() {
 	// game.composerCelShading.addPass(effectcopy);		// Standard-Copy-Shader zum finalen rendern
 
 
-
-	// code fuer minimap effect composer
-	// game.mapComposerCelShading = new THREE.EffectComposer(game.renderer, renderTarget);
-	// game.mapComposerCelShading.setSize(512,512);
-	// game.mapComposerCelShading.addPass(renderPassMap);
-	// game.mapComposerCelShading.addPass(edgePass);
-
-
 	// Composer CustomShader
 	var renderTarget = new THREE.WebGLRenderTarget(game.breite, game.hoehe, parameters);	// Rendertarget-Objekt fuer Renderer-Initialisierung
 	game.composerCustom = new THREE.EffectComposer(game.renderer, renderTarget);			// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren
 	game.composerCustom.setSize(game.breite, game.hoehe);									// Groesse setzen
 	
 	game.composerCustom.addPass(renderPass);		// Normales Bild rendern
-	game.composerCustom.addPass(edgePass);		// Custom-Effekt
+	// game.composerCustom.addPass(customShader);		// Custom-Effekt
+	game.composerCustom.addPass(game.motionBlur.hblur);
+	game.composerCustom.addPass(game.motionBlur.vblur);
 	game.composerCustom.addPass(effectcopy);		// Standard-Copy-Shader zum finalen rendern
 
 }

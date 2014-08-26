@@ -343,7 +343,7 @@ function loadMonster(pathMesh, pathTexture, color, name, position) {
       var sphere = new Physijs.ConvexMesh(
           new THREE.SphereGeometry(0.75, 16, 16),
           glowMaterial,
-          100
+          800
         );
       sphere.add(new THREE.Mesh(geometry, celShadingMaterial));
 
