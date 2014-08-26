@@ -1,5 +1,5 @@
 
-	// modifiziereLambertShading();
+initialisiereHatching();
 
 function celShadingGUIKontur() {
 	// Ordner fuer die Cel-Shading-Einstellungen
@@ -7,6 +7,7 @@ function celShadingGUIKontur() {
 
 	// Parameter-Liste fuer das Cel-Shading
 	var paramCelShadingKontur = {
+		edgeDetection : "Canny",
 		kontur : true,
 		offset: 0.3,
 		konturFarbe : [ 0, 0, 0, 1 ], // RGB with alpha
@@ -14,6 +15,7 @@ function celShadingGUIKontur() {
 
 	game.renderer.celShadingKontur = true; // Default = true
 	// Post-Processingeintraege hinzufuegen
+	game.debugGUI.edgeDetection = celShadingKontur.add(paramCelShadingKontur, 'edgeDetection', ["Canny", "TODO"]).name("Edge-Detection");
 	game.debugGUI.kontur = celShadingKontur.add(paramCelShadingKontur, 'kontur').name("Kontur").listen();
 	game.debugGUI.konturfarbe = celShadingKontur.addColor(paramCelShadingKontur, 'konturFarbe').name("Kontur-Farbe").listen();
 	game.debugGUI.offset = celShadingKontur.add(paramCelShadingKontur, 'offset').min(0.0).max(2.0).step(0.01).name("Offset").listen();
@@ -36,6 +38,21 @@ function celShadingGUIKontur() {
 
 	celShadingKontur.open(); 	// Ordner standardmaessig oeffnen
 };
+
+/* Hatching-Texturen werden initial einmal geladen und beim Erstellen von Cel-Shading-Materialien aus dem Namespace heraus referenziert.*/
+function initialisiereHatching(){
+	window.game = {};   					// Game-NameSpace
+	window.game.celShading = {};			// CelShading-NameSpace
+	window.game.celShading.hatching = {};	// CelShading-Hatching-NameSpace
+	
+	game.celShading.hatching.hatch1 = THREE.ImageUtils.loadTexture("shaders/img/hatch_0.jpg");
+	game.celShading.hatching.hatch2 = THREE.ImageUtils.loadTexture("shaders/img/hatch_1.jpg");
+	game.celShading.hatching.hatch3 = THREE.ImageUtils.loadTexture("shaders/img/hatch_2.jpg");
+	game.celShading.hatching.hatch4 = THREE.ImageUtils.loadTexture("shaders/img/hatch_3.jpg");
+	game.celShading.hatching.hatch5 = THREE.ImageUtils.loadTexture("shaders/img/hatch_4.jpg");
+	game.celShading.hatching.hatch6 = THREE.ImageUtils.loadTexture("shaders/img/hatch_5.jpg");
+};
+
 
 function erstelleCelShadingMaterial(beschreibung, textur, farbe){
 // var shaderUniforms = THREE.UniformsUtils.clone( CelShader.uniforms );
@@ -116,12 +133,12 @@ if(textur){
 		"resolution":{type:'v2',value: new THREE.Vector2( 0, 0 )},
 		"bkgResolution": {type: 'v2', value: new THREE.Vector2( 0, 0 ) },
 		"lightPosition": {type: 'v3', value: new THREE.Vector3( 0, 100, 0 ) },
-		"hatch1": {type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/hatch_0.jpg")},
-		"hatch2": {type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/hatch_1.jpg")},
-		"hatch3": {type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/hatch_2.jpg")},
-		"hatch4": {type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/hatch_3.jpg")},
-		"hatch5": {type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/hatch_4.jpg")},
-		"hatch6": {type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/hatch_5.jpg")},
+		"hatch1": {type: 't', value: game.celShading.hatching.hatch1},
+		"hatch2": {type: 't', value: game.celShading.hatching.hatch2},
+		"hatch3": {type: 't', value: game.celShading.hatching.hatch3},
+		"hatch4": {type: 't', value: game.celShading.hatching.hatch4},
+		"hatch5": {type: 't', value: game.celShading.hatching.hatch5},
+		"hatch6": {type: 't', value: game.celShading.hatching.hatch6},
 		"repeat": {type: 'v2', value: new THREE.Vector2( 0, 0 )},
 		"paper": {type: 't', value: THREE.ImageUtils.loadTexture("shaders/img/paper.jpg")}
 	},

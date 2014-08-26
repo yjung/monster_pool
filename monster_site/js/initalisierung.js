@@ -25,7 +25,7 @@ function initialisiere() {
 
 	Physijs.scripts.worker = 'lib/physijs_worker.js';        // Physi.js-Worker einbinden
 	Physijs.scripts.ammo = '../lib/ammo.js';                    // Bibliotheksverweis zu Ammo
-    window.game = {};   
+
     window.addEventListener('resize', onWindowResize, false);   // Eventlistener fuer Groessenaenderung
     
     //game.ballNumber is the variable to change, if we want to change the number of balls
@@ -35,8 +35,7 @@ function initialisiere() {
 	// Cel-Shading-Namespace
 	window.game.gameObjects = new Array();
 	window.game.celShadingMaterials = new Array();
-	window.game.celShading = {};
-	window.game.celShading.hatching = {};
+
     
     window.game.monsterBalls = [];								// Sammlung fuer alle Monster im Spiel	
     game.monsterCounter=game.ballNumber; //Counter fuer Kugeln (Monster) im Spiel (wird in loecherTrigger.js und raumErstellen.js aktualisiert)
