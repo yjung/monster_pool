@@ -6,33 +6,39 @@ function spriteErstellen(x, y, z, points)
 	canvasPoints.height/=8;
 	
 	var context = canvasPoints.getContext('2d');
-	context.font = "Bold 20px Arial";
-	context.fillStyle = "rgba(255,0,0,0.95)";
+	//context.font = "Bold 20px Arial";
+	context.font = "Bold 20px 'Comic Sans MS'";
+	context.fillStyle = "rgba(255,255,255,0.95)";
     context.fillText('Points: '+points+'!', 5, 17);
     
     
     // canvas contents will be used for a texture
 	var textureText = new THREE.Texture(canvasPoints);
 	textureText.needsUpdate = true;
+	var backmaterial = new THREE.MeshLambertMaterial({color: 0x7777ff});
 	
+	var materialText = new THREE.MeshBasicMaterial( {map: textureText, side:THREE.FrontSide } );
 	
-	var materialText = new THREE.MeshBasicMaterial( {map: textureText, side:THREE.DoubleSide } );
     materialText.transparent = false;
 
-    /*var spriteInfo = new THREE.Mesh(
-        new THREE.PlaneGeometry(canvasPoints.width, canvasPoints.height),
-        materialText
-      );*/
-     
-     var spriteInfo = new THREE.Mesh(
-        new THREE.PlaneGeometry(canvasPoints.width/16, canvasPoints.height/16),
-        materialText
-      );
-	spriteInfo.position.set(x, y, z);
-	game.szene.add( spriteInfo );
-    
+     var spriteFrontGeometry = new THREE.PlaneGeometry(canvasPoints.width/14, canvasPoints.height/14);
+	 var spriteBackGeometry = new THREE.PlaneGeometry(canvasPoints.width/14, canvasPoints.height/14);
+	 
+	 spriteBackGeometry.applyMatrix( new THREE.Matrix4().makeRotationY( Math.PI ) );
+	 
+	 spriteObject = new THREE.Object3D();
+	 
+	 
+	 spriteFrontMesh = new THREE.Mesh(spriteFrontGeometry, materialText );
+	 spriteObject.add(spriteFrontMesh);
+	 spriteBackMesh = new THREE.Mesh(spriteBackGeometry, materialText );
+	 spriteObject.add( spriteBackMesh );
+	 
+	 spriteObject.position.set(x, y, z);
+	 game.szene.add( spriteObject );
+
 	window.setTimeout(function() {
-		removeSprite(spriteInfo);
+		removeSprite(spriteObject);
 		}, 2000);
 }
 
@@ -43,12 +49,12 @@ function updateSprite(){
 	var dir = pWorld.sub( game.kamera.position ).normalize();
 	console.log(dir);
 }
-function removeSprite(spriteInfo)
+function removeSprite(spriteObject)
 {
-	game.szene.remove(spriteInfo);
+	game.szene.remove(spriteObject);
 }
 
-function escribirCanvas()
+/*function escribirCanvas()
 {
 	$("#viewport").append("<canvas id='canvasPoints'></div>");
 	var mainCanvas = document.getElementsByTagName("canvas")[0];
@@ -64,4 +70,4 @@ function escribirCanvas()
 	context1.font = "Bold 10px Arial";
 	context1.fillStyle = "rgba(255,0,0,0.95)";
     context1.fillText('Points: 50!', 0, 8);
-}
+}*/
