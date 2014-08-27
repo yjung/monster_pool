@@ -371,6 +371,13 @@ OrbitControls = function(object, domElement) {
 		theta += thetaDelta;
 		phi += phiDelta;
 
+		if (game.motionBlur)
+		{
+		game.motionBlur.DeltaX = phiDelta;
+		game.motionBlur.DeltaY = thetaDelta;
+		// console.log(game.motionBlur.DeltaX );
+		}
+
 		// restrict phi to be between desired limits
 		phi = Math.max(this.minPolarAngle, Math.min(this.maxPolarAngle, phi));
 
