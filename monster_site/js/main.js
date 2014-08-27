@@ -22,26 +22,15 @@ function mainloop() {
 
 	// Animation fuer Test-Monster-Animation
 	if (game.monsterBalls.animation) {
-				game.monsterBalls.animation.update(0.01);
+		game.monsterBalls.animation.update(0.01);
 	}
 
 	var screenWidth = window.innerWidth, screenHeight = window.innerHeight;
 
-	game.renderer.clear(true, false, false);	// (color, depth, stencil)
-	
+
 	if (!game.postProcessing) {// Falls Post-Processing deaktiviert
-		
-		
-
-
-		
-		
 		game.renderer.render(game.szene, game.kamera);
-		// Falls Postprocessing aktiv, aber kein Effekt gesetzt normal rendern
-		game.renderer.clear(false, true, false);
-		// Depth-Cache muss noch entleert werden
-		game.renderer.setViewport(10, screenHeight - 160 - 120, 240, 140);
-		game.renderer.render(game.szene, game.mapCamera);
+
 
 	} else {// Postprocessing ist aktiviert
 		if (game.renderer.filmEffect) {
@@ -50,35 +39,17 @@ function mainloop() {
 		if (game.renderer.bloomPass) {
 			game.composerBloomPass.render();
 		}
-		if (game.renderer.celShadingKontur) {
-			// Code fuer Minimap bisher auskommentiert
-			//game.renderer.setViewport(0, 0, screenWidth, screenHeight);
-			//game.renderer.clear(false, true, false);
-			game.composerCelShading.render();
-			game.renderer.clear(false, false, false);
-			game.renderer.setViewport(10, screenHeight - 160 - 120, 240, 140);
-			// // game.mapComposerCelShading.render();
-			game.renderer.render(game.szene, game.mapCamera);
-
-		}
 		if (game.renderer.custom) {
 			game.composerCustom.render();
 		} else {
-			// console.log("Outline");
-			// for(var i = 0; i < game.celShadingMaterials.length; i++){
-				// if(  game.celShading.hatching.settings.displayOutline ) {
-					// game.celShadingMaterials[i].depthWrite = false;
-					// game.celShadingMaterials[i].uniforms.showOutline.value = 1;
-					// game.renderer.setViewport(0, 0, screenWidth, screenHeight);
-					// game.renderer.render(game.szene, game.kamera);
-				// }
-				// game.celShadingMaterials[i].depthWrite = true;
-				// game.celShadingMaterials[i].uniforms.showOutline.value = 0;
-				game.renderer.setViewport(0, 0, screenWidth, screenHeight);
-				game.renderer.render(game.szene, game.kamera);
-			}
-	// }
-}
+			game.renderer.setViewport(0, 0, game.breite, game.hoehe);
+			game.composerCelShading.render(delta);
+			game.renderer.clear(false, false, false);	// (color, depth, stencil)
+			game.renderer.setViewport(10, screenHeight - 160 - 120, 240, 140);
+			game.renderer.render(game.szene, game.mapCamera);
+		}
+
+	}
 
 	updateStatistik(true, true);
 	// Statistiken aktualisieren
@@ -89,16 +60,13 @@ function mainloop() {
 			game.debugGUI.__controllers[i].updateDisplay();
 		}
 
-	if ((animate)&&(game.monsterCounter>0)) {
+	if ((animate) && (game.monsterCounter > 0)) {
 		requestID = window.requestAnimationFrame(mainloop);
-	}
-	else
-	{
-		if(game.monsterCounter<=0)
-		{
-			
+	} else {
+		if (game.monsterCounter <= 0) {
+
 			window.cancelAnimationFrame(requestID);
-			requestID = undefined;			
+			requestID = undefined;
 			game.clock.stop();
 			spielEnden();
 		}

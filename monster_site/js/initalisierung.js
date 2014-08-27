@@ -5,6 +5,8 @@ function initialisiere() {
 	if(debugMode){
 		console.log("--Initialisierung--");
 	}
+	
+	window.game ={};
 
 
 	$("#einstellungContent").css("visibility","visible");
@@ -89,6 +91,7 @@ function initialisiere() {
 	game.orbitControls = new OrbitControls(game.kamera, $('#viewport')[0]);    // Kamera und Canvas an Steuerung
     game.orbitControls.autoRotate = false;                                     // Auto-Rotate ausschalten
     
+    console.log(game.orbitControls);
     
     // Canvas-Abmessungen zur Initialisierung des Renderes festhalten
 	game.breite = Math.round($("#viewport").width());									// Volle Bildschirmbreite
@@ -122,9 +125,8 @@ function initialisiere() {
 
 	createGUI();								// Debugging-GUI erstellen
 	/* Post-Processing - Cel-Shading*/
-	celShadingGUIKontur();
-	// celShadingGUIShading();
-	erstelleHatchingGUI();
+	initialisiereCelShading();
+
 	/* Post-Processing - Allgemein*/	
 	initialisiereMotionBlur();
 	erstelleComposer();				// Effekt-Composer erstellen
@@ -157,7 +159,6 @@ function initialisiere() {
  //    game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
 
 	erstelleMinimap();	
-		game.renderer.celShadingKontur = true; // Default = true
     /* Ende der Initialisierung / Aufruf des Mainloops */
 	mainloop();
 };

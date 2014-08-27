@@ -6,7 +6,7 @@ CannyEdgePass = {
 		"tDiffuse": { type: "t", value: null }, // Type 't' fuer Textur. 
 		"opacity":  { type: "f", value: 1.0 },
 		"uAspect": { type: "v2", value: new THREE.Vector2(parseFloat(window.innerWidth), parseFloat(window.innerHeight)) },
-		"uBorderColor": { type: "v4", value: new THREE.Vector4(0.0, 0.0, 0.0, 1.0)},
+		"uKonturFarbe": { type: "v4", value: new THREE.Vector4(0.0, 0.0, 0.0, 1.0)},
 		"uOffset": { type: "f", value: 0.3},
 	},
 
@@ -28,7 +28,7 @@ CannyEdgePass = {
 		"uniform sampler2D tDiffuse;",
 		"uniform float opacity;",
 		"uniform vec2 uAspect;",
-		"uniform vec4 uBorderColor;",
+		"uniform vec4 uKonturFarbe;",
 		"uniform float uOffset;",
 		
 		// varying Variablen unterscheiden sich fuer jeden Pixel, der durchlaufen wird und werden vom Vertex-Shader entgegen genommen.
@@ -46,8 +46,8 @@ CannyEdgePass = {
 		"	vec2 gradient = vec2(length(texture2D(tDiffuse, pixelRight_Coord).xyz - texture2D(tDiffuse, pixelLeft_Coord).xyz), length(texture2D(tDiffuse, pixelTop_Coord).xyz - texture2D(tDiffuse, pixelBottom_Coord).xyz));",
 		
 		"	gradientColor = vec4(length(gradient));",
-		" if(gradientColor.x < 0.15 && gradientColor.y < 0.15 && gradientColor.z < 0.15){discard;}",
-		"	else{gl_FragColor = vec4(mix( gradientColor, uBorderColor, 0.5));}",			
+		" if(gradientColor.x < 0.05 && gradientColor.y < 0.05 && gradientColor.z < 0.05){discard;}",
+		"	else{gl_FragColor = vec4(mix( gradientColor, uKonturFarbe, 0.5));}",			
 		"}"
 	].join("\n")
 

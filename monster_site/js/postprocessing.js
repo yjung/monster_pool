@@ -21,11 +21,11 @@ function erstelleComposer() {
 
 	game.motionBlur.hblur = new THREE.ShaderPass( THREE.HorizontalBlurShader );
 	game.motionBlur.vblur = new THREE.ShaderPass( THREE.VerticalBlurShader );
-	game.motionBlur.vblur.renderToScreen = true;
+	game.motionBlur.vblur.renderToScreen = false;
 	
 	var customShader = new THREE.ShaderPass(CustomShader);			// Custom-Shader
 	
-	effectcopy = new THREE.ShaderPass(THREE.CopyShader);		// Kopier-Shader fuer Effekte, die nicht selbst/direkt gerendert werden koennen
+	var effectcopy = new THREE.ShaderPass(THREE.CopyShader);		// Kopier-Shader fuer Effekte, die nicht selbst/direkt gerendert werden koennen
 	effectcopy.renderToScreen = true;								// Als Letzten markieren bzw. final auf das Canvas rendern
 	
 	// Parameter fuer den Renderer festlegen
@@ -55,23 +55,6 @@ function erstelleComposer() {
 	game.composerBloomPass.addPass(effektBloomPass);// Film-Effekt
 	game.composerBloomPass.addPass(effectcopy);		// Standard-Copy-Shader zum finalen rendern
 	
-	
-	// Composer CelShader
-	// var hatchPass = new THREE.RenderPass(game.szene, game.kamera, hatchingMaterial, new THREE.Color("rgb(0,0,0)"), new THREE.Color("rgb(0,0,0)"));	// Renderpass, der die Szene komplett im Hatching-Stil rendert.
-	// game.szene.overrideMaterial = hatchingMaterial;
-	// console.log(game.szene);
-	// var hatchPass = new THREE.RenderPass(game.szene, game.kamera, hatchingMaterial, 0, 0);	// Renderpass, der die Szene komplett im Hatching-Stil rendert.
-	
-	var renderTarget = new THREE.WebGLRenderTarget(game.breite, game.hoehe, parameters);	// Rendertarget-Objekt fuer Renderer-Initialisierung
-	game.composerCelShading = new THREE.EffectComposer(game.renderer, renderTarget);			// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren
-	game.composerCelShading.setSize(game.breite, game.hoehe);									// Groesse setzen
-	
-	game.composerCelShading.addPass(renderPass);		// Normales Bild rendern
-	game.composerCelShading.addPass(edgePass);			// Custom-Effekt
-	// game.composerCelShading.addPass(hatchPass);			// Custom-Effekt
-	// game.composerCelShading.addPass(effectcopy);		// Standard-Copy-Shader zum finalen rendern
-
-
 	// Composer CustomShader
 	var renderTarget = new THREE.WebGLRenderTarget(game.breite, game.hoehe, parameters);	// Rendertarget-Objekt fuer Renderer-Initialisierung
 	game.composerCustom = new THREE.EffectComposer(game.renderer, renderTarget);			// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren
