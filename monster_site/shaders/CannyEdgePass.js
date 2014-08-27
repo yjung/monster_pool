@@ -8,6 +8,7 @@ CannyEdgePass = {
 		"uAspect": { type: "v2", value: new THREE.Vector2(parseFloat(window.innerWidth), parseFloat(window.innerHeight)) },
 		"uKonturFarbe": { type: "v4", value: new THREE.Vector4(0.0, 0.0, 0.0, 1.0)},
 		"uOffset": { type: "f", value: 0.3},
+		"uThreshold": {type: "f", value: 0.05}
 	},
 
 	vertexShader: [
@@ -30,6 +31,7 @@ CannyEdgePass = {
 		"uniform vec2 uAspect;",
 		"uniform vec4 uKonturFarbe;",
 		"uniform float uOffset;",
+		"uniform float uThreshold;",
 		
 		// varying Variablen unterscheiden sich fuer jeden Pixel, der durchlaufen wird und werden vom Vertex-Shader entgegen genommen.
 		"varying vec2 vUv;",	// UV-Koordinaten, die vom Vertex-Shader uebergeben wurden.
@@ -46,7 +48,7 @@ CannyEdgePass = {
 		"	vec2 gradient = vec2(length(texture2D(tDiffuse, pixelRight_Coord).xyz - texture2D(tDiffuse, pixelLeft_Coord).xyz), length(texture2D(tDiffuse, pixelTop_Coord).xyz - texture2D(tDiffuse, pixelBottom_Coord).xyz));",
 		
 		"	gradientColor = vec4(length(gradient));",
-		" if(gradientColor.x < 0.05 && gradientColor.y < 0.05 && gradientColor.z < 0.05){discard;}",
+		" if(gradientColor.x < uThreshold && gradientColor.y < uThreshold && gradientColor.z < uThreshold){discard;}",
 		"	else{gl_FragColor = vec4(mix( gradientColor, uKonturFarbe, 0.5));}",			
 		"}"
 	].join("\n")

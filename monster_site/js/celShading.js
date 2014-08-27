@@ -383,6 +383,7 @@ function celShadingGUIKontur() {
 		kontur : true,
 		offset : 0.3,
 		konturFarbe : [0, 0, 0, 1], // RGB with alpha
+		threshold : 0.05,
 	};
 
 	game.renderer.celShadingKontur = true;
@@ -392,6 +393,7 @@ function celShadingGUIKontur() {
 	game.debugGUI.kontur = celShadingKontur.add(paramCelShadingKontur, 'kontur').name("Kontur").listen();
 	game.debugGUI.konturfarbe = celShadingKontur.addColor(paramCelShadingKontur, 'konturFarbe').name("Kontur-Farbe").listen();
 	game.debugGUI.offset = celShadingKontur.add(paramCelShadingKontur, 'offset').min(0.0).max(2.0).step(0.01).name("Offset").listen();
+	game.debugGUI.threshold = celShadingKontur.add(paramCelShadingKontur, 'threshold').min(0.0).max(0.1).step(0.001).name("Threshold").listen();
 
 	game.debugGUI.konturfarbe.onChange(function(value) {
 		if (game.debugGUI.kontur.object.kontur) {
@@ -414,6 +416,10 @@ function celShadingGUIKontur() {
 
 	game.debugGUI.offset.onChange(function(value) {
 		game.composerCelShading.edgePass.uniforms.uOffset.value = value;
+	});
+
+	game.debugGUI.threshold.onChange(function(value) {
+		game.composerCelShading.edgePass.uniforms.uThreshold.value = value;
 	});
 
 	game.debugGUI.kontur.onFinishChange(function(value) {
