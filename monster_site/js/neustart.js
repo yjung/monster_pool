@@ -19,7 +19,7 @@ function neustarten()
 	queueLaden();
 	createWhiteBall(0,22,15);
 	//game.whiteBall.position.set(0,22,15);	
-	//mainloop();
+	mainloop();
 	
 }
 
