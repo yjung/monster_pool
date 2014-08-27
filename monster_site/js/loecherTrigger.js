@@ -9,10 +9,10 @@ function loecherTrigger()
 	//1.1 6 Boxen erstellen (Wo?)	
 	lochColliderErstellen(-13, 16, -25, 30);
 	lochColliderErstellen(13, 16, -25, 30);
-	lochColliderErstellen(-13, 16, 1, 20);
-	lochColliderErstellen(13, 16, 1, 20);
-	lochColliderErstellen(-13, 16, 26, 10);
-	lochColliderErstellen(13, 16, 26, 10);
+	lochColliderErstellen(-13, 16, 1, 10);
+	lochColliderErstellen(13, 16, 1, 10);
+	lochColliderErstellen(-13, 16, 26, 30);
+	lochColliderErstellen(13, 16, 26, 30);
 }
 
 function lochColliderErstellen(x, y, z, points)
