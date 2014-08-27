@@ -27,7 +27,8 @@ function spriteErstellen(x, y, z, points)
 	 spriteBackGeometry.applyMatrix( new THREE.Matrix4().makeRotationY( Math.PI ) );
 	 
 	 spriteObject = new THREE.Object3D();
-	 
+	 var name = "sprite"+Math.floor((Math.random() * 1000) + 1);
+	 spriteObject.name=name;
 	 
 	 spriteFrontMesh = new THREE.Mesh(spriteFrontGeometry, materialText );
 	 spriteObject.add(spriteFrontMesh);
@@ -38,7 +39,7 @@ function spriteErstellen(x, y, z, points)
 	 game.szene.add( spriteObject );
 
 	window.setTimeout(function() {
-		removeSprite(spriteObject);
+		removeSprite(name);
 		}, 2000);
 }
 
@@ -49,9 +50,9 @@ function updateSprite(){
 	var dir = pWorld.sub( game.kamera.position ).normalize();
 	console.log(dir);
 }
-function removeSprite(spriteObject)
+function removeSprite(name)
 {
-	game.szene.remove(spriteObject);
+	game.szene.remove(game.szene.getObjectByName(name));
 }
 
 /*function escribirCanvas()
