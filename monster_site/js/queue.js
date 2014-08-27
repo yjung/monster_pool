@@ -12,7 +12,7 @@ function queueLaden() {
 			erstelleCelShadingMaterial(
     			"queueMat",						// Bezeichnung
     			THREE.ImageUtils.loadTexture( "assets/dae/tex/queue.jpg" ),							// Textur
-    			new THREE.Vector3(1,0,0)		// Farbe
+    			new THREE.Vector3(1,1,1)		// Farbe
     		),
 		0);   // Objekterzeugung
         game.queue._physijs.collision_flags = 4; 		                    // COLLISION IST ZUM BUGFIXING NOCH DEAKTIVIERT

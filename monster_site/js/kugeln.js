@@ -15,7 +15,7 @@ function ladeKugeln(){
 		var kugel = new Physijs.SphereMesh(kugelGeometrie, Physijs.createMaterial(
 			erstelleCelShadingMaterial("raumMat", // Bezeichnung
 				THREE.ImageUtils.loadTexture(kugelMaterial.map.sourceFile), // Textur
-				new THREE.Vector3(1, 0, 0)	// Farbe
+				new THREE.Vector3(1, 1, 1)	// Farbe
 		),
 		0.1, 1.0),800);
 		kugel.name="ball-"+i;

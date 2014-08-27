@@ -11,7 +11,7 @@ function createWhiteBall(x,y,z) {
     	erstelleCelShadingMaterial(
     		"whiteBallMat",						// Bezeichnung
     		THREE.ImageUtils.loadTexture("assets/dae/tex/weisseKugel.jpg"),								// Textur
-    		new THREE.Vector3(1,0,0)		// Farbe
+    		new THREE.Vector3(1,1,1)		// Farbe
     		),
     0.1,0.1),800);
 

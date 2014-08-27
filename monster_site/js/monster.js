@@ -355,7 +355,7 @@ function loadMonster(pathMesh, pathTexture, color, name, position) {
       });
 
       var celShadingMaterial = erstelleCelShadingMaterial("monsterMaterial",
-                                  THREE.ImageUtils.loadTexture(pathTexture), new THREE.Vector3(0,0,0));
+                                  THREE.ImageUtils.loadTexture(pathTexture), new THREE.Vector3(1,1,1));
 
       var sphere = new Physijs.ConvexMesh(
           new THREE.SphereGeometry(0.75, 16, 16),

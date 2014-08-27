@@ -17,7 +17,7 @@ function setupLights() {
 	//wirft nen fehler
 	// barLight.castShadow = true;
 	// Schattenwurf aktivieren
-	barLight.intensity = 0.7;
+	barLight.intensity = 10;
 	lichter.push(barLight);
 	// Lichtquelle in die Sammlung einfuegen
 
@@ -29,7 +29,7 @@ function setupLights() {
 	UeberKugel.name = "Ueber_Kugeln";
 	UeberKugel.position.set(00, 60, -40);
 	UeberKugel.target.position = new THREE.Vector3(0, 0, -40);
-	UeberKugel.intensity = 0.7;
+	UeberKugel.intensity = 3.9;
 	// UeberKugel.castShadow = true;
 	lichter.push(UeberKugel);
 	// Lichtquelle in die Sammlung einfuegen
@@ -39,7 +39,7 @@ function setupLights() {
 	UeberStart.name = "Ueber_Startposition";
 	UeberStart.position.set(0, 60, 40);
 	UeberStart.target.position = new THREE.Vector3(0, 0, 40);
-	UeberStart.intensity = 0.6;
+	UeberStart.intensity = 2.9;
 	// UeberStart.castShadow = true;
 	lichter.push(UeberStart);
 	// Lichtquelle in die Sammlung einfuegen
@@ -61,7 +61,7 @@ function setupLights() {
 	tischLicht.name = "Tisch Ecke";
 	tischLicht.position.set(-110, 60, 70);
 	tischLicht.target.position = new THREE.Vector3(-110, 0, 70);
-	tischLicht.intensity = 1.5;
+	tischLicht.intensity = 2.2;
 	// tischLicht.castShadow = true;
 	lichter.push(tischLicht);
 	
@@ -79,7 +79,7 @@ function setupLights() {
 	tischLicht.name = "Tisch Ecke2";
 	tischLicht.position.set(-50, 60, 80);
 	tischLicht.target.position = new THREE.Vector3(tischLicht.position.x, 0, tischLicht.position.z);
-	tischLicht.intensity = 1.5;
+	tischLicht.intensity = 2.6;
 	// tischLicht.castShadow = true;
 	lichter.push(tischLicht);
 
@@ -87,7 +87,7 @@ function setupLights() {
 	tischLicht.name = "Tisch Mitte";
 	tischLicht.position.set(-80, 60, 40);
 	tischLicht.target.position = new THREE.Vector3(tischLicht.position.x, 0, tischLicht.position.z);
-	tischLicht.intensity = 1.5;
+	tischLicht.intensity = 2.2;
 	// tischLicht.castShadow = true;
 	lichter.push(tischLicht);
 
@@ -96,7 +96,7 @@ function setupLights() {
 	tischLicht.name = "Tischgruppe Tuer";
 	tischLicht.position.set(-100, 60, 0);
 	tischLicht.target.position = new THREE.Vector3(tischLicht.position.x, 0, tischLicht.position.z);
-	tischLicht.intensity = 1.5;
+	tischLicht.intensity = 2.6;
 	// tischLicht.castShadow = true;
 	lichter.push(tischLicht);
 	// Lichtquelle in die Sammlung einfuegen
@@ -105,7 +105,7 @@ function setupLights() {
 	tischLicht.name = "Tisch Wand1";
 	tischLicht.position.set(-50, 60, -80);
 	tischLicht.target.position = new THREE.Vector3(tischLicht.position.x, 0, tischLicht.position.z);
-	tischLicht.intensity = 1.5;
+	tischLicht.intensity = 3;
 	// tischLicht.castShadow = true;
 	lichter.push(tischLicht);
 	// // Lichtquelle in die Sammlung einfuegen
@@ -114,7 +114,7 @@ function setupLights() {
 	tischLicht.name = "Tisch Wand2";
 	tischLicht.position.set(10, 60, -80);
 	tischLicht.target.position = new THREE.Vector3(tischLicht.position.x, 0, tischLicht.position.z);
-	tischLicht.intensity = 1.5;
+	tischLicht.intensity = 3;
 	// tischLicht.castShadow = true;
 	lichter.push(tischLicht);
 	// Lichtquelle in die Sammlung einfuegen

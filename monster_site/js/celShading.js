@@ -358,6 +358,9 @@ function erstelleCelShadingMaterial(beschreibung, textur, farbe) {
 
 	var aktuellesMaterial = game.celShadingMaterials[game.celShadingMaterials.length - 1];
 
+
+	aktuellesMaterial.uniforms.diffuse.value = farbe;
+
 	aktuellesMaterial.uniforms.repeat.value.set(3, 3);
 	aktuellesMaterial.uniforms.hatch1.value.wrapS = aktuellesMaterial.uniforms.hatch1.value.wrapT = THREE.RepeatWrapping;
 	aktuellesMaterial.uniforms.hatch2.value.wrapS = aktuellesMaterial.uniforms.hatch2.value.wrapT = THREE.RepeatWrapping;
@@ -372,6 +375,7 @@ function erstelleCelShadingMaterial(beschreibung, textur, farbe) {
 
 // Ordner fuer die Cel-Shading-Einstellungen zur Kontur ueber GUI
 function celShadingGUIShading() {
+	
 }	;// TODO
 // Ordner fuer die Cel-Shading-Einstellungen zur Kontur ueber GUI
 function celShadingGUIKontur() {

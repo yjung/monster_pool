@@ -23,7 +23,7 @@ function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine 
     			erstelleCelShadingMaterial(
     				"filzMat",						// Bezeichnung
     				THREE.ImageUtils.loadTexture("assets/dae/tex/filz.jpg"),								// Textur
-    				new THREE.Vector3(1,0,0)		// Farbe
+    				new THREE.Vector3(1,1,1)		// Farbe
     		), 0.1, 1.0);
     	}else{
 			var diffuseColor = modelScene.children[i].children[0].material.color;

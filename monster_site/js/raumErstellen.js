@@ -20,7 +20,7 @@ function raumLaden() {
 			var modelMaterial = modelScene.children[i].children[0].material;
 			game.raum.i = new THREE.Mesh(modelGeometry, erstelleCelShadingMaterial("raumMat", // Bezeichnung
 			THREE.ImageUtils.loadTexture("assets/dae/tex/raumTex.jpg"), // Textur
-			new THREE.Vector3(1, 0, 0)	// Farbe
+			new THREE.Vector3(1, 1, 1)	// Farbe
 			));
 			// game.raum.i.scale.set(0.25, 0.25, 0.25);
 			game.raum.i.receiveShadow = true;
@@ -31,7 +31,7 @@ function raumLaden() {
 	});
 
 	// Bar laden
-	ColladaLoader.load('assets/dae/bar.dae', function(collada) {
+	ColladaLoader.load('assets/dae/bar_b01.dae', function(collada) {
 
 		var modelScene = collada.scene;
 		var szenenbestandteile = modelScene.children.length;
@@ -39,8 +39,13 @@ function raumLaden() {
 			var modelGeometry = modelScene.children[i].children[0].geometry;
 			// Geometrie aus der .dae-Szene extrahieren
 			var modelMaterial = modelScene.children[i].children[0].material;
+			var diffuseColor = modelMaterial.color;
+			console.log(diffuseColor);
 
-			var element = new THREE.Mesh(modelGeometry, modelMaterial);
+			var element = new THREE.Mesh(modelGeometry, erstelleCelShadingMaterial("raumMat", // Bezeichnung
+			false, // Textur
+			new THREE.Vector3(diffuseColor.r,diffuseColor.g,diffuseColor.b)		// Farbe	// Farbe
+			));
 			element.receiveShadow = true;
 			// Collada Bar zur Szene hinzufuegen
 			game.szene.add(element);
