@@ -413,7 +413,7 @@ function celShadingGUIKontur() {
 	});
 
 	game.debugGUI.offset.onChange(function(value) {
-		edgePass.uniforms.uOffset.value = value;
+		game.composerCelShading.edgePass.uniforms.uOffset.value = value;
 	});
 
 	game.debugGUI.kontur.onFinishChange(function(value) {
