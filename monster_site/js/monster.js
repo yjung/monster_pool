@@ -371,11 +371,11 @@ function loadMonster(pathMesh, pathTexture, color, name, position) {
                soundEffekt("ball-ball");
           } 
       });
-	  console.log(position);
+	  //console.log(position);
 	  sphere.position.x = position.x;
 	  sphere.position.y = position.y;
       sphere.position.z = position.z;
-	  console.log( sphere.position );
+	  //console.log( sphere.position );
 	  sphere.name=name;
       game.szene.add(sphere);
   });

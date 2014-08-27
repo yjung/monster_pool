@@ -11,11 +11,11 @@ function setupLights() {
 	var barLight = new THREE.SpotLight(0xF7D358);
 	// Spotlichtquelle in weisser Lichtfarbe
 	barLight.name = "Bar";
-	barLight.position.set(50, 60, 40);
+	barLight.position.set(30, 60, 40);
 	// Positionierung in der Szene
-	barLight.target.position = new THREE.Vector3(80, 0, 40);
+	barLight.target.position = new THREE.Vector3(80, 20, 40);
 	//wirft nen fehler
-	// barLight.castShadow = true;
+	barLight.castShadow = true;
 	// Schattenwurf aktivieren
 	barLight.intensity = 10;
 	lichter.push(barLight);

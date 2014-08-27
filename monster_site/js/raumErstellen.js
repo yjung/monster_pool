@@ -31,16 +31,17 @@ function raumLaden() {
 	});
 
 	// Bar laden
-	ColladaLoader.load('assets/dae/bar_b01.dae', function(collada) {
+	ColladaLoader.load('assets/dae/bar.dae', function(collada) {
 
 		var modelScene = collada.scene;
+		console.log(modelScene);
 		var szenenbestandteile = modelScene.children.length;
-		for (var i = 0; i < szenenbestandteile; i++) {
+		var barbestandteile = 21;
+		for (var i = 2; i <= barbestandteile; i++) {
 			var modelGeometry = modelScene.children[i].children[0].geometry;
 			// Geometrie aus der .dae-Szene extrahieren
 			var modelMaterial = modelScene.children[i].children[0].material;
 			var diffuseColor = modelMaterial.color;
-			console.log(diffuseColor);
 
 			var element = new THREE.Mesh(modelGeometry, erstelleCelShadingMaterial("raumMat", // Bezeichnung
 			false, // Textur
@@ -48,6 +49,22 @@ function raumLaden() {
 			));
 			element.receiveShadow = true;
 			// Collada Bar zur Szene hinzufuegen
+			game.szene.add(element);
+			// console.log(element);
+		}
+		for (var i = 0; i < 2; i++) {
+			var modelGeometry = modelScene.children[i].children[0].geometry;
+			// Geometrie aus der .dae-Szene extrahieren
+			var modelMaterial = modelScene.children[i].children[0].material;
+			var texture = modelMaterial.map.sourceFile;
+console.log(texture);
+
+			var element = new THREE.Mesh(modelGeometry, erstelleCelShadingMaterial("raumMat", // Bezeichnung
+			THREE.ImageUtils.loadTexture(texture), // Textur
+			new THREE.Vector3(1,1,1)		// Farbe	// Farbe
+			));
+			element.receiveShadow = true;
+			// // Collada Bar zur Szene hinzufuegen
 			game.szene.add(element);
 		}
 	});
