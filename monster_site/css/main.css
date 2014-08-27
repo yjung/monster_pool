@@ -264,24 +264,50 @@ td {
 
 #scoreboard {
 	font-family: comicNew;
-	
+	font-size: 2em;
+	text-shadow:
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000;  
 	position:absolute;
 	top:0px;
 	right:0px
 	height:80px;
 	width:300px;
 	padding: 10px;
-	background:#000000;	
+	background:rgba(0,0,0,0);;	
 }
 
 #divTimer {
 	font-family: comicNew;
+	font-size: 2em;
+	text-shadow:
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000;  
 	font-weight: bold;
 	position:absolute;
 	height:80px;
-	width:300px;
+	/*width:300px;*/
 	padding: 10px;
-	background:#000000;
+	background:rgba(0,0,0,0);
+}
+#canvasPoints {
+	font-family: comicNew;
+	font-size: 2em;
+	text-shadow:
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000;  
+	font-weight: bold;
+	/*position:absolute;*/
+	/*height:80px;*/
+	/*width:300px;*/
+	padding: 10px;
+	background:rgba(0,0,0,0);
 }
 
 #divSeconds{	
