@@ -259,6 +259,16 @@ var colorPalettes = {
 var chosenPalette = colorPalettes["c64"];
 
 function loadMonsters() {
+  var positions=[
+			{x: 7.75, y: 18.75, z: -10},
+			{x: -8, y: 18.75, z: -10},
+			{x: -8.75, y: 18.75, z: -8.5},
+			{x: -6.5, y: 18.75, z: -8.5},
+			{x: 7, y: 18.75, z: -8.5},
+			{x: 9.25, y: 18.75, z: -8.5},
+			{x: 7.75, y: 18.75, z: -7},
+			{x: -8, y: 18.75, z: -7}
+			];
   var ballPosition = new THREE.Vector3(0, 0, 0);
   var i = 0;
   var j = 15;
@@ -266,8 +276,8 @@ function loadMonsters() {
   ballPosition.y += gridPosition.y;
   ballPosition.z += gridPosition.z;
 
-  for (var i = 0; i < grid.length; i++) {
-    if (i === 0) {
+  for (var i = 0; i < 8; i++) {
+    /*if (i === 0) {
       ballPosition.x += gridSymbols[grid[i]];
     }
     else if (i % offset === 0) {
@@ -279,17 +289,24 @@ function loadMonsters() {
       ballPosition.x += gridSymbols[grid[i]];
     }
 
-    if (grid[i] === placeSymbol) {
+    if (grid[i] === placeSymbol) {*/
       var monsterAsset = monsterAssets[Math.floor(Math.random() * monsterAssets.length)];
-      loadMonster(
+      /*loadMonster(
             monsterAsset["mesh"],
             monsterAsset["texture"],
             chosenPalette[Math.floor(Math.random() * chosenPalette.length)],
             ballname+j,
             ballPosition.clone()
+      );*/
+		loadMonster(
+            monsterAsset["mesh"],
+            monsterAsset["texture"],
+            chosenPalette[Math.floor(Math.random() * chosenPalette.length)],
+            ballname+j,
+            positions[i]
       );
       j += 1;
-    }
+    //}
   }
 
 /*  ballPosition.x += gridSymbols[grid[i]];
@@ -354,8 +371,11 @@ function loadMonster(pathMesh, pathTexture, color, name, position) {
                soundEffekt("ball-ball");
           } 
       });
-
-      sphere.position = position;
+	  console.log(position);
+	  sphere.position.x = position.x;
+	  sphere.position.y = position.y;
+      sphere.position.z = position.z;
+	  console.log( sphere.position );
 	  sphere.name=name;
       game.szene.add(sphere);
   });
