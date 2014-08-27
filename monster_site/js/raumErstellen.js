@@ -205,7 +205,8 @@ function roomCollideEvent(object) {
 		window.setTimeout(whiteCollideRoom, 3000);
 		setTimer("White Ball fell down! Wait: ", 3);
 	} else {
-		monsterCollideRoom();
+		var name = object.name;
+		monsterCollideRoom(name);
 	}
 }
 
@@ -213,9 +214,15 @@ function whiteCollideRoom() {
 	positionBall(0, 22, 15);
 }
 
-function monsterCollideRoom() {
-	game.monsterCounter -= 1;
-	//Counter von 15 bis 0 aktualisieren
-	$("#balls").text(game.monsterCounter);
+function monsterCollideRoom(name) {
+	var ball = game.szene.getObjectByName(name);
+		console.log(ball);
+		if(typeof ball != 'undefined')
+		{
+			game.szene.remove( ball);
+			game.monsterCounter -= 1;
+			//Counter von 15 bis 0 aktualisieren
+			$("#balls").text(game.monsterCounter);
+		}
 }
 

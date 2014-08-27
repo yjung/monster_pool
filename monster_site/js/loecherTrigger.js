@@ -40,7 +40,8 @@ function lochColliderErstellen(x, y, z, points)
 		 }
 		 else
 		 {
-		 	monsterCollideHole(object);
+			name=object.name;
+		 	monsterCollideHole(name);
 		 }
 	  
     });
@@ -51,8 +52,12 @@ function lochColliderErstellen(x, y, z, points)
 	  
     }
 
-	function monsterCollideHole(object){
-		  game.szene.remove( object); //3. Remove Kugel (game-szene remove)	  	
+	function monsterCollideHole(name){
+		var ball = game.szene.getObjectByName(name);
+		console.log(ball);
+		if(typeof ball != 'undefined')
+		{
+		  game.szene.remove( ball); //3. Remove Kugel (game-szene remove)	  	
 		  game.monsterCounter -= 1; //4. Counter von 15 bis 0 aktualisieren
 		  game.scoreCounter += points;
 		  spriteErstellen(x, y+5, z, points);
@@ -63,6 +68,7 @@ function lochColliderErstellen(x, y, z, points)
 		  $( "#points" ).text(game.scoreCounter);
 		  $( "#balls" ).text(game.monsterCounter);
 		  soundEffekt("ball-loch");
+	   }
 	
 	}
 }
