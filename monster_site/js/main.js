@@ -9,6 +9,7 @@ function benutzereingaben() {
 // Mainloop des Spiels von dem aus aktualisiert und gerendert wird
 function mainloop() {
 	updateHatching();
+	updateMotionBlur();
 	benutzereingaben();
 	// Benutzereingaben abfangen
 	var delta = game.clock.getDelta();

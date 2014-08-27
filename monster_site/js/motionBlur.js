@@ -1,7 +1,8 @@
 function initialisiereMotionBlur() {
 
 	game.motionBlur = {};
-
+	game.motionBlur.DeltaX = 0.0;
+	game.motionBlur.DeltaY = 0.0;
 	erstelleMotionBlurGUI();
 };
 
@@ -21,7 +22,8 @@ function erstelleMotionBlurGUI() {
 		}else{													// andernfalls
 			var kontur = game.debugGUI.kontur.object.kontur; 	// Ueberpruefen ob das Cel-Shading derzeit mit Kontur verwendet wird (true ? false)
 			erstelleCelShadingComposer(kontur);					// Entsprechend der Ueberpruefung den Standard-CelShading-Composer wiederherstellen
-		}								
+		}
+						
 	});
 
 	motionBlur.open();
@@ -81,3 +83,17 @@ function erstelleMotionBlurComposer() {
 	game.composerCelShading = erweiterterCelComposer;
 
 }
+
+function updateMotionBlur()
+{
+	if(game.composerCelShading.passes[5]){
+			game.composerCelShading.passes[4].uniforms.h.value = (game.motionBlur.DeltaX*100)/ window.innerHeight;							
+			game.composerCelShading.passes[5].uniforms.v.value = (game.motionBlur.DeltaY*100)/ window.innerWidth;									
+	}
+			console.log((game.motionBlur.DeltaY*1000)/ window.innerHeight);								
+			// console.log(game.composerCelShading.passes[5]);		
+	  // THREE.VerticalBlurShader.uniforms.v.value = (game.motionBlur.DeltaX*1000)/ window.innerWidth;
+	  // THREE.HorizontalBlurShader.uniforms.h.value = (game.motionBlur.DeltaY*1000)/ window.innerHeight;
+
+	// console.log("X Delta "+ (game.motionBlur.DeltaX*1000)/ window.innerWidth+" Y Delta "+ (game.motionBlur.DeltaY*1000)/ window.innerWidth);
+};
