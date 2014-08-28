@@ -128,11 +128,12 @@ function initialisiere() {
 	initialisiereCelShading();
 
 	/* Post-Processing - Allgemein*/	
+	// Motion-Blur
 	initialisiereMotionBlur();
 	erstelleComposer();				// Effekt-Composer erstellen
 	game.postProcessing = true;	// Postprocessing standardmaessig deaktiviert
 	
-	// Motion-Blur
+	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
 
 	/* Sound */
 	game.ambientSound = new Audio();//document.createElement("audio");
@@ -145,12 +146,11 @@ function initialisiere() {
 	queueLaden();                               // Queue laden
     ladePooltable();                             // Nicht-Physisches, detailliertes Model des Tisches laden    
     ladeKugeln();                             // Nicht-Physisches, detailliertes Model des Tisches laden
-    sceneLaden();                        //Alpha Tisch aus Colada File Laden^
     loecherTrigger();							//Lade die Triggers von den Loechern
     createWhiteBall(0,22,15);                    // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
+    sceneLaden();                        //Alpha Tisch aus Colada File Laden^
     loadMonsters();								// Lade ein Monster (Bernd)
     // ladeAnimation();
-	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
     erstelleStatistik(true,true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
 
 

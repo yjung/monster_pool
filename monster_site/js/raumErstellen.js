@@ -4,7 +4,7 @@ function sceneLaden() {
 	girlandeLaden();
 	moebelLaden();
 	erstelleUmgebungsCollider();
-	// lichterLaden();
+	lichterLaden();
 }
 
 function raumLaden() {
@@ -186,14 +186,23 @@ function lichterLaden() {
 		var szenenbestandteile = modelScene.children.length;
 		for (var i = 0; i < szenenbestandteile; i++) {
 			var modelGeometry = modelScene.children[i].children[0].geometry;
-			// Geometrie aus der .dae-Szene extrahieren
-			var modelMaterial = modelScene.children[i].children[0].material;
 
-			var element = new THREE.Mesh(modelGeometry, modelMaterial);
+			var element = new THREE.Mesh(modelGeometry, erstelleCelShadingMaterial(
+					"lampenMat", // Bezeichnung
+					false, // Textur
+					new THREE.Vector3(0.82,0.82,0.82)		// Farbe
+			));
+
 			element.scale.set(0.25, 0.25, 0.25);
-
+			
+			// i = 1, weil Barlicht ohne Lampenschirm length -1, weil Ambient am Schluss kommt
+			for(var i=1; i < game.lichter.length -1; i++){
+				var instanz = element.clone();
+				instanz.position = new THREE.Vector3(game.lichter[i].position.x,35,game.lichter[i].position.z);
+				game.szene.add(instanz);
+			}
+			
 			// Collada Spotlight lampe zur Szene hinzufuegen
-			game.szene.add(element);
 		}
 	});
 

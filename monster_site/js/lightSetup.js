@@ -4,7 +4,7 @@ function setupLights() {
 		console.log("--Erstelle Lichtquellen.--");
 	}
 
-	var lichter = [];
+	game.lichter = [];
 	// Sammlung fuer alle Lichtquellen der Szene
 
 	// Licht für die Bar
@@ -18,7 +18,7 @@ function setupLights() {
 	barLight.castShadow = true;
 	// Schattenwurf aktivieren
 	barLight.intensity = 10;
-	lichter.push(barLight);
+	game.lichter.push(barLight);
 	// Lichtquelle in die Sammlung einfuegen
 
 	// normal is 0.5
@@ -27,31 +27,31 @@ function setupLights() {
 	// add spotlight for the PoolTable1
 	var UeberKugel = new THREE.SpotLight(PooltableLightColor);
 	UeberKugel.name = "Ueber_Kugeln";
-	UeberKugel.position.set(00, 60, -40);
+	UeberKugel.position.set(00, 60, -15);
 	UeberKugel.target.position = new THREE.Vector3(0, 0, -40);
-	UeberKugel.intensity = 3.9;
+	UeberKugel.intensity = 1.2;
 	// UeberKugel.castShadow = true;
-	lichter.push(UeberKugel);
+	game.lichter.push(UeberKugel);
 	// Lichtquelle in die Sammlung einfuegen
 
 	// add spotlight for the PoolTable2
 	var UeberStart = new THREE.SpotLight(PooltableLightColor);
 	UeberStart.name = "Ueber_Startposition";
-	UeberStart.position.set(0, 60, 40);
+	UeberStart.position.set(0, 60, 15);
 	UeberStart.target.position = new THREE.Vector3(0, 0, 40);
-	UeberStart.intensity = 2.9;
+	UeberStart.intensity = 1.2;
 	// UeberStart.castShadow = true;
-	lichter.push(UeberStart);
+	game.lichter.push(UeberStart);
 	// Lichtquelle in die Sammlung einfuegen
 
 	// add spotlight for the PoolTable3
 	var UeberMitte = new THREE.SpotLight(PooltableLightColor);
 	UeberMitte.name = "Pooltisch-Mitte";
-	UeberMitte.position.set(0, 60, 00);
+	UeberMitte.position.set(0, 60, 0);
 	UeberMitte.target.position = new THREE.Vector3(0, 0, 0);
-	UeberMitte.intensity = 0.6;
+	UeberMitte.intensity = 1.1;
 	// UeberMitte.castShadow = true;
-	lichter.push(UeberMitte);	// Lichtquelle in die Sammlung einfuegen
+	game.lichter.push(UeberMitte);	// Lichtquelle in die Sammlung einfuegen
 
 	//Tischlichter
 	var TischLightColor = 0xFF7F24;
@@ -61,9 +61,9 @@ function setupLights() {
 	tischLicht.name = "Tisch Ecke";
 	tischLicht.position.set(-110, 60, 70);
 	tischLicht.target.position = new THREE.Vector3(-110, 0, 70);
-	tischLicht.intensity = 2.2;
+	tischLicht.intensity = 3.9;
 	// tischLicht.castShadow = true;
-	lichter.push(tischLicht);
+	game.lichter.push(tischLicht);
 	
 	
 	var achsendreibein = new THREE.AxisHelper(50);
@@ -79,54 +79,54 @@ function setupLights() {
 	tischLicht.name = "Tisch Ecke2";
 	tischLicht.position.set(-50, 60, 80);
 	tischLicht.target.position = new THREE.Vector3(tischLicht.position.x, 0, tischLicht.position.z);
-	tischLicht.intensity = 2.6;
+	tischLicht.intensity = 3.3;
 	// tischLicht.castShadow = true;
-	lichter.push(tischLicht);
+	game.lichter.push(tischLicht);
 
 	var tischLicht = new THREE.SpotLight(TischLightColor);
 	tischLicht.name = "Tisch Mitte";
 	tischLicht.position.set(-80, 60, 40);
 	tischLicht.target.position = new THREE.Vector3(tischLicht.position.x, 0, tischLicht.position.z);
-	tischLicht.intensity = 2.2;
+	tischLicht.intensity = 2.1;
 	// tischLicht.castShadow = true;
-	lichter.push(tischLicht);
+	game.lichter.push(tischLicht);
 
 	// Lichtquelle in die Sammlung einfuegen
 	var tischLicht = new THREE.SpotLight(TischLightColor);
 	tischLicht.name = "Tischgruppe Tuer";
 	tischLicht.position.set(-100, 60, 0);
 	tischLicht.target.position = new THREE.Vector3(tischLicht.position.x, 0, tischLicht.position.z);
-	tischLicht.intensity = 2.6;
+	tischLicht.intensity = 3.5;
 	// tischLicht.castShadow = true;
-	lichter.push(tischLicht);
+	game.lichter.push(tischLicht);
 	// Lichtquelle in die Sammlung einfuegen
 	
 	var tischLicht = new THREE.SpotLight(TischLightColor);
 	tischLicht.name = "Tisch Wand1";
 	tischLicht.position.set(-50, 60, -80);
 	tischLicht.target.position = new THREE.Vector3(tischLicht.position.x, 0, tischLicht.position.z);
-	tischLicht.intensity = 3;
+	tischLicht.intensity = 3.2;
 	// tischLicht.castShadow = true;
-	lichter.push(tischLicht);
+	game.lichter.push(tischLicht);
 	// // Lichtquelle in die Sammlung einfuegen
 // 
 	var tischLicht = new THREE.SpotLight(TischLightColor);
 	tischLicht.name = "Tisch Wand2";
 	tischLicht.position.set(10, 60, -80);
 	tischLicht.target.position = new THREE.Vector3(tischLicht.position.x, 0, tischLicht.position.z);
-	tischLicht.intensity = 3;
+	tischLicht.intensity = 3.6;
 	// tischLicht.castShadow = true;
-	lichter.push(tischLicht);
+	game.lichter.push(tischLicht);
 	// Lichtquelle in die Sammlung einfuegen
 	//Licht zur allgemeinen raumaufhellung
 	var ambientLight = new THREE.PointLight(PooltableLightColor, 0.51, 250);
 	ambientLight.name = "Ambiente";
-	ambientLight.intensity = 1.7;
+	ambientLight.intensity = 1.6;
 	ambientLight.position.set(0, 60, 0);
-	lichter.push(ambientLight);
+	game.lichter.push(ambientLight);
 	// Lichtquelle in die Sammlung einfuegen
 
-	lichtquellenEinfuegen(lichter);
+	lichtquellenEinfuegen(game.lichter);
 	// Einfuegen der Lichtquellen in die Szene
 };
 

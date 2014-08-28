@@ -258,7 +258,7 @@ function erstelleCelShadingMaterial(beschreibung, textur, farbe) {
 			},			
 			"mixFaktor" : {
 				type : "f",
-				value : 0.5
+				value : 0.25
 			},			
 			
 			// Hatching-spezifische Uniforms
@@ -370,7 +370,7 @@ function erstelleCelShadingMaterial(beschreibung, textur, farbe) {
 
 	aktuellesMaterial.uniforms.diffuse.value = farbe;
 	aktuellesMaterial.uniforms.shadingStufen.value = 4;
-	aktuellesMaterial.uniforms.mixFaktor.value = 0.5;
+	aktuellesMaterial.uniforms.mixFaktor.value = 0.25;
 
 	aktuellesMaterial.uniforms.repeat.value.set(3, 3);
 	aktuellesMaterial.uniforms.hatch1.value.wrapS = aktuellesMaterial.uniforms.hatch1.value.wrapT = THREE.RepeatWrapping;
@@ -418,7 +418,7 @@ function celShadingGUIKontur() {
 		kontur : true,
 		offset : 0.3,
 		konturFarbe : [0, 0, 0, 1], // RGB with alpha
-		threshold : 0.05,
+		threshold : 0.08,
 	};
 
 	game.renderer.celShadingKontur = true;
@@ -482,58 +482,16 @@ function celShadingGUIHatching() {
 	// Ordner fuer die Cel-Shading-Einstellungen
 	var celShadingHatching = game.debugGUI.addFolder('Cel-Shading (Hatching) - Mathias');
 
-	var presets = {
-		'Default' : {
-			ambient : 8,
-			diffuse : 100,
-			specular : 100,
-			rim : 46,
-			shininess : 49,
-			invertRim : false,
-			displayOutline : false,
-			inkColor : [72, 72, 164]
-		},
-		'Sketch' : {
-			ambient : 9.8,
-			diffuse : 100,
-			specular : 100,
-			rim : 81,
-			shininess : 12,
-			invertRim : true,
-			displayOutline : false,
-			inkColor : [175, 175, 175]
-		},
-		'Classroom' : {
-			ambient : 13,
-			diffuse : 27,
-			specular : 100,
-			rim : 76,
-			shininess : 27,
-			invertRim : false,
-			displayOutline : true,
-			inkColor : [41, 41, 202]
-		},
-		'Engraving' : {
-			ambient : 0,
-			diffuse : 57,
-			specular : 100,
-			rim : 77,
-			shininess : 15,
-			invertRim : true,
-			displayOutline : false,
-			inkColor : [90, 120, 111]
-		}
-	};
 	var Settings = function() {
 		this.aktivieren = true;
-		this.ambient = 8.7;
-		this.diffuse = 7;
-		this.specular = 22;
+		this.ambient = 5.4;
+		this.diffuse = 78.8;
+		this.specular = 64;
 		this.rim = 100;
-		this.shininess = 13;
+		this.shininess = 31;
 		this.invertRim = false;
 		this.displayOutline = false;
-		this.inkColor = [255, 255, 255];
+		this.inkColor = [20, 20, 20];
 		this.preset = 0;
 	};
 
