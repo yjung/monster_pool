@@ -3,7 +3,8 @@ function initialisiereMotionBlur() {
 	game.motionBlur = {};
 	game.motionBlur.DeltaX = 0.0;
 	game.motionBlur.DeltaY = 0.0;
-	game.motionBlur.BlurFaktor = 100;
+	game.motionBlur.BlurFaktorX = 25;
+	game.motionBlur.BlurFaktorY = 300;
 	erstelleMotionBlurGUI();
 };
 
@@ -15,10 +16,12 @@ function erstelleMotionBlurGUI()
 	var parameterMotionBlur = 
 	{
 		aktivieren : false,
-		BlurIntens : 100
+		BlurIntensX : 25,
+		BlurIntensY : 300
 	};
 	
 	game.motionBlur.aktivieren = motionBlur.add(parameterMotionBlur, "aktivieren").listen();
+	motionBlur.open();				
 	game.motionBlur.aktivieren.onFinishChange(function(value) 
 	{
 		if(value){												// Falls Haekchen gesetzt			
@@ -27,14 +30,16 @@ function erstelleMotionBlurGUI()
 			var kontur = game.debugGUI.kontur.object.kontur; 	// Ueberpruefen ob das Cel-Shading derzeit mit Kontur verwendet wird (true ? false)
 			erstelleCelShadingComposer(kontur);					// Entsprechend der Ueberpruefung den Standard-CelShading-Composer wiederherstellen
 		}
-						
 	});
-	game.motionBlur.BlurIntens = motionBlur.add(parameterMotionBlur, 'BlurIntens').min(0.0).max(300.0).step(5.0).name("Blur Intensität").listen();
-	game.motionBlur.BlurIntens.onChange(function(value)
+	game.motionBlur.BlurIntensX = motionBlur.add(parameterMotionBlur, 'BlurIntensX').min(0.0).max(100.0).step(5.0).name("Blur IntensitätX").listen();
+	game.motionBlur.BlurIntensX.onChange(function(value)
 	{
-		game.motionBlur.BlurFaktor = value;
-		motionBlur.open();
-		// Fuer Debugging geoeffnet
+		game.motionBlur.BlurFaktorX = value;
+	});
+	game.motionBlur.BlurIntensY = motionBlur.add(parameterMotionBlur, 'BlurIntensY').min(0.0).max(900.0).step(5.0).name("Blur IntensitätY").listen();
+	game.motionBlur.BlurIntensY.onChange(function(value)
+	{
+		game.motionBlur.BlurFaktorY = value;
 	});
 };
 
@@ -98,12 +103,12 @@ function updateMotionBlur()
 	{		
 		if(game.debugGUI.kontur.object.kontur == true)
 		{	
-			game.composerCelShading.passes[4].uniforms.h.value = (game.motionBlur.DeltaX*(game.motionBlur.BlurFaktor)/1)/ window.innerHeight;							
-			game.composerCelShading.passes[5].uniforms.v.value = (game.motionBlur.DeltaY*(game.motionBlur.BlurFaktor)/2)/ window.innerWidth;									
+			game.composerCelShading.passes[4].uniforms.h.value = (game.motionBlur.DeltaX*(game.motionBlur.BlurFaktorX)/1)/ window.innerHeight;							
+			game.composerCelShading.passes[5].uniforms.v.value = (game.motionBlur.DeltaY*(game.motionBlur.BlurFaktorY)/1)/ window.innerWidth;									
 		}else
 		{		
-			game.composerCelShading.passes[3].uniforms.h.value = (game.motionBlur.DeltaX*(game.motionBlur.BlurFaktor)/1)/ window.innerHeight;							
-			game.composerCelShading.passes[4].uniforms.v.value = (game.motionBlur.DeltaY*(game.motionBlur.BlurFaktor)/2)/ window.innerWidth;									
+			game.composerCelShading.passes[3].uniforms.h.value = (game.motionBlur.DeltaX*(game.motionBlur.BlurFaktorX)/1)/ window.innerHeight;							
+			game.composerCelShading.passes[4].uniforms.v.value = (game.motionBlur.DeltaY*(game.motionBlur.BlurFaktorY)/1)/ window.innerWidth;									
 		}
 	}
 };
