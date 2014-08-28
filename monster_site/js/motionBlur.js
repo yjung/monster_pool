@@ -103,12 +103,12 @@ function updateMotionBlur()
 	{		
 		if(game.debugGUI.kontur.object.kontur == true)
 		{	
-			game.composerCelShading.passes[4].uniforms.h.value = (game.motionBlur.DeltaX*(game.motionBlur.BlurFaktorX)/1)/ window.innerHeight;							
-			game.composerCelShading.passes[5].uniforms.v.value = (game.motionBlur.DeltaY*(game.motionBlur.BlurFaktorY)/1)/ window.innerWidth;									
+			game.composerCelShading.passes[4].uniforms.h.value = (game.motionBlur.DeltaX*game.motionBlur.BlurFaktorX)/ window.innerHeight;							
+			game.composerCelShading.passes[5].uniforms.v.value = (game.motionBlur.DeltaY*game.motionBlur.BlurFaktorY)/ window.innerWidth;									
 		}else
 		{		
-			game.composerCelShading.passes[3].uniforms.h.value = (game.motionBlur.DeltaX*(game.motionBlur.BlurFaktorX)/1)/ window.innerHeight;							
-			game.composerCelShading.passes[4].uniforms.v.value = (game.motionBlur.DeltaY*(game.motionBlur.BlurFaktorY)/1)/ window.innerWidth;									
+			game.composerCelShading.passes[3].uniforms.h.value = (game.motionBlur.DeltaX*game.motionBlur.BlurFaktorX)/ window.innerHeight;							
+			game.composerCelShading.passes[4].uniforms.v.value = (game.motionBlur.DeltaY*game.motionBlur.BlurFaktorY)/ window.innerWidth;									
 		}
 	}
 };
