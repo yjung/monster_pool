@@ -251,7 +251,16 @@ function erstelleCelShadingMaterial(beschreibung, textur, farbe) {
 				type : "m4v",
 				value : []
 			},
-
+			// Shading-spezifische Uniforms
+			"shadingStufen" : {
+				type : "i",
+				value : 4
+			},			
+			"mixFaktor" : {
+				type : "f",
+				value : 0.5
+			},			
+			
 			// Hatching-spezifische Uniforms
 			"ambient" : {
 				type : "c",
@@ -360,13 +369,14 @@ function erstelleCelShadingMaterial(beschreibung, textur, farbe) {
 
 
 	aktuellesMaterial.uniforms.diffuse.value = farbe;
+	aktuellesMaterial.uniforms.shadingStufen.value = 4;
+	aktuellesMaterial.uniforms.mixFaktor.value = 0.5;
 
 	aktuellesMaterial.uniforms.repeat.value.set(3, 3);
 	aktuellesMaterial.uniforms.hatch1.value.wrapS = aktuellesMaterial.uniforms.hatch1.value.wrapT = THREE.RepeatWrapping;
 	aktuellesMaterial.uniforms.hatch2.value.wrapS = aktuellesMaterial.uniforms.hatch2.value.wrapT = THREE.RepeatWrapping;
 	aktuellesMaterial.uniforms.hatch3.value.wrapS = aktuellesMaterial.uniforms.hatch3.value.wrapT = THREE.RepeatWrapping;
 	aktuellesMaterial.uniforms.hatch4.value.wrapS = aktuellesMaterial.uniforms.hatch4.value.wrapT = THREE.RepeatWrapping;
-
 	aktuellesMaterial.uniforms.hatch5.value.wrapS = aktuellesMaterial.uniforms.hatch5.value.wrapT = THREE.RepeatWrapping;
 	aktuellesMaterial.uniforms.hatch6.value.wrapS = aktuellesMaterial.uniforms.hatch6.value.wrapT = THREE.RepeatWrapping;
 
@@ -379,12 +389,25 @@ function celShadingGUIShading() {	// TODO
 	
 	// Parameter-Liste fuer das Cel-Shading
 	var paramCelShadingShading = {
-		shadingStufen : 4
+		shadingStufen : 4,
+		mixFaktor : 0.5
 	};
 	
-	game.debugGUI.shadingStufen = celShadingShading.add(paramCelShadingShading, 'shadingStufen', { "Drei-Stufig": 3, "Vier-Stufig": 0.1, "Fünf-Stufig": 5 } );
+	game.debugGUI.shadingStufen = celShadingShading.add(paramCelShadingShading, 'shadingStufen', { "Ohne Abstufung": 0, "Zwei-Stufig": 2, "Drei-Stufig": 3, "Vier-Stufig": 4, "Fünf-Stufig": 5 } ).name("Shading-Stufen").listen();
+	game.debugGUI.shadingMixFaktor = celShadingShading.add(paramCelShadingShading, 'mixFaktor').name("Mix-Faktor").min(0.0).max(1.0).step(0.01).listen();
 	
-}	;
+	game.debugGUI.shadingStufen.onChange(function(value) {
+		for(var i = 0; i < game.celShadingMaterials.length; i++){
+		game.celShadingMaterials[i].uniforms['shadingStufen'].value = value;
+	}
+	});
+
+	game.debugGUI.shadingMixFaktor.onChange(function(value) {
+		for(var i = 0; i < game.celShadingMaterials.length; i++){
+		game.celShadingMaterials[i].uniforms['mixFaktor'].value = value;
+	}
+	});
+};
 // Ordner fuer die Cel-Shading-Einstellungen zur Kontur ueber GUI
 function celShadingGUIKontur() {
 	var celShadingKontur = game.debugGUI.addFolder('Cel-Shading (Kontur) - Mathias');

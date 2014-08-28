@@ -445,7 +445,9 @@ vertexShader: [
 fragmentShader: [
 	"uniform vec3 diffuse;",
 	"uniform float opacity;",
-	"uniform int hatchingAktiv;	//Hatching",		// TODO
+	"uniform int shadingStufen;		//Cel-Shading",
+	"uniform float mixFaktor;		//Cel-Shading",
+	"uniform int hatchingAktiv;		//Hatching",
 	"uniform sampler2D hatch1;		//Hatching",
 	"uniform sampler2D hatch2;		//Hatching",
 	"uniform sampler2D hatch3;		//Hatching",
@@ -836,21 +838,34 @@ fragmentShader: [
 		"	float alpha = gl_FragColor[3];",
 		"	float vlf = vLightFront[0];",
 
-		// // This version presevers colors, but looks less cartoonish (good with simple textures, colors)
-		// // "	if (vlf< 0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.5), alpha); }",
-		// // "	if (vlf>=0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.3), alpha); }", 
-		// // "	if (vlf>=0.75) { gl_FragColor = vec4(mix( basecolor, vec3(1.0), 0.0), alpha); }", 
-		// // "	if (vlf>=0.95) { gl_FragColor = vec4(mix( basecolor, vec3(1.0), 0.3), alpha); }",
+		" if(shadingStufen == 2){",
+		"	if (vlf < 0.5) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), mixFaktor), alpha); }",
+		"	if (vlf >= 0.5) { gl_FragColor = vec4(mix( basecolor, vec3(0.5), mixFaktor), alpha); }",
+		"}",
 
-		// This version looks more cartoonish, but washes colors out (looks good with complex textures)
-		"	if (vlf < 0.25) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), 0.5), alpha); }",
-		"	if (vlf >= 0.25) { gl_FragColor = vec4(mix( basecolor, vec3(0.25), 0.5), alpha); }",
-		"	if (vlf >= 0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.5), 0.5), alpha); }",
-		"	if (vlf >= 0.75) { gl_FragColor = vec4(mix( basecolor, vec3(0.75), 0.5), alpha); }",
+		" if(shadingStufen == 3){",
+		"	if (vlf < 0.33) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), mixFaktor), alpha); }",
+		"	if (vlf >= 0.33) { gl_FragColor = vec4(mix( basecolor, vec3(0.5), mixFaktor), alpha); }",
+		"	if (vlf >= 0.66) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), mixFaktor), alpha); }",
+		"}",
+		
+		" if(shadingStufen == 4){",
+		"	if (vlf < 0.25) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), mixFaktor), alpha); }",
+		"	if (vlf >= 0.25) { gl_FragColor = vec4(mix( basecolor, vec3(0.25), mixFaktor), alpha); }",
+		"	if (vlf >= 0.50) { gl_FragColor = vec4(mix( basecolor, vec3(0.5), mixFaktor), alpha); }",
+		"	if (vlf >= 0.75) { gl_FragColor = vec4(mix( basecolor, vec3(0.75), mixFaktor), alpha); }",
+		"}",
+
+		" if(shadingStufen == 5){",
+		"	if (vlf < 0.20) { gl_FragColor = vec4(mix( basecolor, vec3(0.0), mixFaktor), alpha); }",
+		"	if (vlf >= 0.20) { gl_FragColor = vec4(mix( basecolor, vec3(0.2), mixFaktor), alpha); }",
+		"	if (vlf >= 0.40) { gl_FragColor = vec4(mix( basecolor, vec3(0.4), mixFaktor), alpha); }",
+		"	if (vlf >= 0.60) { gl_FragColor = vec4(mix( basecolor, vec3(0.6), mixFaktor), alpha); }",
+		"	if (vlf >= 0.80) { gl_FragColor = vec4(mix( basecolor, vec3(0.8), mixFaktor), alpha); }",
+		"}",
 
 		"	gl_FragColor.xyz *= vLightFront;",
 		"	vec3 celColor = gl_FragColor.xyz;",
-		
 		
 		"// Hatching-Part",		
 		"if(hatchingAktiv != 0){", 
