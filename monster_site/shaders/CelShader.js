@@ -445,7 +445,7 @@ vertexShader: [
 fragmentShader: [
 	"uniform vec3 diffuse;",
 	"uniform float opacity;",
-	// "uniform float hatchingAktiv;	//Hatching",		// TODO
+	"uniform int hatchingAktiv;	//Hatching",		// TODO
 	"uniform sampler2D hatch1;		//Hatching",
 	"uniform sampler2D hatch2;		//Hatching",
 	"uniform sampler2D hatch3;		//Hatching",
@@ -852,9 +852,8 @@ fragmentShader: [
 		"	vec3 celColor = gl_FragColor.xyz;",
 		
 		
-		"// Hatching-Part",
-		// "if(hatchingAktiv > 0.0){", 
-		
+		"// Hatching-Part",		
+		"if(hatchingAktiv != 0){", 
 			"vec2 nUV = vec2( mod( gl_FragCoord.x, bkgResolution.x ) / bkgResolution.x, mod( gl_FragCoord.y, bkgResolution.y ) / bkgResolution.y );",
 			"vec4 dst = vec4( texture2D( paper, nUV ).rgb, 1. );",
 			"vec4 src;",
@@ -870,7 +869,7 @@ fragmentShader: [
 
 			"gl_FragColor = vec4(mixColor.rgb, 1.0);",
 		"}",
-    // "}"
+    "}"
 
 ].join("\n")
 
