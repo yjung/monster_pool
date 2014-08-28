@@ -69,6 +69,7 @@ function erstelleCelShadingComposer(kontur) {
 
 };
 /* Hatching-Texturen werden initial einmal geladen und beim Erstellen von Cel-Shading-Materialien aus dem Namespace heraus referenziert.*/
+
 function initialisiereCelShadingHatching() {
 	game.celShading.hatching.hatch1 = THREE.ImageUtils.loadTexture("shaders/img/hatch_0.jpg");
 	game.celShading.hatching.hatch2 = THREE.ImageUtils.loadTexture("shaders/img/hatch_1.jpg");
@@ -269,8 +270,8 @@ function erstelleCelShadingMaterial(beschreibung, textur, farbe) {
 				value : new THREE.Vector3(1, 1, 1)
 			},
 			"hatchingAktiv" : {
-				type : "f",
-				value : 0
+				type : "i",
+				value : 1
 			},
 			"showOutline" : {
 				type : "f",
@@ -501,6 +502,7 @@ function celShadingGUIHatching() {
 		}
 	};
 	var Settings = function() {
+		this.aktivieren = true;
 		this.ambient = 8.7;
 		this.diffuse = 7;
 		this.specular = 22;
@@ -514,7 +516,7 @@ function celShadingGUIHatching() {
 
 	game.celShading.hatching.settings = new Settings();
 
-	// game.celShading.hatching.aktivieren = celShadingHatching.add(game.celShading.hatching.settings, 'aktivieren', false ).listen();
+	game.celShading.hatching.aktivieren = celShadingHatching.add(game.celShading.hatching.settings, 'aktivieren', true).listen();
 	game.celShading.hatching.ambient = celShadingHatching.add(game.celShading.hatching.settings, 'ambient', 0.0, 100.0).listen();
 	game.celShading.hatching.diffuse = celShadingHatching.add(game.celShading.hatching.settings, 'diffuse', 0.0, 100.0);
 	game.celShading.hatching.specular = celShadingHatching.add(game.celShading.hatching.settings, 'specular', 0.0, 100.0);
@@ -524,16 +526,16 @@ function celShadingGUIHatching() {
 	game.celShading.hatching.displayOutline = celShadingHatching.add(game.celShading.hatching.settings, 'displayOutline');
 	game.celShading.hatching.inkColor = celShadingHatching.addColor(game.celShading.hatching.settings, 'inkColor');
 
-	// game.celShading.hatching.aktivieren.onChange(function(value) {
-	// for(var i = 0; i < game.celShadingMaterials.length; i++){
+	game.celShading.hatching.aktivieren.onChange(function(value) {
+	for(var i = 0; i < game.celShadingMaterials.length; i++){
 	// console.log(game.celShadingMaterials[i]);
-	// if(value){
-	// game.celShadingMaterials[i].uniforms['hatchingAktiv'].value = 1;
-	// }else{
-	// game.celShadingMaterials[i].uniforms['hatchingAktiv'].value = 0;
-	// }
-	// }
-	// });
+	if(value){
+		game.celShadingMaterials[i].uniforms['hatchingAktiv'].value = 1;
+	}else{
+		game.celShadingMaterials[i].uniforms['hatchingAktiv'].value = 0;
+	}
+	}
+	});
 
 	// game.celShading.hatching.ambient.onFinishChange(function(value) {
 	// for(var i = 0; i < game.celShadingMaterials.length; i++){

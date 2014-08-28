@@ -16,7 +16,7 @@ function erstelleBumper(loader, xPosition, yPosition, zPosition)
 		erstelleCelShadingMaterial(
     			"bumperMat",												// Bezeichnung
     			THREE.ImageUtils.loadTexture( "assets/dae/tex/bumper.jpg" ),// Textur
-    			new THREE.Vector3(1,0,0)									// Farbe
+    			new THREE.Vector3(1,1,1)									// Farbe
     		),
  		0);
 
