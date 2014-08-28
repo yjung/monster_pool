@@ -19,8 +19,8 @@ function erstelleComposer() {
 	edgePass = new THREE.ShaderPass(CannyEdgePass);			// Custom-Shader
 	edgePass.renderToScreen = true;
 
-	game.motionBlur.hblur = new THREE.ShaderPass( THREE.HorizontalBlurShader );
-	game.motionBlur.vblur = new THREE.ShaderPass( THREE.VerticalBlurShader );
+	game.motionBlur.hblur = new THREE.ShaderPass(HorizontalBlurShader);
+	game.motionBlur.vblur = new THREE.ShaderPass(VerticalBlurShader);
 	game.motionBlur.vblur.renderToScreen = false;
 	
 	var customShader = new THREE.ShaderPass(CustomShader);			// Custom-Shader

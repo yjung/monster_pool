@@ -3,20 +3,24 @@ function initialisiereMotionBlur() {
 	game.motionBlur = {};
 	game.motionBlur.DeltaX = 0.0;
 	game.motionBlur.DeltaY = 0.0;
+	game.motionBlur.BlurFaktor = 100;
 	erstelleMotionBlurGUI();
 };
 
-function erstelleMotionBlurGUI() {
+function erstelleMotionBlurGUI() 
+{
 	// Ordner fuer die Motion-Blur-Einstellungen
 	var motionBlur = game.debugGUI.addFolder('Motion-Blur - Sebastian');
 
-	var parameterMotionBlur = {
-		aktivieren : false
+	var parameterMotionBlur = 
+	{
+		aktivieren : false,
+		BlurIntens : 100
 	};
-
+	
 	game.motionBlur.aktivieren = motionBlur.add(parameterMotionBlur, "aktivieren").listen();
-
-	game.motionBlur.aktivieren.onFinishChange(function(value) {
+	game.motionBlur.aktivieren.onFinishChange(function(value) 
+	{
 		if(value){												// Falls Haekchen gesetzt			
 			erstelleMotionBlurComposer();						// Erweitere den bisherigen Composer um den Blur-Effekt
 		}else{													// andernfalls
@@ -25,9 +29,13 @@ function erstelleMotionBlurGUI() {
 		}
 						
 	});
-
-	motionBlur.open();
-	// Fuer Debugging geoeffnet
+	game.motionBlur.BlurIntens = motionBlur.add(parameterMotionBlur, 'BlurIntens').min(0.0).max(300.0).step(5.0).name("Blur Intensität").listen();
+	game.motionBlur.BlurIntens.onChange(function(value)
+	{
+		game.motionBlur.BlurFaktor = value;
+		motionBlur.open();
+		// Fuer Debugging geoeffnet
+	});
 };
 
 function erstelleMotionBlurComposer() {
@@ -54,10 +62,10 @@ function erstelleMotionBlurComposer() {
 	game.motionBlur.erweiterterCelComposer.effectcopy = new THREE.ShaderPass(THREE.CopyShader);		// Kopier-Shader fuer Effekte, die nicht selbst/direkt gerendert werden koennen
 	game.motionBlur.erweiterterCelComposer.effectcopy.renderToScreen = true;								// Als Letzten markieren bzw. final auf das Canvas rendern	game.composerCelShading.addPass(effectcopy);
 
-	var hblur = new THREE.ShaderPass( THREE.HorizontalBlurShader );
+	var hblur = new THREE.ShaderPass(HorizontalBlurShader);
 	hblur.renderToScreen = false;
 	
-	var vblur = new THREE.ShaderPass( THREE.VerticalBlurShader );
+	var vblur = new THREE.ShaderPass(VerticalBlurShader);
 	vblur.renderToScreen = false;
 	
 	var effectcopy = new THREE.ShaderPass(THREE.CopyShader);		// Kopier-Shader fuer Effekte, die nicht selbst/direkt gerendert werden koennen
@@ -86,20 +94,38 @@ function erstelleMotionBlurComposer() {
 
 function updateMotionBlur()
 {
-	if(game.composerCelShading.passes[4] && game.composerCelShading.passes[5]){		
-	if(game.debugGUI.kontur.object.kontur == true)
-	{	
-			game.composerCelShading.passes[4].uniforms.h.value = (game.motionBlur.DeltaX*100)/ window.innerHeight;							
-			game.composerCelShading.passes[5].uniforms.v.value = (game.motionBlur.DeltaY*100)/ window.innerWidth;									
-	}else{		
-			game.composerCelShading.passes[3].uniforms.h.value = (game.motionBlur.DeltaX*100)/ window.innerHeight;							
-			game.composerCelShading.passes[4].uniforms.v.value = (game.motionBlur.DeltaY*100)/ window.innerWidth;									
+	if(game.composerCelShading.passes[4] && game.composerCelShading.passes[5])
+	{		
+		if(game.debugGUI.kontur.object.kontur == true)
+		{	
+			game.composerCelShading.passes[4].uniforms.h.value = (game.motionBlur.DeltaX*(game.motionBlur.BlurFaktor)/1)/ window.innerHeight;							
+			game.composerCelShading.passes[5].uniforms.v.value = (game.motionBlur.DeltaY*(game.motionBlur.BlurFaktor)/2)/ window.innerWidth;									
+		}else
+		{		
+			game.composerCelShading.passes[3].uniforms.h.value = (game.motionBlur.DeltaX*(game.motionBlur.BlurFaktor)/1)/ window.innerHeight;							
+			game.composerCelShading.passes[4].uniforms.v.value = (game.motionBlur.DeltaY*(game.motionBlur.BlurFaktor)/2)/ window.innerWidth;									
+		}
 	}
-	}
-			// console.log((game.motionBlur.DeltaY*1000)/ window.innerHeight);								
-			// console.log(game.composerCelShading.passes[5]);		
-	  // THREE.VerticalBlurShader.uniforms.v.value = (game.motionBlur.DeltaX*1000)/ window.innerWidth;
-	  // THREE.HorizontalBlurShader.uniforms.h.value = (game.motionBlur.DeltaY*1000)/ window.innerHeight;
-
-	// console.log("X Delta "+ (game.motionBlur.DeltaX*1000)/ window.innerWidth+" Y Delta "+ (game.motionBlur.DeltaY*1000)/ window.innerWidth);
 };
+
+function generateDataTexture(width, height, color)
+{
+	var size = With * height;
+	var data = new Unit8Array(3 * size);
+	
+	var r = Math.floor( color.r * 255);
+	var g = Math.floor( color.g * 255);
+	var b = Math.floor( color.b * 255);
+	
+	
+	for (var i=0; i < size; i++)
+	{
+		data [i*3	] = r;
+		data [i*3+1	] = g;
+		data [i*3+2	] = b;
+	}
+	
+	var texture = new Three.DataTexture(data,width, height, Three.RGBFormat);
+	texture.needUpdate = true;
+	return texture;
+}

@@ -10,7 +10,7 @@
  * - "h" and "v" parameters should be set to "1 / width" and "1 / height"
  */
 
-THREE.VerticalBlurShader = {
+VerticalBlurShader = {
 
 	uniforms: {
 
@@ -47,7 +47,7 @@ THREE.VerticalBlurShader = {
 			"sum += texture2D( tDiffuse, vec2( vUv.x, vUv.y - 3.0 * v ) ) * 0.0918;",
 			"sum += texture2D( tDiffuse, vec2( vUv.x, vUv.y - 2.0 * v ) ) * 0.12245;",
 			"sum += texture2D( tDiffuse, vec2( vUv.x, vUv.y - 1.0 * v ) ) * 0.1531;",
-			"sum += texture2D( tDiffuse, vec2( vUv.x, vUv.y ) ) * 0.1633;",
+			"sum += texture2D( tDiffuse, vec2( vUv.x, vUv.y - 0.0*0.0 ) ) * 0.1633;",
 			"sum += texture2D( tDiffuse, vec2( vUv.x, vUv.y + 1.0 * v ) ) * 0.1531;",
 			"sum += texture2D( tDiffuse, vec2( vUv.x, vUv.y + 2.0 * v ) ) * 0.12245;",
 			"sum += texture2D( tDiffuse, vec2( vUv.x, vUv.y + 3.0 * v ) ) * 0.0918;",
