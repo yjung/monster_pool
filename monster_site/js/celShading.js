@@ -18,9 +18,8 @@ function initialisiereCelShading() {
 	// CelShading-Hatching-NameSpace
 
 	erstelleCelShadingComposer(true);
-	// initialisiereCSKontur();			// TODO
 	initialisiereCelShadingHatching();
-	// celShadingGUIShading();					// TODO
+	celShadingGUIShading();					// TODO
 	celShadingGUIKontur();
 	celShadingGUIHatching();
 };
@@ -374,9 +373,17 @@ function erstelleCelShadingMaterial(beschreibung, textur, farbe) {
 };
 
 // Ordner fuer die Cel-Shading-Einstellungen zur Kontur ueber GUI
-function celShadingGUIShading() {
+function celShadingGUIShading() {	// TODO
+	var celShadingShading = game.debugGUI.addFolder('Cel-Shading (Shading) - Mathias');
 	
-}	;// TODO
+	// Parameter-Liste fuer das Cel-Shading
+	var paramCelShadingShading = {
+		shadingStufen : 4
+	};
+	
+	game.debugGUI.shadingStufen = celShadingShading.add(paramCelShadingShading, 'shadingStufen', { "Drei-Stufig": 3, "Vier-Stufig": 0.1, "Fünf-Stufig": 5 } );
+	
+}	;
 // Ordner fuer die Cel-Shading-Einstellungen zur Kontur ueber GUI
 function celShadingGUIKontur() {
 	var celShadingKontur = game.debugGUI.addFolder('Cel-Shading (Kontur) - Mathias');

@@ -111,7 +111,7 @@ samp {
 button,
 input,
 optgroup,
-select,
+/*select,*/
 textarea {
   margin: 0;
   font: inherit;
