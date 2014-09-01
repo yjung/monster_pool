@@ -1,3 +1,11 @@
+/**
+* @author Bittner, Sebastian 
+*  
+* Implementierung eines Motionblurs.
+* motionBlur.JS dient der aktualisierung der Delta-Bewegung in Vertikaler und Horizontaler Richtung.
+* Je nach Geschwindigkeit der Bewegung in Horizontaler und Vertikaler Richutng werden die jeweiligen Shader-UniformVariablen gesetzt.
+*/
+
 function initialisiereMotionBlur() {
 
 	game.motionBlur = {};

@@ -193,8 +193,8 @@ var grids = {
                         },
                         "placeSymbol": "#",
                         "rowDistance" : 1.75
-                      }
-}
+                     }
+};
 
 var chosenGrid    = grids["doppelRaute"];
 var grid          = chosenGrid["grid"];
@@ -255,7 +255,7 @@ var colorPalettes = {
                         0x7869c4,
                         0x9f9f9f
                       ]
-}
+};
 var chosenPalette = colorPalettes["c64"];
 
 function loadMonsters() {

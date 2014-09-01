@@ -1,13 +1,10 @@
 /**
- * @author alteredq / http://alteredqualia.com/
- *
- * Simple fake tilt-shift effect, modulating two pass Gaussian blur (see above) by vertical position
- *
- * - 9 samples per pass
- * - standard deviation 2.7
- * - "h" and "v" parameters should be set to "1 / width" and "1 / height"
- * - "r" parameter control where "focused" horizontal line lies
- */
+* @author Bittner, Sebastian 
+* 
+* 
+* Implementierung eines Motionblurs in Horizontaler Richtung.
+* Dieser shader basiert auf der arbeit von zz85 / http://www.lab4games.net/zz85/blog
+*/
 
 THREE.HorizontalTiltShiftShader = {
 
