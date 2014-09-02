@@ -17,14 +17,14 @@ function initialisiereCelShading() {
 	window.game.celShading.hatching = {};
 	// CelShading-Hatching-NameSpace
 
-	erstelleCelShadingComposer(true);
+	erstelleCelShadingComposer(true, "Canny");
 	initialisiereCelShadingHatching();
 	celShadingGUIShading();					// TODO
 	celShadingGUIKontur();
 	celShadingGUIHatching();
 };
 
-function erstelleCelShadingComposer(kontur) {
+function erstelleCelShadingComposer(kontur, edgeDetection) {
 	// Parameter fuer den Renderer festlegen
 	var parameters = {
 		anisotropy : game.renderer.getMaxAnisotropy(), // Maximale Anzahl an Textur-Samples je nach Geraet
@@ -43,9 +43,32 @@ function erstelleCelShadingComposer(kontur) {
 	game.composerCelShading.renderPass = new THREE.RenderPass(game.szene, game.kamera);
 	// Renderpass fuer Szene aus Kamera
 
-	game.composerCelShading.edgePass = new THREE.ShaderPass(CannyEdgePass);
-	// Custom-Shader
-	game.composerCelShading.edgePass.renderToScreen = false;
+	switch (edgeDetection){
+		case "Canny": {
+			game.composerCelShading.edgePass = new THREE.ShaderPass(CannyEdgePass);
+			game.composerCelShading.edgePass.renderToScreen = false;
+			console.log("Aktuell Canny");
+			break;
+		}
+		case "Sobel": {
+			game.composerCelShading.edgePass = new THREE.ShaderPass(Sobel);
+			game.composerCelShading.edgePass.renderToScreen = false;
+			console.log("Aktuell Sobel");
+			break;
+		}			
+		case "Frei-Chen": {
+			game.composerCelShading.edgePass = new THREE.ShaderPass(FreiChen);
+			// game.composerCelShading.edgePass.uniforms["uThreshold"] = 0.8;
+			console.log(game.composerCelShading.edgePass.uniforms["uThreshold"]);
+			game.composerCelShading.edgePass.renderToScreen = false;
+			console.log("Aktuell Frei-Chen");
+			break;
+		}
+		// default: {
+			// game.composerCelShading.edgePass = new THREE.ShaderPass(CannyEdgePass);
+			// console.log("Aktuell Default");
+		// }
+	}
 
 	game.composerCelShading.effectcopy = new THREE.ShaderPass(THREE.CopyShader);
 	// Kopier-Shader fuer Effekte, die nicht selbst/direkt gerendert werden koennen
@@ -65,7 +88,7 @@ function erstelleCelShadingComposer(kontur) {
 		// Custom-Effekt
 	}
 
-	// game.composerCelShading.addPass(effectcopy);		// Standard-Copy-Shader zum finalen rendern
+	// game.composerCelShading.addPass(game.composerCelShading.effectcopy);		// Standard-Copy-Shader zum finalen rendern
 
 };
 /* Hatching-Texturen werden initial einmal geladen und beim Erstellen von Cel-Shading-Materialien aus dem Namespace heraus referenziert.*/
@@ -424,11 +447,27 @@ function celShadingGUIKontur() {
 	game.renderer.celShadingKontur = true;
 	// Default = true
 	// Post-Processingeintraege hinzufuegen
-	game.debugGUI.edgeDetection = celShadingKontur.add(paramCelShadingKontur, 'edgeDetection', ['Canny', 'Sobel', 'Frei-Chen']).name("Edge-Detection");
+	game.debugGUI.edgeDetection = celShadingKontur.add(paramCelShadingKontur, 'edgeDetection', ['Canny', 'Sobel', 'Frei-Chen']).name("Edge-Detection").listen();
 	game.debugGUI.kontur = celShadingKontur.add(paramCelShadingKontur, 'kontur').name("Kontur").listen();
 	game.debugGUI.konturfarbe = celShadingKontur.addColor(paramCelShadingKontur, 'konturFarbe').name("Kontur-Farbe").listen();
 	game.debugGUI.offset = celShadingKontur.add(paramCelShadingKontur, 'offset').min(0.0).max(2.0).step(0.01).name("Offset").listen();
 	game.debugGUI.threshold = celShadingKontur.add(paramCelShadingKontur, 'threshold').min(0.0).max(0.1).step(0.001).name("Threshold").listen();
+
+	game.debugGUI.edgeDetection.onChange(function(value) {
+		console.log(value);
+		erstelleCelShadingComposer(true, value);
+		switch(value){
+			case "Frei-Chen":{
+				celShadingKontur.remove(game.debugGUI.offset);
+				break;
+			}
+			case "Canny":{
+				game.debugGUI.offset = celShadingKontur.add(paramCelShadingKontur, 'offset').min(0.0).max(2.0).step(0.01).name("Offset").listen();
+				game.debugGUI.offset.onChange(function(wert) {
+					game.composerCelShading.edgePass.uniforms.uOffset.value = wert;
+				});
+			}
+	}});
 
 	game.debugGUI.konturfarbe.onChange(function(value) {
 		if (game.debugGUI.kontur.object.kontur) {
@@ -445,8 +484,6 @@ function celShadingGUIKontur() {
 			var neueFarbe = new THREE.Vector4(value[0] / 255, value[1] / 255, value[2] / 255, value[3] / 255);
 			game.composerCelShading.edgePass.uniforms.uKonturFarbe.value = neueFarbe;
 		}
-		//game.composerCelShading.passes[3].uniforms.uBorderColor.value = neueFarbe;
-		//console.log(game.composerCelShading.passes[3]);
 	});
 
 	game.debugGUI.offset.onChange(function(value) {

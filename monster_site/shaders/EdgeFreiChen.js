@@ -1,18 +1,11 @@
-/**
- * @author zz85 / https://github.com/zz85 | https://www.lab4games.net/zz85/blog
- *
- * Edge Detection Shader using Frei-Chen filter
- * Based on http://rastergrid.com/blog/2011/01/frei-chen-edge-detector
- *
- * aspect: vec2 of (1/width, 1/height)
- */
-
-THREE.EdgeShader = {
+FreiChen = {
 
 	uniforms: {
 
 		"tDiffuse": { type: "t", value: null },
 		"aspect":    { type: "v2", value: new THREE.Vector2( 512, 512 ) },
+		"uKonturFarbe": { type: "v4", value: new THREE.Vector4(0.0, 0.0, 0.0, 1.0)},
+		"uThreshold":   { type: "f", value: 0.8 },
 	},
 
 	vertexShader: [
@@ -31,6 +24,9 @@ THREE.EdgeShader = {
 	fragmentShader: [
 
 		"uniform sampler2D tDiffuse;",
+		"uniform vec4 uKonturFarbe;",
+		"uniform float uThreshold;",
+
 		"varying vec2 vUv;",
 
 		"uniform vec2 aspect;",
@@ -86,7 +82,9 @@ THREE.EdgeShader = {
 			"float M = (cnv[0] + cnv[1]) + (cnv[2] + cnv[3]);",
 			"float S = (cnv[4] + cnv[5]) + (cnv[6] + cnv[7]) + (cnv[8] + M);",
 
-			"gl_FragColor = vec4(vec3(sqrt(M/S)), 1.0);",
+			"vec4 gradientColor = vec4(vec3(sqrt(M/S)), 1.0);",
+			"if(gradientColor.x < uThreshold && gradientColor.y < uThreshold && gradientColor.z < uThreshold){discard;}",
+			"gl_FragColor = vec4(mix( gradientColor, uKonturFarbe, 0.5));",
 		"}",
 
 	].join("\n")
