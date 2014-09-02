@@ -4,6 +4,9 @@ var animate = true;
 function benutzereingaben() {
 	// Aktualisierung der Queue-Position
 	checkKeyboard();
+	if(game.controlls.stossKontrolle){
+		stossKontrolle(game.delta);
+	}
 }
 
 // Mainloop des Spiels von dem aus aktualisiert und gerendert wird
@@ -12,11 +15,11 @@ function mainloop() {
 	updateMotionBlur();
 	benutzereingaben();
 	// Benutzereingaben abfangen
-	var delta = game.clock.getDelta();
+	game.delta = game.clock.getDelta();
 	// Verstrichene Zeit messen
 	TWEEN.update();
 	// Interpolationsschritt von Animationstweens
-	game.orbitControls.update(delta);
+	game.orbitControls.update(game.delta);
 	// Steuerung in Zeitabhängigkeit aktualisieren
 	game.szene.simulate(undefined, 20);
 	// Physiksimulation
@@ -42,7 +45,7 @@ function mainloop() {
 			game.composerCustom.render();
 		} else {
 			game.renderer.setViewport(0, 0, game.breite, game.hoehe);
-			game.composerCelShading.render(delta);
+			game.composerCelShading.render(game.delta);
 			game.renderer.clear(false, true, false);	// (color, depth, stencil)
 			game.renderer.setViewport(10, screenHeight - 160 - 120, 240, 140);
 			game.renderer.render(game.szene, game.mapCamera);

@@ -1,27 +1,11 @@
-/**
- * @author qiao / https://github.com/qiao
- * @author mrdoob / http://mrdoob.com
- * @author alteredq / http://alteredqualia.com/
- * @author WestLangley / http://github.com/WestLangley
- * @author erich666 / http://erichaines.com
- */
-/*global THREE, console */
-
-// This set of controls performs orbiting, dollying (zooming), and panning. It maintains
-// the "up" direction as +Y, unlike the TrackballControls. Touch on tablet and phones is
-// supported.
-//
-//    Orbit - left mouse / touch: one finger move
-//    Zoom - middle mouse, or mousewheel / touch: two finger spread or squish
-//    Pan - right mouse, or arrow keys / touch: three finter swipe
-//
-// This is a drop-in replacement for (most) TrackballControls used in examples.
-// That is, include this js file and wherever you see:
-//    	controls = new THREE.TrackballControls( camera );
-//      controls.target.z = 150;
-// Simple substitute "OrbitControls" and the control should work as-is.
-
 OrbitControls = function(object, domElement) {
+
+	game.controlls = {};
+	game.controlls.linkeTasteUnten = false;
+	game.controlls.rechteTasteUnten = false;
+	game.controlls.stossKontrolle = false;
+	game.controlls.stossRichtung = new THREE.Vector3(0,0,0);
+
 
 	this.object = object;
 	this.domElement = (domElement !== undefined ) ? domElement : document;
@@ -183,7 +167,7 @@ OrbitControls = function(object, domElement) {
 		// Richtung zur Kamera normalisiert
 
 		/* Einschub: Stosskraft in Debug-GUI ueberfuehren */
-			// paramControls.stosskraftX += richtungCam.x;
+		// paramControls.stosskraftX += richtungCam.x;
 		// In Debug-GUI uebertragen
 
 		/* Sicherheitsabstand zur Kugel*/
@@ -211,15 +195,15 @@ OrbitControls = function(object, domElement) {
 		if (angle === undefined) {
 			angle = getAutoRotationAngle();
 		}
-		thetaDelta -= angle;		
-		
+		thetaDelta -= angle;
+
 		/* Lokale Variablen zur Positionsberechnung initialisieren*/
 		var richtungCam = new THREE.Vector3();
 		// Vektor fuer Richtung initialisieren
 		var positionBall = new THREE.Vector3();
 		var positionCam = new THREE.Vector3();
 		// Vektor Position Kamera initialisieren
-		
+
 		/* Positionen der Objekte in Vektorvariablen sichern.*/
 		positionCam.copy(game.kamera.position);
 		// Position Kamera sichern
@@ -236,7 +220,7 @@ OrbitControls = function(object, domElement) {
 		paramControls.stosskraftY = richtungCam.Y * 1000;
 		paramControls.stosskraftZ = richtungCam.z * 1000;
 		/* Einschub: Stosskraft in Debug-GUI ueberfuehren */
-			// paramControls.stosskraftX += richtungCam.x;
+		// paramControls.stosskraftX += richtungCam.x;
 		// In Debug-GUI uebertragen
 	};
 
@@ -346,83 +330,84 @@ OrbitControls = function(object, domElement) {
 	};
 
 	this.update = function() {
+		if (!game.controlls.stossKontrolle) {
+			this.updateQueueRotation();
 
-		this.updateQueueRotation();
+			var position = this.object.position;
 
-		var position = this.object.position;
+			offset.copy(position).sub(this.target);
 
-		offset.copy(position).sub(this.target);
+			// rotate offset to "y-axis-is-up" space
+			offset.applyQuaternion(quat);
 
-		// rotate offset to "y-axis-is-up" space
-		offset.applyQuaternion(quat);
+			// angle from z-axis around y-axis
+			var theta = Math.atan2(offset.x, offset.z);
 
-		// angle from z-axis around y-axis
+			// angle from y-axis
+			var phi = Math.atan2(Math.sqrt(offset.x * offset.x + offset.z * offset.z), offset.y);
 
-		var theta = Math.atan2(offset.x, offset.z);
+			if (this.autoRotate) {
+				this.rotateLeft(getAutoRotationAngle());
+			}
 
-		// angle from y-axis
+			theta += thetaDelta;
+			phi += phiDelta;
 
-		var phi = Math.atan2(Math.sqrt(offset.x * offset.x + offset.z * offset.z), offset.y);
+			if (game.motionBlur) {
+				game.motionBlur.DeltaX = phiDelta;
+				game.motionBlur.DeltaY = thetaDelta;
+				// console.log(game.motionBlur.DeltaX );
+			}
 
-		if (this.autoRotate) {
-			this.rotateLeft(getAutoRotationAngle());
-		}
+			// restrict phi to be between desired limits
+			phi = Math.max(this.minPolarAngle, Math.min(this.maxPolarAngle, phi));
 
-		theta += thetaDelta;
-		phi += phiDelta;
+			// restrict phi to be betwee EPS and PI-EPS
+			phi = Math.max(EPS, Math.min(Math.PI - EPS, phi));
 
-		if (game.motionBlur)
-		{
-		game.motionBlur.DeltaX = phiDelta;
-		game.motionBlur.DeltaY = thetaDelta;
-		// console.log(game.motionBlur.DeltaX );
-		}
+			var radius = offset.length() * scale;
 
-		// restrict phi to be between desired limits
-		phi = Math.max(this.minPolarAngle, Math.min(this.maxPolarAngle, phi));
+			// restrict radius to be between desired limits
+			radius = Math.max(this.minDistance, Math.min(this.maxDistance, radius));
 
-		// restrict phi to be betwee EPS and PI-EPS
-		phi = Math.max(EPS, Math.min(Math.PI - EPS, phi));
+			// move target to panned location
+			// this.target.add(pan);
+			var normalPan = new THREE.Vector3(pan.x, pan.y, pan.z);
+			// normalPan.normalize(0.05);
+			normalPan.multiplyScalar(0.5);
+			normalPan.clampScalar(-0.5, 0.5);
 
-		var radius = offset.length() * scale;
+			if(!game.controlls.stossKontrolle){
 
-		// restrict radius to be between desired limits
-		radius = Math.max(this.minDistance, Math.min(this.maxDistance, radius));
+			game.queue.position.sub(normalPan);
 
-		// move target to panned location
-		// this.target.add(pan);
-		var normalPan = new THREE.Vector3(pan.x, pan.y, pan.z);
-		// normalPan.normalize(0.05);
-		normalPan.multiplyScalar(0.5);
-		normalPan.clampScalar(-0.5, 0.5);
+			offset.x = radius * Math.sin(phi) * Math.sin(theta);
+			offset.y = radius * Math.cos(phi);
+			offset.z = radius * Math.sin(phi) * Math.cos(theta);
 
-		game.queue.position.sub(normalPan);
+			// rotate offset back to "camera-up-vector-is-up" space
+			offset.applyQuaternion(quatInverse);
+			game.queue.__dirtyRotation = true;
+			game.queue.__dirtyPosition = true;
+			position.copy(this.target).add(offset);
+			game.queue.__dirtyRotation = true;
+			game.queue.__dirtyPosition = true;
+			}
+			
+			if (state != 2) {
+				this.object.lookAt(this.target);
+			}
 
-		offset.x = radius * Math.sin(phi) * Math.sin(theta);
-		offset.y = radius * Math.cos(phi);
-		offset.z = radius * Math.sin(phi) * Math.cos(theta);
+			thetaDelta = 0;
+			phiDelta = 0;
+			scale = 1;
+			// pan.set(0, 0, 0);
 
-		// rotate offset back to "camera-up-vector-is-up" space
-		offset.applyQuaternion(quatInverse);
-		game.queue.__dirtyRotation = true;
-		game.queue.__dirtyPosition = true;
-		position.copy(this.target).add(offset);
-		game.queue.__dirtyRotation = true;
-		game.queue.__dirtyPosition = true;
+			if (lastPosition.distanceToSquared(this.object.position) > EPS) {
+				this.dispatchEvent(changeEvent);
+				lastPosition.copy(this.object.position);
 
-		if (state != 2) {
-			this.object.lookAt(this.target);
-		}
-
-		thetaDelta = 0;
-		phiDelta = 0;
-		scale = 1;
-		// pan.set(0, 0, 0);
-
-		if (lastPosition.distanceToSquared(this.object.position) > EPS) {
-			this.dispatchEvent(changeEvent);
-			lastPosition.copy(this.object.position);
-
+			}
 		}
 	};
 
@@ -475,10 +460,8 @@ OrbitControls = function(object, domElement) {
 		} else if (event.button === 2) {
 			if (scope.noPan === true)
 				return;
-
 			state = STATE.PAN;
 			panStart.set(event.clientX, event.clientY);
-
 		}
 
 		scope.domElement.addEventListener('mousemove', onMouseMove, false);
