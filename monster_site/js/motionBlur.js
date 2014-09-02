@@ -36,7 +36,7 @@ function erstelleMotionBlurGUI()
 			erstelleMotionBlurComposer();						// Erweitere den bisherigen Composer um den Blur-Effekt
 		}else{													// andernfalls
 			var kontur = game.debugGUI.kontur.object.kontur; 	// Ueberpruefen ob das Cel-Shading derzeit mit Kontur verwendet wird (true ? false)
-			erstelleCelShadingComposer(kontur);					// Entsprechend der Ueberpruefung den Standard-CelShading-Composer wiederherstellen
+			erstelleCelShadingComposer(kontur, "Canny");					// Entsprechend der Ueberpruefung den Standard-CelShading-Composer wiederherstellen
 		}
 	});
 	game.motionBlur.BlurIntensX = motionBlur.add(parameterMotionBlur, 'BlurIntensX').min(0.0).max(100.0).step(5.0).name("Blur IntensitätX").listen();

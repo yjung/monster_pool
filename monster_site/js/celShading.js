@@ -411,7 +411,7 @@ function celShadingGUIShading() {	// TODO
 	
 	// Parameter-Liste fuer das Cel-Shading
 	var paramCelShadingShading = {
-		shadingStufen : 4,
+		shadingStufen : 3,
 		mixFaktor : 0.5
 	};
 	
@@ -438,9 +438,9 @@ function celShadingGUIKontur() {
 	var paramCelShadingKontur = {
 		edgeDetection : ["Canny", "Sobel", "Frei-Chen"],
 		kontur : true,
-		offset : 0.3,
+		offset : 0.09,
 		konturFarbe : [0, 0, 0, 1], // RGB with alpha
-		threshold : 0.08,
+		threshold : 0.03,
 	};
 
 	game.renderer.celShadingKontur = true;
@@ -530,14 +530,14 @@ function celShadingGUIHatching() {
 
 	var Settings = function() {
 		this.aktivieren = true;
-		this.ambient = 5.4;
-		this.diffuse = 78.8;
-		this.specular = 64;
-		this.rim = 100;
-		this.shininess = 31;
+		this.ambient = 6.5;
+		this.diffuse = 54;
+		this.specular = 100;
+		this.rim = 90;
+		this.shininess = 100;
 		this.invertRim = false;
 		this.displayOutline = false;
-		this.inkColor = [20, 20, 20];
+		this.inkColor = [80, 80, 80];
 		this.preset = 0;
 	};
 
