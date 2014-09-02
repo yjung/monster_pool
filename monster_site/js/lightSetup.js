@@ -65,15 +65,6 @@ function setupLights() {
 	// tischLicht.castShadow = true;
 	game.lichter.push(tischLicht);
 	
-	
-	var achsendreibein = new THREE.AxisHelper(50);
-	achsendreibein.position.set(-110, 30, 70);
-    game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
-	
-	
-	
-	
-	
 	// Lichtquelle in die Sammlung einfuegen
 	var tischLicht = new THREE.SpotLight(TischLightColor);
 	tischLicht.name = "Tisch Ecke2";
