@@ -7,6 +7,7 @@ function initialisiere() {
 	}
 	
 	window.game ={};
+	game.delta;
 
 
 	$("#einstellungContent").css("visibility","visible");
@@ -89,7 +90,9 @@ function initialisiere() {
     // Initialisierung der Steurung
     game.keyboard = erstelleTastaturSteuerung();
 	game.orbitControls = new OrbitControls(game.kamera, $('#viewport')[0]);    // Kamera und Canvas an Steuerung
-    game.orbitControls.autoRotate = false;                                     // Auto-Rotate ausschalten
+    game.orbitControls.autoRotate = false;      // Auto-Rotate ausschalten
+    erstelleMausKontrolle();                               
+    erstelleStossKontrolle();                               
     
     console.log(game.orbitControls);
     

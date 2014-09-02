@@ -13,7 +13,7 @@ function createWhiteBall(x,y,z) {
     		THREE.ImageUtils.loadTexture("assets/dae/tex/weisseKugel.jpg"),								// Textur
     		new THREE.Vector3(1,1,1)		// Farbe
     		),
-    0.1,0.1),800);
+    0.1,0.1),400);
 
     // Initiale Positionierung in der Welt
     game.whiteBall.position.x = x;
@@ -36,6 +36,7 @@ function positionBall(x,y,z){
 }
 
 function applyForce(bumperForce){
+  	// effect = new THREE.Vector3( paramControls.stosskraftX * game.controlls.deltaY, paramControls.stosskraftY * game.controlls.deltaY, paramControls.stosskraftZ * game.controlls.deltaY);
   	effect = new THREE.Vector3( paramControls.stosskraftX, paramControls.stosskraftY, paramControls.stosskraftZ);
   	offset = new THREE.Vector3( paramControls.offsetX, paramControls.offsetY, paramControls.offsetZ );
   	
