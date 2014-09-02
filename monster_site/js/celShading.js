@@ -504,30 +504,17 @@ function celShadingGUIHatching() {
 	game.celShading.hatching.rim = celShadingHatching.add(game.celShading.hatching.settings, 'rim', 0.0, 100.0);
 	game.celShading.hatching.shininess = celShadingHatching.add(game.celShading.hatching.settings, 'shininess', 1, 100);
 	game.celShading.hatching.invertRim = celShadingHatching.add(game.celShading.hatching.settings, 'invertRim');
-	game.celShading.hatching.displayOutline = celShadingHatching.add(game.celShading.hatching.settings, 'displayOutline');
 	game.celShading.hatching.inkColor = celShadingHatching.addColor(game.celShading.hatching.settings, 'inkColor');
 
 	game.celShading.hatching.aktivieren.onChange(function(value) {
-	for(var i = 0; i < game.celShadingMaterials.length; i++){
-	// console.log(game.celShadingMaterials[i]);
-	if(value){
-		game.celShadingMaterials[i].uniforms['hatchingAktiv'].value = 1;
-	}else{
-		game.celShadingMaterials[i].uniforms['hatchingAktiv'].value = 0;
-	}
-	}
+		for(var i = 0; i < game.celShadingMaterials.length; i++){
+			if(value){
+				game.celShadingMaterials[i].uniforms['hatchingAktiv'].value = 1;
+			}else{
+				game.celShadingMaterials[i].uniforms['hatchingAktiv'].value = 0;
+			}
+		}
 	});
-
-	// game.celShading.hatching.ambient.onFinishChange(function(value) {
-	// for(var i = 0; i < game.celShadingMaterials.length; i++){
-	// game.celShadingMaterials[i].uniforms['ambient'].value = value;
-	// console.log(game.celShadingMaterials[i]);
-	// }
-	// });
-	game.celShading.hatching.diffuse.onFinishChange(function(value) {
-		console.log(game.celShadingMaterials);
-	});
-
 };
 // Uniform-Variablen fuer die Aktualisierung des Hatching-Effekts beim CelShadings. Wird bei jedem Rendering aufgerufen.
 function updateHatching() {

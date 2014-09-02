@@ -873,10 +873,10 @@ fragmentShader: [
 			"vec4 dst = vec4( texture2D( paper, nUV ).rgb, 1. );",
 			"vec4 src;",
 			
-			"src = ( .5 * inkColor ) * vec4( showOutline ) + vec4( 1. - showOutline ) * shade();",
+			"src = ( .5 * inkColor ) + shade();",
 
 			"vec4 c = src * dst;",
-			// "gl_FragColor = vec4( c.rgb, 1. );",
+
 			"vec3 hatchingColor = vec3(c.rgb);",
 			
 			// "vec3 mixColor = mix( hatchingColor.rgb, celColor.rgb, 0.75 ); ",
