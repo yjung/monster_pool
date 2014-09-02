@@ -58,8 +58,7 @@ function erstelleCelShadingComposer(kontur, edgeDetection) {
 		}			
 		case "Frei-Chen": {
 			game.composerCelShading.edgePass = new THREE.ShaderPass(FreiChen);
-			// game.composerCelShading.edgePass.uniforms["uThreshold"] = 0.8;
-			console.log(game.composerCelShading.edgePass.uniforms["uThreshold"]);
+			game.composerCelShading.edgePass.uniforms["uThreshold"].value = 0.08;
 			game.composerCelShading.edgePass.renderToScreen = false;
 			console.log("Aktuell Frei-Chen");
 			break;
@@ -451,14 +450,24 @@ function celShadingGUIKontur() {
 	game.debugGUI.kontur = celShadingKontur.add(paramCelShadingKontur, 'kontur').name("Kontur").listen();
 	game.debugGUI.konturfarbe = celShadingKontur.addColor(paramCelShadingKontur, 'konturFarbe').name("Kontur-Farbe").listen();
 	game.debugGUI.offset = celShadingKontur.add(paramCelShadingKontur, 'offset').min(0.0).max(2.0).step(0.01).name("Offset").listen();
-	game.debugGUI.threshold = celShadingKontur.add(paramCelShadingKontur, 'threshold').min(0.0).max(0.1).step(0.001).name("Threshold").listen();
+	game.debugGUI.threshold = celShadingKontur.add(paramCelShadingKontur, 'threshold').min(0.0).max(1).step(0.001).name("Threshold").listen();
 
 	game.debugGUI.edgeDetection.onChange(function(value) {
 		console.log(value);
 		erstelleCelShadingComposer(true, value);
 		switch(value){
+			case "Sobel":{
+				if(game.debugGUI.offset){					
+					celShadingKontur.remove(game.debugGUI.offset);
+					game.debugGUI.offset = null;
+				}
+				break;
+			}
 			case "Frei-Chen":{
-				celShadingKontur.remove(game.debugGUI.offset);
+				if(game.debugGUI.offset){					
+					celShadingKontur.remove(game.debugGUI.offset);
+					game.debugGUI.offset = null;
+				}
 				break;
 			}
 			case "Canny":{
