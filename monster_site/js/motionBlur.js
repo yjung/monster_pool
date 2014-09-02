@@ -11,23 +11,26 @@ function initialisiereMotionBlur() {
 	game.motionBlur = {};
 	game.motionBlur.DeltaX = 0.0;
 	game.motionBlur.DeltaY = 0.0;
-	game.motionBlur.BlurFaktorX = 25;
-	game.motionBlur.BlurFaktorY = 300;
+	game.motionBlur.BlurFaktorX = 10;
+	game.motionBlur.BlurFaktorY = 145;
 	erstelleMotionBlurGUI();
+	
+	
+	//TODOO Generate Alpha Picture Wird aktuell im Shader direkt geladen
+	// game.motionBlur.hatching.hatch6 = THREE.ImageUtils.loadTexture("shaders/img/hatch_5.jpg");
+	
 };
 
 function erstelleMotionBlurGUI() 
 {
 	// Ordner fuer die Motion-Blur-Einstellungen
 	var motionBlur = game.debugGUI.addFolder('Motion-Blur - Sebastian');
-
 	var parameterMotionBlur = 
 	{
 		aktivieren : false,
-		BlurIntensX : 25,
-		BlurIntensY : 300
+		BlurIntensX : 10,
+		BlurIntensY : 145
 	};
-	
 	game.motionBlur.aktivieren = motionBlur.add(parameterMotionBlur, "aktivieren").listen();
 	motionBlur.open();				
 	game.motionBlur.aktivieren.onFinishChange(function(value) 
@@ -61,7 +64,6 @@ function erstelleMotionBlurComposer() {
 		stencilBuffer : false				// Stencil-Buffer deaktivieren
 	};
 	var renderTarget = new THREE.WebGLRenderTarget(game.breite, game.hoehe, parameters);
-	
 	
 	// Rendertarget-Objekt fuer Renderer-Initialisierung
 	game.motionBlur.erweiterterCelComposer = new THREE.EffectComposer(game.renderer, renderTarget);
@@ -107,6 +109,7 @@ function erstelleMotionBlurComposer() {
 
 function updateMotionBlur()
 {
+	// console.log(window.innerWidth +" "+ window.innerHeight);
 	if(game.composerCelShading.passes[4] && game.composerCelShading.passes[5])
 	{		
 		if(game.debugGUI.kontur.object.kontur == true)
