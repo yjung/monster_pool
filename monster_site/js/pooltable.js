@@ -24,7 +24,7 @@ function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine 
     				"filzMat",						// Bezeichnung
     				THREE.ImageUtils.loadTexture("assets/dae/tex/filz.jpg"),								// Textur
     				new THREE.Vector3(1,1,1)		// Farbe
-    		), 0.1, 1.0);
+    		), 1.0, 1.0);
     	}else{
 			var diffuseColor = modelScene.children[i].children[0].material.color;
     		
@@ -45,7 +45,7 @@ function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine 
 		var colliderPosition = colliderObjekt.position;
 		var colliderGeometrie = colliderObjekt.children[0].geometry;
 		// var colliderMaterial = colliderObjekt.children[0].material;
-		var collider = new Physijs.BoxMesh(colliderGeometrie, pTransparentT,0);
+		var collider = new Physijs.BoxMesh(colliderGeometrie, lFrictionMatP,0);
 		collider.position = colliderPosition;
 		game.szene.add(collider); 		// Collada Table Alpha zur Szene hinzufuegen
 		};

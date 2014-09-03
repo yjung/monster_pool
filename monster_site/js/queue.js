@@ -35,7 +35,7 @@ function queueLaden() {
 
 		game.queue.addEventListener('collision', function(other_object, relative_velocity, relative_rotation, contact_normal) {
 			if(other_object == game.whiteBall){				
-				applyForce();
+				applyForce(false, 50);
 			}
 		});
 	});
@@ -94,14 +94,13 @@ function erstelleStossKontrolle() {
 function stossKontrolle(deltaZeit) {
 	stossRichtungErmitteln();
 
-	var faktor = 0.5;
+	var faktor = 0.15;
 
 	game.queue.__dirtyRotation = true;
 	game.queue.__dirtyPosition = true;
-	console.log(game.queue);
-	game.queue.position.x += game.controlls.stossRichtung.x * game.controlls.deltaY * deltaZeit * faktor;
-	game.queue.position.y += game.controlls.stossRichtung.y * game.controlls.deltaY * deltaZeit * faktor;
-	game.queue.position.z += game.controlls.stossRichtung.z * game.controlls.deltaY * deltaZeit * faktor;
+	game.queue.position.x -= game.controlls.stossRichtung.x * game.controlls.deltaY * deltaZeit * faktor;
+	game.queue.position.y -= game.controlls.stossRichtung.y * game.controlls.deltaY * deltaZeit * faktor;
+	game.queue.position.z -= game.controlls.stossRichtung.z * game.controlls.deltaY * deltaZeit * faktor;
 	game.queue.__dirtyRotation = true;
 	game.queue.__dirtyPosition = true;
 };

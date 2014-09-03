@@ -13,7 +13,7 @@ function createWhiteBall(x,y,z) {
     		THREE.ImageUtils.loadTexture("assets/dae/tex/weisseKugel.jpg"),								// Textur
     		new THREE.Vector3(1,1,1)		// Farbe
     		),
-    0.1,0.1),400);
+    1.0,0.1),5000);
 
     // Initiale Positionierung in der Welt
     game.whiteBall.position.x = x;
@@ -35,9 +35,10 @@ function positionBall(x,y,z){
 	
 }
 
-function applyForce(bumperForce){
+function applyForce(bumperForce, faktor){
+	if(faktor == undefined){faktor = 1;}
   	// effect = new THREE.Vector3( paramControls.stosskraftX * game.controlls.deltaY, paramControls.stosskraftY * game.controlls.deltaY, paramControls.stosskraftZ * game.controlls.deltaY);
-  	effect = new THREE.Vector3( paramControls.stosskraftX, paramControls.stosskraftY, paramControls.stosskraftZ);
+  	effect = new THREE.Vector3( paramControls.stosskraftX * faktor, paramControls.stosskraftY * faktor, paramControls.stosskraftZ * faktor);
   	offset = new THREE.Vector3( paramControls.offsetX, paramControls.offsetY, paramControls.offsetZ );
   	
   	if(bumperForce){
@@ -47,4 +48,17 @@ function applyForce(bumperForce){
   	}else{
   		game.whiteBall.applyImpulse( effect, offset );
   	}
+  	
+  	console.log(game.whiteBall);
 };
+
+function pruefeKugelBewegung(){
+	var vergleichsVektor = new THREE.Vector3(0,0,0);
+	
+	if(game.whiteBall._physijs.angularVelocity.equals(vergleichsVektor) && game.whiteBall._physijs.linearVelocity.equals(vergleichsVektor)){
+				game.whiteBall.inBewegung = false;
+	}else{
+				game.whiteBall.inBewegung = true;		
+	}
+	console.log(game.whiteBall.inBewegung);
+}

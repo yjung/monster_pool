@@ -78,12 +78,13 @@ function initialisiere() {
 
 	game.queue = new THREE.Object3D();          		// Queue als GameObject initialisieren
 	game.whiteBall = new THREE.Object3D();      		// Weisse Kugel als GameObject initialisieren
+	game.whiteBall.inBewegung = false;
 
 	// Kamera mit (fov, aspect, near, far) Blickrichtung ist Sache des Mainloops
 	game.kamera = new THREE.PerspectiveCamera(45, (window.innerWidth) / (window.innerHeight - 160), 0.1, 1000);
     game.kamera.position.x = 0;                 // x-Position
     game.kamera.position.y = 20;                // y-Position
-    game.kamera.position.z = 10;                // z-Position
+    game.kamera.position.z = 30;                // z-Position
 
 	game.clock = new THREE.Clock();             // Uhr-Objekt zur internen Zeitmessung im Spiel
 
@@ -150,7 +151,7 @@ function initialisiere() {
     ladePooltable();                             // Nicht-Physisches, detailliertes Model des Tisches laden    
     ladeKugeln();                             // Nicht-Physisches, detailliertes Model des Tisches laden
     loecherTrigger();							//Lade die Triggers von den Loechern
-    createWhiteBall(0,20,15);                    // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
+    createWhiteBall(0,18.75,15);                    // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
     sceneLaden();                        //Alpha Tisch aus Colada File Laden^
     loadMonsters();								// Lade ein Monster (Bernd)
     // ladeAnimation();
@@ -161,7 +162,9 @@ function initialisiere() {
 	// achsendreibein.position.y = 20;
  //    game.szene.add(achsendreibein);   // Achsendreibein(groesse) zu Debugging-Zwecken in Spiel hinzufuegen
 
-	erstelleMinimap();	
+	erstelleMinimap();
+	pruefeKugelBewegung();
+	var timerId = setInterval(pruefeKugelBewegung, 500);	
     /* Ende der Initialisierung / Aufruf des Mainloops */
 	mainloop();
 };

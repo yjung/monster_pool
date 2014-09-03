@@ -24,7 +24,7 @@ function createGUI() {
 	paramControls = {
 		stosskraftX : 0, // Muss initial 0.01 sein um float zu bekommen
 		stosskraftY : 0, // Muss initial 0.01 sein um float zu bekommen
-		stosskraftZ : 0, // Muss initial 0.01 sein um float zu bekommen
+		stosskraftZ : -1000, // Muss initial 0.01 sein um float zu bekommen
 		offsetX : 0.01, // Muss initial 0.01 sein um float zu bekommen
 		offsetY : 0.01, // Muss initial 0.01 sein um float zu bekommen
 		offsetZ : 0.01	// Muss initial 0.01 sein um float zu bekommen

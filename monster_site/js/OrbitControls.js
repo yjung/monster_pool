@@ -330,7 +330,7 @@ OrbitControls = function(object, domElement) {
 	};
 
 	this.update = function() {
-		if (!game.controlls.stossKontrolle) {
+		if (!game.controlls.stossKontrolle && !game.whiteBall.inBewegung) {
 			this.updateQueueRotation();
 
 			var position = this.object.position;

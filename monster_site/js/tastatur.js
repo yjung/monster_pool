@@ -4,9 +4,11 @@ function erstelleTastaturSteuerung() {
 
 function checkKeyboard(){
 	if(game.keyboard.pressed("x")){
-		console.log("Queue-Stoss");
-		soundEffekt("ball-queue");
-		applyForce();
+		if(!game.whiteBall.inBewegung){
+			console.log("Queue-Stoss");
+			soundEffekt("ball-queue");
+			applyForce(false, 50);
+		}
 	}
 
 	if(game.keyboard.pressed("s")){
