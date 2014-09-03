@@ -9,10 +9,12 @@
 function initialisiereMotionBlur() {
 
 	game.motionBlur = {};
-	game.motionBlur.DeltaX = 0.0;
-	game.motionBlur.DeltaY = 0.0;
-	game.motionBlur.BlurFaktorX = 10;
-	game.motionBlur.BlurFaktorY = 145;
+	game.motionBlur.deltaX = 0.0;
+	game.motionBlur.deltaY = 0.0;
+	game.motionBlur.blurFaktorX = 10;
+	game.motionBlur.blurFaktorY = 145;
+	game.motionBlur.offset = 3.0;
+	game.motionBlur.brightness = 0.0;
 	erstelleMotionBlurGUI();
 	
 	
@@ -28,8 +30,9 @@ function erstelleMotionBlurGUI()
 	var parameterMotionBlur = 
 	{
 		aktivieren : false,
-		BlurIntensX : 10,
-		BlurIntensY : 145
+		BlurIntensX : game.motionBlur.blurFaktorX,
+		BlurIntensY : game.motionBlur.blurFaktorY,
+		offsetGui:game.motionBlur.offset
 	};
 	game.motionBlur.aktivieren = motionBlur.add(parameterMotionBlur, "aktivieren").listen();
 	motionBlur.open();				
@@ -45,12 +48,17 @@ function erstelleMotionBlurGUI()
 	game.motionBlur.BlurIntensX = motionBlur.add(parameterMotionBlur, 'BlurIntensX').min(0.0).max(100.0).step(5.0).name("Blur IntensitätX").listen();
 	game.motionBlur.BlurIntensX.onChange(function(value)
 	{
-		game.motionBlur.BlurFaktorX = value;
+		game.motionBlur.blurFaktorX = value;
 	});
 	game.motionBlur.BlurIntensY = motionBlur.add(parameterMotionBlur, 'BlurIntensY').min(0.0).max(900.0).step(5.0).name("Blur IntensitätY").listen();
 	game.motionBlur.BlurIntensY.onChange(function(value)
 	{
-		game.motionBlur.BlurFaktorY = value;
+		game.motionBlur.blurFaktorY = value;
+	});
+	game.motionBlur.offsetGui = motionBlur.add(parameterMotionBlur, 'offsetGui').min(0.0).max(10.0).step(0.25).name("Blur Blende").listen();
+	game.motionBlur.offsetGui.onChange(function(value)
+	{
+		game.motionBlur.offset = value;
 	});
 };
 
@@ -114,12 +122,14 @@ function updateMotionBlur()
 	{		
 		if(game.debugGUI.kontur.object.kontur == true)
 		{	
-			game.composerCelShading.passes[4].uniforms.h.value = (game.motionBlur.DeltaX*game.motionBlur.BlurFaktorX)/ window.innerHeight;							
-			game.composerCelShading.passes[5].uniforms.v.value = (game.motionBlur.DeltaY*game.motionBlur.BlurFaktorY)/ window.innerWidth;									
+			game.composerCelShading.passes[4].uniforms.h.value = (game.motionBlur.deltaX*game.motionBlur.blurFaktorX)/ window.innerHeight;							
+			game.composerCelShading.passes[4].uniforms.offset.value = game.motionBlur.offset;							
+			game.composerCelShading.passes[5].uniforms.v.value = (game.motionBlur.deltaY*game.motionBlur.blurFaktorY)/ window.innerWidth;									
 		}else
 		{		
-			game.composerCelShading.passes[3].uniforms.h.value = (game.motionBlur.DeltaX*game.motionBlur.BlurFaktorX)/ window.innerHeight;							
-			game.composerCelShading.passes[4].uniforms.v.value = (game.motionBlur.DeltaY*game.motionBlur.BlurFaktorY)/ window.innerWidth;									
+			game.composerCelShading.passes[3].uniforms.h.value = (game.motionBlur.deltaX*game.motionBlur.blurFaktorX)/ window.innerHeight;							
+			game.composerCelShading.passes[3].uniforms.offset.value = game.motionBlur.offset;							
+			game.composerCelShading.passes[4].uniforms.v.value = (game.motionBlur.deltaY*game.motionBlur.blurFaktorY)/ window.innerWidth;									
 		}
 	}
 };
