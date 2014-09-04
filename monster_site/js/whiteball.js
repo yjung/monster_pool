@@ -48,8 +48,6 @@ function applyForce(bumperForce, faktor){
   	}else{
   		game.whiteBall.applyImpulse( effect, offset );
   	}
-  	
-  	console.log(game.whiteBall);
 };
 
 function pruefeKugelBewegung(){

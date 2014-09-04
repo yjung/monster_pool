@@ -26,9 +26,7 @@ function erstelleBumper(loader, xPosition, yPosition, zPosition)
 
 		// Event zum Bumpen
 		bumper.addEventListener( 'collision', function( other_object, relative_velocity, relative_rotation, contact_normal )  
-		{
-			console.log(contact_normal);
-			
+		{			
 			applyForce(true);
 		});
 
