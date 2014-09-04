@@ -36,6 +36,7 @@ function mainloop() {
 		game.renderer.render(game.szene, game.kamera);
 	} else {// Postprocessing ist aktiviert
 			game.renderer.setViewport(0, 0, game.breite, game.hoehe);
+			// game.renderer.render(game.szene, game.kamera, game.depthOfField.renderTarget, false);
 			game.composerCelShading.render(game.delta);
 			game.renderer.clear(false, true, false);	// (color, depth, stencil)
 			game.renderer.setViewport(10, screenHeight - 160 - 120, 240, 140);

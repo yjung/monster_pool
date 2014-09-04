@@ -46,6 +46,8 @@ function initialisiere() {
 
 	game.szene = new Physijs.Scene;             		// Erstellen einer Physi.js-Szene
 	game.szene.setGravity(new THREE.Vector3(0,-10,0));	// Schwerkraft
+	game.depthMaterial = new THREE.MeshDepthMaterial();
+	game.szene.overrideMaterial = game.depthMaterial;
 	
 	game.raum = new THREE.Object3D();          		// Tisch als GameObject initialisieren
 	game.tisch = new THREE.Object3D();          		// Tisch als GameObject initialisieren
@@ -90,6 +92,7 @@ function initialisiere() {
 	/* Post-Processing - Allgemein*/	
 	// Motion-Blur
 	initialisiereMotionBlur();
+	initializeDOF();
 	erstelleComposer();				// Effekt-Composer erstellen
 	game.postProcessing = true;	// Postprocessing standardmaessig deaktiviert
 	
