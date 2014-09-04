@@ -9,12 +9,12 @@
 function initialisiereMotionBlur() {
 
 	game.motionBlur = {};
-	game.motionBlur.deltaX = 0.0;
-	game.motionBlur.deltaY = 0.0;
-	game.motionBlur.blurFaktorX = 10;
-	game.motionBlur.blurFaktorY = 145;
-	game.motionBlur.offset = 3.0;
-	game.motionBlur.brightness = 0.0;
+	game.motionBlur.DeltaX = 0.0;
+	game.motionBlur.DeltaY = 0.0;
+	game.motionBlur.BlurFaktorX = 145;
+	game.motionBlur.BlurFaktorY = 10;
+	game.motionBlur.offset = 2.0;
+	game.motionBlur.threshold = 0.5;
 	erstelleMotionBlurGUI();
 	
 	
@@ -30,9 +30,10 @@ function erstelleMotionBlurGUI()
 	var parameterMotionBlur = 
 	{
 		aktivieren : false,
-		BlurIntensX : game.motionBlur.blurFaktorX,
-		BlurIntensY : game.motionBlur.blurFaktorY,
-		offsetGui:game.motionBlur.offset
+		BlurIntensX : game.motionBlur.BlurFaktorX,
+		BlurIntensY : game.motionBlur.BlurFaktorY,
+		threshold : game.motionBlur.threshold,
+		offset: game.motionBlur.offset
 	};
 	game.motionBlur.aktivieren = motionBlur.add(parameterMotionBlur, "aktivieren").listen();
 	motionBlur.open();				
@@ -45,20 +46,26 @@ function erstelleMotionBlurGUI()
 			erstelleCelShadingComposer(kontur, "Canny");					// Entsprechend der Ueberpruefung den Standard-CelShading-Composer wiederherstellen
 		}
 	});
-	game.motionBlur.BlurIntensX = motionBlur.add(parameterMotionBlur, 'BlurIntensX').min(0.0).max(100.0).step(5.0).name("Blur IntensitätX").listen();
+	game.motionBlur.BlurIntensX = motionBlur.add(parameterMotionBlur, 'BlurIntensX').min(0.0).max(900.0).step(5.0).name("Blur IntensitätX").listen();
 	game.motionBlur.BlurIntensX.onChange(function(value)
 	{
-		game.motionBlur.blurFaktorX = value;
+		game.motionBlur.BlurFaktorX = value;
 	});
-	game.motionBlur.BlurIntensY = motionBlur.add(parameterMotionBlur, 'BlurIntensY').min(0.0).max(900.0).step(5.0).name("Blur IntensitätY").listen();
+	game.motionBlur.BlurIntensY = motionBlur.add(parameterMotionBlur, 'BlurIntensY').min(0.0).max(100.0).step(5.0).name("Blur IntensitätY").listen();
 	game.motionBlur.BlurIntensY.onChange(function(value)
 	{
-		game.motionBlur.blurFaktorY = value;
+		game.motionBlur.BlurFaktorY = value;
 	});
-	game.motionBlur.offsetGui = motionBlur.add(parameterMotionBlur, 'offsetGui').min(0.0).max(10.0).step(0.25).name("Blur Blende").listen();
-	game.motionBlur.offsetGui.onChange(function(value)
+	
+	game.motionBlur.offset = motionBlur.add(parameterMotionBlur, 'offset').min(0.0).max(3.0).step(0.1).name("Blur Blende").listen();
+	game.motionBlur.offset.onChange(function(value)
 	{
 		game.motionBlur.offset = value;
+	});
+	game.motionBlur.threshold = motionBlur.add(parameterMotionBlur, 'threshold').min(0.0).max(1.0).step(0.01).name("Blur Threshold").listen();
+	game.motionBlur.threshold.onChange(function(value)
+	{
+		game.motionBlur.threshold = value;
 	});
 };
 
@@ -86,6 +93,7 @@ function erstelleMotionBlurComposer() {
 	game.motionBlur.erweiterterCelComposer.effectcopy.renderToScreen = true;								// Als Letzten markieren bzw. final auf das Canvas rendern	game.composerCelShading.addPass(effectcopy);
 
 	var hblur = new THREE.ShaderPass(HorizontalBlurShader);
+	hblur.uniforms.offset.value = 0.1;
 	hblur.renderToScreen = false;
 	
 	var vblur = new THREE.ShaderPass(VerticalBlurShader);
@@ -122,36 +130,16 @@ function updateMotionBlur()
 	{		
 		if(game.debugGUI.kontur.object.kontur == true)
 		{	
-			game.composerCelShading.passes[4].uniforms.h.value = (game.motionBlur.deltaX*game.motionBlur.blurFaktorX)/ window.innerHeight;							
-			game.composerCelShading.passes[4].uniforms.offset.value = game.motionBlur.offset;							
-			game.composerCelShading.passes[5].uniforms.v.value = (game.motionBlur.deltaY*game.motionBlur.blurFaktorY)/ window.innerWidth;									
+			game.composerCelShading.passes[4].uniforms.offset.value = game.motionBlur.offset;								
+			game.composerCelShading.passes[4].uniforms.threshold.value = game.motionBlur.threshold;								
+			game.composerCelShading.passes[4].uniforms.h.value = (game.motionBlur.DeltaX*game.motionBlur.BlurFaktorX)/ window.innerHeight;
+			game.composerCelShading.passes[5].uniforms.v.value = (game.motionBlur.DeltaY*game.motionBlur.BlurFaktorY)/ window.innerWidth;									
 		}else
 		{		
-			game.composerCelShading.passes[3].uniforms.h.value = (game.motionBlur.deltaX*game.motionBlur.blurFaktorX)/ window.innerHeight;							
 			game.composerCelShading.passes[3].uniforms.offset.value = game.motionBlur.offset;							
-			game.composerCelShading.passes[4].uniforms.v.value = (game.motionBlur.deltaY*game.motionBlur.blurFaktorY)/ window.innerWidth;									
+			game.composerCelShading.passes[4].uniforms.threshold.value = game.motionBlur.threshold;								
+			game.composerCelShading.passes[3].uniforms.h.value = (game.motionBlur.DeltaX*game.motionBlur.BlurFaktorX)/ window.innerHeight;	
+			game.composerCelShading.passes[4].uniforms.v.value = (game.motionBlur.DeltaY*game.motionBlur.BlurFaktorY)/ window.innerWidth;									
 		}
 	}
 };
-
-function generateDataTexture(width, height, color)
-{
-	var size = With * height;
-	var data = new Unit8Array(3 * size);
-	
-	var r = Math.floor( color.r * 255);
-	var g = Math.floor( color.g * 255);
-	var b = Math.floor( color.b * 255);
-	
-	
-	for (var i=0; i < size; i++)
-	{
-		data [i*3	] = r;
-		data [i*3+1	] = g;
-		data [i*3+2	] = b;
-	}
-	
-	var texture = new Three.DataTexture(data,width, height, Three.RGBFormat);
-	texture.needUpdate = true;
-	return texture;
-}

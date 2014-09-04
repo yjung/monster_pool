@@ -84,15 +84,7 @@ function erstelleHindernisse(ColladaLoader){
  
 	erstelleRampe(ColladaLoader, 9,18,-20, 3.9269908169872414, true); 	//Rechte Rampe
 	erstelleRampe(ColladaLoader, -9,18,-20, -0.7853981633974483, false);	//Linke Rampe
-				
-				//Paddel erstellen und animation anschmeißen
-				// var paddleLeftConstraint = erstellePaddleJS(-10,18,-2, -1.7);
-				// var paddleRightConstraint = erstellePaddleJS(10,18,2, 1.7);
-				// console.log(paddleLeftConstraint);
-				// paddleLeftConstraint.enableAngularMotor(-10, 2);
-			                
-			    // paddleRightConstraint.enableAngularMotor(-1 * -10, 2);
-				// updateMotor();
+
 
 	 // erstellePaddleMitAnimation();
  	 
