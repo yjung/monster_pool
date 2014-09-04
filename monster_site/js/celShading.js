@@ -47,26 +47,19 @@ function erstelleCelShadingComposer(kontur, edgeDetection) {
 		case "Canny": {
 			game.composerCelShading.edgePass = new THREE.ShaderPass(CannyEdgePass);
 			game.composerCelShading.edgePass.renderToScreen = false;
-			console.log("Aktuell Canny");
 			break;
 		}
 		case "Sobel": {
 			game.composerCelShading.edgePass = new THREE.ShaderPass(Sobel);
 			game.composerCelShading.edgePass.renderToScreen = false;
-			console.log("Aktuell Sobel");
 			break;
 		}			
 		case "Frei-Chen": {
 			game.composerCelShading.edgePass = new THREE.ShaderPass(FreiChen);
 			game.composerCelShading.edgePass.uniforms["uThreshold"].value = 0.08;
 			game.composerCelShading.edgePass.renderToScreen = false;
-			console.log("Aktuell Frei-Chen");
 			break;
 		}
-		// default: {
-			// game.composerCelShading.edgePass = new THREE.ShaderPass(CannyEdgePass);
-			// console.log("Aktuell Default");
-		// }
 	}
 
 	game.composerCelShading.effectcopy = new THREE.ShaderPass(THREE.CopyShader);
