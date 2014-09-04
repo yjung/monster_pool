@@ -3,6 +3,8 @@ function sceneLaden() {
 	raumLaden();
 	girlandeLaden();
 	moebelLaden();
+	barhockerLaden();
+	palettenLaden();
 	erstelleUmgebungsCollider();
 	lichterLaden();
 }
@@ -138,6 +140,55 @@ function moebelLaden() {
 		}
 	});
 }
+
+// Barhocker und Bartische laden
+function barhockerLaden() {
+	var ColladaLoader = new THREE.ColladaLoader();
+	ColladaLoader.load('assets/dae/barhocker.dae', function(collada) {
+		var modelScene = collada.scene;
+		var szenenbestandteile = modelScene.children.length;
+		for (var i = 0; i < szenenbestandteile; i++) {
+			var modelGeometry = modelScene.children[i].children[0].geometry;
+			// Geometrie aus der .dae-Szene extrahieren
+			var diffuseColor = modelScene.children[i].children[0].material.color;
+
+
+			var element = new THREE.Mesh(modelGeometry, 
+				erstelleCelShadingMaterial(
+					"hockerMat", // Bezeichnung
+					false, // Textur
+					new THREE.Vector3(diffuseColor.r,diffuseColor.g,diffuseColor.b)		// Farbe
+			));
+			element.castShadow = true;
+		game.szene.add(element);			// Collada Tische und stuehle zur Szene hinzufuegen
+		}
+	});
+}
+
+// Paletten laden
+function palettenLaden() {
+	var ColladaLoader = new THREE.ColladaLoader();
+	ColladaLoader.load('assets/dae/palette.dae', function(collada) {
+		var modelScene = collada.scene;
+		var szenenbestandteile = modelScene.children.length;
+		for (var i = 0; i < szenenbestandteile; i++) {
+			var modelGeometry = modelScene.children[i].children[0].geometry;
+			// Geometrie aus der .dae-Szene extrahieren
+			var diffuseColor = modelScene.children[i].children[0].material.color;
+
+
+			var element = new THREE.Mesh(modelGeometry, 
+				erstelleCelShadingMaterial(
+					"hockerMat", // Bezeichnung
+					false, // Textur
+					new THREE.Vector3(diffuseColor.r,diffuseColor.g,diffuseColor.b)		// Farbe
+			));
+			element.castShadow = true;
+		game.szene.add(element);			// Collada Tische und stuehle zur Szene hinzufuegen
+		}
+	});
+}
+
 
 // Collider erstellen
 function erstelleUmgebungsCollider() {

@@ -164,7 +164,7 @@ function initialisiere() {
 
 	erstelleMinimap();
 	pruefeKugelBewegung();
-	var timerId = setInterval(pruefeKugelBewegung, 500);	
+	var timerId = setInterval(pruefeKugelBewegung, 250);	
     /* Ende der Initialisierung / Aufruf des Mainloops */
 	mainloop();
 };
