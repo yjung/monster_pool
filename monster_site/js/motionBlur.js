@@ -40,15 +40,15 @@ function erstelleMotionBlurGUI()
 			erstelleMotionBlurComposer();						// Erweitere den bisherigen Composer um den Blur-Effekt
 		}else{													// andernfalls
 			var kontur = game.debugGUI.kontur.object.kontur; 	// Ueberpruefen ob das Cel-Shading derzeit mit Kontur verwendet wird (true ? false)
-			erstelleCelShadingComposer(kontur, "Canny");					// Entsprechend der Ueberpruefung den Standard-CelShading-Composer wiederherstellen
+			erstelleCelShadingComposer(kontur, "Canny");		// Entsprechend der Ueberpruefung den Standard-CelShading-Composer wiederherstellen
 		}
 	});
-	game.motionBlur.BlurIntensX = motionBlur.add(parameterMotionBlur, 'BlurIntensX').min(0.0).max(900.0).step(5.0).name("Blur IntensitätX").listen();
+	game.motionBlur.BlurIntensX = motionBlur.add(parameterMotionBlur, 'BlurIntensX').min(0.0).max(900.0).step(5.0).name("Blur Horizontal").listen();
 	game.motionBlur.BlurIntensX.onChange(function(value)
 	{
-		game.motionBlur.BlurFaktorX = value;
+		game.motionBlur.BlurFaktorX = value;					
 	});
-	game.motionBlur.BlurIntensY = motionBlur.add(parameterMotionBlur, 'BlurIntensY').min(0.0).max(100.0).step(5.0).name("Blur IntensitätY").listen();
+	game.motionBlur.BlurIntensY = motionBlur.add(parameterMotionBlur, 'BlurIntensY').min(0.0).max(100.0).step(5.0).name("Blur Vertical").listen();
 	game.motionBlur.BlurIntensY.onChange(function(value)
 	{
 		game.motionBlur.BlurFaktorY = value;
@@ -59,11 +59,11 @@ function erstelleMotionBlurGUI()
 	{
 		game.motionBlur.offset = value;
 	});
-	game.motionBlur.threshold = motionBlur.add(parameterMotionBlur, 'threshold').min(0.0).max(1.0).step(0.01).name("Blur Threshold").listen();
-	game.motionBlur.threshold.onChange(function(value)
-	{
-		game.motionBlur.threshold = value;
-	});
+	// game.motionBlur.threshold = motionBlur.add(parameterMotionBlur, 'threshold').min(0.0).max(1.0).step(0.01).name("Blur Threshold").listen();
+	// game.motionBlur.threshold.onChange(function(value)
+	// {
+		// game.motionBlur.threshold = value;
+	// });
 };
 
 function erstelleMotionBlurComposer() {
@@ -122,7 +122,6 @@ function erstelleMotionBlurComposer() {
 
 function updateMotionBlur()
 {
-	// console.log(window.innerWidth +" "+ window.innerHeight);
 	if(game.composerCelShading.passes[4] && game.composerCelShading.passes[5])
 	{		
 		if(game.debugGUI.kontur.object.kontur == true)
@@ -130,12 +129,18 @@ function updateMotionBlur()
 			game.composerCelShading.passes[4].uniforms.offset.value = game.motionBlur.offset;								
 			game.composerCelShading.passes[4].uniforms.threshold.value = game.motionBlur.threshold;								
 			game.composerCelShading.passes[4].uniforms.h.value = (game.motionBlur.DeltaX*game.motionBlur.BlurFaktorX)/ window.innerHeight;
+			
+			game.composerCelShading.passes[5].uniforms.offset.value = game.motionBlur.offset;								
+			game.composerCelShading.passes[5].uniforms.threshold.value = game.motionBlur.threshold;								
 			game.composerCelShading.passes[5].uniforms.v.value = (game.motionBlur.DeltaY*game.motionBlur.BlurFaktorY)/ window.innerWidth;									
 		}else
 		{		
 			game.composerCelShading.passes[3].uniforms.offset.value = game.motionBlur.offset;							
-			game.composerCelShading.passes[4].uniforms.threshold.value = game.motionBlur.threshold;								
+			game.composerCelShading.passes[3].uniforms.threshold.value = game.motionBlur.threshold;								
 			game.composerCelShading.passes[3].uniforms.h.value = (game.motionBlur.DeltaX*game.motionBlur.BlurFaktorX)/ window.innerHeight;	
+			
+			game.composerCelShading.passes[4].uniforms.offset.value = game.motionBlur.offset;								
+			game.composerCelShading.passes[4].uniforms.threshold.value = game.motionBlur.threshold;								
 			game.composerCelShading.passes[4].uniforms.v.value = (game.motionBlur.DeltaY*game.motionBlur.BlurFaktorY)/ window.innerWidth;									
 		}
 	}
