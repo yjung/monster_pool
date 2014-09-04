@@ -18,26 +18,16 @@ function createGUI() {
 
 	// Ordner fuer die Kategorien erstellen
 	var controls = game.debugGUI.addFolder('Controls');
-	var postprocessing = game.debugGUI.addFolder('Postprocessing - Allgmein');
 	var options = game.debugGUI.addFolder('Options');
 
 	paramControls = {
 		stosskraftX : 0, // Muss initial 0.01 sein um float zu bekommen
-		stosskraftY : 0, // Muss initial 0.01 sein um float zu bekommen
+		// stosskraftY : 0, // Muss initial 0.01 sein um float zu bekommen
 		stosskraftZ : -1000, // Muss initial 0.01 sein um float zu bekommen
 		offsetX : 0.01, // Muss initial 0.01 sein um float zu bekommen
 		offsetY : 0.01, // Muss initial 0.01 sein um float zu bekommen
 		offsetZ : 0.01	// Muss initial 0.01 sein um float zu bekommen
 	};
-
-	paramPostprocessing = {
-		enable : true,
-		filmEffekt : false,
-		bloomPass : false,
-		custom : false,
-	};
-
-
 
 	paramOptions = {
 		vollbild : false,
@@ -47,19 +37,11 @@ function createGUI() {
 
 	// Steuerungseintraege hinzufuegen
 	game.debugGUI.stosskraftX = controls.add(paramControls, 'stosskraftX').min(0).max(1000).step(1).listen().name("Stosskraft-X");
-	game.debugGUI.stosskraftY = controls.add(paramControls, 'stosskraftY').min(0).max(1000).step(1).listen().name("Stosskraft-Y");
+	// game.debugGUI.stosskraftY = controls.add(paramControls, 'stosskraftY').min(0).max(1000).step(1).listen().name("Stosskraft-Y");
 	game.debugGUI.stosskraftZ = controls.add(paramControls, 'stosskraftZ').min(0).max(1000).step(1).listen().name("Stosskraft-Z");
 	game.debugGUI.offsetX = controls.add(paramControls, 'offsetX').min(-1.0).max(1.0).step(0.01).listen().name("Offset-X");
 	game.debugGUI.offsetY = controls.add(paramControls, 'offsetY').min(-1.0).max(1.0).step(0.01).listen().name("Offset-Y");
 	game.debugGUI.offsetZ = controls.add(paramControls, 'offsetZ').min(-1.0).max(1.0).step(0.01).listen().name("Offset-Z");
-
-	// Post-Processingeintraege hinzufuegen
-	game.debugGUI.enable = postprocessing.add(paramPostprocessing, 'enable').listen();
-	game.debugGUI.filmEffekt = postprocessing.add(paramPostprocessing, 'filmEffekt').listen().name("Film-Effekt");
-	game.debugGUI.bloomPass = postprocessing.add(paramPostprocessing, 'bloomPass').listen().name("Leucht-Effekt");
-	game.debugGUI.custom = postprocessing.add(paramPostprocessing, 'custom').listen().name("Custom-Effekt");
-
-
 
 	// Optionen-Eintraege hinzufuegen
 	game.debugGUI.vollbild = options.add(paramOptions, 'vollbild').listen().name("Vollbildmodus");
@@ -75,10 +57,10 @@ function createGUI() {
 	});
 
 	// Event on change in 'effectY'
-	game.debugGUI.stosskraftY.onFinishChange(function(value) {
-		stosskraftY = value;
-		game.queue.stosskraftY = value;
-	});
+	// game.debugGUI.stosskraftY.onFinishChange(function(value) {
+		// stosskraftY = value;
+		// game.queue.stosskraftY = value;
+	// });
 
 	// Event on change in 'effectZ'
 	game.debugGUI.stosskraftZ.onFinishChange(function(value) {
@@ -103,32 +85,6 @@ function createGUI() {
 		offsetZ = value;
 		game.queue.offsetZ = value;
 	});
-
-	// controls.add(parameter, 'fX').min(0).max(1000).step(1).onFinishChange(function() {
-	// // refresh based on the new value of params.interation
-	// });
-
-	game.debugGUI.enable.onChange(function(value) {
-		game.postProcessing = value;
-	});
-
-	game.debugGUI.filmEffekt.onChange(function(value) {
-		game.filmEffekt = value;
-		game.renderer.filmEffect = value;
-	});
-
-	game.debugGUI.bloomPass.onChange(function(value) {
-		game.bloomPass = value;
-		game.renderer.bloomPass = value;
-	});
-
-	game.debugGUI.custom.onChange(function(value) {
-		game.custom = value;
-		game.renderer.custom = value;
-	});
-
-
-
 
 	game.debugGUI.vollbild.onChange(function(value) {
 		game.vollbild = value;
