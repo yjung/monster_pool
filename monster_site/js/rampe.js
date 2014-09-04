@@ -10,7 +10,6 @@ function erstelleRampe(loader, xPosition, yPosition, zPosition, yRotation, recht
 	// Slider einladen
 	ColladaLoader.load('assets/dae/rampe_a04.dae', function(collada)
 	{
-
 		var modelScene = collada.scene;
 		// console.log(modelScene);
 		var rampenbestandteile = 1;

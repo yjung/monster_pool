@@ -13,13 +13,10 @@ function initialisiereMotionBlur() {
 	game.motionBlur.DeltaY = 0.0;
 	game.motionBlur.BlurFaktorX = 145;
 	game.motionBlur.BlurFaktorY = 10;
-	game.motionBlur.offset = 2.0;
+	game.motionBlur.offset = 1.5;
 	game.motionBlur.threshold = 0.5;
 	erstelleMotionBlurGUI();
-	
-	
-	//TODOO Generate Alpha Picture Wird aktuell im Shader direkt geladen
-	// game.motionBlur.hatching.hatch6 = THREE.ImageUtils.loadTexture("shaders/img/hatch_5.jpg");
+
 	
 };
 
@@ -57,7 +54,7 @@ function erstelleMotionBlurGUI()
 		game.motionBlur.BlurFaktorY = value;
 	});
 	
-	game.motionBlur.offset = motionBlur.add(parameterMotionBlur, 'offset').min(0.0).max(3.0).step(0.1).name("Blur Blende").listen();
+	game.motionBlur.offset = motionBlur.add(parameterMotionBlur, 'offset').min(0.0).max(2.0).step(0.1).name("Blur Blende").listen();
 	game.motionBlur.offset.onChange(function(value)
 	{
 		game.motionBlur.offset = value;

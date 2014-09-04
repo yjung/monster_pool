@@ -53,7 +53,6 @@ function erstelleFlipper(enableMotor, PaddlePos, PivotPos, Rechts)
 		{
 			hhconstraint.disableMotor();
 		}
-		
 		return hhconstraint;
 	});
 }

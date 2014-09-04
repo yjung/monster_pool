@@ -1,12 +1,9 @@
 function erstelleBumper(loader, xPosition, yPosition, zPosition)
 {
-
 	var ColladaLoader = new THREE.ColladaLoader();
 
-	// Slider einladen
 	ColladaLoader.load('assets/dae/bumper.dae', function(collada)
 	{
-
 		var modelScene = collada.scene.children[0].children[0];
 		var modelGeometry = modelScene.geometry;
 		/* Geometrie aus der .dae-Szene extrahieren*/
@@ -31,9 +28,6 @@ function erstelleBumper(loader, xPosition, yPosition, zPosition)
 			
 			applyForce(true);
 		});
-
-
-
 
 		game.szene.add(bumper);
 
