@@ -1,7 +1,7 @@
 function ladeKugeln(){
 	var ColladaLoader = new THREE.ColladaLoader();
 	// JSON-Loader erstellen
-	ColladaLoader.load('assets/dae/kugeln_a04.dae', function(collada) {
+	ColladaLoader.load('assets/dae/kugeln.dae', function(collada) {
 
 		var modelScene = collada.scene;
 		var anzahlKugeln = modelScene.children.length;
