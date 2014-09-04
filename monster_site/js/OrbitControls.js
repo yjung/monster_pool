@@ -354,8 +354,8 @@ OrbitControls = function(object, domElement) {
 			phi += phiDelta;
 
 			if (game.motionBlur) {
-				game.motionBlur.DeltaX = phiDelta;
-				game.motionBlur.DeltaY = thetaDelta;
+				game.motionBlur.DeltaX = thetaDelta;
+				game.motionBlur.DeltaY = phiDelta;
 				// console.log(game.motionBlur.DeltaX );
 			}
 
