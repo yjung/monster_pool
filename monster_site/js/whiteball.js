@@ -60,5 +60,4 @@ function pruefeKugelBewegung(){
 	}else{
 				game.whiteBall.inBewegung = true;		
 	}
-	console.log(game.whiteBall.inBewegung);
 }

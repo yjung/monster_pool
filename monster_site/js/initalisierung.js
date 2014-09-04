@@ -43,33 +43,8 @@ function initialisiere() {
     window.game.monsterBalls = [];								// Sammlung fuer alle Monster im Spiel	
     game.monsterCounter=game.ballNumber; //Counter fuer Kugeln (Monster) im Spiel (wird in loecherTrigger.js und raumErstellen.js aktualisiert)
     game.scoreCounter=0; //Counter fuer Score vom Spiel (wird in loecherTrigger.js aktualisiert)
-    
-	game.modus = {
-		statisch : 0,           // Position ist fixiert
-		orbitrotation : 1,      // Position rotiert um weisse Kugel
-		zoom : 2,               // Zoom (optional)
-		// pan : 3              // Verschieben (optional, BRAUCHT BUGFIXING)
-	};
-
-	game.state = game.modus.orbitrotation; // Initial auf Rotationsmodus setzen
-
-	// Mausposition in der Anwendung tracken
-	game.mausPosition = {
-		x : 0,                  // eingelesener X-Wert
-		y : 0,                  // eingelesener Y-Wert
-
-		x_n:0,                  // normalisierter X-Wert
-		y_n:0,                  // normalisierter Y-Wert
-
-        x_last:0,               // letzter X-Wert
-        y_last:0,               // Letzter Y-Wert
-
-        x_d:0,					// Delta-X
-        y_d:0					// Delta-Y
-	};
 
 	game.szene = new Physijs.Scene;             		// Erstellen einer Physi.js-Szene
-	game.szene.fog = new THREE.Fog(0x000000, 1, 200);;             		// Erstellen einer Physi.js-Szene
 	game.szene.setGravity(new THREE.Vector3(0,-10,0));	// Schwerkraft
 	
 	game.raum = new THREE.Object3D();          		// Tisch als GameObject initialisieren
@@ -107,25 +82,6 @@ function initialisiere() {
 
     // Initialisierung des Canvas
     game.canvas = document.getElementsByTagName("canvas")[0];                   // Zeichenfläche der Anwendung sichern
-    game.canvas.addEventListener('mousemove', function(event) {                 // Eventlistener fuer mousemove
-        var rect = game.canvas.getBoundingClientRect();                         // Groesse der Zeichenflaeche auslesen
-        game.mausPosition.x = event.clientX - rect.left;                        // Maus-x berechnen
-        game.mausPosition.y = event.clientY - rect.top;                         // Maus-y berechnen
-
-        game.mausPosition.x_n = rect.left / event.clientX;                      // Maus-x normalisieren
-        game.mausPosition.y_n = rect.top / event.clientY;                       // Maus-y normalisieren
-
-        game.mausPosition.x_gemapped = rect.left / event.clientX - 0.5;             // Maus-x normalisieren
-        game.mausPosition.y_gemapped = rect.top / event.clientY - 0.5;              // Maus-y normalisieren
-
-        game.mausPosition.x_d = game.mausPosition.x_n - game.mausPosition.x_last;	//  Delta-X
-        game.mausPosition.y_d = game.mausPosition.y_n - game.mausPosition.y_last;	//  Delta-Y
-
-        game.mausPosition.x_last = game.mausPosition.x_n;							// Letzte Position X
-        game.mausPosition.y_last = game.mausPosition.y_n;							// Letzte Position Y
-
-
-    }, false);
 
 	createGUI();								// Debugging-GUI erstellen
 	/* Post-Processing - Cel-Shading*/

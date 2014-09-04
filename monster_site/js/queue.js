@@ -60,10 +60,8 @@ function erstelleMausKontrolle() {
 	$(document).mouseup(function(e) {
 		if (e.which == 1) {
 			game.controlls.linkeTasteUnten = false;
-			console.log("Links oben");
 		} else if (e.which == 3) {
 			game.controlls.rechteTasteUnten = false;
-			console.log("Rechts oben");
 		}
 		game.controlls.stossKontrolle = false;
 	});
