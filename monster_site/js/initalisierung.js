@@ -72,8 +72,6 @@ function initialisiere() {
     erstelleMausKontrolle();                               
     erstelleStossKontrolle();                               
     
-    console.log(game.orbitControls);
-    
     // Canvas-Abmessungen zur Initialisierung des Renderes festhalten
 	game.breite = Math.round($("#viewport").width());									// Volle Bildschirmbreite
 	game.hoehe = ($(window).height() - $("#header").height()- $("#footer").height());	// Volle Bildschirmhoehe ohne Header und Footer
@@ -87,14 +85,14 @@ function initialisiere() {
 
 	createGUI();								// Debugging-GUI erstellen
 	/* Post-Processing - Cel-Shading*/
+	game.postProcessing = true;	// Postprocessing standardmaessig deaktiviert
 	initialisiereCelShading();
 
-	/* Post-Processing - Allgemein*/	
 	// Motion-Blur
 	initialisiereMotionBlur();
+	
+	// Depth of Field
 	initializeDOF();
-	erstelleComposer();				// Effekt-Composer erstellen
-	game.postProcessing = true;	// Postprocessing standardmaessig deaktiviert
 	
 	setupLights();                              // Aufrufen externer Funktion zur Initialisierung der Lichtquellen
 

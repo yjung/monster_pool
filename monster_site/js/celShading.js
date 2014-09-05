@@ -25,64 +25,63 @@ function initialisiereCelShading() {
 };
 
 function erstelleCelShadingComposer(kontur, edgeDetection) {
-	// Parameter fuer den Renderer festlegen
-	var parameters = {
-		anisotropy : game.renderer.getMaxAnisotropy(), // Maximale Anzahl an Textur-Samples je nach Geraet
-		minFilter : THREE.LinearFilter, // Textur-Sampling falls Texel kleiner als Pixel. THREE.LinearFilter nimmt Interpolation der nähesten vier.
-		magFilter : THREE.LinearFilter, // Textur-Sampling falls Texel groesser als Pixel. THREE.LinearFilter nimmt Interpolation der nähesten vier.
-		format : THREE.RGBAFormat, // RGB-Farbraum mit zusaetzlichem Alpha
-		stencilBuffer : false	// Stencil-Buffer deaktivieren
-	};
-
-	var renderTarget = new THREE.WebGLRenderTarget(game.breite, game.hoehe, parameters);
-	// Rendertarget-Objekt fuer Renderer-Initialisierung
-	game.composerCelShading = new THREE.EffectComposer(game.renderer, renderTarget);
-	// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren
-	game.composerCelShading.setSize(game.breite, game.hoehe);
-	// Groesse setzen
-	game.composerCelShading.renderPass = new THREE.RenderPass(game.szene, game.kamera);
-	// Renderpass fuer Szene aus Kamera
-
-	switch (edgeDetection){
-		case "Canny": {
-			game.composerCelShading.edgePass = new THREE.ShaderPass(CannyEdgePass);
-			game.composerCelShading.edgePass.renderToScreen = false;
-			break;
+		// Parameter fuer den Renderer festlegen
+		var parameters = {
+			anisotropy : game.renderer.getMaxAnisotropy(), // Maximale Anzahl an Textur-Samples je nach Geraet
+			minFilter : THREE.LinearFilter, // Textur-Sampling falls Texel kleiner als Pixel. THREE.LinearFilter nimmt Interpolation der nähesten vier.
+			magFilter : THREE.LinearFilter, // Textur-Sampling falls Texel groesser als Pixel. THREE.LinearFilter nimmt Interpolation der nähesten vier.
+			format : THREE.RGBAFormat, // RGB-Farbraum mit zusaetzlichem Alpha
+			stencilBuffer : false	// Stencil-Buffer deaktivieren
+		};
+	
+		var renderTarget = new THREE.WebGLRenderTarget(game.breite, game.hoehe, parameters);
+		// Rendertarget-Objekt fuer Renderer-Initialisierung
+		game.composerCelShading = new THREE.EffectComposer(game.renderer, renderTarget);
+		// Effect-Composer mit Renderer und Rendertarget-Objekt initialisieren
+		game.composerCelShading.setSize(game.breite, game.hoehe);
+		// Groesse setzen
+		game.composerCelShading.renderPass = new THREE.RenderPass(game.szene, game.kamera);
+		// Renderpass fuer Szene aus Kamera
+	
+		switch (edgeDetection){
+			case "Canny": {
+				game.composerCelShading.edgePass = new THREE.ShaderPass(CannyEdgePass);
+				game.composerCelShading.edgePass.renderToScreen = false;
+				break;
+			}
+			case "Sobel": {
+				game.composerCelShading.edgePass = new THREE.ShaderPass(Sobel);
+				game.composerCelShading.edgePass.renderToScreen = false;
+				break;
+			}			
+			case "Frei-Chen": {
+				game.composerCelShading.edgePass = new THREE.ShaderPass(FreiChen);
+				game.composerCelShading.edgePass.uniforms["uThreshold"].value = 0.08;
+				game.composerCelShading.edgePass.renderToScreen = false;
+				break;
+			}
 		}
-		case "Sobel": {
-			game.composerCelShading.edgePass = new THREE.ShaderPass(Sobel);
-			game.composerCelShading.edgePass.renderToScreen = false;
-			break;
-		}			
-		case "Frei-Chen": {
-			game.composerCelShading.edgePass = new THREE.ShaderPass(FreiChen);
-			game.composerCelShading.edgePass.uniforms["uThreshold"].value = 0.08;
-			game.composerCelShading.edgePass.renderToScreen = false;
-			break;
-		}
-	}
-
-	game.composerCelShading.effectcopy = new THREE.ShaderPass(THREE.CopyShader);
-	// Kopier-Shader fuer Effekte, die nicht selbst/direkt gerendert werden koennen
-	game.composerCelShading.effectcopy.renderToScreen = true;
-	// Als Letzten markieren bzw. final auf das Canvas rendern	game.composerCelShading.addPass(effectcopy);
-
-	game.composerCelShading.addPass(game.composerCelShading.renderPass);
-	// Normales Bild rendern
-	game.composerCelShading.addPass(game.composerCelShading.effectcopy);
-	// Custom-Effekt
-	if (kontur) {
+	
+		game.composerCelShading.effectcopy = new THREE.ShaderPass(THREE.CopyShader);
+		// Kopier-Shader fuer Effekte, die nicht selbst/direkt gerendert werden koennen
+		game.composerCelShading.effectcopy.renderToScreen = true;
+		// Als Letzten markieren bzw. final auf das Canvas rendern	game.composerCelShading.addPass(effectcopy);
+	
 		game.composerCelShading.addPass(game.composerCelShading.renderPass);
 		// Normales Bild rendern
-		game.composerCelShading.addPass(game.composerCelShading.edgePass);
-		// Custom-Effekt
 		game.composerCelShading.addPass(game.composerCelShading.effectcopy);
 		// Custom-Effekt
-	}
-
-	// game.composerCelShading.addPass(game.composerCelShading.effectcopy);		// Standard-Copy-Shader zum finalen rendern
-
-};
+		if (kontur) {
+			game.composerCelShading.addPass(game.composerCelShading.renderPass);
+			// Normales Bild rendern
+			game.composerCelShading.addPass(game.composerCelShading.edgePass);
+			// Custom-Effekt
+			game.composerCelShading.addPass(game.composerCelShading.effectcopy);
+			// Custom-Effekt
+		}
+	
+		// game.composerCelShading.addPass(game.composerCelShading.effectcopy);		// Standard-Copy-Shader zum finalen rendern
+	};
 /* Hatching-Texturen werden initial einmal geladen und beim Erstellen von Cel-Shading-Materialien aus dem Namespace heraus referenziert.*/
 
 function initialisiereCelShadingHatching() {
@@ -566,4 +565,8 @@ function updateHatching() {
 		game.celShadingMaterials[i].uniforms.invertRim.value = game.celShading.hatching.settings.invertRim ? 1 : 0;
 		game.celShadingMaterials[i].uniforms.inkColor.value.set(game.celShading.hatching.settings.inkColor[0] / 255, game.celShading.hatching.settings.inkColor[1] / 255, game.celShading.hatching.settings.inkColor[2] / 255, 1);
 	}
+};
+
+function resizeComposer(){
+	game.composerCelShading.setSize(game.breite, game.hoehe);		// Composer fuer Custom-Effekt in Groesse aktualisieren
 };

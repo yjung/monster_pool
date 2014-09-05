@@ -13,7 +13,7 @@ VerticalBlurShader = {
 		"tDiffuse": { type: "t", value: null },
 		"v":        { type: "f", value: 1.0 / 512.0 },
 		
-		"offset": 	{ type: "f", value: 0.5},
+		"offset": 	{ type: "f", value: 1.7},
 		"threshold": { type: "f", value: 0.1},
 		"brightness": { type: "f", value: 1.0}
 
