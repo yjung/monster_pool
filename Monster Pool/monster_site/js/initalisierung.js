@@ -110,7 +110,7 @@ function initialisiere() {
     loecherTrigger();							//Lade die Triggers von den Loechern
     createWhiteBall(0, 18.75, 15);                    // Weisse Kugel aus physikalischem Grundobjekt an x,y erstellen
     sceneLaden();                        //Alpha Tisch aus Colada File Laden^
-    //loadMonsters();								// Lade ein Monster (Bernd)
+    loadMonsters();								// Lade ein Monster (Bernd)
     // ladeAnimation();
     erstelleStatistik(true, true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
 

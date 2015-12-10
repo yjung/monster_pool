@@ -3,12 +3,12 @@ function createWhiteBall(x,y,z) {
 	
 	// erstelleCelShadingMaterial("whiteballMat");
 
-    var friction = .2;      // low friction
+    var friction = 0;      // low friction
     var restitution = .8;   // low restitution
 
     // Grundobjekterzeugung mit Material aus angelegter Bibliothek
     game.whiteBall = new Physijs.ConvexMesh(new THREE.SphereGeometry(0.75, 16, 16), Physijs.createMaterial(
-            				new THREE.MeshLambertMaterial( { map: THREE.ImageUtils.loadTexture("assets/dae/tex/weisseKugel.jpg"), shading: THREE.SmoothShading } ) ,friction, restitution),20000);
+            		new THREE.MeshLambertMaterial( { map: THREE.ImageUtils.loadTexture("assets/dae/tex/weisseKugel.jpg"), shading: THREE.SmoothShading } ) ,friction, restitution),20000);
 //erstelleCelShadingMaterial(
 //    		"whiteBallMat",						// Bezeichnung
 //    		THREE.ImageUtils.loadTexture("assets/dae/tex/weisseKugel.jpg"),								// Textur

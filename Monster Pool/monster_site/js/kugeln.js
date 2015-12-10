@@ -13,18 +13,21 @@ function ladeKugeln(){
 		var kugelPosition = modelScene.children[i].children[0].parent.position;
 		var kugelGeometrie = modelScene.children[i].children[0].geometry;
 		
-		var kugel = new Physijs.SphereMesh(kugelGeometrie, Physijs.createMaterial( new THREE.MeshLambertMaterial( {  map: THREE.ImageUtils.loadTexture("assets/dae/tex/kugel_atlas.jpg"), shading: THREE.SmoothShading } ), 
+		var kugel = new Physijs.SphereMesh(kugelGeometrie, 
+                Physijs.createMaterial( new THREE.MeshLambertMaterial( {  map: THREE.ImageUtils.loadTexture("assets/dae/tex/kugel_atlas.jpg"), shading: THREE.SmoothShading } ), 
 //                ,0.2,0.2);
 //			erstelleCelShadingMaterial(kugelName, // Bezeichnung
 //			texturAtlas,
 //			new THREE.Vector3(1, 1, 1)	// Farbe
 //		),
-		0.2, 0.8),10000);
+		0.9, 0.8),10000);
 		kugel.name="ball-"+i;
 		kugel.position.x = kugelPosition.x * 0.25;
 		kugel.position.y = kugelPosition.y * 0.25;
 		kugel.position.z = kugelPosition.z * 0.25;
                 kugel.castShadow = true;
+                kugel.addEventListener('collision', tableCollideEvent);
+
 // 
 		game.szene.add(kugel);
 		
@@ -33,6 +36,7 @@ function ladeKugeln(){
 				// console.log("Comparacion con "+object.name+": "+pattern.test(object.name));
 				if((object === game.whiteBall)||(pattern.test(object.name))){
 					soundEffekt("ball-ball");
+                                        
 				}					
 			  
 		    });

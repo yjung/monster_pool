@@ -129,3 +129,4 @@ function loadDatGUI() //Erstellt 2te GUI für den Motor
     hingeFolder.add(controls, "enableMotor").onChange(controls.updateMotor);
     game.szene.simulate();
 }
+

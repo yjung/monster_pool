@@ -348,11 +348,23 @@ td {
 
 #b1{
     height: 50px;
+    width: 200px;
+    color: black;
+    font-size: 30px;
+}
+#b2{
+    height: 50px;
     width: 100px;
     color: black;
     font-size: 30px;
 }
 
+#starten{
+    color: black;
+    position: absolute;
+    top:70%;
+    right:45%;
+}
 #minimapViewport {
 	position: absolute;
 	width: 240px;

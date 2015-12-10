@@ -45,7 +45,8 @@ function raumLaden() {
 			var modelMaterial = modelScene.children[i].children[0].material;
 			var diffuseColor = modelMaterial.color;
 
-			var element = new THREE.Mesh(modelGeometry, new THREE.MeshLambertMaterial( {  map: THREE.ImageUtils.loadTexture("assets/dae/tex/wood2.jpg"), shading: THREE.SmoothShading } )
+			var element = new THREE.Mesh(modelGeometry, 
+                        new THREE.MeshLambertMaterial( {  map: THREE.ImageUtils.loadTexture("assets/dae/tex/wood2.jpg"), shading: THREE.SmoothShading } )
 //                        erstelleCelShadingMaterial("raumMat", // Bezeichnung
 //			false, // Textur
 //			new THREE.Vector3(diffuseColor.r,diffuseColor.g,diffuseColor.b)		// Farbe	// Farbe
@@ -61,7 +62,7 @@ function raumLaden() {
 			// Geometrie aus der .dae-Szene extrahieren
 			var modelMaterial = modelScene.children[i].children[0].material;
 			var texture = modelMaterial.map.sourceFile;
-			var element = new THREE.Mesh(modelGeometry, new THREE.MeshLambertMaterial( {  map: THREE.ImageUtils.loadTexture("assets/dae/tex/fernseher.jpg"), shading: THREE.SmoothShading } )
+			var element = new THREE.Mesh(modelGeometry, new THREE.MeshPhongMaterial( {  map: THREE.ImageUtils.loadTexture("assets/dae/tex/fernseher.jpg"), shading: THREE.SmoothShading } )
 //                        erstelleCelShadingMaterial("raumMat", // Bezeichnung
 //			THREE.ImageUtils.loadTexture(texture), // Textur
 //			new THREE.Vector3(1,1,1)		// Farbe	// Farbe
@@ -136,11 +137,13 @@ function moebelLaden() {
 
 
 			var element = new THREE.Mesh(modelGeometry, 
-				erstelleCelShadingMaterial(
-					"moebelMat", // Bezeichnung
-					false, // Textur
-					new THREE.Vector3(diffuseColor.r,diffuseColor.g,diffuseColor.b)		// Farbe
-			));
+                        new THREE.MeshLambertMaterial( {  map: THREE.ImageUtils.loadTexture("assets/dae/tex/wood.jpg"), shading: THREE.SmoothShading } )
+//				erstelleCelShadingMaterial(
+//					"moebelMat", // Bezeichnung
+//					false, // Textur
+//					new THREE.Vector3(diffuseColor.r,diffuseColor.g,diffuseColor.b)		// Farbe
+//			)
+                        );
 			element.castShadow = true;
 		game.szene.add(element);			// Collada Tische und stuehle zur Szene hinzufuegen
 		}
@@ -160,11 +163,13 @@ function barhockerLaden() {
 
 
 			var element = new THREE.Mesh(modelGeometry, 
-				erstelleCelShadingMaterial(
-					"hockerMat", // Bezeichnung
-					false, // Textur
-					new THREE.Vector3(diffuseColor.r,diffuseColor.g,diffuseColor.b)		// Farbe
-			));
+                        new THREE.MeshLambertMaterial( {  map: THREE.ImageUtils.loadTexture("assets/dae/tex/wood.jpg"), shading: THREE.SmoothShading } )
+//				erstelleCelShadingMaterial(
+//					"hockerMat", // Bezeichnung
+//					false, // Textur
+//					new THREE.Vector3(diffuseColor.r,diffuseColor.g,diffuseColor.b)		// Farbe
+//			)
+                        );
 			element.castShadow = true;
 		game.szene.add(element);			// Collada Tische und stuehle zur Szene hinzufuegen
 		}
@@ -184,11 +189,14 @@ function palettenLaden() {
 
 
 			var element = new THREE.Mesh(modelGeometry, 
-				erstelleCelShadingMaterial(
-					"hockerMat", // Bezeichnung
-					false, // Textur
-					new THREE.Vector3(diffuseColor.r,diffuseColor.g,diffuseColor.b)		// Farbe
-			));
+                            new THREE.MeshLambertMaterial( {  map: THREE.ImageUtils.loadTexture("assets/dae/tex/wood3.jpg"), shading: THREE.SmoothShading } )
+
+//				erstelleCelShadingMaterial(
+//					"hockerMat", // Bezeichnung
+//					false, // Textur
+//					new THREE.Vector3(diffuseColor.r,diffuseColor.g,diffuseColor.b)		// Farbe
+//			)
+                        );
 			element.castShadow = true;
 		game.szene.add(element);			// Collada Tische und stuehle zur Szene hinzufuegen
 		}
@@ -244,11 +252,14 @@ function lichterLaden() {
 		for (var i = 0; i < szenenbestandteile; i++) {
 			var modelGeometry = modelScene.children[i].children[0].geometry;
 
-			var element = new THREE.Mesh(modelGeometry, erstelleCelShadingMaterial(
-					"lampenMat", // Bezeichnung
-					false, // Textur
-					new THREE.Vector3(0.82,0.82,0.82)		// Farbe
-			));
+			var element = new THREE.Mesh(modelGeometry, 
+                        Physijs.createMaterial( new THREE.MeshLambertMaterial( {  color: "#ffff00", shading: THREE.SmoothShading } ) 
+//                        erstelleCelShadingMaterial(
+//					"lampenMat", // Bezeichnung
+//					false, // Textur
+//					new THREE.Vector3(0.82,0.82,0.82)		// Farbe
+//			)
+                        ));
 
 			element.scale.set(0.25, 0.25, 0.25);
 			element.shadowMapWidth = 2048;
@@ -293,15 +304,7 @@ function roomCollideEvent(object) {
 	}
 }
 
-function tableCollideEvent(object) {
-    if (object === game.whiteBall) {
-		applyForce(false, 100);
-                consolo.log("stinker");
-	} else {
-		var name = object.name;
-		monsterCollideRoom(name);
-	}
-}
+
 
 function whiteCollideRoom() {
 	positionBall(0, 18.75, 15);
@@ -319,3 +322,13 @@ function monsterCollideRoom(name) {
 		}
 }
 
+function tableCollideEvent(colliderObjekt) {
+    if (colliderObjekt === game.whiteBall) {
+		applyForce(false, 0);
+                console.log("stinker");
+	} 
+//        else {
+//		var name = object.name;
+//		monsterCollideRoom(name);
+//	}
+}
