@@ -21,6 +21,8 @@ if (performance) {
 }
 
 function updateStatistik(statistik, performance){
-    game.statistik.update(game.renderer);
-    game.performance.update(game.renderer);
+    if (game.statistik)
+        game.statistik.update(game.renderer);
+    if (game.performance)
+        game.performance.update(game.renderer);
 }

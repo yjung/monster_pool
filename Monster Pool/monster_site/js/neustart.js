@@ -25,9 +25,9 @@ function neustarten()
 
 function removeAllBalls(){
 	//console.log(game.ballNumber);
-	for(i=0;i<game.ballNumber;i++)
+	for(var i=0;i<game.ballNumber;i++)
 	{
-		object = game.szene.getObjectByName('ball-'+i);
+		var object = game.szene.getObjectByName('ball-'+i);
 		if(typeof(object) !== 'undefined'){
 			game.szene.remove( object);
 		}

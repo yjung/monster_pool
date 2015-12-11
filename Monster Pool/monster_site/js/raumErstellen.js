@@ -325,7 +325,7 @@ function monsterCollideRoom(name) {
 function tableCollideEvent(colliderObjekt) {
     if (colliderObjekt === game.whiteBall) {
 		applyForce(false, 0);
-                console.log("stinker");
+                //console.log("stinker");
 	} 
 //        else {
 //		var name = object.name;

@@ -112,7 +112,7 @@ function initialisiere() {
     sceneLaden();                        //Alpha Tisch aus Colada File Laden^
     loadMonsters();								// Lade ein Monster (Bernd)
     // ladeAnimation();
-    erstelleStatistik(true, true);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
+    erstelleStatistik(/*true, true*/);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
 
 
 //	 var achsendreibein = new THREE.AxisHelper(50);
@@ -121,8 +121,7 @@ function initialisiere() {
 
     //erstelleMinimap();
     pruefeKugelBewegung();
-    var timerId = setInterval(pruefeKugelBewegung, 250);
+    var timerId = setInterval(pruefeKugelBewegung, 100);
     /* Ende der Initialisierung / Aufruf des Mainloops */
     mainloop();
 }
-;

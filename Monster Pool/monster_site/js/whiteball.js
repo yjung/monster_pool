@@ -3,12 +3,12 @@ function createWhiteBall(x,y,z) {
 	
 	// erstelleCelShadingMaterial("whiteballMat");
 
-    var friction = 0;      // low friction
-    var restitution = .8;   // low restitution
+    var friction = 0.7;      // low friction
+    var restitution = 0.2;   // low restitution
 
     // Grundobjekterzeugung mit Material aus angelegter Bibliothek
     game.whiteBall = new Physijs.ConvexMesh(new THREE.SphereGeometry(0.75, 16, 16), Physijs.createMaterial(
-            		new THREE.MeshLambertMaterial( { map: THREE.ImageUtils.loadTexture("assets/dae/tex/weisseKugel.jpg"), shading: THREE.SmoothShading } ) ,friction, restitution),20000);
+            		new THREE.MeshLambertMaterial( { map: THREE.ImageUtils.loadTexture("assets/dae/tex/weisseKugel.jpg"), shading: THREE.SmoothShading } ) ,friction, restitution), 20000);
 //erstelleCelShadingMaterial(
 //    		"whiteBallMat",						// Bezeichnung
 //    		THREE.ImageUtils.loadTexture("assets/dae/tex/weisseKugel.jpg"),								// Textur
@@ -51,9 +51,12 @@ function applyForce(bumperForce, faktor){
 };
 
 function pruefeKugelBewegung(){
-	var vergleichsVektor = new THREE.Vector3(0,0,0);
+	//var vergleichsVektor = new THREE.Vector3(0,0,0);
 	
-	if(game.whiteBall._physijs.angularVelocity.equals(vergleichsVektor) && game.whiteBall._physijs.linearVelocity.equals(vergleichsVektor)){
+    if (game.whiteBall._physijs.angularVelocity.length() < 0.01 &&
+        game.whiteBall._physijs.linearVelocity.length() < 0.01)
+	//if(game.whiteBall._physijs.angularVelocity.equals(vergleichsVektor) && game.whiteBall._physijs.linearVelocity.equals(vergleichsVektor))
+    {
 				game.whiteBall.inBewegung = false;
 	}
         else{

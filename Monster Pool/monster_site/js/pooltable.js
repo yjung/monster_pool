@@ -23,7 +23,7 @@ function ladePooltable()/* Tisch falsch rotiert (steht hochkant): Gedreht beine 
             if (i == 0) {
                 modelMaterial = Physijs.createMaterial(
                         new THREE.MeshLambertMaterial( {  map: THREE.ImageUtils.loadTexture("assets/dae/tex/filz.jpg"), shading: THREE.SmoothShading } ) 
-                ,0.2,0.2);
+                ,0.8,0.2);
 //                        erstelleCelShadingMaterial(
 //                                "filzMat", // Bezeichnung
 //                                THREE.ImageUtils.loadTexture("assets/dae/tex/filz.jpg"), // Textur
