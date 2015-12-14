@@ -175,14 +175,14 @@
                     <div class="collapse_navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li>
-                                <a href="#" data-toggle="modal" data-target="#controlsModal">Controls</a>
+                                <a href="#" data-toggle="modal" data-target="#controlsModal">Steuerung</a>
                             </li>
                             <li>
                                 <a href="#" data-toggle="modal" data-target="#einstellungModal">Einstellung</a>
                             </li>
-<!--                            <li>
-                                <a href="#" data-toggle="modal" data-target="#hilfeModal">Spiel Hilfe</a>
-                            </li>-->
+                            <!--                            <li>
+                                                            <a href="#" data-toggle="modal" data-target="#hilfeModal">Spiel Hilfe</a>
+                                                        </li>-->
                             <li>
                                 <a href="#" data-toggle="modal" data-target="#aboutModal">About</a>
                             </li>
@@ -195,13 +195,16 @@
         <div id=contentwrapper>
             <div id='info' class="content">
                 <p>
-                    Bored of the normal Billard? with the same elements of always? then Monster Pool is for you. Monster Pool is the amazing game, in which you will hit monsters AND normal balls.
-                </p>
+                    Sind Sie gelangweilt von normalen Billard Spielen mit immer dem selben Spielprinzip?
+                    Dann ist Monster Pool genau das Richtige für Dich!
+                    Hier warten neben den Standart Kugeln weitere Monster Kugeln und diverse Hindernisse auf Dich.
+                    Kannst du trotzdem alle Kugeln einlochen?
+                    Versuche dein Glück!                </p>
                 <form action="">
                     <label for="inputName">Name:</label>
                     <input type="text" name="inputName" id="inputName">
                     <br>
-                    <a href='#' onclick='initialisiere()'>Press here to play</a>
+                    <a href='#' onclick='initialisiere()'>Spiel Starten!</a>
                     <!--<input type="submit" onclick='initialisiere()' value="Press here to play">-->
                 </form>
 
@@ -209,7 +212,7 @@
 
             <div id="viewport">
                 <div id="scoreboard">
-                    Points:
+                    Punkte:
                     <div id="points">
                         0
                     </div>
@@ -217,25 +220,25 @@
                     <div id="balls">
                         15
                     </div>
-                    
+
                 </div>
                 <div id="button">
-                        <button  id="b2" onclick="applyForce(false, 400)">Stoß!</button>
+                    <button  id="b2" onclick="applyForce(false, 400)">Stoß!</button>
                 </div>
             </div>
             <div id='gameEnde' class="content">
                 <p>
-                    Great! You got lots of points in this game.
+                    Super! Du hast jede Menge Punkte erreicht!
                 </p>
                 <p>
-                    Points:
+                    Punkte:
                 </p>
                 <div id='finalScore'>
                     0
                 </div>
-                <a href='#' onclick='neustarten()'>Press here to play again</a>
+                <a href='#' onclick='neustarten()'>HIer drücken um das Spiel neu zu starten</a>
             </div>
-            
+
         </div>
         <!-- /////////////////		FOOTER		/////////////////-->
         <div id=footer>
@@ -257,30 +260,31 @@
                         <br>
 
                         <p>
-                            Name und Anschrift: TODO
+                            Name und Anschrift: 
                             <br>
-                            TODO
+                            Hochschule Fulda
                             <br>
-                            TODO
+                            Leipziger Straße 123
+                            36037 Fulda 
                             <br>
                         </p>
 
                         <p>
-                            Internet: TODO
+                            Internet:
+                        </p>
+                        http://www.hs-fulda.de
+                        <p>
+
                         </p>
 
                         <p>
-                            Gesetzlicher Vertreter: TODO
-                        </p>
-
-                        <p>
-                            Webmaster: TODO
+                            Webmaster: Prof. Dr. Yvonne Jung
                             <br>
-                            Telefon: TODO
+                            Telefon: +49 661 9640-3349 
                             <br>
-                            Telefax: TODO
+                            Telefax: +49 661 9640-349 
                             <br>
-                            eMail: TODO
+                            eMail: yvonne.jung@informatik.hs-fulda.de
                         </p>
 
                         <p>
@@ -293,7 +297,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">
-                            Close
+                            schließen
                         </button>
                     </div>
                 </div>
@@ -308,20 +312,21 @@
                         <button type="button" class="close" data-dismiss="modal">
                             <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
                         </button>
-                        <h4 class="modal-title" id="myModalLabel">Controls</h4>
+                        <h4 class="modal-title" id="myModalLabel">Steuerung</h4>
                     </div>
                     <div class="modal-body">
                         <p></p>
-                        <p>The controls for the game are quite simple:</p>
+                        <p>Die Steuerung des Spiels ist sehr simpel:</p>
                         <ul>
-                            <li>Just press the right click of the mouse or touchpad and move around to see your surroundings.</li>
-                            <li>In order to change the point where you hit the ball, just press the right button of your mouse or touchpad and move it to move the queue.</li>
-                            <li>X – Press this key to hit the ball</li>
+                            <li>Einfach die Linke Maustaste gedrückt halt oder auf das Touchpad tippen und den Finger hin- und herbewegen, um den Köh zu drehen.</li>
+                            <li>Mit dem Mausrad zoomt man hinein/hinaus.</li>
+                            <li>Mit einem Klick oder Tippen auf das Stoß! Feld stößt man die Kugel an.</li>
+                            
                         </ul>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">
-                            Close
+                            schließen
                         </button>
                     </div>
                 </div>
@@ -344,7 +349,7 @@
                                 <p>You have to start the game to see this options</p>
                             </div>
                             <div id="einstellungContent">
-                                <p>Check the elements, in order to activate the options, that you would like to use:</p>
+                                <p>Aktiviere/Deaktiviere die Spielelement, welche du nutzen möchtest</p>
                                 <p>
                                     <!--<input type="checkbox" id="checkFullscreen" name="fullscreen" value="fullscreen"> Fullscreen<br>-->
                                     <input type="checkbox" id="checkSound" name="sound" value="sound"> Sound<br>
@@ -355,34 +360,34 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">
-                        Close
+                        schließen
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-<!--     /////////////////    Modal Hilfe ///////////////////
-    <div class="modal fade" id="hilfeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-hilfe modal-dialog-center">
-            <div class="modal-content inner-modal-dialog-center">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">Spiel Hilfe</h4>
-                </div>
-                <div class="modal-body">
-                    <p></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                        Close
-                    </button>
+    <!--     /////////////////    Modal Hilfe ///////////////////
+        <div class="modal fade" id="hilfeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-hilfe modal-dialog-center">
+                <div class="modal-content inner-modal-dialog-center">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Spiel Hilfe</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>-->
+        </div>-->
 
     <!-- /////////////////    Modal About ///////////////////-->
     <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -397,12 +402,17 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                        Monster Pool is a web based game developed for the lecture of Computer Games in the University of Applied Sciences Fulda. There are beside balls, some monsters and obstacles in order to make the game more interesting. The goal of the game is to put all monsters and balls in the holes. You can get a different quantity of points depending on the hole you aim to. The points are distributed in the following way:
+                        Monster Pool ist ein webbasiertes Spiel, 
+                        welches in dem Modul Spieleprogrammierung an der Hochschule Fulda entwickelt wurde.
+                        Hier sind neben den Kugel noch ein paar Monster und Hindernisse auf dem Spieltisch welche das Spiel interessanter machen.
+                        Das Ziel ist es, alle Kugeln und Monster einzulochen.
+                        Man bekommt eine unterschiedliche Anzahl an Punkten, je nachdem welches Loch man trifft.
+                        Die Punkte ergeben sich:
                     </p>
                     <ul>
-                        <li>You get 30 points, if you aim to the holes behind the slider.</li>
-                        <li>10 points if you aim to the center holes.</li>
-                        <li>You get also the great quantity of 30 points if you aim to the holes that are surrounded by bumpes and accessible through the ramp.</li>
+                        <li>30 Punkte für die Löcher hinter der beweglichen Mauer.</li>
+                        <li>30 Punkte für die Löcher hinter der Rampe und den Bumpern.</li>
+                        <li>10 Punkte für die seitlichen Löcher.</li>
                     </ul>
                 </div>
                 <div class="modal-footer">
@@ -413,6 +423,6 @@
             </div>
         </div>
     </div>
-   
+
 </body>
 </html>

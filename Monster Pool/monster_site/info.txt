@@ -1,0 +1,44 @@
+Bored of the normal Billard? 
+with the same elements of always? 
+then Monster Pool is for you. 
+Monster Pool is the amazing game, in which you will hit monsters AND normal balls.
+
+Sind Sie gelangweilt von normalen Billard Spielen mit immer dem selben Spielprinzip?
+Dann ist Monster Pool genau das Richtige für Dich!
+Hier warten neben den Standart Kugeln weitere Monster Kugeln und diverse Hindernisse auf Dich.
+Kannst du trotzdem alle Kugeln einlochen?
+Versuche dein Glück!
+
+Monster Pool is a web based game 
+developed for the lecture of Computer Games in the University of Applied Sciences Fulda. 
+There are beside balls, some monsters and obstacles in order to make the game more interesting. 
+The goal of the game is to put all monsters and balls in the holes. 
+You can get a different quantity of points depending on the hole you aim to. 
+The points are distributed in the following way:
+
+Monster Pool ist ein webbasiertes Spiel, 
+welches in dem Modul Spieleprogrammierung an der Hochschule Fulda entwickelt wurde.
+Hier sind neben den Kugel noch ein paar Monster und Hindernisse auf dem Spieltisch welche das Spiel interessanter machen.
+Das Ziel ist es, alle Kugeln und Monster einzulochen.
+Man bekommt eine unterschiedliche Anzahl an Punkten, je nachdem welches Loch man trifft.
+Die Punkte ergeben sich:
+
+<li>You get 30 points, if you aim to the holes behind the slider.</li>
+                        <li>10 points if you aim to the center holes.</li>
+                        <li>You get also the great quantity of 30 points if you aim to the holes that are surrounded by bumpes and accessible through the ramp.</li>
+
+30 Punkte für die Löcher hinter der beweglichen Mauer.
+30 Punkte für die Löcher hinter der Rampe und den Bumpern.
+10 Punkte für die seitlichen Löcher.
+
+<p>The controls for the game are quite simple:</p>
+Just press the right click of the mouse or touchpad and move around to see your surroundings.</li>
+In order to change the point where you hit the ball, 
+just press the right button of your mouse or touchpad and move it to move the queue.</li>
+Press
+X – Press this key to hit the ball</li>
+
+Die Steuerung des Spiels ist sehr simpel.
+Einfach die Linke Maustaste gedrückt halt oder auf das Touchpad tippen und den Finger hin- und herbewegen, um den Köh zu drehen.
+Mit dem Mausrad zoomt man hinein/hinaus.
+Mit einem Klick oder Tippen auf das Stoß! Feld stößt man die Kugel an.
