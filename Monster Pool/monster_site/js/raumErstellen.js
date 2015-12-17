@@ -16,11 +16,12 @@ function raumLaden() {
 
 		var modelScene = collada.scene;
 		var szenenbestandteile = modelScene.children.length;
+                var bmap =  THREE.ImageUtils.loadTexture("assets/dae/tex/bmap.jpg", {}, function(){});
 		for (var i = 0; i < szenenbestandteile; i++) {
 			var modelGeometry = modelScene.children[i].children[0].geometry;
 			// Geometrie aus der .dae-Szene extrahieren
 			var modelMaterial = modelScene.children[i].children[0].material;
-			game.raum.i = new THREE.Mesh(modelGeometry, new THREE.MeshLambertMaterial( {  map: THREE.ImageUtils.loadTexture("assets/dae/tex/raumTex.jpg"), shading: THREE.SmoothShading } )
+			game.raum.i = new THREE.Mesh(modelGeometry, new THREE.MeshLambertMaterial( {  bumpMap: bmap, map: THREE.ImageUtils.loadTexture("assets/dae/tex/raumTex.jpg"), shading: THREE.SmoothShading } )
 //                        erstelleCelShadingMaterial("raumMat", // Bezeichnung
 //			THREE.ImageUtils.loadTexture("assets/dae/tex/raumTex.jpg"), // Textur
 //			new THREE.Vector3(1, 1, 1)	// Farbe
@@ -324,8 +325,9 @@ function monsterCollideRoom(name) {
 
 function tableCollideEvent(colliderObjekt) {
     if (colliderObjekt === game.whiteBall) {
-		applyForce(false, 0);
-                //console.log("stinker");
+		game.whiteBall._physijs.LinearVelocity =0;
+        console.log("stinker");
+                
 	} 
 //        else {
 //		var name = object.name;

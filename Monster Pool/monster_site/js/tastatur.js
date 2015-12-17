@@ -6,8 +6,8 @@ function checkKeyboard(){
     if(!game.whiteBall.inBewegung){
 	if(game.keyboard.pressed("x")){
             
-        
-		console.log(game.whiteBall);
+        window.setInterval(console.log(game.whiteBall._physijs.linearVelocity.length()), 1000);
+		//console.log(game.whiteBall);
 			console.log("Queue-Stoss");
 			soundEffekt("ball-queue");
 			applyForce(false, 100);
