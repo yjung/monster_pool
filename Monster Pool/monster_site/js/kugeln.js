@@ -20,7 +20,7 @@ function ladeKugeln(){
 //			texturAtlas,
 //			new THREE.Vector3(1, 1, 1)	// Farbe
 //		),
-		0.9, 0.8),10000);
+		0.9, 0.8),8000);
 		kugel.name="ball-"+i;
 		kugel.position.x = kugelPosition.x * 0.25;
 		kugel.position.y = kugelPosition.y * 0.25;
