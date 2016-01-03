@@ -115,7 +115,7 @@ function initialisiere() {
     erstelleStatistik(/*true, true*/);               // Statistiken zu Debugging-Zwecken in Spiel hinzufuegen
 
             
-    window.alert(unescape("Die Steuerung des Spiels ist sehr simpel: \nEinfach die Linke Maustaste gedr%FCckt halt oder auf das Touchpad tippen und den Finger hin- und herbewegen, um den K%F6h zu drehen.\nMit dem Mausrad zoomt man hinein/hinaus.\nMit einem Klick oder Tippen auf das Sto%DF%21 Feld st%F6%DFt man die Kugel an.\n"));
+    window.alert(unescape("Die Steuerung des Spiels ist sehr simpel: \nEinfach die linke Maustaste gedr%FCckt halten oder auf das Touchpad tippen und den Finger hin- und herbewegen, um den K%F6h zu drehen.\nMit dem Mausrad zoomt man hinein/hinaus.\nMit einem Klick oder Tippen auf das \"Sto%DF%21\"-Feld st%F6%DFt man die Kugel an.\nAchtung: Man kann sich erst wieder umschauen, wenn die Kugel nicht mehr rollt!"));
         
            
 
